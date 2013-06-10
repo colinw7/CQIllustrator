@@ -1,0 +1,35 @@
+/* XPM */
+
+static const char *
+image_data[] = {
+  /* width height num_colors chars_per_pixel x_hot y_hot */
+  "16 16 8 1 0 0",
+
+  /* colors */
+  ". s symbol1 c #000000 m black",
+  "# s symbol2 c #ddddff m white",
+  "a s symbol3 c #ffffff m white",
+  "b s symbol4 c #00ff00 m black",
+  "c s symbol5 c #ff0000 m black",
+  "d s symbol6 c #ffff00 m white",
+  "e s symbol7 c #a52a2a m black",
+  "f s symbol8 c #1d831b m black",
+
+  /* pixels */
+  "................",
+  ".##############.",
+  ".#########aaa##.",
+  ".##bbbb##aaaaa#.",
+  ".#bbbbbbaaaaaaa.",
+  ".#bbbbbb#######.",
+  ".#bbbbbb###c###.",
+  ".##bbbb###cdc##.",
+  ".###ee#####c###.",
+  ".###ee###b#b#b#.",
+  ".###ee####bbb##.",
+  ".###ee#####b###.",
+  ".ffffffffffffff.",
+  ".ffffffffffffff.",
+  "................",
+  "................",
+};

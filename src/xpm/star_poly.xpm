@@ -1,0 +1,35 @@
+/* XPM */
+
+static const char *
+star_poly_data[] = {
+  /* width height num_colors chars_per_pixel x_hot y_hot */
+  "16 16 8 1 0 0",
+
+  /* colors */
+  ". s symbol1 c #000000 m black",
+  "# s symbol2 c #ffffff m white",
+  "a s symbol3 c #444444 m black",
+  "b s symbol4 c #000000 m black",
+  "c s symbol5 c #ffffff m white",
+  "d s symbol6 c #444444 m black",
+  "e s symbol7 c #888888 m white",
+  "  s mask c none",
+
+  /* pixels */
+  "     a          ",
+  "     .          ",
+  "    .#.         ",
+  "e...###...ee    ",
+  "a#########a     ",
+  " b#######b...   ",
+  "  b#####b####.  ",
+  "  de###ed#####. ",
+  "  .##.##.######.",
+  " a#a. .a#a#####.",
+  " aa   .#aa#####.",
+  "      .###c####.",
+  "       .######. ",
+  "        .####.  ",
+  "         ....   ",
+  "                ",
+};

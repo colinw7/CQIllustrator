@@ -1,0 +1,32 @@
+/* XPM */
+
+static const char *
+group_data[] = {
+  /* width height num_colors chars_per_pixel x_hot y_hot */
+  "16 16 5 1 0 0",
+
+  /* colors */
+  ". s symbol1 c #000000 m black",
+  "# s symbol2 c #aaaaaa m white",
+  "a s symbol3 c #ffffff m white",
+  "b s symbol4 c #0000ff m black",
+  "  s mask c none",
+
+  /* pixels */
+  "                ",
+  " bbb         bbb",
+  " b             b",
+  " b .......     b",
+  "   .aaaaa.      ",
+  "   .aaaaa.      ",
+  "   .aaaaa.....  ",
+  "   .aaaaa.###.  ",
+  "   .aaaaa.###.  ",
+  "   .......###.  ",
+  "      .######.  ",
+  "      .######.  ",
+  "      .######.  ",
+  " b    ........ b",
+  " b             b",
+  " bbb         bbb",
+};

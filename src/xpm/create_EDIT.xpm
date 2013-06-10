@@ -1,0 +1,26 @@
+/* XPM */
+
+static const char *
+create_EDIT_data[] = {
+  /* width height num_colors chars_per_pixel x_hot y_hot */
+  "16 8 7 1 0 0",
+
+  /* colors */
+  ". s symbol1 c #000000 m black",
+  "# s symbol2 c #ffffff m white",
+  "a s symbol3 c #ffff00 m white",
+  "b s symbol4 c #ffa500 m white",
+  "c s symbol5 c #ff0000 m black",
+  "d s symbol6 c #666666 m black",
+  "  s mask c none",
+
+  /* pixels */
+  "#######ddddddddd",
+  "#b b b d    .  #",
+  "# bab  d   .#. #",
+  "#baaab d  .#.  #",
+  "# bab  d d#.   #",
+  "#b b b d cd    #",
+  "#      d       #",
+  "dddddddd########",
+};

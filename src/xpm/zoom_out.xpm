@@ -1,0 +1,33 @@
+/* XPM */
+
+static const char *
+zoom_out_data[] = {
+  /* width height num_colors chars_per_pixel x_hot y_hot */
+  "16 16 6 1 0 0",
+
+  /* colors */
+  ". s symbol1 c #000000 m black",
+  "# s symbol2 c #aaaaaa m white",
+  "a s symbol3 c #444444 m black",
+  "b s symbol4 c #ffffff m white",
+  "c s symbol5 c #ff0000 m black",
+  "  s mask c none",
+
+  /* pixels */
+  "  #a...a#       ",
+  " #ab b ba#      ",
+  "#ab b b ba#     ",
+  "ab b b b ba     ",
+  ". b b.b b .     ",
+  ".b b...b b.     ",
+  ". b b.b b .     ",
+  "ab b b b ba     ",
+  "#ab b b ba      ",
+  " #ab b ba.      ",
+  "  #aa..a.a.     ",
+  "         .a.    ",
+  " cccccc   .a.   ",
+  " cccccc    .a.  ",
+  "            .a. ",
+  "             .  ",
+};

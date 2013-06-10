@@ -1,0 +1,29 @@
+/* XPM */
+
+static const char *
+menu_active_data[] = {
+  /* width height num_colors chars_per_pixel x_hot y_hot */
+  "8 16 2 1 0 0",
+
+  /* colors */
+  ". s symbol1 c #0000ff m black",
+  "  s mask c none",
+
+  /* pixels */
+  "        ",
+  "        ",
+  "        ",
+  "   ..   ",
+  "   ..   ",
+  "  ....  ",
+  "  ....  ",
+  " ..  .. ",
+  " ..  .. ",
+  "...  ...",
+  "..    ..",
+  "..    ..",
+  "        ",
+  "        ",
+  "        ",
+  "        ",
+};

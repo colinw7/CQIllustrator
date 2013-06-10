@@ -1,0 +1,32 @@
+/* XPM */
+
+static const char *
+font_dialog_data[] = {
+  /* width height num_colors chars_per_pixel x_hot y_hot */
+  "16 16 5 1 0 0",
+
+  /* colors */
+  ". s symbol1 c #000000 m black",
+  "# s symbol2 c #ffffff m white",
+  "a s symbol3 c #999999 m white",
+  "b s symbol4 c #999999 m white",
+  "  s mask c none",
+
+  /* pixels */
+  "                ",
+  " .............. ",
+  " .############. ",
+  " .#......#aaa#. ",
+  " .#.##########. ",
+  " .#.aaaa#..#b#. ",
+  " .#.####.##.##. ",
+  " .#....#.#b#b#. ",
+  " .#.####.#####. ",
+  " .#.aa#....#a#. ",
+  " .#.####.#####. ",
+  " .#.aa#a.#aba#. ",
+  " .#.####.#####. ",
+  " .############. ",
+  " .............. ",
+  "                ",
+};

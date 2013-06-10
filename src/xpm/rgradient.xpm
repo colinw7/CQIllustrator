@@ -1,0 +1,36 @@
+/* XPM */
+
+static const char *
+rgradient_data[] = {
+  /* width height num_colors chars_per_pixel x_hot y_hot */
+  "16 16 9 1 0 0",
+
+  /* colors */
+  ". s symbol1 c #000000 m black",
+  "# s symbol2 c #666666 m black",
+  "a s symbol3 c #777777 m black",
+  "b s symbol4 c #999999 m white",
+  "c s symbol5 c #aaaaaa m white",
+  "d s symbol6 c #bbbbbb m white",
+  "e s symbol7 c #cccccc m white",
+  "f s symbol8 c #dddddd m white",
+  "  s mask c none",
+
+  /* pixels */
+  "     ......     ",
+  "   ...####...   ",
+  "  ..##aaaa##..  ",
+  " ..#aabbbbaa#.. ",
+  " .#aabccccbaa#. ",
+  "..#abcddddcbaa#.",
+  ".#abcddeeddcba#.",
+  ".#abcdeffedcbaa.",
+  ".#abcdeffedcbaa.",
+  ".#abcddeeddcbaa.",
+  "..#abcddddcba#..",
+  " .#aabccccbaa#. ",
+  " ..#aabbbbaa#.. ",
+  "  ..##aaaa##..  ",
+  "   ...####...   ",
+  "     ......     ",
+};
