@@ -12,8 +12,6 @@ CBezierToLine.cpp \
 CDelaunay.cpp \
 CEncode64.cpp \
 CCSS.cpp \
-CFont.cpp \
-CFontMgr.cpp \
 CGenPoly.cpp \
 CGiftWrap.cpp \
 CHull3D.cpp \
@@ -91,7 +89,6 @@ CQTableWidget.cpp \
 CQUtil.cpp \
 CQWindow.cpp \
 CQWinWidget.cpp \
-CRegExp.cpp \
 CRGBName.cpp \
 CTriangulate2D.cpp \
 CUndo.cpp \
@@ -106,9 +103,6 @@ CDisplayRange2D.h \
 CEncode64.h \
 CEvent.h \
 CFillType.h \
-CFlags.h \
-CFont.h \
-CFontStyle.h \
 CGaussianBlur.h \
 CGeneric.h \
 CGenPoly.h \
@@ -203,7 +197,6 @@ CQUtil.h \
 CQWindow.h \
 CQWinWidget.h \
 CRange2D.h \
-CRegExp.cpp \
 CRGBName.h \
 CStack.h \
 CStateIterator.h \
@@ -222,6 +215,8 @@ INCLUDEPATH += \
 ../../CConfig/include \
 ../../CArgs/include \
 ../../CFile/include \
+../../CFont/include \
+../../CRegExp/include \
 ../../CStrUtil/include \
 ../../COS/include \
 ../../CMath/include \
@@ -235,6 +230,8 @@ unix:LIBS += \
 -L../../CImageLib/lib \
 -L../../CArgs/lib \
 -L../../CConfig/lib \
+-L../../CFont/lib \
+-L../../CRegExp/lib \
 -L../../CFile/lib \
 -L../../CMath/lib \
 -L../../CStrUtil/lib \
@@ -242,9 +239,11 @@ unix:LIBS += \
 -lCSVG \
 -lCXML \
 -lCImageLib \
+-lCFont \
 -lCArgs \
 -lCConfig \
 -lCFile \
 -lCOS \
+-lCRegExp \
 -lCStrUtil \
 -ljpeg -lpng -ltre
