@@ -89,9 +89,7 @@ CQTableWidget.cpp \
 CQUtil.cpp \
 CQWindow.cpp \
 CQWinWidget.cpp \
-CRGBName.cpp \
 CTriangulate2D.cpp \
-CUndo.cpp \
 CWindow.cpp \
 
 HEADERS += \
@@ -99,21 +97,13 @@ CAxis2D.h \
 CBooleanOp.h \
 CCSS.h \
 CDelaunay.h \
-CDisplayRange2D.h \
 CEncode64.h \
 CEvent.h \
-CFillType.h \
 CGaussianBlur.h \
-CGeneric.h \
 CGenPoly.h \
 CGiftWrap.h \
 CHull3D.h \
-CILineDash.h \
-CIRange2D.h \
 CKuhnMunkres.h \
-CLineCapType.h \
-CLineDash.h \
-CLineJoinType.h \
 CListLink.h \
 CLog.h \
 CMathGeom2D.h \
@@ -196,12 +186,9 @@ CQuadTree.h \
 CQUtil.h \
 CQWindow.h \
 CQWinWidget.h \
-CRange2D.h \
-CRGBName.h \
 CStack.h \
 CStateIterator.h \
 CTriangulate2D.h \
-CUndo.h \
 CWindow.h \
 
 DESTDIR     = ../bin
@@ -220,6 +207,8 @@ INCLUDEPATH += \
 ../../CStrUtil/include \
 ../../COS/include \
 ../../CMath/include \
+../../CRGBName/include \
+../../CUndo/include \
 ../../CUtil/include \
 .
 
@@ -235,6 +224,8 @@ unix:LIBS += \
 -L../../CFile/lib \
 -L../../CMath/lib \
 -L../../CStrUtil/lib \
+-L../../CRGBName/lib \
+-L../../CUndo/lib \
 -L../../COS/lib \
 -lCSVG \
 -lCXML \
@@ -242,7 +233,9 @@ unix:LIBS += \
 -lCFont \
 -lCArgs \
 -lCConfig \
+-lCUndo \
 -lCFile \
+-lCRGBName \
 -lCOS \
 -lCRegExp \
 -lCStrUtil \
