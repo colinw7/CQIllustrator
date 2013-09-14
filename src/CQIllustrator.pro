@@ -22,11 +22,9 @@ CPathShape.cpp \
 CQAccelerate.cpp \
 CQAlphaButton.cpp \
 CQAngleSpinBox.cpp \
-CQApp.cpp \
 CQColorChooser.cpp \
 CQFillOption.cpp \
 CQFontChooser.cpp \
-CQFont.cpp \
 CQFontOption.cpp \
 CQGradientStopList.cpp \
 CQIllustratorAlignMode.cpp \
@@ -67,14 +65,12 @@ CQIllustratorUndo.cpp \
 CQIllustratorUndoDock.cpp \
 CQIllustratorZoomMode.cpp \
 CQImageButton.cpp \
-CQImage.cpp \
 CQImagePreview.cpp \
 CQIntegerEdit.cpp \
 CQLayerOption.cpp \
 CQLineCap.cpp \
 CQLineDash.cpp \
 CQLineJoin.cpp \
-CQMainWindow.cpp \
 CQMatrix2D.cpp \
 CQObjectOption.cpp \
 CQOptionToolSet.cpp \
@@ -86,11 +82,8 @@ CQScrollArea.cpp \
 CQStrokeOption.cpp \
 CQSwatch.cpp \
 CQTableWidget.cpp \
-CQUtil.cpp \
-CQWindow.cpp \
 CQWinWidget.cpp \
 CTriangulate2D.cpp \
-CWindow.cpp \
 
 HEADERS += \
 CAxis2D.h \
@@ -98,7 +91,6 @@ CBooleanOp.h \
 CCSS.h \
 CDelaunay.h \
 CEncode64.h \
-CEvent.h \
 CGaussianBlur.h \
 CGenPoly.h \
 CGiftWrap.h \
@@ -112,12 +104,10 @@ CPathShape.h \
 CQAccelerate.h \
 CQAlphaButton.h \
 CQAngleSpinBox.h \
-CQApp.h \
 CQColorChooser.h \
 CQDockWidget.h \
 CQFillOption.h \
 CQFontChooser.h \
-CQFont.h \
 CQFontOption.h \
 CQGradientStopList.h \
 CQIllustratorAlignMode.h \
@@ -161,16 +151,13 @@ CQIllustratorUndo.h \
 CQIllustratorZoomMode.h \
 CQImageButton.h \
 CQImageGaussianBlur.h \
-CQImage.h \
 CQImagePreview.h \
 CQIntegerEdit.h \
 CQLayerOption.h \
 CQLineCap.h \
 CQLineDash.h \
 CQLineJoin.h \
-CQMainWindow.h \
 CQMatrix2D.h \
-CQMenu.h \
 CQObjectOption.h \
 CQOptionToolSet.h \
 CQPointEdit.h \
@@ -183,13 +170,10 @@ CQSwatch.h \
 CQTableWidget.h \
 CQToolBar.h \
 CQuadTree.h \
-CQUtil.h \
-CQWindow.h \
 CQWinWidget.h \
 CStack.h \
 CStateIterator.h \
 CTriangulate2D.h \
-CWindow.h \
 
 DESTDIR     = ../bin
 OBJECTS_DIR = ../obj
@@ -198,6 +182,7 @@ LIB_DIR     = ../lib
 INCLUDEPATH += \
 ../include \
 ../../CSVG/include \
+../../CQUtil/include \
 ../../CImageLib/include \
 ../../CConfig/include \
 ../../CArgs/include \
@@ -215,6 +200,7 @@ INCLUDEPATH += \
 unix:LIBS += \
 -L$$LIB_DIR \
 -L../../CSVG/lib \
+-L../../CQUtil/lib \
 -L../../CXML/lib \
 -L../../CImageLib/lib \
 -L../../CArgs/lib \
@@ -226,9 +212,11 @@ unix:LIBS += \
 -L../../CStrUtil/lib \
 -L../../CRGBName/lib \
 -L../../CUndo/lib \
+-L../../CUtil/lib \
 -L../../COS/lib \
 -lCSVG \
 -lCXML \
+-lCQUtil \
 -lCImageLib \
 -lCFont \
 -lCArgs \
@@ -236,6 +224,7 @@ unix:LIBS += \
 -lCUndo \
 -lCFile \
 -lCRGBName \
+-lCUtil \
 -lCOS \
 -lCRegExp \
 -lCStrUtil \
