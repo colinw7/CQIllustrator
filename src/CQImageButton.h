@@ -13,6 +13,7 @@ class CQImageButton : public QToolButton {
  public:
   CQImageButton(CImagePtr image);
   CQImageButton(const QString &fileName);
+  CQImageButton(const char *data[]);
   CQImageButton(uchar *data, uint len);
   CQImageButton(const QPixmap &pixmap);
 

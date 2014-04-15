@@ -183,7 +183,7 @@ initWidgets()
   QHBoxLayout *buttonLayout = new QHBoxLayout;
   buttonLayout->setMargin(2); buttonLayout->setSpacing(8);
 
-  flatButton_  = new CQImageButton(flat_data );
+  flatButton_  = new CQImageButton(flat_data);
   lgradButton_ = new CQImageButton(lgradient_data);
   rgradButton_ = new CQImageButton(rgradient_data);
   imageButton_ = new CQImageButton(image_data);

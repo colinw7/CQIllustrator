@@ -4,6 +4,8 @@ TARGET = CQIllustrator
 
 DEPENDPATH += .
 
+QT += widgets
+
 CONFIG += debug
 
 # Input

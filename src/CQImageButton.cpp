@@ -19,13 +19,16 @@ CQImageButton(CImagePtr image)
 }
 
 CQImageButton::
-CQImageButton(uchar *data, uint len)
+CQImageButton(const char *data[])
 {
-  QPixmap pixmap;
-
-  pixmap.loadFromData(data, len);
+  QPixmap pixmap(data);
 
   init(pixmap);
+}
+
+CQImageButton::
+CQImageButton(uchar *data, uint len)
+{
 }
 
 CQImageButton::

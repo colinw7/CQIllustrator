@@ -458,6 +458,8 @@ class CQIllustratorShapeGeometry {
    fixed_(fixed), rcenter_(rcenter), m_(m) {
   }
 
+  virtual ~CQIllustratorShapeGeometry() { }
+
   virtual CQIllustratorShapeGeometry *dup() = 0;
 
  protected:

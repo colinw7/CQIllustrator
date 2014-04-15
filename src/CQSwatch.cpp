@@ -99,7 +99,7 @@ setTitle(const char *title)
   int len = title1.length();
 
   if (len > 3 && title1[len - 3] == '<' && title1[len - 2].isDigit() && title1[len - 1] == '>') {
-    cols = title1[len - 2].toAscii() - '0';
+    cols = title1[len - 2].toLatin1() - '0';
 
     title1 = title1.mid(0, len - 3);
   }
