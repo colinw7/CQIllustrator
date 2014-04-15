@@ -1,5 +1,7 @@
 TEMPLATE = app
-TARGET = 
+
+TARGET = CQIllustrator
+
 DEPENDPATH += .
 
 CONFIG += debug
