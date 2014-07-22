@@ -162,10 +162,10 @@ addWidgets()
 {
   QBoxLayout *layout = qobject_cast<QBoxLayout *>(CQIllustratorToolbar::layout());
 
-  zoomFitButton_ = new CQImageButton(zoom_fit_data     );
-  zoomSelButton_ = new CQImageButton(zoom_selected_data);
-  zoomInButton_  = new CQImageButton(zoom_in_data      );
-  zoomOutButton_ = new CQImageButton(zoom_out_data     );
+  zoomFitButton_ = new CQImageButton(QPixmap(zoom_fit_data     ));
+  zoomSelButton_ = new CQImageButton(QPixmap(zoom_selected_data));
+  zoomInButton_  = new CQImageButton(QPixmap(zoom_in_data      ));
+  zoomOutButton_ = new CQImageButton(QPixmap(zoom_out_data     ));
 
   zoomFitButton_->setToolTip("Zoom Fit");
   zoomSelButton_->setToolTip("Zoom Selected");

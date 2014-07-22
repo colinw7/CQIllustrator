@@ -1,4 +1,5 @@
 #include <CQWinWidget.h>
+#include <CQDrawUtil.h>
 
 #include <QImage>
 #include <QMenu>
@@ -32,11 +33,6 @@ CQWinWidget(QWidget *parent, const char *name) :
   setMouseTracking(true);
 
   setAutoFillBackground(true);
-}
-
-CQWinWidget::
-~CQWinWidget()
-{
 }
 
 void

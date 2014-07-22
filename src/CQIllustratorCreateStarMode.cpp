@@ -211,8 +211,8 @@ addWidgets()
 
   //-----
 
-  starButton_ = new CQImageButton(star_data);
-  polyButton_ = new CQImageButton(poly_data);
+  starButton_ = new CQImageButton(QPixmap(star_data));
+  polyButton_ = new CQImageButton(QPixmap(poly_data));
 
   connect(starButton_, SIGNAL(toggled(bool)), this, SLOT(starModeSlot(bool)));
   connect(polyButton_, SIGNAL(toggled(bool)), this, SLOT(polyModeSlot(bool)));

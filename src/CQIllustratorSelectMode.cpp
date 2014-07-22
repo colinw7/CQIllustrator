@@ -315,8 +315,8 @@ addWidgets()
 {
   QBoxLayout *layout = qobject_cast<QBoxLayout *>(CQIllustratorToolbar::layout());
 
-  selectAllButton_  = new CQImageButton(select_all_data );
-  selectNoneButton_ = new CQImageButton(select_none_data);
+  selectAllButton_  = new CQImageButton(QPixmap(select_all_data ));
+  selectNoneButton_ = new CQImageButton(QPixmap(select_none_data));
 
   selectAllButton_ ->setToolTip("Select All");
   selectNoneButton_->setToolTip("Select None");

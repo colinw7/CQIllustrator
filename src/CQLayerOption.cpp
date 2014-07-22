@@ -103,10 +103,10 @@ initWidgets()
 
   QHBoxLayout *buttonLayout = new QHBoxLayout;
 
-  CQImageButton *upButton     = new CQImageButton(up_data);
-  CQImageButton *downButton   = new CQImageButton(down_data);
-  CQImageButton *addButton    = new CQImageButton(plus_data);
-  CQImageButton *removeButton = new CQImageButton(minus_data);
+  CQImageButton *upButton     = new CQImageButton(QPixmap(up_data   ));
+  CQImageButton *downButton   = new CQImageButton(QPixmap(down_data ));
+  CQImageButton *addButton    = new CQImageButton(QPixmap(plus_data ));
+  CQImageButton *removeButton = new CQImageButton(QPixmap(minus_data));
 
   connect(addButton, SIGNAL(clicked()), this, SLOT(addLayerSlot()));
 

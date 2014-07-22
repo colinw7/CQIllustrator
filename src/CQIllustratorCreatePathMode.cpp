@@ -885,9 +885,9 @@ addWidgets()
 
   //-----
 
-  pathFreeButton_ = new CQImageButton(path_free_data);
-  pathRectButton_ = new CQImageButton(path_rect_data);
-  path45Button_   = new CQImageButton(path_45_data);
+  pathFreeButton_ = new CQImageButton(QPixmap(path_free_data));
+  pathRectButton_ = new CQImageButton(QPixmap(path_rect_data));
+  path45Button_   = new CQImageButton(QPixmap(path_45_data));
 
   connect(pathFreeButton_, SIGNAL(toggled(bool)), this, SLOT(pathFreeSlot(bool)));
   connect(pathRectButton_, SIGNAL(toggled(bool)), this, SLOT(pathRectSlot(bool)));
@@ -929,9 +929,9 @@ addWidgets()
 
   //-----
 
-  pathLineButton_   = new CQImageButton(path_line_data  );
-  pathCurve2Button_ = new CQImageButton(path_curve2_data);
-  pathCurve3Button_ = new CQImageButton(path_curve3_data);
+  pathLineButton_   = new CQImageButton(QPixmap(path_line_data  ));
+  pathCurve2Button_ = new CQImageButton(QPixmap(path_curve2_data));
+  pathCurve3Button_ = new CQImageButton(QPixmap(path_curve3_data));
 
   pathLineButton_  ->setCheckable(true);
   pathCurve2Button_->setCheckable(true);
@@ -958,8 +958,8 @@ addWidgets()
 
   //-----
 
-  nodeCornerButton_ = new CQImageButton(path_corner_data);
-  nodeCurveButton_  = new CQImageButton(path_curve_data );
+  nodeCornerButton_ = new CQImageButton(QPixmap(path_corner_data));
+  nodeCurveButton_  = new CQImageButton(QPixmap(path_curve_data ));
 
   nodeCornerButton_->setToolTip("Point Node");
   nodeCurveButton_ ->setToolTip("Curve Node");
@@ -973,8 +973,8 @@ addWidgets()
 
   //-----
 
-  addNodeButton_    = new CQImageButton(path_add_data);
-  removeNodeButton_ = new CQImageButton(path_remove_data);
+  addNodeButton_    = new CQImageButton(QPixmap(path_add_data   ));
+  removeNodeButton_ = new CQImageButton(QPixmap(path_remove_data));
 
   addNodeButton_   ->setToolTip("Add Node");
   removeNodeButton_->setToolTip("Remove Node");

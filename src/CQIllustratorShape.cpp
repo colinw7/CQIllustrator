@@ -1475,13 +1475,13 @@ drawShape(CQIllustratorShapeDrawer *drawer) const
   if (rx_ > 0 && ry_ > 0) {
     drawer->pathMoveTo(CPoint2D(p1.x + rx_, p1.y      ));
 //  drawer->pathMoveTo(CPoint2D(p2.x - rx_, p2.y      ));
-    drawer->pathArc   (CPoint2D(p2.x - rx_, p2.y + ry_), rx_, ry_, 3*M_PI/2, 2*M_PI      );
+    drawer->pathArc   (CPoint2D(p2.x - rx_, p2.y + ry_), rx_, ry_, 3*M_PI/2, 2*M_PI  );
 //  drawer->pathLineTo(CPoint2D(p3.x      , p3.y - ry_));
-    drawer->pathArc   (CPoint2D(p3.x - rx_, p3.y - ry_), rx_, ry_, 0        , M_PI/2 );
+    drawer->pathArc   (CPoint2D(p3.x - rx_, p3.y - ry_), rx_, ry_, 0       , M_PI/2  );
 //  drawer->pathLineTo(CPoint2D(p4.x + rx_, p4.y      ));
-    drawer->pathArc   (CPoint2D(p4.x + rx_, p4.y - ry_), rx_, ry_, M_PI/2 , M_PI     );
+    drawer->pathArc   (CPoint2D(p4.x + rx_, p4.y - ry_), rx_, ry_, M_PI/2  , M_PI    );
 //  drawer->pathLineTo(CPoint2D(p1.x      , p1.y + ry_));
-    drawer->pathArc   (CPoint2D(p1.x + rx_, p1.y + ry_), rx_, ry_, M_PI     , 3*M_PI/2);
+    drawer->pathArc   (CPoint2D(p1.x + rx_, p1.y + ry_), rx_, ry_, M_PI    , 3*M_PI/2);
   }
   else {
     drawer->pathMoveTo(p1);

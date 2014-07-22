@@ -122,7 +122,7 @@ class CQWinWidget : public QWidget {
  public:
   CQWinWidget(QWidget *parent=0, const char *name=0);
 
-  virtual ~CQWinWidget();
+  virtual ~CQWinWidget() { }
 
   void setChild(QWidget *child);
 

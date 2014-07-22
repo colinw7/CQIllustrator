@@ -718,9 +718,9 @@ addWidgets()
 
   //-----
 
-  polyFreeButton_ = new CQImageButton(poly_free_data);
-  polyRectButton_ = new CQImageButton(poly_rect_data);
-  poly45Button_   = new CQImageButton(poly_45_data);
+  polyFreeButton_ = new CQImageButton(QPixmap(poly_free_data));
+  polyRectButton_ = new CQImageButton(QPixmap(poly_rect_data));
+  poly45Button_   = new CQImageButton(QPixmap(poly_45_data));
 
   connect(polyFreeButton_, SIGNAL(toggled(bool)), this, SLOT(polyFreeSlot(bool)));
   connect(polyRectButton_, SIGNAL(toggled(bool)), this, SLOT(polyRectSlot(bool)));
@@ -739,8 +739,8 @@ addWidgets()
 
   //-----
 
-  addPointButton_    = new CQImageButton(path_add_data);
-  removePointButton_ = new CQImageButton(path_remove_data);
+  addPointButton_    = new CQImageButton(QPixmap(path_add_data));
+  removePointButton_ = new CQImageButton(QPixmap(path_remove_data));
 
   addPointButton_   ->setToolTip("Add Point");
   removePointButton_->setToolTip("Remove Point");

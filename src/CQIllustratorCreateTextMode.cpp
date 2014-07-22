@@ -285,8 +285,8 @@ addWidgets()
 
   fontCombo_    = new QFontComboBox;
   sizeCombo_    = new QComboBox;
-  boldButton_   = new CQImageButton(bold_data );
-  italicButton_ = new CQImageButton(italic_data);
+  boldButton_   = new CQImageButton(QPixmap(bold_data  ));
+  italicButton_ = new CQImageButton(QPixmap(italic_data));
 
   boldButton_  ->setCheckable(true);
   italicButton_->setCheckable(true);
@@ -326,9 +326,9 @@ addWidgets()
 
   //-----
 
-  lalignButton_  = new CQImageButton(lalign_data );
-  hcalignButton_ = new CQImageButton(hcalign_data);
-  ralignButton_  = new CQImageButton(ralign_data );
+  lalignButton_  = new CQImageButton(QPixmap(lalign_data ));
+  hcalignButton_ = new CQImageButton(QPixmap(hcalign_data));
+  ralignButton_  = new CQImageButton(QPixmap(ralign_data ));
 
   lalignButton_ ->setCheckable(true);
   hcalignButton_->setCheckable(true);
@@ -348,9 +348,9 @@ addWidgets()
 
   //-----
 
-  talignButton_  = new CQImageButton(talign_data );
-  vcalignButton_ = new CQImageButton(vcalign_data);
-  balignButton_  = new CQImageButton(balign_data );
+  talignButton_  = new CQImageButton(QPixmap(talign_data ));
+  vcalignButton_ = new CQImageButton(QPixmap(vcalign_data));
+  balignButton_  = new CQImageButton(QPixmap(balign_data ));
 
   talignButton_ ->setCheckable(true);
   vcalignButton_->setCheckable(true);
