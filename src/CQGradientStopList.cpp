@@ -150,7 +150,7 @@ setEditorData()
 {
   if (edit_.isNull()) return;
 
-  edit_->setRGBA(rgba_);
+  edit_->setColor(QColor(rgba_.getRedI(), rgba_.getGreenI(), rgba_.getBlueI()));
 }
 
 void
@@ -159,7 +159,9 @@ getEditorData(QString &str)
 {
   if (edit_.isNull()) return;
 
-  rgba_ = edit_->getRGBA();
+  const QColor &c = edit_->color();
+
+  rgba_ = CRGBA(c.red()/255.0, c.green()/255.0, c.blue()/255.0);
 
   str = "";
 }

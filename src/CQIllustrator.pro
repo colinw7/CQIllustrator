@@ -24,11 +24,8 @@ CLog.cpp \
 CMathGeom2D.cpp \
 CPathShape.cpp \
 CQAccelerate.cpp \
-CQAlphaButton.cpp \
 CQAngleSpinBox.cpp \
-CQColorChooser.cpp \
 CQFillOption.cpp \
-CQFontChooser.cpp \
 CQFontOption.cpp \
 CQGradientStopList.cpp \
 CQIllustratorAlignMode.cpp \
@@ -106,12 +103,9 @@ CMathGeom2D.h \
 CPathPartType.h \
 CPathShape.h \
 CQAccelerate.h \
-CQAlphaButton.h \
 CQAngleSpinBox.h \
-CQColorChooser.h \
 CQDockWidget.h \
 CQFillOption.h \
-CQFontChooser.h \
 CQFontOption.h \
 CQGradientStopList.h \
 CQIllustratorAlignMode.h \
