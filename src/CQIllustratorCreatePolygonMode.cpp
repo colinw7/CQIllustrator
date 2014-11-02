@@ -13,22 +13,22 @@
 #include <CQImageButton.h>
 #include <CQSwatch.h>
 
-#include "xpm/polygon.xpm"
-#include "xpm/path_add.xpm"
-#include "xpm/path_remove.xpm"
+#include <xpm/polygon.xpm>
+#include <xpm/path_add.xpm>
+#include <xpm/path_remove.xpm>
 
-#include "xpm/poly_free.xpm"
-#include "xpm/poly_rect.xpm"
-#include "xpm/poly_45.xpm"
+#include <xpm/poly_free.xpm>
+#include <xpm/poly_rect.xpm>
+#include <xpm/poly_45.xpm>
 
-#include "xpm/control_point.xpm"
-#include "xpm/control_point_active.xpm"
+#include <xpm/control_point.xpm>
+#include <xpm/control_point_active.xpm>
 
-#include "xpm/snap_point.xpm"
-#include "xpm/snap_point_active.xpm"
+#include <xpm/snap_point.xpm>
+#include <xpm/snap_point_active.xpm>
 
-#include "cursors/select.xbm"
-#include "cursors/selectmask.xbm"
+#include <cursors/select.xbm>
+#include <cursors/selectmask.xbm>
 
 #define IMAGE_DATA(I) I, sizeof(I)/sizeof(char *)
 

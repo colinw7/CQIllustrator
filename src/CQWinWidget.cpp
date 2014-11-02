@@ -11,8 +11,8 @@
 #include <QStyleOption>
 #include <QFileDialog>
 
-#include "cursors/select.xbm"
-#include "cursors/selectmask.xbm"
+#include <cursors/select.xbm>
+#include <cursors/selectmask.xbm>
 
 CQWinWidget::
 CQWinWidget(QWidget *parent, const char *name) :

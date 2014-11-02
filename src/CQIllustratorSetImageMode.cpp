@@ -15,13 +15,13 @@
 #include <CQImageButton.h>
 #include <CQSwatch.h>
 
-#include "xpm/image.xpm"
-#include "xpm/lalign.xpm"
-#include "xpm/hcalign.xpm"
-#include "xpm/ralign.xpm"
-#include "xpm/balign.xpm"
-#include "xpm/vcalign.xpm"
-#include "xpm/talign.xpm"
+#include <xpm/image.xpm>
+#include <xpm/lalign.xpm>
+#include <xpm/hcalign.xpm>
+#include <xpm/ralign.xpm>
+#include <xpm/balign.xpm>
+#include <xpm/vcalign.xpm>
+#include <xpm/talign.xpm>
 
 #define IMAGE_DATA(I) I, sizeof(I)/sizeof(char *)
 

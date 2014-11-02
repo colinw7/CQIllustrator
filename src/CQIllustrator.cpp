@@ -45,15 +45,15 @@
 #include <CQIllustratorHandle.h>
 #include <CQIllustratorCmd.h>
 
-#include "CQStrokeOption.h"
-#include "CQFillOption.h"
-//#include "CQFontOption.h"
-#include "CQObjectOption.h"
-#include "CQLayerOption.h"
-#include "CQPropertiesOption.h"
+#include <CQStrokeOption.h>
+#include <CQFillOption.h>
+//#include <CQFontOption.h>
+#include <CQObjectOption.h>
+#include <CQLayerOption.h>
+#include <CQPropertiesOption.h>
 
 #ifdef PSVIEW
-#include "CPSViewShapeRenderer.h"
+#include <CPSViewShapeRenderer.h>
 #endif
 
 #include <COSFile.h>
@@ -66,24 +66,24 @@
 #include <QMouseEvent>
 #include <QFileDialog>
 
-#include "xpm/select_all.xpm"
-#include "xpm/select_none.xpm"
+#include <xpm/select_all.xpm>
+#include <xpm/select_none.xpm>
 
-#include "xpm/group.xpm"
-#include "xpm/ungroup.xpm"
-#include "xpm/copy.xpm"
-#include "xpm/copy_color.xpm"
-#include "xpm/delete.xpm"
-#include "xpm/raise.xpm"
-#include "xpm/lower.xpm"
-#include "xpm/flip_x.xpm"
-#include "xpm/flip_y.xpm"
-#include "xpm/lock.xpm"
-#include "xpm/unlock.xpm"
-#include "xpm/add_layer.xpm"
+#include <xpm/group.xpm>
+#include <xpm/ungroup.xpm>
+#include <xpm/copy.xpm>
+#include <xpm/copy_color.xpm>
+#include <xpm/delete.xpm>
+#include <xpm/raise.xpm>
+#include <xpm/lower.xpm>
+#include <xpm/flip_x.xpm>
+#include <xpm/flip_y.xpm>
+#include <xpm/lock.xpm>
+#include <xpm/unlock.xpm>
+#include <xpm/add_layer.xpm>
 
-#include "images/undo_16_png.h"
-#include "images/redo_16_png.h"
+#include <images/undo_16_png.h>
+#include <images/redo_16_png.h>
 
 #define IMAGE_DATA(I) I, sizeof(I)/sizeof(char *)
 

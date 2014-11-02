@@ -8,8 +8,8 @@
 #include <QFrame>
 #include <QHBoxLayout>
 
-#include "xpm/CREATE_edit.xpm"
-#include "xpm/create_EDIT.xpm"
+#include <xpm/CREATE_edit.xpm>
+#include <xpm/create_EDIT.xpm>
 
 CQIllustratorToolbar::
 CQIllustratorToolbar(CQIllustratorMode *mode) :

@@ -7,7 +7,7 @@
 #include <QListWidget>
 #include <QListWidgetItem>
 
-#include "xpm/undo_redo_png.h"
+#include <xpm/undo_redo_png.h>
 
 class CQIllustratorUndoListGroupItem : public QListWidgetItem {
  public:

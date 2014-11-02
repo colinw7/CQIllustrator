@@ -3,7 +3,7 @@
 
 #include <CQMenu.h>
 
-#include "xpm/pan.xpm"
+#include <xpm/pan.xpm>
 
 CQIllustratorPanMode::
 CQIllustratorPanMode(CQIllustrator *illustrator) :

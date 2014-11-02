@@ -4,7 +4,7 @@
 #include <CQMenu.h>
 #include <CQIllustrator.h>
 
-#include "xpm/select.xpm"
+#include <xpm/select.xpm>
 
 CQIllustratorSetAnchorPositionMode::
 CQIllustratorSetAnchorPositionMode(CQIllustrator *illustrator) :

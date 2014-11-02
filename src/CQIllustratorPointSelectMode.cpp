@@ -11,12 +11,12 @@
 #include <CQUtil.h>
 #include <CQSwatch.h>
 
-#include "xpm/point_select.xpm"
+#include <xpm/point_select.xpm>
 
-#include "cursors/select.xbm"
-#include "cursors/selectmask.xbm"
+#include <cursors/select.xbm>
+#include <cursors/selectmask.xbm>
 
-#include "xpm/selected_point.xpm"
+#include <xpm/selected_point.xpm>
 
 #define IMAGE_DATA(I) I, sizeof(I)/sizeof(char *)
 

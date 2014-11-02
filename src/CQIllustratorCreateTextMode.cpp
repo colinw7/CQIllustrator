@@ -13,18 +13,18 @@
 #include <CQImageButton.h>
 #include <CQSwatch.h>
 
-#include "xpm/text.xpm"
-#include "xpm/lalign.xpm"
-#include "xpm/hcalign.xpm"
-#include "xpm/ralign.xpm"
-#include "xpm/balign.xpm"
-#include "xpm/vcalign.xpm"
-#include "xpm/talign.xpm"
-#include "xpm/bold.xpm"
-#include "xpm/italic.xpm"
+#include <xpm/text.xpm>
+#include <xpm/lalign.xpm>
+#include <xpm/hcalign.xpm>
+#include <xpm/ralign.xpm>
+#include <xpm/balign.xpm>
+#include <xpm/vcalign.xpm>
+#include <xpm/talign.xpm>
+#include <xpm/bold.xpm>
+#include <xpm/italic.xpm>
 
-#include "cursors/text.xbm"
-#include "cursors/textmask.xbm"
+#include <cursors/text.xbm>
+#include <cursors/textmask.xbm>
 
 CQIllustratorCreateTextMode::
 CQIllustratorCreateTextMode(CQIllustrator *illustrator) :

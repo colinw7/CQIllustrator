@@ -14,10 +14,10 @@
 #include <CQAngleSpinBox.h>
 #include <CQSwatch.h>
 
-#include "xpm/ellipse.xpm"
+#include <xpm/ellipse.xpm>
 
-#include "cursors/circle.xbm"
-#include "cursors/circlemask.xbm"
+#include <cursors/circle.xbm>
+#include <cursors/circlemask.xbm>
 
 class CQIllustratorCreateEllipseCmd : public CQIllustratorCmd {
  public:

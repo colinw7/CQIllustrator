@@ -2,9 +2,9 @@
 #include <CQUtil.h>
 #include <QAction>
 
-#include "pixmaps/join_mitre.xpm"
-#include "pixmaps/join_round.xpm"
-#include "pixmaps/join_bevel.xpm"
+#include <pixmaps/join_mitre.xpm>
+#include <pixmaps/join_round.xpm>
+#include <pixmaps/join_bevel.xpm>
 
 CQLineJoin::
 CQLineJoin(QWidget *parent) :

@@ -11,12 +11,12 @@
 #include <CQRadioButtons.h>
 #include <CQImageButton.h>
 
-#include "xpm/select.xpm"
-#include "xpm/select_all.xpm"
-#include "xpm/select_none.xpm"
+#include <xpm/select.xpm>
+#include <xpm/select_all.xpm>
+#include <xpm/select_none.xpm>
 
-#include "cursors/select.xbm"
-#include "cursors/selectmask.xbm"
+#include <cursors/select.xbm>
+#include <cursors/selectmask.xbm>
 
 enum { ROTATE_SMALL = 1, ROTATE_NORMAL = 15, ROTATE_LARGE = 90 };
 

@@ -14,28 +14,28 @@
 #include <CQImageButton.h>
 #include <CQSwatch.h>
 
-#include "xpm/path.xpm"
-#include "xpm/path_line.xpm"
-#include "xpm/path_curve2.xpm"
-#include "xpm/path_curve3.xpm"
+#include <xpm/path.xpm>
+#include <xpm/path_line.xpm>
+#include <xpm/path_curve2.xpm>
+#include <xpm/path_curve3.xpm>
 
-#include "xpm/path_free.xpm"
-#include "xpm/path_rect.xpm"
-#include "xpm/path_45.xpm"
+#include <xpm/path_free.xpm>
+#include <xpm/path_rect.xpm>
+#include <xpm/path_45.xpm>
 
-#include "xpm/path_corner.xpm"
-#include "xpm/path_curve.xpm"
-#include "xpm/path_add.xpm"
-#include "xpm/path_remove.xpm"
+#include <xpm/path_corner.xpm>
+#include <xpm/path_curve.xpm>
+#include <xpm/path_add.xpm>
+#include <xpm/path_remove.xpm>
 
-#include "xpm/control_point.xpm"
-#include "xpm/control_point_active.xpm"
+#include <xpm/control_point.xpm>
+#include <xpm/control_point_active.xpm>
 
-#include "xpm/snap_point.xpm"
-#include "xpm/snap_point_active.xpm"
+#include <xpm/snap_point.xpm>
+#include <xpm/snap_point_active.xpm>
 
-#include "cursors/select.xbm"
-#include "cursors/selectmask.xbm"
+#include <cursors/select.xbm>
+#include <cursors/selectmask.xbm>
 
 #define IMAGE_DATA(I) I, sizeof(I)/sizeof(char *)
 

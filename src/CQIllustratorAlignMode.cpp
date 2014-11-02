@@ -21,24 +21,24 @@
 #include <CQMenu.h>
 #include <CQDockWidget.h>
 
-#include "xpm/align.xpm"
+#include <xpm/align.xpm>
 
-#include "align_xpm/align_to_bottom_16_xpm.xpm"
-#include "align_xpm/align_to_left_16_xpm.xpm"
-#include "align_xpm/align_to_right_16_xpm.xpm"
-#include "align_xpm/align_to_top_16_xpm.xpm"
-#include "align_xpm/align_horizontally_16_xpm.xpm"
-#include "align_xpm/align_vertically_16_xpm.xpm"
-#include "align_xpm/distribute_bottom_16_xpm.xpm"
-#include "align_xpm/distribute_left_16_xpm.xpm"
-#include "align_xpm/distribute_right_16_xpm.xpm"
-#include "align_xpm/distribute_top_16_xpm.xpm"
-#include "align_xpm/spread_horz_16_xpm.xpm"
-#include "align_xpm/spread_vert_16_xpm.xpm"
-#include "align_xpm/select.xpm"
-#include "align_xpm/left_bottom.xpm"
-#include "align_xpm/right_top.xpm"
-#include "align_xpm/middle_middle.xpm"
+#include <align_xpm/align_to_bottom_16_xpm.xpm>
+#include <align_xpm/align_to_left_16_xpm.xpm>
+#include <align_xpm/align_to_right_16_xpm.xpm>
+#include <align_xpm/align_to_top_16_xpm.xpm>
+#include <align_xpm/align_horizontally_16_xpm.xpm>
+#include <align_xpm/align_vertically_16_xpm.xpm>
+#include <align_xpm/distribute_bottom_16_xpm.xpm>
+#include <align_xpm/distribute_left_16_xpm.xpm>
+#include <align_xpm/distribute_right_16_xpm.xpm>
+#include <align_xpm/distribute_top_16_xpm.xpm>
+#include <align_xpm/spread_horz_16_xpm.xpm>
+#include <align_xpm/spread_vert_16_xpm.xpm>
+#include <align_xpm/select.xpm>
+#include <align_xpm/left_bottom.xpm>
+#include <align_xpm/right_top.xpm>
+#include <align_xpm/middle_middle.xpm>
 
 CQIllustratorAlignMode::
 CQIllustratorAlignMode(CQIllustrator *illustrator) :
