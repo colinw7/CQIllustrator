@@ -6,8 +6,8 @@
 
 #include <QPainter>
 
-//#include "xpm/control_point.xpm"
-//#include "xpm/control_point_active.xpm"
+//#include <xpm/control_point.xpm>
+//#include <xpm/control_point_active.xpm>
 
 CQIllustratorHandle::
 CQIllustratorHandle(CQIllustrator *illustrator) :

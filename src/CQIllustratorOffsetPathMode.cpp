@@ -12,10 +12,10 @@
 #include <CQRealEdit.h>
 #include <CQSwatch.h>
 
-#include "xpm/offset_path.xpm"
+#include <xpm/offset_path.xpm>
 
-#include "cursors/rect.xbm"
-#include "cursors/rectmask.xbm"
+#include <cursors/rect.xbm>
+#include <cursors/rectmask.xbm>
 
 CQIllustratorOffsetPathMode::
 CQIllustratorOffsetPathMode(CQIllustrator *illustrator) :

@@ -10,9 +10,9 @@
 #include <QMouseEvent>
 #include <QStackedWidget>
 
-#include "xpm/selected_point.xpm"
-#include "xpm/selected_hline.xpm"
-#include "xpm/selected_vline.xpm"
+#include <xpm/selected_point.xpm>
+#include <xpm/selected_hline.xpm>
+#include <xpm/selected_vline.xpm>
 
 #define IMAGE_DATA(I) I, sizeof(I)/sizeof(char *)
 

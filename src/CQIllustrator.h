@@ -8,7 +8,7 @@
 #include <CEvent.h>
 #include <CBooleanOp.h>
 
-#include "CStack.h"
+#include <CStack.h>
 
 class CQIllustrator;
 class CQIllustratorCanvas;

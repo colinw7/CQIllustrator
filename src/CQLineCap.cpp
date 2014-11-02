@@ -2,9 +2,9 @@
 #include <CQUtil.h>
 #include <QAction>
 
-#include "pixmaps/cap_square.xpm"
-#include "pixmaps/cap_butt.xpm"
-#include "pixmaps/cap_round.xpm"
+#include <pixmaps/cap_square.xpm>
+#include <pixmaps/cap_butt.xpm>
+#include <pixmaps/cap_round.xpm>
 
 CQLineCap::
 CQLineCap(QWidget *parent) :

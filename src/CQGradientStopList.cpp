@@ -1,4 +1,4 @@
-#include "CQGradientStopList.h"
+#include <CQGradientStopList.h>
 #include <CQUtil.h>
 #include <CQColorChooser.h>
 #include <CQRealEdit.h>
@@ -150,7 +150,7 @@ setEditorData()
 {
   if (edit_.isNull()) return;
 
-  edit_->setColor(QColor(rgba_.getRedI(), rgba_.getGreenI(), rgba_.getBlueI()));
+  edit_->setColor(CQUtil::rgbaToColor(rgba_));
 }
 
 void
@@ -161,7 +161,7 @@ getEditorData(QString &str)
 
   const QColor &c = edit_->color();
 
-  rgba_ = CRGBA(c.red()/255.0, c.green()/255.0, c.blue()/255.0);
+  rgba_ = CQUtil::colorToRGBA(c);
 
   str = "";
 }

@@ -3,8 +3,8 @@
 #include <QLabel>
 #include <QHBoxLayout>
 
-#include "menu.xpm"
-#include "menu_active.xpm"
+#include <menu.xpm>
+#include <menu_active.xpm>
 
 CQOptionToolSet::
 CQOptionToolSet(QWidget *parent) :

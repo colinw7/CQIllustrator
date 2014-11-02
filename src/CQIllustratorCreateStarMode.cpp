@@ -15,14 +15,14 @@
 #include <CQAngleSpinBox.h>
 #include <CQSwatch.h>
 
-#include "xpm/star_poly.xpm"
-#include "xpm/poly.xpm"
-#include "xpm/star.xpm"
-#include "xpm/center.xpm"
-#include "xpm/center_active.xpm"
+#include <xpm/star_poly.xpm>
+#include <xpm/poly.xpm>
+#include <xpm/star.xpm>
+#include <xpm/center.xpm>
+#include <xpm/center_active.xpm>
 
-#include "cursors/star.xbm"
-#include "cursors/starmask.xbm"
+#include <cursors/star.xbm>
+#include <cursors/starmask.xbm>
 
 #define IMAGE_DATA(I) I, sizeof(I)/sizeof(char *)
 

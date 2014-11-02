@@ -13,10 +13,10 @@
 #include <CQRealEdit.h>
 #include <CQSwatch.h>
 
-#include "xpm/lgradient.xpm"
+#include <xpm/lgradient.xpm>
 
-#include "xpm/stop_point.xpm"
-#include "xpm/stop_point_active.xpm"
+#include <xpm/stop_point.xpm>
+#include <xpm/stop_point_active.xpm>
 
 #define IMAGE_DATA(I) I, sizeof(I)/sizeof(char *)
 

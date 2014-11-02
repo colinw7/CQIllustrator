@@ -1,15 +1,15 @@
-#include "CQIllustratorShapeDrawer.h"
-#include "CQIllustratorCanvas.h"
-#include "CQIllustrator.h"
+#include <CQIllustratorShapeDrawer.h>
+#include <CQIllustratorCanvas.h>
+#include <CQIllustrator.h>
 
 #include <CQImage.h>
 #include <CQUtil.h>
 #include <QPainter>
 
-#include "xpm/control_point.xpm"
-#include "xpm/control_point_active.xpm"
-#include "xpm/curve_point.xpm"
-#include "xpm/curve_point_active.xpm"
+#include <xpm/control_point.xpm>
+#include <xpm/control_point_active.xpm>
+#include <xpm/curve_point.xpm>
+#include <xpm/curve_point_active.xpm>
 
 #define IMAGE_DATA(I) I, sizeof(I)/sizeof(char *)
 

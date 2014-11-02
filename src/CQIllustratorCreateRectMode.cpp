@@ -13,10 +13,10 @@
 #include <CQRealEdit.h>
 #include <CQSwatch.h>
 
-#include "xpm/rect.xpm"
+#include <xpm/rect.xpm>
 
-#include "cursors/rect.xbm"
-#include "cursors/rectmask.xbm"
+#include <cursors/rect.xbm>
+#include <cursors/rectmask.xbm>
 
 class CQIllustratorCreateRectCmd : public CQIllustratorCmd {
  public:

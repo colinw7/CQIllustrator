@@ -10,10 +10,10 @@
 #include <CQSwatch.h>
 #include <CQImageButton.h>
 
-#include "xpm/slice.xpm"
+#include <xpm/slice.xpm>
 
-#include "cursors/slice.xbm"
-#include "cursors/slicemask.xbm"
+#include <cursors/slice.xbm>
+#include <cursors/slicemask.xbm>
 
 CQIllustratorSliceMode::
 CQIllustratorSliceMode(CQIllustrator *illustrator) :

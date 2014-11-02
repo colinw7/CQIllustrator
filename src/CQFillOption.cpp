@@ -10,7 +10,7 @@
 #include <CRadialGradient.h>
 #include <COSFile.h>
 
-#include "CQGradientStopList.h"
+#include <CQGradientStopList.h>
 
 #include <QVBoxLayout>
 #include <QHBoxLayout>

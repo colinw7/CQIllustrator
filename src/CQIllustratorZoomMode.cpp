@@ -10,14 +10,14 @@
 #include <CQSwatch.h>
 #include <CQImageButton.h>
 
-#include "xpm/zoom.xpm"
-#include "xpm/zoom_fit.xpm"
-#include "xpm/zoom_selected.xpm"
-#include "xpm/zoom_in.xpm"
-#include "xpm/zoom_out.xpm"
+#include <xpm/zoom.xpm>
+#include <xpm/zoom_fit.xpm>
+#include <xpm/zoom_selected.xpm>
+#include <xpm/zoom_in.xpm>
+#include <xpm/zoom_out.xpm>
 
-#include "cursors/zoom.xbm"
-#include "cursors/zoommask.xbm"
+#include <cursors/zoom.xbm>
+#include <cursors/zoommask.xbm>
 
 CQIllustratorZoomMode::
 CQIllustratorZoomMode(CQIllustrator *illustrator) :

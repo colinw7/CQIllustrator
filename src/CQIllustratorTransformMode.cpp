@@ -22,7 +22,7 @@
 #include <CQMenu.h>
 #include <CQDockWidget.h>
 
-#include "xpm/transform.xpm"
+#include <xpm/transform.xpm>
 
 CQIllustratorTransformMode::
 CQIllustratorTransformMode(CQIllustrator *illustrator) :

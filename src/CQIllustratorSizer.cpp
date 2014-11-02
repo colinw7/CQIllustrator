@@ -5,27 +5,27 @@
 
 #include <QPainter>
 
-#include "xpm/corner_bl.xpm"
-#include "xpm/corner_bl_active.xpm"
-#include "xpm/corner_tl.xpm"
-#include "xpm/corner_tl_active.xpm"
+#include <xpm/corner_bl.xpm>
+#include <xpm/corner_bl_active.xpm>
+#include <xpm/corner_tl.xpm>
+#include <xpm/corner_tl_active.xpm>
 
-#include "xpm/rotate_bl.xpm"
-#include "xpm/rotate_bl_active.xpm"
-#include "xpm/rotate_br.xpm"
-#include "xpm/rotate_br_active.xpm"
-#include "xpm/rotate_tl.xpm"
-#include "xpm/rotate_tl_active.xpm"
-#include "xpm/rotate_tr.xpm"
-#include "xpm/rotate_tr_active.xpm"
+#include <xpm/rotate_bl.xpm>
+#include <xpm/rotate_bl_active.xpm>
+#include <xpm/rotate_br.xpm>
+#include <xpm/rotate_br_active.xpm>
+#include <xpm/rotate_tl.xpm>
+#include <xpm/rotate_tl_active.xpm>
+#include <xpm/rotate_tr.xpm>
+#include <xpm/rotate_tr_active.xpm>
 
-#include "xpm/side_lr.xpm"
-#include "xpm/side_lr_active.xpm"
-#include "xpm/side_tb.xpm"
-#include "xpm/side_tb_active.xpm"
+#include <xpm/side_lr.xpm>
+#include <xpm/side_lr_active.xpm>
+#include <xpm/side_tb.xpm>
+#include <xpm/side_tb_active.xpm>
 
-#include "xpm/rcenter.xpm"
-#include "xpm/rcenter_active.xpm"
+#include <xpm/rcenter.xpm>
+#include <xpm/rcenter_active.xpm>
 
 #define IMAGE_DATA(I) I##_data, sizeof(I##_data)/sizeof(char *)
 
