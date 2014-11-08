@@ -1,6 +1,6 @@
 *.o
 
-moc_*
+moc_*.cpp
 
 bin/
 obj/
