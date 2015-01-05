@@ -9,6 +9,21 @@ using std::vector;
 using std::list;
 using std::map;
 
+//! intersect polygon (points) and bbox and return the result in (ipoints) if successful
+bool
+CMathGeom2D::
+IntersectPolygon(const vector<CPoint2D> &points, const CBBox2D &bbox, vector<CPoint2D> &ipoints)
+{
+  std::vector<CPoint2D> points1;
+
+  points1.push_back(bbox.getLL());
+  points1.push_back(bbox.getLR());
+  points1.push_back(bbox.getUR());
+  points1.push_back(bbox.getUL());
+
+  return IntersectPolygons(points, points1, ipoints);
+}
+
 //! intersect two polygons (x1,y1,n1) and (x2,y2,n2) and return the
 //! result in (xi, yi, ni) if successful
 //!
@@ -243,7 +258,7 @@ typedef vector<CutPoint>    CutPointArray;
 typedef list<CutPointArray> CutPointArrayList;
 
 //! intersect two polygons (points1) and (points2) and return the
-//! result in (ipoints) if successful
+//! result in (cpoints) if successful
 bool
 CMathGeom2D::
 CutPolygons(const vector<CPoint2D> &points1, const vector<CPoint2D> &points2,
@@ -466,7 +481,7 @@ CutPolygons(const vector<CPoint2D> &points1, const vector<CPoint2D> &points2,
 
   //----
 
-  // set return array of cut polygons 
+  // set return array of cut polygons
   CutPointArrayList::const_iterator p1, p2;
 
   for (p1 = opoints.begin(), p2 = opoints.end(); p1 != p2; ++p1) {
@@ -1431,7 +1446,7 @@ LinesAreCoincident(double x11, double y11, double x21, double y21,
 //! Find intersection between two lines
 //!
 //! Note: intersection is done on infinite line through line points
-//! so intersection need not be on the line segment. Use mu1 amnd mu2
+//! so intersection need not be on the line segment. Use mu1 and mu2
 //! if you need to restrict to line segment. mu1 and mu2 need to be in
 //! range 0->1 for intersect in segment
 bool
@@ -1477,7 +1492,7 @@ IntersectLine(double x11, double y11, double x21, double y21,
 //! Find intersection between two lines
 //!
 //! Note: intersection is done on infinite line through line points
-//! so intersection need not be on the line segment. Use mu1 amnd mu2
+//! so intersection need not be on the line segment. Use mu1 and mu2
 //! if you need to restrict to line segment. mu1 and mu2 need to be in
 //! range 0->1 for intersect in segment
 bool

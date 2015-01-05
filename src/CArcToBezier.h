@@ -18,10 +18,8 @@ class CArcToBezier {
 
   virtual ~CArcToBezier();
 
-  void calc (double x, double y, double xr, double yr,
-             double angle1, double angle2);
-  void calcN(double x, double y, double xr, double yr,
-             double angle1, double angle2);
+  void calc (double x, double y, double xr, double yr, double angle1, double angle2);
+  void calcN(double x, double y, double xr, double yr, double angle1, double angle2);
 
   virtual uint getCalcNumBeziers();
 

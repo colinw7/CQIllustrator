@@ -54,25 +54,23 @@ namespace CMathGeom2D {
     POINT_POSITION_ON    = 0
   };
 
+  bool IntersectPolygon(const std::vector<CPoint2D> &points, const CBBox2D &bbox,
+                        std::vector<CPoint2D> &ipoints);
+
   bool IntersectPolygons(const double *x1, const double *y1, uint n1,
                          const double *x2, const double *y2, uint n2,
                          double **xi, double **yi, uint *ni);
-  bool IntersectPolygons(const CPoint2D *points1, uint num1,
-                         const CPoint2D *points2, uint num2,
+  bool IntersectPolygons(const CPoint2D *points1, uint num1, const CPoint2D *points2, uint num2,
                          CPoint2D *ipoints, uint *maxi);
-  bool IntersectPolygons(const std::vector<CPoint2D> &points1,
-                         const std::vector<CPoint2D> &points2,
+  bool IntersectPolygons(const std::vector<CPoint2D> &points1, const std::vector<CPoint2D> &points2,
                          std::vector<CPoint2D> &ipoints);
 
-  bool CutPolygons(const std::vector<CPoint2D> &points1,
-                   const std::vector<CPoint2D> &points2,
+  bool CutPolygons(const std::vector<CPoint2D> &points1, const std::vector<CPoint2D> &points2,
                    std::vector<CPoint2D> &opoints);
-  bool CutPolygons(const std::vector<CPoint2D> &points1,
-                   const std::vector<CPoint2D> &points2,
+  bool CutPolygons(const std::vector<CPoint2D> &points1, const std::vector<CPoint2D> &points2,
                    std::vector< std::vector<CPoint2D> > &opoints);
 
-  bool AddPolygons(const std::vector<CPoint2D> &points1,
-                   const std::vector<CPoint2D> &points2,
+  bool AddPolygons(const std::vector<CPoint2D> &points1, const std::vector<CPoint2D> &points2,
                    std::vector<CPoint2D> &opoints);
 
   //------
@@ -161,8 +159,7 @@ namespace CMathGeom2D {
   double IncludedAngle(const CPoint2D &point1, const CPoint2D &point2, const CPoint2D &point3);
   double IncludedAngle(double x1, double y1, double x2, double y2);
 
-  bool clipLine(int xmin, int ymin, int xmax, int ymax,
-                int *x1, int *y1, int *x2, int *y2);
+  bool clipLine(int xmin, int ymin, int xmax, int ymax, int *x1, int *y1, int *x2, int *y2);
   bool clipLine(double xmin, double ymin, double xmax, double ymax,
                 double *x1, double *y1, double *x2, double *y2);
   bool clipLine1(double xmin, double ymin, double xmax, double ymax,
@@ -182,11 +179,9 @@ namespace CMathGeom2D {
                            double *xi2, double *yi2, uint *num_i);
 
   bool ThreePointCircle(const CPoint2D &point1, const CPoint2D &point2,
-                        const CPoint2D &point3, CPoint2D &center,
-                        double &radius);
+                        const CPoint2D &point3, CPoint2D &center, double &radius);
   bool ThreePointCircle(double x1, double y1, double x2, double y2,
-                        double x3, double y3, double *xc, double *yc,
-                        double *r);
+                        double x3, double y3, double *xc, double *yc, double *r);
 
   PointPosition PointLinePosition(const CPoint2D &lpoint1, const CPoint2D &lpoint2,
                                   const CPoint2D &point);
@@ -218,8 +213,7 @@ namespace CMathGeom2D {
   bool IsPerpendicular(double x21, double y21, double x32, double y32);
 
   bool ThreePointCircle1(double x1, double y1, double x2, double y2,
-                         double x3, double y3, double *xc, double *yc,
-                         double *r);
+                         double x3, double y3, double *xc, double *yc, double *r);
 
   void PointsRange(const std::vector<CPoint2D> &points, CPoint2D &min_point,
                    CPoint2D &max_point);
@@ -311,12 +305,13 @@ namespace CMathGeom2D {
                      std::vector<CPoint2D> &points, double line_width=1.0);
 
   bool LineJoinToPolygon(const CPoint2D &p1, const CPoint2D &p2, const CPoint2D &p3,
-                         CLineJoinType lineJoin, std::vector<CPoint2D> &points, double line_width=1.0);
+                         CLineJoinType lineJoin, std::vector<CPoint2D> &points,
+                         double line_width=1.0);
 
   bool MitreLineJoinToPolygon(const CPoint2D &p1, const CPoint2D &p2, const CPoint2D &p3,
                               std::vector<CPoint2D> &points, double line_width=1.0,
                               double mitre_limit=1.0);
-  bool RoundLineJoinToPolygon(const CPoint2D &/*p1*/, const CPoint2D &/*p2*/, const CPoint2D &/*p3*/,
+  bool RoundLineJoinToPolygon(const CPoint2D &p1, const CPoint2D &p2, const CPoint2D &p3,
                               std::vector<CPoint2D> &points);
   bool BevelLineJoinToPolygon(const CPoint2D &p1, const CPoint2D &p2, const CPoint2D &p3,
                               std::vector<CPoint2D> &points, double line_width=1.0);
