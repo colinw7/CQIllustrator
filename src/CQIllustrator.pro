@@ -6,6 +6,8 @@ DEPENDPATH += .
 
 QT += widgets
 
+QMAKE_CXXFLAGS += -std=c++11
+
 CONFIG += debug
 
 # Input
