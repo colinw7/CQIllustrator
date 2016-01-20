@@ -2,6 +2,7 @@
 #define CQUAD_TREE_H
 
 #include <list>
+#include <cassert>
 
 // quad tree containing pointers to items of type DATA with an associated bbox of type BBOX
 //
@@ -17,10 +18,10 @@
 // BBOX must support:
 //   constructor BBOX(l, b, r, t);
 //
-//   T l = bbox.getLeft();
+//   T l = bbox.getLeft  ();
 //   T b = bbox.getBottom();
-//   T r = bbox.getRight();
-//   T t = bbox.getTop();
+//   T r = bbox.getRight ();
+//   T t = bbox.getTop   ();
 //
 template<typename DATA, typename BBOX, typename T=double>
 class CQuadTree {
@@ -28,7 +29,7 @@ class CQuadTree {
   typedef std::list<DATA *> DataList;
 
  private:
-  CQuadTree *parent_;   // parent tree (NULL if root)
+  CQuadTree *parent_;   // parent tree (0 if root)
   BBOX       bbox_;     // bounding box of tree
   DataList   dataList_; // data list
   CQuadTree *bl_tree_;  // bottom left sub tree
@@ -38,7 +39,7 @@ class CQuadTree {
 
  public:
   explicit CQuadTree(const BBOX &bbox=BBOX(1,1,-1,-1)) :
-   parent_(NULL), bbox_(bbox), bl_tree_(NULL), br_tree_(NULL), tl_tree_(NULL), tr_tree_(NULL) {
+   parent_(0), bbox_(bbox), bl_tree_(0), br_tree_(0), tl_tree_(0), tr_tree_(0) {
   }
 
  ~CQuadTree() {
@@ -50,7 +51,7 @@ class CQuadTree {
 
  private:
   CQuadTree(CQuadTree *parent, const BBOX &bbox) :
-   parent_(parent), bbox_(bbox), bl_tree_(NULL), br_tree_(NULL), tl_tree_(NULL), tr_tree_(NULL) {
+   parent_(parent), bbox_(bbox), bl_tree_(0), br_tree_(0), tl_tree_(0), tr_tree_(0) {
   }
 
  public:
@@ -58,10 +59,10 @@ class CQuadTree {
   void reset() {
     dataList_.clear();
 
-    delete bl_tree_; bl_tree_ = NULL;
-    delete br_tree_; br_tree_ = NULL;
-    delete tl_tree_; tl_tree_ = NULL;
-    delete tr_tree_; tr_tree_ = NULL;
+    delete bl_tree_; bl_tree_ = 0;
+    delete br_tree_; br_tree_ = 0;
+    delete tl_tree_; tl_tree_ = 0;
+    delete tr_tree_; tr_tree_ = 0;
   }
 
   // get bounding box
@@ -100,7 +101,7 @@ class CQuadTree {
   CQuadTree *getTRTree() const { return tr_tree_; }
 
   // has child trees
-  bool hasChildren() const { return bl_tree_ != NULL; }
+  bool hasChildren() const { return bl_tree_ != 0; }
 
   //----------
 
@@ -420,7 +421,7 @@ class CQuadTree {
   const CQuadTree *getTreeAtPoint(T x, T y) const {
     if (x < bbox_.getLeft  () || x > bbox_.getRight() ||
         y < bbox_.getBottom() || y > bbox_.getTop  ())
-      return NULL;
+      return 0;
 
     typename DataList::const_iterator p1, p2;
 
@@ -433,12 +434,12 @@ class CQuadTree {
     }
 
     if (bl_tree_) {
-      const CQuadTree *tree = NULL;
+      const CQuadTree *tree = 0;
 
-      if ((tree = bl_tree_->getTreeAtPoint(x, y)) != NULL) return tree;
-      if ((tree = br_tree_->getTreeAtPoint(x, y)) != NULL) return tree;
-      if ((tree = tl_tree_->getTreeAtPoint(x, y)) != NULL) return tree;
-      if ((tree = tr_tree_->getTreeAtPoint(x, y)) != NULL) return tree;
+      if ((tree = bl_tree_->getTreeAtPoint(x, y)) != 0) return tree;
+      if ((tree = br_tree_->getTreeAtPoint(x, y)) != 0) return tree;
+      if ((tree = tl_tree_->getTreeAtPoint(x, y)) != 0) return tree;
+      if ((tree = tr_tree_->getTreeAtPoint(x, y)) != 0) return tree;
     }
 
     return this;
