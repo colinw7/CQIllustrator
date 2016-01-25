@@ -5,7 +5,7 @@
 
 CQScrollArea::
 CQScrollArea(QWidget *widget) :
- QWidget  (NULL),
+ QWidget  (0),
  widget_  (widget),
  x_size_  (-1),
  y_size_  (-1),

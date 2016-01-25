@@ -13,7 +13,7 @@ enum { TIMEOUT = 500 };
 
 CQIllustratorCanvas::
 CQIllustratorCanvas(CQIllustrator *illustrator) :
- illustrator_(illustrator), popupMenu_(NULL), pressed_(false), infoShape_(NULL)
+ illustrator_(illustrator), popupMenu_(0), pressed_(false), infoShape_(0)
 {
   setFocusPolicy(Qt::StrongFocus);
 
@@ -143,11 +143,11 @@ void
 CQIllustratorCanvas::
 showMenu(const QPoint &p)
 {
-  if (popupMenu_ == NULL) {
+  if (popupMenu_ == 0) {
     popupMenu_ = new QMenu(this);
 
-    QAction *applyAction  = new QAction("Apply" , NULL);
-    QAction *cancelAction = new QAction("Cancel", NULL);
+    QAction *applyAction  = new QAction("Apply" , 0);
+    QAction *cancelAction = new QAction("Cancel", 0);
 
     popupMenu_->addAction(applyAction);
     popupMenu_->addAction(cancelAction);

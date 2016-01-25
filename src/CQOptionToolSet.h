@@ -104,7 +104,7 @@ class CQOptionToolSet : public QWidget {
   Q_OBJECT
 
  public:
-  CQOptionToolSet(QWidget *parent=NULL);
+  CQOptionToolSet(QWidget *parent=0);
 
   void setPopupArea(QWidget *popupArea);
 

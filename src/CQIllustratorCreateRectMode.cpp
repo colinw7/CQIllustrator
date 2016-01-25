@@ -285,11 +285,11 @@ setSelectedShape(const CQIllustratorShape *shape)
 {
   const CQIllustratorRectShape *rect = dynamic_cast<const CQIllustratorRectShape *>(shape);
 
-  posEdit_   ->setEnabled(rect != NULL);
-  widthEdit_ ->setEnabled(rect != NULL);
-  heightEdit_->setEnabled(rect != NULL);
-  xRadEdit_  ->setEnabled(rect != NULL);
-  yRadEdit_  ->setEnabled(rect != NULL);
+  posEdit_   ->setEnabled(rect != 0);
+  widthEdit_ ->setEnabled(rect != 0);
+  heightEdit_->setEnabled(rect != 0);
+  xRadEdit_  ->setEnabled(rect != 0);
+  yRadEdit_  ->setEnabled(rect != 0);
 
   if (rect) {
     const CBBox2D &bbox = rect->getBBox();

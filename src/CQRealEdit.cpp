@@ -9,14 +9,14 @@
 
 CQRealEdit::
 CQRealEdit(QWidget *parent, double value) :
- QLineEdit(parent), menu_(NULL)
+ QLineEdit(parent), menu_(0)
 {
   init("edit", value);
 }
 
 CQRealEdit::
 CQRealEdit(double value) :
- QLineEdit(NULL), menu_(NULL)
+ QLineEdit(0), menu_(0)
 {
   init("edit", value);
 }
@@ -45,7 +45,7 @@ void
 CQRealEdit::
 addMenuValue(double value)
 {
-  if (menu_ == NULL) {
+  if (menu_ == 0) {
     menu_ = new QMenu;
 
     connect(menu_, SIGNAL(triggered(QAction *)), this, SLOT(menuItemActivated(QAction *)));
@@ -136,6 +136,6 @@ menuItemActivated(QAction *action)
 
 CQRealEditAction::
 CQRealEditAction(double value) :
- QAction(QString("%1").arg(value), NULL), value_(value)
+ QAction(QString("%1").arg(value), 0), value_(value)
 {
 }

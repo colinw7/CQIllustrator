@@ -44,7 +44,7 @@ class CQFillOptionSwab : public QWidget {
 
 CQFillOptionTool::
 CQFillOptionTool(CQIllustrator *illustrator) :
- CQOptionTool(), illustrator_(illustrator), dialog_(NULL)
+ CQOptionTool(), illustrator_(illustrator), dialog_(0)
 {
   dialog_ = new CQFillOptionDialog(this);
 
@@ -82,7 +82,7 @@ void
 CQFillOptionTool::
 selectionChangedSlot()
 {
-  const CQIllustratorShape *shape = NULL;
+  const CQIllustratorShape *shape = 0;
 
   const CQIllustratorSelectedShapes *selection = illustrator_->getSelection();
 
@@ -126,15 +126,15 @@ paintEvent(QPaintEvent *)
   if (fill.hasGradient()) {
     const CGenGradient *g = fill.getGradient();
 
-    const CLinearGradient *lg = NULL;
-    const CRadialGradient *rg = NULL;
+    const CLinearGradient *lg = 0;
+    const CRadialGradient *rg = 0;
 
-    if      ((lg = dynamic_cast<const CLinearGradient *>(g)) != NULL) {
+    if      ((lg = dynamic_cast<const CLinearGradient *>(g)) != 0) {
       QBrush brush(CQUtil::toQGradient(lg));
 
       painter.setBrush(brush);
     }
-    else if ((rg = dynamic_cast<const CRadialGradient *>(g)) != NULL) {
+    else if ((rg = dynamic_cast<const CRadialGradient *>(g)) != 0) {
       QBrush brush(CQUtil::toQGradient(rg));
 
       painter.setBrush(brush);
@@ -155,7 +155,7 @@ paintEvent(QPaintEvent *)
 
 CQFillOptionDialog::
 CQFillOptionDialog(CQFillOptionTool *tool) :
- CQOptionToolDialog(), tool_(tool), colorChooser_(NULL)
+ CQOptionToolDialog(), tool_(tool), colorChooser_(0)
 {
   initWidgets();
 }
@@ -424,7 +424,7 @@ flatSlot()
   stack_->setCurrentIndex(0);
 
   if (fill_.hasGradient() || fill_.hasImage()) {
-    fill_.setGradient(NULL);
+    fill_.setGradient(0);
     fill_.resetImage();
 
     emit valueChanged(fill_);
@@ -441,7 +441,7 @@ lgradSlot()
 {
   stack_->setCurrentIndex(1);
 
-  const CLinearGradient *lg = NULL;
+  const CLinearGradient *lg = 0;
 
   if (fill_.hasGradient()) {
     const CGenGradient *g = fill_.getGradient();
@@ -449,7 +449,7 @@ lgradSlot()
     lg = dynamic_cast<const CLinearGradient *>(g);
   }
 
-  if (lg == NULL) {
+  if (lg == 0) {
     CLinearGradient *lg1 = new CLinearGradient;
 
     lg1->addStop(0.0, CRGBA(1,1,1));
@@ -474,7 +474,7 @@ rgradSlot()
 {
   stack_->setCurrentIndex(2);
 
-  const CRadialGradient *rg = NULL;
+  const CRadialGradient *rg = 0;
 
   if (fill_.hasGradient()) {
     const CGenGradient *g = fill_.getGradient();
@@ -482,7 +482,7 @@ rgradSlot()
     rg = dynamic_cast<const CRadialGradient *>(g);
   }
 
-  if (rg == NULL) {
+  if (rg == 0) {
     CRadialGradient *rg1 = new CRadialGradient;
 
     rg1->addStop(0.0, CRGBA(1,1,1));
@@ -509,7 +509,7 @@ imageSlot()
 
   if (! fill_.hasImage()) {
     fill_.setImage(CImagePtr());
-    fill_.setGradient(NULL);
+    fill_.setGradient(0);
 
     emit valueChanged(fill_);
 
@@ -523,8 +523,8 @@ void
 CQFillOptionDialog::
 setActiveState()
 {
-  const CLinearGradient *lg = NULL;
-  const CRadialGradient *rg = NULL;
+  const CLinearGradient *lg = 0;
+  const CRadialGradient *rg = 0;
 
   bool is_image = false;
 
@@ -548,8 +548,8 @@ void
 CQFillOptionDialog::
 updateWidgets()
 {
-  const CLinearGradient *lg = NULL;
-  const CRadialGradient *rg = NULL;
+  const CLinearGradient *lg = 0;
+  const CRadialGradient *rg = 0;
 
   bool is_image = false;
 
@@ -558,7 +558,7 @@ updateWidgets()
 
     lg = dynamic_cast<const CLinearGradient *>(g);
 
-    if (lg != NULL) {
+    if (lg != 0) {
       stack_->setCurrentIndex(1);
 
       lgrad1_->setValue(lg->getPoint1());
@@ -569,7 +569,7 @@ updateWidgets()
 
     rg = dynamic_cast<const CRadialGradient *>(g);
 
-    if (rg != NULL) {
+    if (rg != 0) {
       stack_->setCurrentIndex(2);
 
       rgradC_->setValue(rg->getCenter());
@@ -594,18 +594,18 @@ updateWidgets()
     fillRule_    ->setCurrentIndex(fill_.getFillRule() == FILL_TYPE_WINDING ? 0 : 1);
   }
 
-  colorChooser_->setEnabled(lg == NULL && rg == NULL && ! is_image);
-  opacityEdit_ ->setEnabled(lg == NULL && rg == NULL && ! is_image);
-  fillRule_    ->setEnabled(lg == NULL && rg == NULL && ! is_image);
+  colorChooser_->setEnabled(lg == 0 && rg == 0 && ! is_image);
+  opacityEdit_ ->setEnabled(lg == 0 && rg == 0 && ! is_image);
+  fillRule_    ->setEnabled(lg == 0 && rg == 0 && ! is_image);
 
-  lgrad1_     ->setEnabled(lg != NULL);
-  lgrad2_     ->setEnabled(lg != NULL);
-  lgradStops_ ->setEnabled(lg != NULL);
+  lgrad1_     ->setEnabled(lg != 0);
+  lgrad2_     ->setEnabled(lg != 0);
+  lgradStops_ ->setEnabled(lg != 0);
 
-  rgradC_    ->setEnabled(rg != NULL);
-  rgradR_    ->setEnabled(rg != NULL);
-  rgradF_    ->setEnabled(rg != NULL);
-  rgradStops_->setEnabled(rg != NULL);
+  rgradC_    ->setEnabled(rg != 0);
+  rgradR_    ->setEnabled(rg != 0);
+  rgradF_    ->setEnabled(rg != 0);
+  rgradStops_->setEnabled(rg != 0);
 
   imagePreview_->setEnabled(is_image);
 }

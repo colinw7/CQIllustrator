@@ -40,7 +40,7 @@ CQWinWidget::
 setChild(QWidget *child)
 {
   if (child_)
-    child_->setParent(NULL);
+    child_->setParent(0);
 
   child_ = child;
 

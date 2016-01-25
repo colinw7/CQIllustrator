@@ -8,7 +8,7 @@ class CQLineCap : public QComboBox {
   Q_OBJECT
 
  public:
-  CQLineCap(QWidget *parent=NULL);
+  CQLineCap(QWidget *parent=0);
 
   void setLineCap(CLineCapType cap);
 

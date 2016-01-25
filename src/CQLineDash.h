@@ -10,7 +10,7 @@ class CQLineDash : public QLineEdit {
   Q_OBJECT
 
  public:
-  CQLineDash(QWidget *parent=NULL);
+  CQLineDash(QWidget *parent=0);
 
   void setLineDash(const CLineDash &dash);
 

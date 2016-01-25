@@ -43,7 +43,7 @@ class CQIllustratorUndoListDataItem : public QListWidgetItem {
 
 CQIllustratorUndoDock::
 CQIllustratorUndoDock(CQIllustrator *illustrator) :
- QWidget(NULL), illustrator_(illustrator)
+ QWidget(0), illustrator_(illustrator)
 {
   QHBoxLayout *layout = new QHBoxLayout(this);
   layout->setMargin(0); layout->setSpacing(0);
@@ -134,7 +134,7 @@ reload()
     ++ind;
   }
 
-  CQIllustratorUndoListGroupItem *item = new CQIllustratorUndoListGroupItem(NULL, 0);
+  CQIllustratorUndoListGroupItem *item = new CQIllustratorUndoListGroupItem(0, 0);
 
   list_->addItem(item);
 

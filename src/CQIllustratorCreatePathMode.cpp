@@ -374,8 +374,8 @@ snapPoint(CPoint2D &p)
 
         CPoint2D pi;
 
-        if (CMathGeom2D::IntersectLine(l, l1, &pi, NULL, NULL)) addSnapHandle(p, pi);
-        if (CMathGeom2D::IntersectLine(l, l2, &pi, NULL, NULL)) addSnapHandle(p, pi);
+        if (CMathGeom2D::IntersectLine(l, l1, &pi, 0, 0)) addSnapHandle(p, pi);
+        if (CMathGeom2D::IntersectLine(l, l2, &pi, 0, 0)) addSnapHandle(p, pi);
       }
     }
   }
@@ -419,10 +419,10 @@ snapPoint(CPoint2D &p)
 
         CPoint2D pi;
 
-        if (CMathGeom2D::IntersectLine(l, l1, &pi, NULL, NULL)) addSnapHandle(p, pi);
-        if (CMathGeom2D::IntersectLine(l, l2, &pi, NULL, NULL)) addSnapHandle(p, pi);
-        if (CMathGeom2D::IntersectLine(l, l3, &pi, NULL, NULL)) addSnapHandle(p, pi);
-        if (CMathGeom2D::IntersectLine(l, l4, &pi, NULL, NULL)) addSnapHandle(p, pi);
+        if (CMathGeom2D::IntersectLine(l, l1, &pi, 0, 0)) addSnapHandle(p, pi);
+        if (CMathGeom2D::IntersectLine(l, l2, &pi, 0, 0)) addSnapHandle(p, pi);
+        if (CMathGeom2D::IntersectLine(l, l3, &pi, 0, 0)) addSnapHandle(p, pi);
+        if (CMathGeom2D::IntersectLine(l, l4, &pi, 0, 0)) addSnapHandle(p, pi);
       }
     }
   }
@@ -1219,7 +1219,7 @@ setSelectedShapePoint(const CQIllustratorShape *shape,
   else
     pointEdit_->setValue(CPoint2D(0,0));
 
-  pointEdit_->setEnabled(point != NULL);
+  pointEdit_->setEnabled(point != 0);
 }
 
 void
@@ -1231,7 +1231,7 @@ updateShape()
   CPathShape *shape =
     CQIllustratorUtil::getCurrentShape<CPathShape>(illustrator);
 
-  CPathShape *path = NULL;
+  CPathShape *path = 0;
 
   if (shape)
     path = dynamic_cast<CPathShape *>(shape);
@@ -1303,7 +1303,7 @@ updateHandles(uint numHandles)
   }
 
   while (controlPointHandles_.size() > numHandles) {
-    CQIllustratorControlPointHandle *handle = NULL;
+    CQIllustratorControlPointHandle *handle = 0;
 
     removeHandle(handle);
   }

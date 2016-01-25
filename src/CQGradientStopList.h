@@ -123,7 +123,7 @@ class CQGradientStopList : public QWidget {
   Q_OBJECT
 
  public:
-  CQGradientStopList(QWidget *parent=NULL);
+  CQGradientStopList(QWidget *parent=0);
 
   void init(const CGenGradient &g);
 

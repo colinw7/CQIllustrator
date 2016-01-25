@@ -8,7 +8,7 @@ class CQFontOptionTool : public CQOptionTool {
   Q_OBJECT
 
  public:
-  CQFontOptionTool(QWidget *parent=NULL);
+  CQFontOptionTool(QWidget *parent=0);
 
   CQOptionToolDialog *getDialog();
 

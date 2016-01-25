@@ -636,7 +636,7 @@ class CQIllustrator : public CQMainWindow {
 namespace CQIllustratorUtil {
   template<typename T>
   T *getCurrentShape(CQIllustrator *illustrator) {
-    T *shape = NULL;
+    T *shape = 0;
 
     CQIllustratorSelectedShapes *selection = illustrator->getSelection();
 
@@ -647,9 +647,9 @@ namespace CQIllustratorUtil {
 
       T *tshape = dynamic_cast<T *>(shape1);
 
-      if (tshape == NULL) continue;
+      if (tshape == 0) continue;
 
-      if (shape == NULL)
+      if (shape == 0)
         shape = tshape;
       else
         break;

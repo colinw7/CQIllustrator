@@ -30,7 +30,7 @@ class CQDockMgr {
 
  private:
   CQDockMgr() :
-   toolsMenu_(NULL) {
+   toolsMenu_(0) {
   }
 };
 

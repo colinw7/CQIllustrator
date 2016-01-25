@@ -283,12 +283,12 @@ setSelectedShape(const CQIllustratorShape *shape)
   const CQIllustratorEllipseShape *ellipse =
     dynamic_cast<const CQIllustratorEllipseShape *>(shape);
 
-  posEdit_    ->setEnabled(ellipse != NULL);
-  widthEdit_  ->setEnabled(ellipse != NULL);
-  heightEdit_ ->setEnabled(ellipse != NULL);
-  angle1Edit_ ->setEnabled(ellipse != NULL);
-  angle1Edit_ ->setEnabled(ellipse != NULL);
-  connectEdit_->setEnabled(ellipse != NULL);
+  posEdit_    ->setEnabled(ellipse != 0);
+  widthEdit_  ->setEnabled(ellipse != 0);
+  heightEdit_ ->setEnabled(ellipse != 0);
+  angle1Edit_ ->setEnabled(ellipse != 0);
+  angle1Edit_ ->setEnabled(ellipse != 0);
+  connectEdit_->setEnabled(ellipse != 0);
 
   if (ellipse) {
     const CBBox2D &bbox = ellipse->getBBox();

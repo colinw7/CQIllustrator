@@ -27,7 +27,7 @@ class CQIllustratorHandle {
   virtual ~CQIllustratorHandle() { }
 
   void setImage(const char **strings, uint num_strings,
-                const char **active_strings=NULL, uint num_active_strings=0);
+                const char **active_strings=0, uint num_active_strings=0);
 
   void setStyle(Style style);
 

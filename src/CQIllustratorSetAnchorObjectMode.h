@@ -9,11 +9,11 @@ class CQIllustratorSetAnchorObjectMode : public CQIllustratorMode {
 
   const char *getTitle() const { return "Set Anchor Object"  ; }
 
-  CQIllustratorToolbar *createToolbar() { return NULL; }
+  CQIllustratorToolbar *createToolbar() { return 0; }
 
   CQMenuItem *createMenuItem(CQMenu *menu);
 
-  CQIllustratorToolbar *getToolbar() const { return NULL; }
+  CQIllustratorToolbar *getToolbar() const { return 0; }
 
   void handleMousePress  (const MouseEvent &e);
   void handleMouseRelease(const MouseEvent &e);

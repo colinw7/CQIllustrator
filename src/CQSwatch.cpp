@@ -5,14 +5,14 @@
 
 CQSwatch::
 CQSwatch() :
- QWidget(NULL)
+ QWidget(0)
 {
   init();
 }
 
 CQSwatch::
 CQSwatch(QWidget *widget) :
- QWidget(NULL)
+ QWidget(0)
 {
   init();
 
@@ -22,7 +22,7 @@ CQSwatch(QWidget *widget) :
 
 CQSwatch::
 CQSwatch(const char *title, QWidget *w) :
- QWidget(NULL)
+ QWidget(0)
 {
   init();
 
@@ -34,7 +34,7 @@ CQSwatch(const char *title, QWidget *w) :
 
 CQSwatch::
 CQSwatch(const char *title, QWidget *w1, QWidget *w2) :
- QWidget(NULL)
+ QWidget(0)
 {
   init();
 
@@ -47,7 +47,7 @@ CQSwatch(const char *title, QWidget *w1, QWidget *w2) :
 
 CQSwatch::
 CQSwatch(const char *title, QWidget *w1, QWidget *w2, QWidget *w3) :
- QWidget(NULL)
+ QWidget(0)
 {
   init();
 
@@ -61,7 +61,7 @@ CQSwatch(const char *title, QWidget *w1, QWidget *w2, QWidget *w3) :
 
 CQSwatch::
 CQSwatch(const char *title, QWidget *w1, QWidget *w2, QWidget *w3, QWidget *w4) :
- QWidget(NULL)
+ QWidget(0)
 {
   init();
 

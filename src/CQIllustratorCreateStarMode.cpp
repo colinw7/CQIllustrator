@@ -280,12 +280,12 @@ setSelectedShape(const CQIllustratorShape *shape)
   const CQIllustratorStarShape  *star = dynamic_cast<const CQIllustratorStarShape  *>(shape);
   const CQIllustratorNPolyShape *poly = dynamic_cast<const CQIllustratorNPolyShape *>(shape);
 
-  centerEdit_ ->setEnabled(star != NULL || poly != NULL);
-  numEdit_    ->setEnabled(star != NULL || poly != NULL);
-  radius1Edit_->setEnabled(star != NULL || poly != NULL);
-  radius2Edit_->setEnabled(star != NULL);
-  angle1Edit_ ->setEnabled(star != NULL || poly != NULL);
-  angle2Edit_ ->setEnabled(star != NULL);
+  centerEdit_ ->setEnabled(star != 0 || poly != 0);
+  numEdit_    ->setEnabled(star != 0 || poly != 0);
+  radius1Edit_->setEnabled(star != 0 || poly != 0);
+  radius2Edit_->setEnabled(star != 0);
+  angle1Edit_ ->setEnabled(star != 0 || poly != 0);
+  angle2Edit_ ->setEnabled(star != 0);
 
   disconnect(numEdit_   , SIGNAL(valueChanged(int)), this, SLOT(updateShape()));
   disconnect(angle1Edit_, SIGNAL(angleChanged(double)), this, SLOT(updateShape()));

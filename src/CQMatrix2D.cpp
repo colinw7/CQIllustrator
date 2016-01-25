@@ -77,7 +77,7 @@ class MatrixCell : public CQTableWidgetItem {
 
 CQMatrix2D::
 CQMatrix2D(const CMatrix2D &m) :
- QWidget(NULL), m_(m)
+ QWidget(0), m_(m)
 {
   init();
 }

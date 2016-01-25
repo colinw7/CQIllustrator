@@ -171,7 +171,7 @@ drawI(QPainter *painter)
 
 CQIllustratorControlPointHandle::
 CQIllustratorControlPointHandle(CQIllustrator *illustrator) :
- CQIllustratorHandle(illustrator), point_(NULL)
+ CQIllustratorHandle(illustrator), point_(0)
 {
   //setImage(IMAGE_DATA(control_point_data), IMAGE_DATA(control_point_active_data));
 }

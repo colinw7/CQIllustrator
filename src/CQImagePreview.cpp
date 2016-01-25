@@ -104,7 +104,7 @@ scrollRight(bool page)
 
 CQImagePreviewCanvas::
 CQImagePreviewCanvas(CQImagePreview *view) :
- QWidget     (NULL),
+ QWidget     (0),
  view_       (view),
  zoom_factor_(1.0),
  fill_screen_(false),

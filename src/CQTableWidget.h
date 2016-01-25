@@ -87,7 +87,7 @@ class CQTableWidget : public QTableWidget {
     QTableWidgetItem *i = item(row, column);
 
     CQTableWidgetItem *i1 = dynamic_cast<CQTableWidgetItem *>(i);
-    assert(i1 != NULL);
+    assert(i1 != 0);
 
     assert(i1->getType() == T::getType());
 

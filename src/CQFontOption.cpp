@@ -22,7 +22,7 @@ class CQFontOptionSwab : public QWidget {
 
 CQFontOptionTool::
 CQFontOptionTool(QWidget *) :
- CQOptionTool(), dialog_(NULL)
+ CQOptionTool(), dialog_(0)
 {
   dialog_ = new CQFontOptionDialog(this);
 
@@ -96,7 +96,7 @@ paintEvent(QPaintEvent *)
 
 CQFontOptionDialog::
 CQFontOptionDialog(CQFontOptionTool *tool) :
- CQOptionToolDialog(), tool_(tool), fontChooser_(NULL)
+ CQOptionToolDialog(), tool_(tool), fontChooser_(0)
 {
   initWidgets();
 }

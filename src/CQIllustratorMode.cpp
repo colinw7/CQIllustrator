@@ -18,14 +18,14 @@
 
 CQIllustratorMode::
 CQIllustratorMode(CQIllustrator *illustrator, uint id) :
- illustrator_(illustrator), parentMode_(NULL), id_(id), menuItem_(NULL),
- editMode_(CREATE_MODE), stack_(NULL), pressed_(false), moving_(false), dragging_(false)
+ illustrator_(illustrator), parentMode_(0), id_(id), menuItem_(0),
+ editMode_(CREATE_MODE), stack_(0), pressed_(false), moving_(false), dragging_(false)
 {
 }
 
 CQIllustratorMode::
 CQIllustratorMode(CQIllustratorMode *parentMode, uint id) :
- illustrator_(parentMode->getIllustrator()), parentMode_(parentMode), id_(id), menuItem_(NULL),
+ illustrator_(parentMode->getIllustrator()), parentMode_(parentMode), id_(id), menuItem_(0),
  editMode_(CREATE_MODE), pressed_(false), moving_(false), dragging_(false)
 {
 }
@@ -48,7 +48,7 @@ CQIllustratorModeSizer *
 CQIllustratorMode::
 createSizer()
 {
-  return NULL;
+  return 0;
 }
 
 void
@@ -273,9 +273,9 @@ selectionSlot()
   uint num_shapes = selection->size();
 
   if      (num_shapes == 0) {
-    setSelectedShape(NULL);
+    setSelectedShape(0);
 
-    setSelectedShapePoint(NULL, NULL);
+    setSelectedShapePoint(0, 0);
   }
   else if (num_shapes == 1) {
     const CQIllustratorSelectedShape &sshape = selection->front();
@@ -287,19 +287,19 @@ selectionSlot()
     uint num_points = sshape.numPoints();
 
     if      (num_points == 0)
-      setSelectedShapePoint(shape, NULL);
+      setSelectedShapePoint(shape, 0);
     else if (num_points == 1) {
       const CQIllustratorShapeControlPoint *point = sshape.getPoint(0);
 
       setSelectedShapePoint(shape, point);
     }
     else
-      setSelectedShapePoint(shape, NULL);
+      setSelectedShapePoint(shape, 0);
   }
   else {
-    setSelectedShape(NULL);
+    setSelectedShape(0);
 
-    setSelectedShapePoint(NULL, NULL);
+    setSelectedShapePoint(0, 0);
   }
 }
 

@@ -13,7 +13,7 @@ CQAngleSpinBox(QWidget *parent, double value) :
 
 CQAngleSpinBox::
 CQAngleSpinBox(double value) :
- QDoubleSpinBox(NULL)
+ QDoubleSpinBox(0)
 {
   init("edit", value);
 }

@@ -317,7 +317,7 @@ setImageSlot()
 
   CQIllustratorSelectedShapes *selection = illustrator->getSelection();
 
-  CQIllustratorShape *shape = NULL;
+  CQIllustratorShape *shape = 0;
 
   if (selection->size() == 1)
     shape = selection->front().getShape();
@@ -353,7 +353,7 @@ setShapeImage(CQIllustratorShape *shape, CImagePtr image)
 {
   CQIllustrator *illustrator = mode_->getIllustrator();
 
-  if (shape == NULL) {
+  if (shape == 0) {
     CPoint2D p1(0, 0);
     CPoint2D p2(image->getWidth(), image->getHeight());
 

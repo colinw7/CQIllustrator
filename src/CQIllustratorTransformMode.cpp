@@ -219,7 +219,7 @@ applySlot()
 
 CQTransformMoveTool::
 CQTransformMoveTool(CQIllustratorTransformToolbar *toolbar) :
- QWidget(NULL), toolbar_(toolbar)
+ QWidget(0), toolbar_(toolbar)
 {
   QGridLayout *grid = new QGridLayout(this);
   grid->setMargin(0); grid->setSpacing(8);
@@ -295,7 +295,7 @@ apply()
 
 CQTransformScaleTool::
 CQTransformScaleTool(CQIllustratorTransformToolbar *toolbar) :
- QWidget(NULL), toolbar_(toolbar)
+ QWidget(0), toolbar_(toolbar)
 {
   QGridLayout *grid = new QGridLayout(this);
   grid->setMargin(0); grid->setSpacing(8);
@@ -359,7 +359,7 @@ apply()
 
 CQTransformRotateTool::
 CQTransformRotateTool(CQIllustratorTransformToolbar *toolbar) :
- QWidget(NULL), toolbar_(toolbar)
+ QWidget(0), toolbar_(toolbar)
 {
   QGridLayout *grid = new QGridLayout(this);
   grid->setMargin(0); grid->setSpacing(8);
@@ -406,7 +406,7 @@ apply()
 
 CQTransformSkewTool::
 CQTransformSkewTool(CQIllustratorTransformToolbar *toolbar) :
- QWidget(NULL), toolbar_(toolbar)
+ QWidget(0), toolbar_(toolbar)
 {
   QGridLayout *grid = new QGridLayout(this);
   grid->setMargin(0); grid->setSpacing(8);

@@ -273,10 +273,10 @@ setSelectedShape(const CQIllustratorShape *shape)
 
   const CLinearGradient *lg = dynamic_cast<const CLinearGradient *>(g);
 
-  startXEdit_->setEnabled(lg != NULL);
-  startYEdit_->setEnabled(lg != NULL);
-  endXEdit_  ->setEnabled(lg != NULL);
-  endYEdit_  ->setEnabled(lg != NULL);
+  startXEdit_->setEnabled(lg != 0);
+  startYEdit_->setEnabled(lg != 0);
+  endXEdit_  ->setEnabled(lg != 0);
+  endYEdit_  ->setEnabled(lg != 0);
 
   if (lg) {
     startXEdit_->setValue(lg->getX1());

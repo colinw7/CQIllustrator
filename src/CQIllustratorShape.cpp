@@ -12,7 +12,7 @@ uint CQIllustratorShape:: last_id_ = 1;
 
 CQIllustratorShape::
 CQIllustratorShape(CQIllustratorShape *parent) :
- data_      (NULL),
+ data_      (0),
  id_        (last_id_++),
  parent_    (parent),
  shapes_    (),
@@ -34,7 +34,7 @@ CQIllustratorShape(CQIllustratorShape *parent) :
 
 CQIllustratorShape::
 CQIllustratorShape(const CQIllustratorShape &shape) :
- data_      (NULL),
+ data_      (0),
  id_        (last_id_++),
  parent_    (shape.parent_),
  shapes_    (shape.shapes_),
@@ -84,7 +84,7 @@ getFlatMatrix() const
 
     CQIllustratorShape *parent = parent_;
 
-    while (parent != NULL) {
+    while (parent != 0) {
       m = parent->m_*m;
 
       parent = parent->parent_;
@@ -224,7 +224,7 @@ void
 CQIllustratorShape::
 removeChild(CQIllustratorShape *child)
 {
-  child->parent_ = NULL;
+  child->parent_ = 0;
 
   shapes_.remove(child);
 
@@ -241,7 +241,7 @@ setParent(CQIllustratorShape *newParent)
   if (newParent)
     newParent->addChild(this);
   else
-    parent_ = NULL;
+    parent_ = 0;
 }
 
 void
@@ -371,7 +371,7 @@ getFilter() const
   if (filter_id_)
     return CQIllustratorShapeFilterMgrInst->getFilter(filter_id_);
   else
-    return NULL;
+    return 0;
 }
 
 void
@@ -403,7 +403,7 @@ unsetFilter()
 {
   checkoutShape(CQIllustratorData::CHANGE_GEOMETRY);
 
-  setFilter((CQIllustratorShapeFilter *) NULL);
+  setFilter((CQIllustratorShapeFilter *) 0);
 
   checkinShape(CQIllustratorData::CHANGE_GEOMETRY);
 }
@@ -717,7 +717,7 @@ void
 CQIllustratorShape::
 draw(CQIllustratorShapeDrawer *drawer) const
 {
-  if (getFilter() != NULL)
+  if (getFilter() != 0)
     drawGaussian(drawer);
   else
     drawShape(drawer);
@@ -3258,7 +3258,7 @@ addPoint(const CQIllustratorShapeControlPoint *before_point, const CPoint2D &p)
 {
   points_.push_back(p);
 
-  if (before_point != NULL) {
+  if (before_point != 0) {
     const CQIllustratorPolygonShapeControlPoint *before_point1 =
       dynamic_cast<const CQIllustratorPolygonShapeControlPoint *>(before_point);
 
@@ -4061,7 +4061,7 @@ setLineType(uint i, CPathPartType type)
     else
       continue;
 
-    CPathShapePart *part1 = NULL;
+    CPathShapePart *part1 = 0;
 
     if (line_num == int(i)) {
       CPoint2D pp1, pp2;
@@ -5807,7 +5807,7 @@ getFilter(uint id)
   FilterMap::const_iterator p = filterMap_.find(id);
 
   if (p == filterMap_.end())
-    return NULL;
+    return 0;
 
   return (*p).second;
 }

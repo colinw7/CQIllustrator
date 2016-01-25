@@ -131,7 +131,7 @@ handleMouseRelease(const MouseEvent &e)
 
       bool single_shape = (selection->size() == 1);
 
-      CQIllustratorShape *old_select_shape = NULL;
+      CQIllustratorShape *old_select_shape = 0;
 
       if (single_shape)
         old_select_shape = selection->front().getShape();

@@ -292,7 +292,7 @@ align(CQIllustrator::AlignSide side, bool commit)
 
   //------
 
-  CQIllustratorShape *ashape = NULL;
+  CQIllustratorShape *ashape = 0;
 
   CBBox2D abbox;
   CBBox2D bbbox;
@@ -347,7 +347,7 @@ align(CQIllustrator::AlignSide side, bool commit)
   else if (anchorMode == CQIllustratorAlignToolbar::OBJECT_MODE) {
     CQIllustratorShape *shape = illustrator_->getShape(toolbar_->getAnchorObject().toStdString());
 
-    if (shape == NULL) return;
+    if (shape == 0) return;
 
     CQIllustratorAlignToolbar::ObjectEdgeType edgeType =
       toolbar_->getAnchorObjectEdgeType();
@@ -676,7 +676,7 @@ resetSelectMode()
 
 CQAlignButtons::
 CQAlignButtons() :
- QWidget(NULL)
+ QWidget(0)
 {
   QGridLayout *agrid = new QGridLayout(this);
   agrid->setMargin(0); agrid->setSpacing(8);
@@ -730,7 +730,7 @@ CQAlignButtons() :
 
 CQDistButtons::
 CQDistButtons() :
- QWidget(NULL)
+ QWidget(0)
 {
   QGridLayout *dgrid = new QGridLayout(this);
   dgrid->setMargin(0); dgrid->setSpacing(8);
@@ -752,7 +752,7 @@ CQDistButtons() :
 
 CQSpreadButtons::
 CQSpreadButtons() :
- QWidget(NULL)
+ QWidget(0)
 {
   QGridLayout *sgrid = new QGridLayout(this);
   sgrid->setMargin(0); sgrid->setSpacing(8);
@@ -1041,7 +1041,7 @@ selectSlot(bool enabled)
 
 CQToolButton::
 CQToolButton(const char **xpmData) :
- QToolButton(NULL), preview_(false)
+ QToolButton(0), preview_(false)
 {
   setAutoRaise(true);
 

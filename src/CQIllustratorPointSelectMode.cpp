@@ -239,7 +239,7 @@ updateHandles(uint numHandles)
   }
 
   while (controlPointHandles_.size() > numHandles) {
-    CQIllustratorControlPointHandle *handle = NULL;
+    CQIllustratorControlPointHandle *handle = 0;
 
     removeHandle(handle);
   }

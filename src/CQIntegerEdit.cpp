@@ -12,7 +12,7 @@ CQIntegerEdit(QWidget *parent, int value) :
 
 CQIntegerEdit::
 CQIntegerEdit(int value) :
- QLineEdit(NULL)
+ QLineEdit(0)
 {
   init("edit", value);
 }

@@ -223,7 +223,7 @@ class CQAlignAnchorObject : public QWidget {
   typedef CQIllustratorAlignToolbar::ObjectEdgeType ObjectEdgeType;
 
  public:
-  CQAlignAnchorObject(QWidget *parent=NULL);
+  CQAlignAnchorObject(QWidget *parent=0);
 
   QString getName() const;
 
@@ -252,7 +252,7 @@ class CQAlignAnchorPoint : public QWidget {
   Q_OBJECT
 
  public:
-  CQAlignAnchorPoint(QWidget *parent=NULL);
+  CQAlignAnchorPoint(QWidget *parent=0);
 
   QPointF getValue() const;
 

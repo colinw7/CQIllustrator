@@ -31,7 +31,7 @@ class CQIllustratorSandbox {
     if (! edit_shapes_.empty())
       return edit_shapes_.front();
     else
-      return NULL;
+      return 0;
   }
 
   shape_iterator beginShape() { return edit_shapes_.begin(); }

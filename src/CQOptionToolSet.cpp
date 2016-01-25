@@ -8,7 +8,7 @@
 
 CQOptionToolSet::
 CQOptionToolSet(QWidget *parent) :
- QWidget(parent), currentTool_(NULL)
+ QWidget(parent), currentTool_(0)
 {
   QHBoxLayout *layout = new QHBoxLayout(this);
   layout->setMargin(0); layout->setSpacing(0);
@@ -90,7 +90,7 @@ popdown()
 
 CQOptionToolArea::
 CQOptionToolArea(CQOptionToolSet *toolset, CQOptionTool *tool) :
- QFrame(NULL), toolset_(toolset), tool_(tool)
+ QFrame(0), toolset_(toolset), tool_(tool)
 {
   setFrameStyle(QFrame::Panel | QFrame::Sunken);
   setLineWidth(1);
@@ -147,7 +147,7 @@ updatePixmap(bool checked)
 
 CQOptionToolDialogArea::
 CQOptionToolDialogArea(CQOptionToolSet *set) :
- CQWinWidget(), set_(set), w_(NULL)
+ CQWinWidget(), set_(set), w_(0)
 {
   setResizable(false);
 
@@ -182,7 +182,7 @@ closedSlot()
 
 CQOptionTool::
 CQOptionTool() :
- area_(NULL)
+ area_(0)
 {
 }
 

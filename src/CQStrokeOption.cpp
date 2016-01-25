@@ -30,7 +30,7 @@ class CQStrokeOptionSwab : public QWidget {
 
 CQStrokeOptionTool::
 CQStrokeOptionTool(CQIllustrator *illustrator) :
- CQOptionTool(), illustrator_(illustrator), dialog_(NULL)
+ CQOptionTool(), illustrator_(illustrator), dialog_(0)
 {
   dialog_ = new CQStrokeOptionDialog(this);
 
@@ -63,7 +63,7 @@ void
 CQStrokeOptionTool::
 selectionChangedSlot()
 {
-  const CQIllustratorShape *shape = NULL;
+  const CQIllustratorShape *shape = 0;
 
   const CQIllustratorSelectedShapes *selection = illustrator_->getSelection();
 
@@ -138,7 +138,7 @@ paintEvent(QPaintEvent *)
 
 CQStrokeOptionDialog::
 CQStrokeOptionDialog(CQStrokeOptionTool *tool) :
- CQOptionToolDialog(), tool_(tool), colorChooser_(NULL)
+ CQOptionToolDialog(), tool_(tool), colorChooser_(0)
 {
   initWidgets();
 }

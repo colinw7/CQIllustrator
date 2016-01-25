@@ -138,7 +138,7 @@ stringToPoint(const std::string &text, CPoint2D &point)
 
   char c = parse.getCharAt();
 
-  if (strchr(lchars, c) != NULL) {
+  if (strchr(lchars, c) != 0) {
     parse.skipChar();
 
     parse.skipSpace();
@@ -172,7 +172,7 @@ stringToPoint(const std::string &text, CPoint2D &point)
 
   c = parse.getCharAt();
 
-  if (strchr(mchars, c) != NULL) {
+  if (strchr(mchars, c) != 0) {
     parse.skipChar();
 
     parse.skipSpace();
@@ -203,7 +203,7 @@ stringToPoint(const std::string &text, CPoint2D &point)
   if (! parse.eof()) {
     c = parse.getCharAt();
 
-    if (strchr(rchars, c) != NULL) {
+    if (strchr(rchars, c) != 0) {
       parse.skipChar();
 
       parse.skipSpace();

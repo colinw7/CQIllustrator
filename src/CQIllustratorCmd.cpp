@@ -66,7 +66,7 @@ displayCmds() const
 
 CQIllustratorCmd::
 CQIllustratorCmd(const char *args) :
- illustrator_(NULL), args_(args)
+ illustrator_(0), args_(args)
 {
 }
 

@@ -18,7 +18,7 @@ class CQEllipseShape2DConnectType : public QComboBox {
   Q_OBJECT
 
  public:
-  CQEllipseShape2DConnectType(QWidget *parent=NULL);
+  CQEllipseShape2DConnectType(QWidget *parent=0);
 
   void setType(CEllipseConnectType value);
 

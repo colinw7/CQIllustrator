@@ -241,7 +241,7 @@ void
 CQIllustratorOffsetPathToolbar::
 setSelectedShape(const CQIllustratorShape *shape)
 {
-  widthEdit_->setEnabled(shape != NULL);
+  widthEdit_->setEnabled(shape != 0);
 
   widthEdit_->setValue(0.0);
 }
@@ -292,7 +292,7 @@ setWidth(double w)
 
 CQIllustratorOffsetPathSizer::
 CQIllustratorOffsetPathSizer(CQIllustratorOffsetPathMode *mode) :
- CQIllustratorModeSizer(mode), shape_(NULL)
+ CQIllustratorModeSizer(mode), shape_(0)
 {
   CQIllustrator *illustrator = mode_->getIllustrator();
 
@@ -310,7 +310,7 @@ setSelectedShape(CQIllustratorShape *shape)
   if (shape)
     shape_ = shape->dup();
   else
-    shape_ = NULL;
+    shape_ = 0;
 
   if (shape_) {
     const CBBox2D &bbox = shape_->getBBox();

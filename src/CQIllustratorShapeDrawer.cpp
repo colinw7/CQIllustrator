@@ -18,7 +18,7 @@ CQIllustratorShapeDrawer(CQIllustrator *illustrator, QPainter *painter) :
  illustrator_(illustrator),
  painter_    (painter),
  bbox_       (),
- path_       (NULL),
+ path_       (0),
  qfont_      (),
  m_          (CMATRIX_TYPE_IDENTITY),
  matrices_   ()

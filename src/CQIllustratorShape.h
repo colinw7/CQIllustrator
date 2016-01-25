@@ -136,11 +136,11 @@ class CQIllustratorShapeFill {
 
  public:
   CQIllustratorShapeFill() :
-   color_(1,1,1), opacity_(1), rule_(FILL_TYPE_EVEN_ODD), gradient_(NULL), image_(NULL) {
+   color_(1,1,1), opacity_(1), rule_(FILL_TYPE_EVEN_ODD), gradient_(0), image_(0) {
   }
 
   CQIllustratorShapeFill(const CQIllustratorShapeFill &fill) :
-   color_(fill.color_), opacity_(fill.opacity_), rule_(fill.rule_), gradient_(NULL), image_(NULL) {
+   color_(fill.color_), opacity_(fill.opacity_), rule_(fill.rule_), gradient_(0), image_(0) {
     if (fill.gradient_)
       gradient_ = fill.gradient_->dup();
 
@@ -158,14 +158,14 @@ class CQIllustratorShapeFill {
     if (fill.gradient_)
       gradient_ = fill.gradient_->dup();
     else
-      gradient_ = NULL;
+      gradient_ = 0;
 
     delete image_;
 
     if (fill.image_)
       image_ = new CQIllustratorImageFill(*fill.image_);
     else
-      image_ = NULL;
+      image_ = 0;
 
     return *this;
   }
@@ -184,7 +184,7 @@ class CQIllustratorShapeFill {
   double getFillRule() const { return rule_; }
   void setFillRule(CFillType rule) { rule_ = rule; }
 
-  bool hasGradient() const { return (gradient_ != NULL); }
+  bool hasGradient() const { return (gradient_ != 0); }
 
   void setGradient(const CGenGradient *g) {
     delete gradient_;
@@ -192,14 +192,14 @@ class CQIllustratorShapeFill {
     if (g)
       gradient_ = g->dup();
     else
-      gradient_ = NULL;
+      gradient_ = 0;
   }
 
   const CGenGradient *getGradient() const { return gradient_; }
 
   CGenGradient *getGradient() { return gradient_; }
 
-  bool hasImage() const { return (image_ != NULL); }
+  bool hasImage() const { return (image_ != 0); }
 
   CImagePtr getImage() const {
     if (! image_) {
@@ -224,7 +224,7 @@ class CQIllustratorShapeFill {
   void resetImage() {
     delete image_;
 
-    image_ = NULL;
+    image_ = 0;
   }
 
   ImageScale getImageScale() const {
@@ -410,17 +410,17 @@ class CQIllustratorShapeControlPoint {
 class CQIllustratorShapeNearestPoint2D {
  public:
   CQIllustratorShapeNearestPoint2D() :
-   set_(false), dist_(0.0), p_(NULL) {
+   set_(false), dist_(0.0), p_(0) {
   }
 
   CQIllustratorShapeNearestPoint2D(const CQIllustratorShapeNearestPoint2D &p) :
-   set_(p.set_), dist_(p.dist_), p_(p.p_ ? p.p_->dup() : NULL) {
+   set_(p.set_), dist_(p.dist_), p_(p.p_ ? p.p_->dup() : 0) {
   }
 
   const CQIllustratorShapeNearestPoint2D &operator=(const CQIllustratorShapeNearestPoint2D &p) {
     set_  = p.set_;
     dist_ = p.dist_;
-    p_    = (p.p_ ? p.p_->dup() : NULL);
+    p_    = (p.p_ ? p.p_->dup() : 0);
 
     return *this;
   }
@@ -524,7 +524,7 @@ class CQIllustratorShape {
   typedef std::list<CQIllustratorShape *> ShapeList;
 
  public:
-  CQIllustratorShape(CQIllustratorShape *parent=NULL);
+  CQIllustratorShape(CQIllustratorShape *parent=0);
   CQIllustratorShape(const CQIllustratorShape &rhs);
 
   virtual ~CQIllustratorShape();
