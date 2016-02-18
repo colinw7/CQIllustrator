@@ -1529,8 +1529,6 @@ moc_CQIllustratorCanvas.cpp: /usr/include/qt5/QtWidgets/QWidget \
 		../../CMath/include/CDisplayRange2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
-		../../CMath/include/CRange2D.h \
-		../../CMath/include/CIRange2D.h \
 		../../CMath/include/CMatrix2D.h \
 		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CIPoint2D.h \
@@ -9068,7 +9066,7 @@ compiler_clean: compiler_moc_header_clean
 		/usr/include/qt5/QtGui/QFont \
 		/usr/include/qt5/QtGui/QImage \
 		CQIllustratorLayer.h \
-		CQColorChooser.h \
+		../../CQUtil/include/CQColorChooser.h \
 		../../CQUtil/include/CQUtil.h \
 		/usr/include/qt5/QtCore/Qt \
 		/usr/include/qt5/QtGui/QColor \
@@ -9522,7 +9520,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CMatrix2D.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
-		CQColorChooser.h \
+		../../CQUtil/include/CQColorChooser.h \
 		/usr/include/qt5/QtWidgets/QWidget \
 		CQRealEdit.h \
 		/usr/include/qt5/QtWidgets/QLineEdit \
@@ -9937,8 +9935,6 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CDisplayRange2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
-		../../CMath/include/CRange2D.h \
-		../../CMath/include/CIRange2D.h \
 		../../CMath/include/CMatrix2D.h \
 		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CIPoint2D.h \
@@ -10588,8 +10584,6 @@ compiler_clean: compiler_moc_header_clean
 		CQIllustratorCanvas.h \
 		/usr/include/qt5/QtWidgets/QWidget \
 		../../CMath/include/CDisplayRange2D.h \
-		../../CMath/include/CRange2D.h \
-		../../CMath/include/CIRange2D.h \
 		CQIllustratorAlignMode.h \
 		CQIllustratorToolbar.h \
 		/usr/include/qt5/QtWidgets/QToolButton \
@@ -12753,8 +12747,6 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CDisplayRange2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
-		../../CMath/include/CRange2D.h \
-		../../CMath/include/CIRange2D.h \
 		../../CMath/include/CMatrix2D.h \
 		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CIPoint2D.h \
@@ -16304,8 +16296,6 @@ compiler_clean: compiler_moc_header_clean
 		/usr/include/qt5/QtGui/qvector2d.h \
 		/usr/include/qt5/QtGui/qtouchdevice.h \
 		../../CMath/include/CDisplayRange2D.h \
-		../../CMath/include/CRange2D.h \
-		../../CMath/include/CIRange2D.h \
 		CQIllustrator.h \
 		../../CQUtil/include/CQMainWindow.h \
 		/usr/include/qt5/QtWidgets/QMainWindow \
@@ -21084,7 +21074,7 @@ compiler_clean: compiler_moc_header_clean
 		/usr/include/qt5/QtGui/QFont \
 		/usr/include/qt5/QtGui/QImage \
 		CQIllustratorLayer.h \
-		CQColorChooser.h \
+		../../CQUtil/include/CQColorChooser.h \
 		CQLineDash.h \
 		/usr/include/qt5/QtWidgets/QLineEdit \
 		/usr/include/qt5/QtWidgets/qlineedit.h \
