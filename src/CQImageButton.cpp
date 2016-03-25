@@ -19,22 +19,25 @@ CQImageButton(CImagePtr image)
 }
 
 CQImageButton::
-CQImageButton(const char *data[])
-{
-  QPixmap pixmap(data);
-
-  init(pixmap);
-}
-
-CQImageButton::
 CQImageButton(uchar *data, uint len)
 {
+  QPixmap pixmap;
+
+  pixmap.loadFromData(data, len);
+
+  init(pixmap);
 }
 
 CQImageButton::
 CQImageButton(const QPixmap &pixmap)
 {
   init(pixmap);
+}
+
+CQImageButton::
+CQImageButton(const QIcon &icon)
+{
+  init(icon);
 }
 
 void
@@ -63,6 +66,19 @@ init(const QPixmap &pixmap)
 #ifndef OS_OSX
   setFixedSize(size_ + QSize(8, 8));
 
+  setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+#endif
+}
+
+void
+CQImageButton::
+init(const QIcon &icon)
+{
+  size_ = iconSize();
+
+  setIcon(icon);
+
+#ifndef OS_OSX
   setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 #endif
 }

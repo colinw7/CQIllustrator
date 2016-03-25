@@ -5,31 +5,33 @@ const QChar Degree(0xB0);
 }
 
 CQAngleSpinBox::
-CQAngleSpinBox(QWidget *parent, double value) :
- QDoubleSpinBox(parent)
+CQAngleSpinBox(QWidget *parent, const CAngle &angle) :
+ QDoubleSpinBox(parent), angle_(angle)
 {
-  init("edit", value);
+  init();
 }
 
 CQAngleSpinBox::
-CQAngleSpinBox(double value) :
- QDoubleSpinBox(0)
+CQAngleSpinBox(const CAngle &angle) :
+ QDoubleSpinBox(0), angle_(angle)
 {
-  init("edit", value);
-}
-
-double
-CQAngleSpinBox::
-getValue() const
-{
-  return value();
+  init();
 }
 
 void
 CQAngleSpinBox::
-init(const QString &name, double value)
+setAngle(const CAngle &angle)
 {
-  if (name.length()) setObjectName(name);
+  angle_ = angle;
+
+  setValue(angle_.degrees());
+}
+
+void
+CQAngleSpinBox::
+init()
+{
+  setObjectName("angle");
 
   setRange(-360.0, 360.0);
 
@@ -39,7 +41,16 @@ init(const QString &name, double value)
 
   setSuffix(Degree);
 
-  connect(this, SIGNAL(valueChanged(double)), this, SIGNAL(angleChanged(double)));
+  connect(this, SIGNAL(valueChanged(double)), this, SLOT(valueChangedSlot(double)));
 
-  setValue(value);
+  setValue(angle_.degrees());
+}
+
+void
+CQAngleSpinBox::
+valueChangedSlot(double a)
+{
+  angle_ = CAngle::makeDegrees(a);
+
+  emit angleChanged(angle_);
 }

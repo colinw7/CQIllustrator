@@ -14,7 +14,7 @@
 #include <CQImageButton.h>
 #include <CQSwatch.h>
 
-#include <xpm/path.xpm>
+#include <svg/path_svg.h>
 #include <xpm/path_line.xpm>
 #include <xpm/path_curve2.xpm>
 #include <xpm/path_curve3.xpm>
@@ -83,10 +83,11 @@ CQMenuItem *
 CQIllustratorCreatePathMode::
 createMenuItem(CQMenu *menu)
 {
-  menuItem_ = new CQMenuItem(menu, "&Path", CQMenuItem::CHECKABLE);
+  QIcon icon = CQPixmapCacheInst->getIcon("PATH");
+
+  menuItem_ = new CQMenuItem(menu, icon, "&Path", CQMenuItem::CHECKABLE);
 
   menuItem_->setStatusTip("Create Path");
-  menuItem_->setXPMIcon(path_data);
 
   connect(menuItem_->getAction(), SIGNAL(toggled(bool)), this, SLOT(menuItemSlot()));
 
@@ -849,7 +850,7 @@ QIcon
 CQIllustratorCreatePathToolbar::
 getIcon()
 {
-  return QIcon(QPixmap(path_data));
+  return CQPixmapCacheInst->getIcon("PATH");
 }
 
 void

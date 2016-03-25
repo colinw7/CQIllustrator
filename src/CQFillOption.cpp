@@ -24,10 +24,10 @@
 #include <QFileDialog>
 #include <QPainter>
 
-#include <xpm/flat.xpm>
-#include <xpm/lgradient.xpm>
-#include <xpm/rgradient.xpm>
-#include <xpm/image.xpm>
+#include <svg/flat_svg.h>
+#include <svg/lgradient_svg.h>
+#include <svg/rgradient_svg.h>
+#include <svg/image_svg.h>
 
 class CQFillOptionSwab : public QWidget {
  public:
@@ -46,6 +46,8 @@ CQFillOptionTool::
 CQFillOptionTool(CQIllustrator *illustrator) :
  CQOptionTool(), illustrator_(illustrator), dialog_(0)
 {
+  setObjectName("fill");
+
   dialog_ = new CQFillOptionDialog(this);
 
   QVBoxLayout *layout = new QVBoxLayout(this);
@@ -112,7 +114,13 @@ CQFillOptionSwab::
 CQFillOptionSwab(CQFillOptionDialog *dialog) :
  dialog_(dialog)
 {
-  setFixedSize(32, 16);
+  setObjectName("swab");
+
+  QFontMetrics fm(font());
+
+  int th = fm.height() + 4;
+
+  setFixedSize(2*th, th);
 }
 
 void
@@ -183,10 +191,10 @@ initWidgets()
   QHBoxLayout *buttonLayout = new QHBoxLayout;
   buttonLayout->setMargin(2); buttonLayout->setSpacing(8);
 
-  flatButton_  = new CQImageButton(QPixmap(flat_data     ));
-  lgradButton_ = new CQImageButton(QPixmap(lgradient_data));
-  rgradButton_ = new CQImageButton(QPixmap(rgradient_data));
-  imageButton_ = new CQImageButton(QPixmap(image_data    ));
+  flatButton_  = new CQImageButton(CQPixmapCacheInst->getIcon("FLAT"     ));
+  lgradButton_ = new CQImageButton(CQPixmapCacheInst->getIcon("LGRADIENT"));
+  rgradButton_ = new CQImageButton(CQPixmapCacheInst->getIcon("RGRADIENT"));
+  imageButton_ = new CQImageButton(CQPixmapCacheInst->getIcon("IMAGE"    ));
 
   flatButton_ ->setCheckable(true);
   lgradButton_->setCheckable(true);

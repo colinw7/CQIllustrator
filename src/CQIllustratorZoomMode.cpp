@@ -10,11 +10,11 @@
 #include <CQSwatch.h>
 #include <CQImageButton.h>
 
-#include <xpm/zoom.xpm>
-#include <xpm/zoom_fit.xpm>
-#include <xpm/zoom_selected.xpm>
-#include <xpm/zoom_in.xpm>
-#include <xpm/zoom_out.xpm>
+#include <svg/zoom_svg.h>
+#include <svg/zoom_fit_svg.h>
+#include <svg/zoom_selected_svg.h>
+#include <svg/zoom_in_svg.h>
+#include <svg/zoom_out_svg.h>
 
 #include <cursors/zoom.xbm>
 #include <cursors/zoommask.xbm>
@@ -39,10 +39,11 @@ CQMenuItem *
 CQIllustratorZoomMode::
 createMenuItem(CQMenu *menu)
 {
-  menuItem_ = new CQMenuItem(menu, "&Zoom In/Out", CQMenuItem::CHECKABLE);
+  QIcon icon = CQPixmapCacheInst->getIcon("ZOOM");
+
+  menuItem_ = new CQMenuItem(menu, icon, "&Zoom In/Out", CQMenuItem::CHECKABLE);
 
   menuItem_->setStatusTip("Zoom In or Out");
-  menuItem_->setXPMIcon(zoom_data);
 
   connect(menuItem_->getAction(), SIGNAL(toggled(bool)), this, SLOT(menuItemSlot()));
 
@@ -153,7 +154,7 @@ QIcon
 CQIllustratorZoomToolbar::
 getIcon()
 {
-  return QIcon(QPixmap(zoom_data));
+  return CQPixmapCacheInst->getIcon("ZOOM");
 }
 
 void
@@ -162,10 +163,10 @@ addWidgets()
 {
   QBoxLayout *layout = qobject_cast<QBoxLayout *>(CQIllustratorToolbar::layout());
 
-  zoomFitButton_ = new CQImageButton(QPixmap(zoom_fit_data     ));
-  zoomSelButton_ = new CQImageButton(QPixmap(zoom_selected_data));
-  zoomInButton_  = new CQImageButton(QPixmap(zoom_in_data      ));
-  zoomOutButton_ = new CQImageButton(QPixmap(zoom_out_data     ));
+  zoomFitButton_ = new CQImageButton(CQPixmapCacheInst->getIcon("ZOOM_FIT"     ));
+  zoomSelButton_ = new CQImageButton(CQPixmapCacheInst->getIcon("ZOOM_SELECTED"));
+  zoomInButton_  = new CQImageButton(CQPixmapCacheInst->getIcon("ZOOM_IN"      ));
+  zoomOutButton_ = new CQImageButton(CQPixmapCacheInst->getIcon("ZOOM_OUT"     ));
 
   zoomFitButton_->setToolTip("Zoom Fit");
   zoomSelButton_->setToolTip("Zoom Selected");

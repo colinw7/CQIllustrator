@@ -3,7 +3,7 @@
 
 #include <CQMenu.h>
 
-#include <xpm/pan.xpm>
+#include <svg/pan_svg.h>
 
 CQIllustratorPanMode::
 CQIllustratorPanMode(CQIllustrator *illustrator) :
@@ -24,10 +24,11 @@ CQMenuItem *
 CQIllustratorPanMode::
 createMenuItem(CQMenu *menu)
 {
-  menuItem_ = new CQMenuItem(menu, "&Pan", CQMenuItem::CHECKABLE);
+  QIcon icon = CQPixmapCacheInst->getIcon("PAN");
+
+  menuItem_ = new CQMenuItem(menu, icon, "&Pan", CQMenuItem::CHECKABLE);
 
   menuItem_->setStatusTip("Pan Display");
-  menuItem_->setXPMIcon(pan_data);
 
   connect(menuItem_->getAction(), SIGNAL(toggled(bool)), this, SLOT(menuItemSlot()));
 
@@ -93,5 +94,5 @@ QIcon
 CQIllustratorPanToolbar::
 getIcon()
 {
-  return QIcon(QPixmap(pan_data));
+  return CQPixmapCacheInst->getIcon("PAN");
 }

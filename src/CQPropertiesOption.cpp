@@ -547,7 +547,7 @@ CQTransformPanel(CQPropertiesOptionDialog *dialog) :
 
   QLabel *rotateAngleLabel = new QLabel("Angle");
 
-  rotateAngleEdit_ = new CQAngleSpinBox(0.0);
+  rotateAngleEdit_ = new CQAngleSpinBox(CAngle(0.0));
 
   rotateLayout->addWidget(rotateAngleLabel, 0, 0);
   rotateLayout->addWidget(rotateAngleEdit_, 0, 1);
@@ -606,7 +606,7 @@ getNewMatrix() const
     case 1:
       return CMatrix2D::scale(scaleXEdit_->getValue(), scaleYEdit_->getValue());
     case 2:
-      return CMatrix2D::rotation(M_PI*rotateAngleEdit_->getValue()/180.0);
+      return CMatrix2D::rotation(M_PI*rotateAngleEdit_->getAngle().degrees()/180.0);
     case 3:
       return CMatrix2D::skew(skewXEdit_->getValue(), skewYEdit_->getValue());
   }

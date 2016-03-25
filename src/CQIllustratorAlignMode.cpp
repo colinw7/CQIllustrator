@@ -21,7 +21,7 @@
 #include <CQMenu.h>
 #include <CQDockWidget.h>
 
-#include <xpm/align.xpm>
+#include <svg/align_svg.h>
 
 #include <align_xpm/align_to_bottom_16_xpm.xpm>
 #include <align_xpm/align_to_left_16_xpm.xpm>
@@ -82,10 +82,11 @@ CQMenuItem *
 CQIllustratorAlignMode::
 createMenuItem(CQMenu *menu)
 {
-  menuItem_ = new CQMenuItem(menu, "&Align", CQMenuItem::CHECKABLE);
+  QIcon icon = CQPixmapCacheInst->getIcon("ALIGN");
+
+  menuItem_ = new CQMenuItem(menu, icon, "&Align", CQMenuItem::CHECKABLE);
 
   menuItem_->setStatusTip("Align Objects");
-  menuItem_->setXPMIcon(align_data);
 
   connect(menuItem_->getAction(), SIGNAL(toggled(bool)), this, SLOT(menuItemSlot()));
 
@@ -528,7 +529,7 @@ QIcon
 CQIllustratorAlignToolbar::
 getIcon()
 {
-  return QIcon(QPixmap(align_data));
+  return CQPixmapCacheInst->getIcon("ALIGN");
 }
 
 void

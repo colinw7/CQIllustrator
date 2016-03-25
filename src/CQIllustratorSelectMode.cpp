@@ -11,9 +11,9 @@
 #include <CQRadioButtons.h>
 #include <CQImageButton.h>
 
-#include <xpm/select.xpm>
-#include <xpm/select_all.xpm>
-#include <xpm/select_none.xpm>
+#include <svg/select_svg.h>
+#include <svg/select_all_svg.h>
+#include <svg/select_none_svg.h>
 
 #include <cursors/select.xbm>
 #include <cursors/selectmask.xbm>
@@ -42,10 +42,11 @@ CQMenuItem *
 CQIllustratorSelectMode::
 createMenuItem(CQMenu *menu)
 {
-  menuItem_ = new CQMenuItem(menu, "&Select Shape", CQMenuItem::CHECKABLE);
+  QIcon icon = CQPixmapCacheInst->getIcon("SELECT");
+
+  menuItem_ = new CQMenuItem(menu, icon, "&Select Shape", CQMenuItem::CHECKABLE);
 
   menuItem_->setStatusTip("Select Shape");
-  menuItem_->setXPMIcon(select_data);
 
   connect(menuItem_->getAction(), SIGNAL(toggled(bool)), this, SLOT(menuItemSlot()));
 
@@ -306,7 +307,7 @@ QIcon
 CQIllustratorSelectToolbar::
 getIcon()
 {
-  return QIcon(QPixmap(select_data));
+  return CQPixmapCacheInst->getIcon("SELECT");
 }
 
 void
@@ -315,8 +316,8 @@ addWidgets()
 {
   QBoxLayout *layout = qobject_cast<QBoxLayout *>(CQIllustratorToolbar::layout());
 
-  selectAllButton_  = new CQImageButton(QPixmap(select_all_data ));
-  selectNoneButton_ = new CQImageButton(QPixmap(select_none_data));
+  selectAllButton_  = new CQImageButton(CQPixmapCacheInst->getIcon("SELECT_ALL" ));
+  selectNoneButton_ = new CQImageButton(CQPixmapCacheInst->getIcon("SELECT_NONE"));
 
   selectAllButton_ ->setToolTip("Select All");
   selectNoneButton_->setToolTip("Select None");

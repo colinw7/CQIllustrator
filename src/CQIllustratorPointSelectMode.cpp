@@ -11,7 +11,7 @@
 #include <CQUtil.h>
 #include <CQSwatch.h>
 
-#include <xpm/point_select.xpm>
+#include <svg/point_select_svg.h>
 
 #include <cursors/select.xbm>
 #include <cursors/selectmask.xbm>
@@ -48,10 +48,11 @@ CQMenuItem *
 CQIllustratorPointSelectMode::
 createMenuItem(CQMenu *menu)
 {
-  menuItem_ = new CQMenuItem(menu, "&Select Point", CQMenuItem::CHECKABLE);
+  QIcon icon = CQPixmapCacheInst->getIcon("POINT_SELECT");
+
+  menuItem_ = new CQMenuItem(menu, icon, "&Select Point", CQMenuItem::CHECKABLE);
 
   menuItem_->setStatusTip("Select Shape Point");
-  menuItem_->setXPMIcon(point_select_data);
 
   connect(menuItem_->getAction(), SIGNAL(toggled(bool)), this, SLOT(menuItemSlot()));
 
@@ -176,7 +177,7 @@ QIcon
 CQIllustratorPointSelectToolbar::
 getIcon()
 {
-  return QIcon(QPixmap(point_select_data));
+  return CQPixmapCacheInst->getIcon("POINT_SELECT");
 }
 
 void

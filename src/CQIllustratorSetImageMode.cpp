@@ -15,7 +15,7 @@
 #include <CQImageButton.h>
 #include <CQSwatch.h>
 
-#include <xpm/image.xpm>
+#include <svg/image_svg.h>
 #include <xpm/lalign.xpm>
 #include <xpm/hcalign.xpm>
 #include <xpm/ralign.xpm>
@@ -53,10 +53,11 @@ CQMenuItem *
 CQIllustratorSetImageMode::
 createMenuItem(CQMenu *menu)
 {
-  menuItem_ = new CQMenuItem(menu, "&Image", CQMenuItem::CHECKABLE);
+  QIcon icon = CQPixmapCacheInst->getIcon("IMAGE");
+
+  menuItem_ = new CQMenuItem(menu, icon, "&Image", CQMenuItem::CHECKABLE);
 
   menuItem_->setStatusTip("Create/Modify Fill Image");
-  menuItem_->setXPMIcon(image_data);
 
   connect(menuItem_->getAction(), SIGNAL(toggled(bool)), this, SLOT(menuItemSlot()));
 
@@ -163,7 +164,7 @@ QIcon
 CQIllustratorSetImageToolbar::
 getIcon()
 {
-  return QIcon(QPixmap(image_data));
+  return CQPixmapCacheInst->getIcon("IMAGE");
 }
 
 void
@@ -174,7 +175,7 @@ addWidgets()
 
   //-----
 
-  imageButton_ = new CQImageButton(QPixmap(image_data));
+  imageButton_ = new CQImageButton(CQPixmapCacheInst->getIcon("IMAGE"));
 
   CQSwatch *fileSwatch = new CQSwatch("Image", imageButton_);
 

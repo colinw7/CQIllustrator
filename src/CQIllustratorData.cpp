@@ -37,7 +37,8 @@ addShape(CQIllustratorShape *shape)
 
   shapes_.push(shape);
 
-  quadTree_->add(shape);
+  if (shape->getBBox().isSet())
+    quadTree_->add(shape);
 
   emit objectCreated(shape);
 }

@@ -13,7 +13,7 @@
 #include <CQImageButton.h>
 #include <CQSwatch.h>
 
-#include <xpm/polygon.xpm>
+#include <svg/polygon_svg.h>
 #include <xpm/path_add.xpm>
 #include <xpm/path_remove.xpm>
 
@@ -61,10 +61,11 @@ CQMenuItem *
 CQIllustratorCreatePolygonMode::
 createMenuItem(CQMenu *menu)
 {
-  menuItem_ = new CQMenuItem(menu, "&Polygon", CQMenuItem::CHECKABLE);
+  QIcon icon = CQPixmapCacheInst->getIcon("POLYGON");
+
+  menuItem_ = new CQMenuItem(menu, icon, "&Polygon", CQMenuItem::CHECKABLE);
 
   menuItem_->setStatusTip("Create Polygon");
-  menuItem_->setXPMIcon(polygon_data);
 
   connect(menuItem_->getAction(), SIGNAL(toggled(bool)), this, SLOT(menuItemSlot()));
 
@@ -682,7 +683,7 @@ QIcon
 CQIllustratorCreatePolygonToolbar::
 getIcon()
 {
-  return QIcon(QPixmap(polygon_data));
+  return CQPixmapCacheInst->getIcon("POLYGON");
 }
 
 void

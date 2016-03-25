@@ -13,7 +13,7 @@
 #include <CQImageButton.h>
 #include <CQSwatch.h>
 
-#include <xpm/text.xpm>
+#include <svg/text_svg.h>
 #include <xpm/lalign.xpm>
 #include <xpm/hcalign.xpm>
 #include <xpm/ralign.xpm>
@@ -56,10 +56,11 @@ CQMenuItem *
 CQIllustratorCreateTextMode::
 createMenuItem(CQMenu *menu)
 {
-  menuItem_ = new CQMenuItem(menu, "&Text", CQMenuItem::CHECKABLE);
+  QIcon icon = CQPixmapCacheInst->getIcon("TEXT");
+
+  menuItem_ = new CQMenuItem(menu, icon, "&Text", CQMenuItem::CHECKABLE);
 
   menuItem_->setStatusTip("Create Text");
-  menuItem_->setXPMIcon(text_data);
 
   connect(menuItem_->getAction(), SIGNAL(toggled(bool)), this, SLOT(menuItemSlot()));
 
@@ -272,7 +273,7 @@ QIcon
 CQIllustratorCreateTextToolbar::
 getIcon()
 {
-  return QIcon(QPixmap(text_data));
+  return CQPixmapCacheInst->getIcon("TEXT");
 }
 
 void

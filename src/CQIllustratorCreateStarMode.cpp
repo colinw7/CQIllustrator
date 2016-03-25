@@ -15,7 +15,7 @@
 #include <CQAngleSpinBox.h>
 #include <CQSwatch.h>
 
-#include <xpm/star_poly.xpm>
+#include <svg/star_poly_svg.h>
 #include <xpm/poly.xpm>
 #include <xpm/star.xpm>
 #include <xpm/center.xpm>
@@ -55,10 +55,11 @@ CQMenuItem *
 CQIllustratorCreateStarMode::
 createMenuItem(CQMenu *menu)
 {
-  menuItem_ = new CQMenuItem(menu, "&Star", CQMenuItem::CHECKABLE);
+  QIcon icon = CQPixmapCacheInst->getIcon("STAR_POLY");
+
+  menuItem_ = new CQMenuItem(menu, icon, "&Star", CQMenuItem::CHECKABLE);
 
   menuItem_->setStatusTip("Create Star or Polygon");
-  menuItem_->setXPMIcon(star_poly_data);
 
   connect(menuItem_->getAction(), SIGNAL(toggled(bool)), this, SLOT(menuItemSlot()));
 
@@ -200,7 +201,7 @@ QIcon
 CQIllustratorCreateStarToolbar::
 getIcon()
 {
-  return QIcon(QPixmap(star_poly_data));
+  return CQPixmapCacheInst->getIcon("STAR_POLY");
 }
 
 void
@@ -232,8 +233,8 @@ addWidgets()
   numEdit_     = new QSpinBox(0);
   radius1Edit_ = new CQRealEdit(0.0);
   radius2Edit_ = new CQRealEdit(0.0);
-  angle1Edit_  = new CQAngleSpinBox(0.0);
-  angle2Edit_  = new CQAngleSpinBox(0.0);
+  angle1Edit_  = new CQAngleSpinBox(CAngle(0.0));
+  angle2Edit_  = new CQAngleSpinBox(CAngle(0.0));
 
   numEdit_->setRange(0, 100);
 
@@ -248,8 +249,8 @@ addWidgets()
   connect(numEdit_    , SIGNAL(valueChanged(int)), this, SLOT(updateShape()));
   connect(radius1Edit_, SIGNAL(valueChanged(double)), this, SLOT(updateShape()));
   connect(radius2Edit_, SIGNAL(valueChanged(double)), this, SLOT(updateShape()));
-  connect(angle1Edit_ , SIGNAL(angleChanged(double)), this, SLOT(updateShape()));
-  connect(angle2Edit_ , SIGNAL(angleChanged(double)), this, SLOT(updateShape()));
+  connect(angle1Edit_ , SIGNAL(angleChanged(const CAngle &)), this, SLOT(updateShape()));
+  connect(angle2Edit_ , SIGNAL(angleChanged(const CAngle &)), this, SLOT(updateShape()));
 
   CQSwatch *centerSwatch  = new CQSwatch("Center"       , centerEdit_ );
   CQSwatch *numSwatch     = new CQSwatch("Num Sides"    , numEdit_    );
@@ -288,8 +289,8 @@ setSelectedShape(const CQIllustratorShape *shape)
   angle2Edit_ ->setEnabled(star != 0);
 
   disconnect(numEdit_   , SIGNAL(valueChanged(int)), this, SLOT(updateShape()));
-  disconnect(angle1Edit_, SIGNAL(angleChanged(double)), this, SLOT(updateShape()));
-  disconnect(angle2Edit_, SIGNAL(angleChanged(double)), this, SLOT(updateShape()));
+  disconnect(angle1Edit_, SIGNAL(angleChanged(const CAngle &)), this, SLOT(updateShape()));
+  disconnect(angle2Edit_, SIGNAL(angleChanged(const CAngle &)), this, SLOT(updateShape()));
 
   if      (star) {
     const CBBox2D &bbox = star->getBBox();
@@ -320,8 +321,8 @@ setSelectedShape(const CQIllustratorShape *shape)
   }
 
   connect(numEdit_   , SIGNAL(valueChanged(int)), this, SLOT(updateShape()));
-  connect(angle1Edit_, SIGNAL(angleChanged(double)), this, SLOT(updateShape()));
-  connect(angle2Edit_, SIGNAL(angleChanged(double)), this, SLOT(updateShape()));
+  connect(angle1Edit_, SIGNAL(angleChanged(const CAngle &)), this, SLOT(updateShape()));
+  connect(angle2Edit_, SIGNAL(angleChanged(const CAngle &)), this, SLOT(updateShape()));
 }
 
 void

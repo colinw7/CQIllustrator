@@ -10,7 +10,7 @@
 #include <CQSwatch.h>
 #include <CQImageButton.h>
 
-#include <xpm/slice.xpm>
+#include <svg/slice_svg.h>
 
 #include <cursors/slice.xbm>
 #include <cursors/slicemask.xbm>
@@ -35,10 +35,11 @@ CQMenuItem *
 CQIllustratorSliceMode::
 createMenuItem(CQMenu *menu)
 {
-  menuItem_ = new CQMenuItem(menu, "&Slice", CQMenuItem::CHECKABLE);
+  QIcon icon = CQPixmapCacheInst->getIcon("SLICE");
+
+  menuItem_ = new CQMenuItem(menu, icon, "&Slice", CQMenuItem::CHECKABLE);
 
   menuItem_->setStatusTip("Slice Shape");
-  menuItem_->setXPMIcon(slice_data);
 
   connect(menuItem_->getAction(), SIGNAL(toggled(bool)), this, SLOT(menuItemSlot()));
 
@@ -171,7 +172,7 @@ QIcon
 CQIllustratorSliceToolbar::
 getIcon()
 {
-  return QIcon(QPixmap(slice_data));
+  return CQPixmapCacheInst->getIcon("SLICE");
 }
 
 void

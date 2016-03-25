@@ -13,7 +13,7 @@
 #include <CQRealEdit.h>
 #include <CQSwatch.h>
 
-#include <xpm/rect.xpm>
+#include <svg/rect_svg.h>
 
 #include <cursors/rect.xbm>
 #include <cursors/rectmask.xbm>
@@ -58,10 +58,11 @@ CQMenuItem *
 CQIllustratorCreateRectMode::
 createMenuItem(CQMenu *menu)
 {
-  menuItem_ = new CQMenuItem(menu, "&Rectangle", CQMenuItem::CHECKABLE);
+  QIcon icon = CQPixmapCacheInst->getIcon("RECT");
+
+  menuItem_ = new CQMenuItem(menu, icon, "&Rectangle", CQMenuItem::CHECKABLE);
 
   menuItem_->setStatusTip("Create Rectangle");
-  menuItem_->setXPMIcon(rect_data);
 
   connect(menuItem_->getAction(), SIGNAL(toggled(bool)), this, SLOT(menuItemSlot()));
 
@@ -231,7 +232,7 @@ QIcon
 CQIllustratorCreateRectToolbar::
 getIcon()
 {
-  return QIcon(QPixmap(rect_data));
+  return CQPixmapCacheInst->getIcon("RECT");
 }
 
 void

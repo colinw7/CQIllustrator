@@ -13,7 +13,7 @@
 #include <CQRealEdit.h>
 #include <CQSwatch.h>
 
-#include <xpm/lgradient.xpm>
+#include <svg/lgradient_svg.h>
 
 #include <xpm/stop_point.xpm>
 #include <xpm/stop_point_active.xpm>
@@ -48,10 +48,11 @@ CQMenuItem *
 CQIllustratorSetLGradientMode::
 createMenuItem(CQMenu *menu)
 {
-  menuItem_ = new CQMenuItem(menu, "&Linear Gradient", CQMenuItem::CHECKABLE);
+  QIcon icon = CQPixmapCacheInst->getIcon("LGRADIENT");
+
+  menuItem_ = new CQMenuItem(menu, icon, "&Linear Gradient", CQMenuItem::CHECKABLE);
 
   menuItem_->setStatusTip("Create/Modify Linear Gradient");
-  menuItem_->setXPMIcon(lgradient_data);
 
   connect(menuItem_->getAction(), SIGNAL(toggled(bool)), this, SLOT(menuItemSlot()));
 
@@ -190,7 +191,7 @@ QIcon
 CQIllustratorSetLGradientToolbar::
 getIcon()
 {
-  return QIcon(QPixmap(lgradient_data));
+  return CQPixmapCacheInst->getIcon("LGRADIENT");
 }
 
 void

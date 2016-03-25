@@ -4,7 +4,7 @@
 #include <CQMenu.h>
 #include <CQIllustrator.h>
 
-#include <xpm/select.xpm>
+#include <svg/select_svg.h>
 
 CQIllustratorSetAnchorPositionMode::
 CQIllustratorSetAnchorPositionMode(CQIllustrator *illustrator) :
@@ -17,10 +17,10 @@ CQMenuItem *
 CQIllustratorSetAnchorPositionMode::
 createMenuItem(CQMenu *menu)
 {
-  menuItem_ = new CQMenuItem(menu, "&Set Anchor Position", CQMenuItem::CHECKABLE);
+  menuItem_ = new CQMenuItem(menu,
+    CQPixmapCacheInst->getIcon("SELECT"), "&Set Anchor Position", CQMenuItem::CHECKABLE);
 
   menuItem_->setStatusTip("Set Anchor Position");
-  menuItem_->setXPMIcon(select_data);
 
   connect(menuItem_->getAction(), SIGNAL(toggled(bool)), this, SLOT(menuItemSlot()));
 

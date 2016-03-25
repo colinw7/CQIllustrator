@@ -22,7 +22,7 @@
 #include <CQMenu.h>
 #include <CQDockWidget.h>
 
-#include <xpm/transform.xpm>
+#include <svg/transform_svg.h>
 
 CQIllustratorTransformMode::
 CQIllustratorTransformMode(CQIllustrator *illustrator) :
@@ -43,10 +43,11 @@ CQMenuItem *
 CQIllustratorTransformMode::
 createMenuItem(CQMenu *menu)
 {
-  menuItem_ = new CQMenuItem(menu, "&Transform", CQMenuItem::CHECKABLE);
+  QIcon icon = CQPixmapCacheInst->getIcon("TRANSFORM");
+
+  menuItem_ = new CQMenuItem(menu, icon, "&Transform", CQMenuItem::CHECKABLE);
 
   menuItem_->setStatusTip("Transform Object");
-  menuItem_->setXPMIcon(transform_data);
 
   connect(menuItem_->getAction(), SIGNAL(toggled(bool)), this, SLOT(menuItemSlot()));
 
@@ -124,7 +125,7 @@ QIcon
 CQIllustratorTransformToolbar::
 getIcon()
 {
-  return QIcon(QPixmap(transform_data));
+  return CQPixmapCacheInst->getIcon("TRANSFORM");
 }
 
 void
@@ -364,7 +365,7 @@ CQTransformRotateTool(CQIllustratorTransformToolbar *toolbar) :
   QGridLayout *grid = new QGridLayout(this);
   grid->setMargin(0); grid->setSpacing(8);
 
-  angleEdit_ = new CQAngleSpinBox(0.0);
+  angleEdit_ = new CQAngleSpinBox(CAngle(0.0));
 
   groupCheck_ = new QCheckBox("As Group");
 
@@ -381,7 +382,7 @@ apply()
 {
   CQIllustrator *illustrator = toolbar_->getIllustrator();
 
-  double a = M_PI*angleEdit_->getValue()/180.0;
+  double a = M_PI*angleEdit_->getAngle().degrees()/180.0;
 
   illustrator->startUndoGroup("Rotate Current");
 

@@ -12,7 +12,7 @@
 #include <CQRealEdit.h>
 #include <CQSwatch.h>
 
-#include <xpm/offset_path.xpm>
+#include <svg/offset_path_svg.h>
 
 #include <cursors/rect.xbm>
 #include <cursors/rectmask.xbm>
@@ -46,10 +46,11 @@ CQMenuItem *
 CQIllustratorOffsetPathMode::
 createMenuItem(CQMenu *menu)
 {
-  menuItem_ = new CQMenuItem(menu, "&Offset Path", CQMenuItem::CHECKABLE);
+  QIcon icon = CQPixmapCacheInst->getIcon("OFFSET_PATH");
+
+  menuItem_ = new CQMenuItem(menu, icon, "&Offset Path", CQMenuItem::CHECKABLE);
 
   menuItem_->setStatusTip("Offset Path");
-  menuItem_->setXPMIcon(offset_path_data);
 
   connect(menuItem_->getAction(), SIGNAL(toggled(bool)), this, SLOT(menuItemSlot()));
 
@@ -213,7 +214,7 @@ QIcon
 CQIllustratorOffsetPathToolbar::
 getIcon()
 {
-  return QIcon(QPixmap(offset_path_data));
+  return CQPixmapCacheInst->getIcon("OFFSET_PATH");
 }
 
 void

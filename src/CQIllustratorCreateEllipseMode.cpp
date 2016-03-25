@@ -14,7 +14,7 @@
 #include <CQAngleSpinBox.h>
 #include <CQSwatch.h>
 
-#include <xpm/ellipse.xpm>
+#include <svg/ellipse_svg.h>
 
 #include <cursors/circle.xbm>
 #include <cursors/circlemask.xbm>
@@ -59,10 +59,11 @@ CQMenuItem *
 CQIllustratorCreateEllipseMode::
 createMenuItem(CQMenu *menu)
 {
-  menuItem_ = new CQMenuItem(menu, "&Ellipse", CQMenuItem::CHECKABLE);
+  QIcon icon = CQPixmapCacheInst->getIcon("ELLIPSE");
+
+  menuItem_ = new CQMenuItem(menu, icon, "&Ellipse", CQMenuItem::CHECKABLE);
 
   menuItem_->setStatusTip("Create Ellipse");
-  menuItem_->setXPMIcon(ellipse_data);
 
   connect(menuItem_->getAction(), SIGNAL(toggled(bool)), this, SLOT(menuItemSlot()));
 
@@ -222,7 +223,7 @@ QIcon
 CQIllustratorCreateEllipseToolbar::
 getIcon()
 {
-  return QIcon(QPixmap(ellipse_data));
+  return CQPixmapCacheInst->getIcon("ELLIPSE");
 }
 
 void
@@ -236,8 +237,8 @@ addWidgets()
   posEdit_     = new CQPointEdit;
   widthEdit_   = new CQRealEdit(0.0);
   heightEdit_  = new CQRealEdit(0.0);
-  angle1Edit_  = new CQAngleSpinBox(0.0);
-  angle2Edit_  = new CQAngleSpinBox(0.0);
+  angle1Edit_  = new CQAngleSpinBox(CAngle(0.0));
+  angle2Edit_  = new CQAngleSpinBox(CAngle(0.0));
   connectEdit_ = new CQEllipseShape2DConnectType();
 
   posEdit_    ->setFocusPolicy(Qt::ClickFocus);
@@ -250,8 +251,8 @@ addWidgets()
   connect(posEdit_    , SIGNAL(valueChanged()), this, SLOT(updateShape()));
   connect(widthEdit_  , SIGNAL(valueChanged(double)), this, SLOT(updateShape()));
   connect(heightEdit_ , SIGNAL(valueChanged(double)), this, SLOT(updateShape()));
-  connect(angle1Edit_ , SIGNAL(angleChanged(double)), this, SLOT(updateShape()));
-  connect(angle2Edit_ , SIGNAL(angleChanged(double)), this, SLOT(updateShape()));
+  connect(angle1Edit_ , SIGNAL(angleChanged(const CAngle &)), this, SLOT(updateShape()));
+  connect(angle2Edit_ , SIGNAL(angleChanged(const CAngle &)), this, SLOT(updateShape()));
   connect(connectEdit_, SIGNAL(valueChanged()), this, SLOT(updateShape()));
 
   CQSwatch *posSwatch     = new CQSwatch("Position", posEdit_   );

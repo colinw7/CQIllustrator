@@ -3,6 +3,7 @@
 #include <CQIllustrator.h>
 
 #include <CQApp.h>
+#include <CQStyle.h>
 #include <CQMenu.h>
 #include <CQImage.h>
 #include <CQToolBar.h>
@@ -45,6 +46,25 @@
 #include <CQIllustratorHandle.h>
 #include <CQIllustratorCmd.h>
 
+#include <CSVGCircle.h>
+#include <CSVGEllipse.h>
+#include <CSVGImage.h>
+#include <CSVGLine.h>
+#include <CSVGLinearGradient.h>
+#include <CSVGPath.h>
+#include <CSVGPathPart.h>
+#include <CSVGPolygon.h>
+#include <CSVGPolyLine.h>
+#include <CSVGRadialGradient.h>
+#include <CSVGRect.h>
+#include <CSVGStop.h>
+#include <CSVGText.h>
+#include <CSVGUse.h>
+#include <CSVGUtil.h>
+
+#include <CLinearGradient.h>
+#include <CRadialGradient.h>
+
 #include <CQStrokeOption.h>
 #include <CQFillOption.h>
 //#include <CQFontOption.h>
@@ -65,32 +85,32 @@
 #include <QPainter>
 #include <QMouseEvent>
 #include <QFileDialog>
+#include <QToolBar>
 
-#include <xpm/select_all.xpm>
-#include <xpm/select_none.xpm>
+#include <svg/select_all_svg.h>
+#include <svg/select_none_svg.h>
 
-#include <xpm/group.xpm>
-#include <xpm/ungroup.xpm>
-#include <xpm/copy.xpm>
+#include <svg/group_svg.h>
+#include <svg/ungroup_svg.h>
+#include <svg/copy_svg.h>
 #include <xpm/copy_color.xpm>
-#include <xpm/delete.xpm>
-#include <xpm/raise.xpm>
-#include <xpm/lower.xpm>
+#include <svg/delete_svg.h>
+#include <svg/raise_svg.h>
+#include <svg/lower_svg.h>
 #include <xpm/flip_x.xpm>
 #include <xpm/flip_y.xpm>
-#include <xpm/lock.xpm>
-#include <xpm/unlock.xpm>
-#include <xpm/add_layer.xpm>
-
-#include <images/undo_16_png.h>
-#include <images/redo_16_png.h>
-
-#define IMAGE_DATA(I) I, sizeof(I)/sizeof(char *)
+#include <svg/lock_svg.h>
+#include <svg/unlock_svg.h>
+#include <svg/add_layer_svg.h>
+#include <svg/undo_svg.h>
+#include <svg/redo_svg.h>
 
 int
 main(int argc, char **argv)
 {
   CQApp app(argc, argv);
+
+  app.setStyle(new CQStyle);
 
   CQIllustrator *w = new CQIllustrator;
 
@@ -354,7 +374,7 @@ CQIllustratorMode *
 CQIllustrator::
 getMode(Mode id) const
 {
-  ModeMap::const_iterator p = modeMap_.find(id);
+  auto p = modeMap_.find(id);
 
   if (p == modeMap_.end())
     return 0;
@@ -416,17 +436,17 @@ createMenus()
 
   //--------
 
-  selectAllItem_ = new CQMenuItem(selectMenu_, "Select All");
+  selectAllItem_ = new CQMenuItem(selectMenu_,
+    CQPixmapCacheInst->getIcon("SELECT_ALL"), "Select All");
 
   selectAllItem_->setStatusTip("Select All");
-  selectAllItem_->setXPMIcon(select_all_data);
 
   connect(selectAllItem_->getAction(), SIGNAL(triggered()), this, SLOT(selectAllSlot()));
 
-  selectNoneItem_ = new CQMenuItem(selectMenu_, "Select None");
+  selectNoneItem_ = new CQMenuItem(selectMenu_,
+    CQPixmapCacheInst->getIcon("SELECT_NONE"), "Select None");
 
   selectNoneItem_->setStatusTip("Select None");
-  selectNoneItem_->setXPMIcon(select_none_data);
 
   connect(selectNoneItem_->getAction(), SIGNAL(triggered()), this, SLOT(selectNoneSlot()));
 
@@ -434,45 +454,45 @@ createMenus()
 
   editMenu_ = new CQMenu(this, "Edit");
 
-  groupItem_ = new CQMenuItem(editMenu_, "Group Objects");
+  groupItem_ = new CQMenuItem(editMenu_,
+    CQPixmapCacheInst->getIcon("GROUP"), "Group Objects");
 
   groupItem_->setStatusTip("Create Group From Selected Objects");
-  groupItem_->setXPMIcon(group_data);
 
   connect(groupItem_->getAction(), SIGNAL(triggered()), this, SLOT(groupSlot()));
 
-  ungroupItem_ = new CQMenuItem(editMenu_, "Ungroup Objects");
+  ungroupItem_ = new CQMenuItem(editMenu_,
+    CQPixmapCacheInst->getIcon("UNGROUP"), "Ungroup Objects");
 
   ungroupItem_->setStatusTip("Ungroup Selected Groups");
-  ungroupItem_->setXPMIcon(ungroup_data);
 
   connect(ungroupItem_->getAction(), SIGNAL(triggered()), this, SLOT(ungroupSlot()));
 
-  copyItem_ = new CQMenuItem(editMenu_, "Copy Objects");
+  copyItem_ = new CQMenuItem(editMenu_,
+    CQPixmapCacheInst->getIcon("COPY"), "Copy Objects");
 
   copyItem_->setStatusTip("Copy Selected Objects");
-  copyItem_->setXPMIcon(copy_data);
 
   connect(copyItem_->getAction(), SIGNAL(triggered()), this, SLOT(copySlot()));
 
-  deleteItem_ = new CQMenuItem(editMenu_, "Delete Objects");
+  deleteItem_ = new CQMenuItem(editMenu_,
+    CQPixmapCacheInst->getIcon("DELETE"), "Delete Objects");
 
   deleteItem_->setStatusTip("Delete Selected Objects");
-  deleteItem_->setXPMIcon(delete_data);
 
   connect(deleteItem_->getAction(), SIGNAL(triggered()), this, SLOT(deleteSlot()));
 
-  raiseItem_ = new CQMenuItem(editMenu_, "Raise Objects");
+  raiseItem_ = new CQMenuItem(editMenu_,
+    CQPixmapCacheInst->getIcon("RAISE"), "Raise Objects");
 
   raiseItem_->setStatusTip("Lower Selected Objects");
-  raiseItem_->setXPMIcon(raise_data);
 
   connect(raiseItem_->getAction(), SIGNAL(triggered()), this, SLOT(raiseSlot()));
 
-  lowerItem_ = new CQMenuItem(editMenu_, "Lower Objects");
+  lowerItem_ = new CQMenuItem(editMenu_,
+    CQPixmapCacheInst->getIcon("LOWER"), "Lower Objects");
 
   lowerItem_->setStatusTip("Raise Selected Objects");
-  lowerItem_->setXPMIcon(lower_data);
 
   connect(lowerItem_->getAction(), SIGNAL(triggered()), this, SLOT(lowerSlot()));
 
@@ -490,17 +510,15 @@ createMenus()
 
   connect(flipYItem_->getAction(), SIGNAL(triggered()), this, SLOT(flipYSlot()));
 
-  lockItem_ = new CQMenuItem(editMenu_, "Lock");
+  lockItem_ = new CQMenuItem(editMenu_, CQPixmapCacheInst->getIcon("LOCK"), "Lock");
 
   lockItem_->setStatusTip("Lock Selected Objects");
-  lockItem_->setXPMIcon(lock_data);
 
   connect(lockItem_->getAction(), SIGNAL(triggered()), this, SLOT(lockSlot()));
 
-  unlockItem_ = new CQMenuItem(editMenu_, "Unlock");
+  unlockItem_ = new CQMenuItem(editMenu_, CQPixmapCacheInst->getIcon("UNLOCK"), "Unlock");
 
   unlockItem_->setStatusTip("Unlock Selected Objects");
-  unlockItem_->setXPMIcon(unlock_data);
 
   connect(unlockItem_->getAction(), SIGNAL(triggered()), this, SLOT(unlockSlot()));
 
@@ -517,23 +535,21 @@ createMenus()
 
   connect(pasteStroke_->getAction(), SIGNAL(triggered()), this, SLOT(pasteStrokeSlot()));
 
-  undoItem_ = new CQMenuItem(editMenu_, "Undo");
+  undoItem_ = new CQMenuItem(editMenu_, CQPixmapCacheInst->getIcon("UNDO"), "Undo");
 
   undoItem_->setEnabled(false);
 
   undoItem_->setShortcut("Ctrl+Z");
   undoItem_->setStatusTip("Undo last change");
-  undoItem_->setIcon(undo_16_data, UNDO_16_DATA_LEN);
 
   connect(undoItem_->getAction(), SIGNAL(triggered()), this, SLOT(undoSlot()));
 
-  redoItem_ = new CQMenuItem(editMenu_, "Redo");
+  redoItem_ = new CQMenuItem(editMenu_, CQPixmapCacheInst->getIcon("REDO"), "Redo");
 
   redoItem_->setEnabled(false);
 
   redoItem_->setShortcut("Ctrl+Y");
   redoItem_->setStatusTip("Redo last undo");
-  redoItem_->setIcon(redo_16_data, REDO_16_DATA_LEN);
 
   connect(redoItem_->getAction(), SIGNAL(triggered()), this, SLOT(redoSlot()));
 
@@ -541,10 +557,10 @@ createMenus()
 
   layerMenu_ = new CQMenu(this, "Layer");
 
-  addLayerItem_ = new CQMenuItem(layerMenu_, "Add Layer");
+  addLayerItem_ = new CQMenuItem(layerMenu_,
+    CQPixmapCacheInst->getIcon("ADD_LAYER"), "Add Layer");
 
   addLayerItem_->setStatusTip("Add New Layer");
-  addLayerItem_->setXPMIcon(add_layer_data);
 
   connect(addLayerItem_->getAction(), SIGNAL(triggered()), this, SLOT(addLayerSlot()));
 
@@ -647,6 +663,14 @@ void
 CQIllustrator::
 createToolBars()
 {
+  QFontMetrics fm(font());
+
+  int is = style()->pixelMetric(QStyle::PM_LargeIconSize);
+
+  int ts = 2*is + 4;
+
+  //-------
+
   modeToolBar_ = new CQToolBar(this, "Mode");
 
   //-------
@@ -692,7 +716,7 @@ createToolBars()
 
   mouseToolToolBar_->addWidget(mouseToolStack_);
 
-  mouseToolToolBar_->getToolBar()->setFixedHeight(48);
+  mouseToolToolBar_->getToolBar()->setFixedHeight(ts);
   mouseToolToolBar_->getToolBar()->setMovable(false);
   mouseToolToolBar_->getToolBar()->setFloatable(false);
 
@@ -702,13 +726,15 @@ createToolBars()
 
   consoleToolBar_ = new CQToolBar(this, "Console", Qt::BottomToolBarArea);
 
-  //consoleToolBar_->getToolBar()->setFixedHeight(40);
+  //consoleToolBar_->getToolBar()->setFixedHeight(ts);
   consoleToolBar_->getToolBar()->setMovable(false);
   consoleToolBar_->getToolBar()->setFloatable(false);
 
   consoleToolBar_->setAllowedAreas(Qt::TopToolBarArea | Qt::BottomToolBarArea);
 
   consoleEdit_ = new QLineEdit;
+
+  consoleToolBar_->addWidget(consoleEdit_);
 
   connect(consoleEdit_, SIGNAL(returnPressed()), this, SLOT(consoleExecSlot()));
 
@@ -720,7 +746,7 @@ createToolBars()
 
   toolsToolBar_ = new CQToolBar(this, "Tools", Qt::BottomToolBarArea);
 
-  toolsToolBar_->getToolBar()->setFixedHeight(40);
+  toolsToolBar_->getToolBar()->setFixedHeight(ts);
   toolsToolBar_->getToolBar()->setMovable(false);
   toolsToolBar_->getToolBar()->setFloatable(false);
 
@@ -773,17 +799,17 @@ createToolBars()
   modeLabel_ = new QLabel("<small><b>Mode</b></small><br>");
 
   modeLabel_->setAlignment(Qt::AlignLeft);
-  modeLabel_->setFixedWidth(128);
+  modeLabel_->setFixedWidth(fm.width("Set Radial Gradient"));
 
   posLabel_ = new QLabel("<small><b>Position</b></small><br>");
 
   posLabel_->setAlignment(Qt::AlignLeft);
-  posLabel_->setFixedWidth(128);
+  posLabel_->setFixedWidth(fm.width("(XXXX.XXX, XXXX.XXX)"));
 
   deltaLabel_ = new QLabel("<small><b>Delta</b></small><br>");
 
   deltaLabel_->setAlignment(Qt::AlignLeft);
-  deltaLabel_->setFixedWidth(128);
+  deltaLabel_->setFixedWidth(fm.width("XXXX.XXX"));
 
   //------
 
@@ -2234,11 +2260,7 @@ loadSVG(const QString &filename)
 
   CSVGBlock *block = svg.getBlock();
 
-  CSVGObject::ObjectList::iterator p1, p2;
-
-  for (p1 = block->childrenBegin(), p2 = block->childrenEnd(); p1 != p2; ++p1) {
-    CSVGObject *object = *p1;
-
+  for (const auto &object : block->children()) {
     CQIllustratorShape *shape = addSVGObject(0, object);
 
     if (! shape) continue;
@@ -2402,10 +2424,10 @@ addSVGObject(CSVGObject *, CSVGObject *object)
 
   CQIllustratorShape *shape = 0;
 
-  uint id = object->getObjType().getId();
+  CSVGObjTypeId id = object->getObjTypeId();
 
   switch (id) {
-    case CSVG_OBJ_TYPE_PATH: {
+    case CSVGObjTypeId::PATH: {
       CPoint2D lp(0,0);
 
       CPathShape *pathShape = createPathShape();
@@ -2426,7 +2448,7 @@ addSVGObject(CSVGObject *, CSVGObject *object)
         CSVGPathPartType type = part->getType();
 
         switch (type) {
-          case CSVG_PATH_PART_MOVE_TO: {
+          case CSVGPathPartType::MOVE_TO: {
             CSVGPathMoveTo const *pp = dynamic_cast<CSVGPathMoveTo const *>(part);
 
             CPoint2D pp1 = pp->getPoint();
@@ -2437,7 +2459,7 @@ addSVGObject(CSVGObject *, CSVGObject *object)
 
             break;
           }
-          case CSVG_PATH_PART_LINE_TO: {
+          case CSVGPathPartType::LINE_TO: {
             CSVGPathLineTo const *pp = dynamic_cast<CSVGPathLineTo const *>(part);
 
             CPoint2D pp1 = pp->getPoint();
@@ -2448,7 +2470,7 @@ addSVGObject(CSVGObject *, CSVGObject *object)
 
             break;
           }
-          case CSVG_PATH_PART_RLINE_TO: {
+          case CSVGPathPartType::RLINE_TO: {
             CSVGPathRLineTo const *pp = dynamic_cast<CSVGPathRLineTo const *>(part);
 
             CPoint2D pp1 = lp + pp->getPoint();
@@ -2459,7 +2481,7 @@ addSVGObject(CSVGObject *, CSVGObject *object)
 
             break;
           }
-          case CSVG_PATH_PART_HLINE_TO: {
+          case CSVGPathPartType::HLINE_TO: {
             CSVGPathHLineTo const *pp = dynamic_cast<CSVGPathHLineTo const *>(part);
 
             CPoint2D pp1 = lp + CPoint2D(pp->getLength(), 0);
@@ -2470,7 +2492,7 @@ addSVGObject(CSVGObject *, CSVGObject *object)
 
             break;
           }
-          case CSVG_PATH_PART_VLINE_TO: {
+          case CSVGPathPartType::VLINE_TO: {
             CSVGPathVLineTo const *pp = dynamic_cast<CSVGPathVLineTo const *>(part);
 
             CPoint2D pp1 = lp + CPoint2D(0, pp->getLength());
@@ -2481,7 +2503,7 @@ addSVGObject(CSVGObject *, CSVGObject *object)
 
             break;
           }
-          case CSVG_PATH_PART_ARC_TO: {
+          case CSVGPathPartType::ARC_TO: {
             CSVGPathArcTo const *pp = dynamic_cast<CSVGPathArcTo const *>(part);
 
             double xa = pp->getXA();
@@ -2508,7 +2530,7 @@ addSVGObject(CSVGObject *, CSVGObject *object)
 
             break;
           }
-          case CSVG_PATH_PART_RARC_TO: {
+          case CSVGPathPartType::RARC_TO: {
             CSVGPathRArcTo const *pp = dynamic_cast<CSVGPathRArcTo const *>(part);
 
             double xa = pp->getXA();
@@ -2535,7 +2557,7 @@ addSVGObject(CSVGObject *, CSVGObject *object)
 
             break;
           }
-          case CSVG_PATH_PART_BEZIER2_TO: {
+          case CSVGPathPartType::BEZIER2_TO: {
             CSVGPathBezier2To const *pp = dynamic_cast<CSVGPathBezier2To const *>(part);
 
             CPoint2D pp1 = pp->getPoint1();
@@ -2547,7 +2569,7 @@ addSVGObject(CSVGObject *, CSVGObject *object)
 
             break;
           }
-          case CSVG_PATH_PART_RBEZIER2_TO: {
+          case CSVGPathPartType::RBEZIER2_TO: {
             CSVGPathRBezier2To const *pp = dynamic_cast<CSVGPathRBezier2To const *>(part);
 
             CPoint2D pp1 = lp + pp->getPoint1();
@@ -2559,7 +2581,7 @@ addSVGObject(CSVGObject *, CSVGObject *object)
 
             break;
           }
-          case CSVG_PATH_PART_BEZIER3_TO: {
+          case CSVGPathPartType::BEZIER3_TO: {
             CSVGPathBezier3To const *pp = dynamic_cast<CSVGPathBezier3To const *>(part);
 
             CPoint2D pp1 = pp->getPoint1();
@@ -2572,7 +2594,7 @@ addSVGObject(CSVGObject *, CSVGObject *object)
 
             break;
           }
-          case CSVG_PATH_PART_RBEZIER3_TO: {
+          case CSVGPathPartType::RBEZIER3_TO: {
             CSVGPathRBezier3To const *pp = dynamic_cast<CSVGPathRBezier3To const *>(part);
 
             CPoint2D pp1 = lp + pp->getPoint1();
@@ -2585,13 +2607,13 @@ addSVGObject(CSVGObject *, CSVGObject *object)
 
             break;
           }
-          case CSVG_PATH_PART_CLOSE_PATH: {
+          case CSVGPathPartType::CLOSE_PATH: {
             pathShape->addClose();
 
             break;
           }
           default:
-            std::cerr << "Unhandled path part " << type << std::endl;
+            std::cerr << "Unhandled path part " << uint(type) << std::endl;
             break;
         }
       }
@@ -2602,7 +2624,7 @@ addSVGObject(CSVGObject *, CSVGObject *object)
 
       break;
     }
-    case CSVG_OBJ_TYPE_POLYGON: {
+    case CSVGObjTypeId::POLYGON: {
       CPathShape *pathShape = createPathShape();
 
       shape = pathShape;
@@ -2629,7 +2651,7 @@ addSVGObject(CSVGObject *, CSVGObject *object)
 
       break;
     }
-    case CSVG_OBJ_TYPE_RECT: {
+    case CSVGObjTypeId::RECT: {
       CSVGRect *rect = dynamic_cast<CSVGRect *>(object);
 
       const CBBox2D &bbox = rect->getBBox();
@@ -2653,7 +2675,7 @@ addSVGObject(CSVGObject *, CSVGObject *object)
 
       break;
     }
-    case CSVG_OBJ_TYPE_CIRCLE: {
+    case CSVGObjTypeId::CIRCLE: {
       CSVGCircle *circle = dynamic_cast<CSVGCircle *>(object);
 
       const CPoint2D &c = circle->getCenter();
@@ -2672,12 +2694,12 @@ addSVGObject(CSVGObject *, CSVGObject *object)
 
       break;
     }
-    case CSVG_OBJ_TYPE_ELLIPSE: {
+    case CSVGObjTypeId::ELLIPSE: {
       CSVGEllipse *ellipse = dynamic_cast<CSVGEllipse *>(object);
 
       const CPoint2D &c  = ellipse->getCenter();
-      double          rx = ellipse->getRX();
-      double          ry = ellipse->getRY();
+      double          rx = ellipse->getRadiusX();
+      double          ry = ellipse->getRadiusY();
 
       CBBox2D bbox(CPoint2D(c.x - rx, c.y - ry), CPoint2D(c.x + rx, c.y + ry));
 
@@ -2692,7 +2714,7 @@ addSVGObject(CSVGObject *, CSVGObject *object)
 
       break;
     }
-    case CSVG_OBJ_TYPE_LINE: {
+    case CSVGObjTypeId::LINE: {
       CPathShape *pathShape = createPathShape();
 
       shape = pathShape;
@@ -2709,7 +2731,7 @@ addSVGObject(CSVGObject *, CSVGObject *object)
 
       break;
     }
-    case CSVG_OBJ_TYPE_POLYLINE: {
+    case CSVGObjTypeId::POLYLINE: {
       CPathShape *pathShape = createPathShape();
 
       shape = pathShape;
@@ -2736,7 +2758,7 @@ addSVGObject(CSVGObject *, CSVGObject *object)
 
       break;
     }
-    case CSVG_OBJ_TYPE_TEXT: {
+    case CSVGObjTypeId::TEXT: {
       CSVGText *text = dynamic_cast<CSVGText *>(object);
 
       CBBox2D bbox;
@@ -2755,10 +2777,10 @@ addSVGObject(CSVGObject *, CSVGObject *object)
 
       break;
     }
-    case CSVG_OBJ_TYPE_TSPAN: {
+    case CSVGObjTypeId::TSPAN: {
       break;
     }
-    case CSVG_OBJ_TYPE_IMAGE: {
+    case CSVGObjTypeId::IMAGE: {
       CSVGImage *image = dynamic_cast<CSVGImage *>(object);
 
       CBBox2D bbox;
@@ -2784,10 +2806,10 @@ addSVGObject(CSVGObject *, CSVGObject *object)
 
       break;
     }
-    case CSVG_OBJ_TYPE_TITLE: {
+    case CSVGObjTypeId::TITLE: {
       break;
     }
-    case CSVG_OBJ_TYPE_USE: {
+    case CSVGObjTypeId::USE: {
       CQIllustratorGroupShape *groupShape = createGroupShape();
 
       shape = groupShape;
@@ -2818,18 +2840,14 @@ addSVGObject(CSVGObject *, CSVGObject *object)
 
       break;
     }
-    case CSVG_OBJ_TYPE_GROUP: {
+    case CSVGObjTypeId::GROUP: {
       CQIllustratorGroupShape *groupShape = createGroupShape();
 
       shape = groupShape;
 
       setShapeSVGStrokeAndFill(groupShape, object);
 
-      CSVGObject::ObjectList::iterator p1, p2;
-
-      for (p1 = object->childrenBegin(), p2 = object->childrenEnd(); p1 != p2; ++p1) {
-        CSVGObject *childObject = *p1;
-
+      for (const auto &childObject : object->children()) {
         CQIllustratorShape *childShape = addSVGObject(object, childObject);
 
         if (! childShape) continue;
@@ -4189,13 +4207,8 @@ setShapeSVGStrokeAndFill(CQIllustratorShape *shape, CSVGObject *object)
     if      (lg) {
       CLinearGradient *lgradient = new CLinearGradient;
 
-      CSVGLinearGradient::StopList::const_iterator ps1, ps2;
-
-      for (ps1 = lg->beginStops(), ps2 = lg->endStops(); ps1 != ps2; ++ps1) {
-        CSVGStop *stop = *ps1;
-
+      for (const auto &stop : lg->stops())
         lgradient->addStop(stop->getOffset(), stop->getAlphaColor());
-      }
 
       CMatrix2D m1;
 
@@ -4210,7 +4223,7 @@ setShapeSVGStrokeAndFill(CQIllustratorShape *shape, CSVGObject *object)
       p1 = m1*p1;
       p2 = m1*p2;
 
-      if (lg->getUnitsValid() && lg->getUnits() != CSVG_COORD_UNITS_OBJECT_BBOX) {
+      if (lg->getUnitsValid() && lg->getUnits() != CSVGCoordUnits::OBJECT_BBOX) {
         const CBBox2D &bbox = shape->getBBox();
 
         p1.x = (p1.x - bbox.getXMin())/(bbox.getXMax() - bbox.getXMin());
@@ -4232,11 +4245,8 @@ setShapeSVGStrokeAndFill(CQIllustratorShape *shape, CSVGObject *object)
 
       CSVGRadialGradient::StopList::const_iterator ps1, ps2;
 
-      for (ps1 = rg->beginStops(), ps2 = rg->endStops(); ps1 != ps2; ++ps1) {
-        CSVGStop *stop = *ps1;
-
+      for (const auto &stop : rg->stops())
         rgradient->addStop(stop->getOffset(), stop->getAlphaColor());
-      }
 
       CMatrix2D m1;
 
@@ -4253,7 +4263,7 @@ setShapeSVGStrokeAndFill(CQIllustratorShape *shape, CSVGObject *object)
       f = m1*f;
       r = m1*r;
 
-      if (rg->getUnitsValid() && rg->getUnits() != CSVG_COORD_UNITS_OBJECT_BBOX) {
+      if (rg->getUnitsValid() && rg->getUnits() != CSVGCoordUnits::OBJECT_BBOX) {
         const CBBox2D &bbox = shape->getBBox();
 
         c.x = (c.x - bbox.getXMin())/(bbox.getXMax() - bbox.getXMin());

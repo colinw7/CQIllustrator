@@ -12,7 +12,7 @@
 #include <CQRealEdit.h>
 #include <CQSwatch.h>
 
-#include <xpm/rgradient.xpm>
+#include <svg/rgradient_svg.h>
 
 #include <xpm/stop_point.xpm>
 #include <xpm/stop_point_active.xpm>
@@ -47,10 +47,11 @@ CQMenuItem *
 CQIllustratorSetRGradientMode::
 createMenuItem(CQMenu *menu)
 {
-  menuItem_ = new CQMenuItem(menu, "&Radial Gradient", CQMenuItem::CHECKABLE);
+  QIcon icon = CQPixmapCacheInst->getIcon("RGRADIENT");
+
+  menuItem_ = new CQMenuItem(menu, icon, "&Radial Gradient", CQMenuItem::CHECKABLE);
 
   menuItem_->setStatusTip("Create/Modify Radial Gradient");
-  menuItem_->setXPMIcon(rgradient_data);
 
   connect(menuItem_->getAction(), SIGNAL(toggled(bool)), this, SLOT(menuItemSlot()));
 
@@ -176,7 +177,7 @@ QIcon
 CQIllustratorSetRGradientToolbar::
 getIcon()
 {
-  return QIcon(QPixmap(rgradient_data));
+  return CQPixmapCacheInst->getIcon("RGRADIENT");
 }
 
 void

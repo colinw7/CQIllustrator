@@ -23,15 +23,6 @@ class CQIllustratorShapeDrawer;
 #include <CQIllustratorData.h>
 
 struct CQIllustratorShapeStroke {
- private:
-  CRGBA         color_;
-  double        width_;
-  double        opacity_;
-  CLineDash     dash_;
-  CLineCapType  cap_;
-  CLineJoinType join_;
-  double        mlimit_;
-
  public:
   CQIllustratorShapeStroke() :
    color_(0,0,0), width_(1), opacity_(1), dash_(), cap_(LINE_CAP_TYPE_SQUARE),
@@ -79,7 +70,18 @@ struct CQIllustratorShapeStroke {
   void setMitreLimit(double mlimit) { mlimit_ = mlimit; }
 
   void draw(const CQIllustratorShape *shape, CQIllustratorShapeDrawer *drawer) const;
+
+ private:
+  CRGBA         color_;
+  double        width_;
+  double        opacity_;
+  CLineDash     dash_;
+  CLineCapType  cap_;
+  CLineJoinType join_;
+  double        mlimit_;
 };
+
+//------
 
 class CQIllustratorImageFill {
  public:
@@ -119,6 +121,8 @@ class CQIllustratorImageFill {
   CVAlignType valign_;
 };
 
+//------
+
 class CQIllustratorShapeFill {
  public:
   enum ImageScale {
@@ -126,13 +130,6 @@ class CQIllustratorShapeFill {
     IMAGE_SCALE_FIT,
     IMAGE_SCALE_EQUAL
   };
-
- private:
-  CRGBA         color_;
-  double        opacity_;
-  CFillType     rule_;
-  CGenGradient *gradient_;
-  CQIllustratorImageFill   *image_;
 
  public:
   CQIllustratorShapeFill() :
@@ -279,7 +276,16 @@ class CQIllustratorShapeFill {
   }
 
   void draw(const CQIllustratorShape *shape, CQIllustratorShapeDrawer *drawer) const;
+
+ private:
+  CRGBA                   color_;
+  double                  opacity_;
+  CFillType               rule_;
+  CGenGradient           *gradient_;
+  CQIllustratorImageFill *image_;
 };
+
+//------
 
 #define CQIllustratorShapeFilterMgrInst CQIllustratorShapeFilterMgr::getInstance()
 
@@ -304,6 +310,8 @@ class CQIllustratorShapeFilterMgr {
   uint      id_;
 };
 
+//------
+
 class CQIllustratorShapeFilter {
  public:
   CQIllustratorShapeFilter();
@@ -321,6 +329,8 @@ class CQIllustratorShapeFilter {
   uint id_;
 };
 
+//------
+
 class CQIllustratorShapeGaussianFilter : public CQIllustratorShapeFilter {
  public:
   CQIllustratorShapeGaussianFilter(double std_dev=1.0) :
@@ -330,6 +340,8 @@ class CQIllustratorShapeGaussianFilter : public CQIllustratorShapeFilter {
  private:
   double std_dev_;
 };
+
+//------
 
 class CQIllustratorShapeControlLine {
  public:
@@ -362,6 +374,8 @@ class CQIllustratorShapeControlLine {
   uint    id_;
   CLine2D line_;
 };
+
+//------
 
 class CQIllustratorShapeControlPoint {
  public:
@@ -406,6 +420,8 @@ class CQIllustratorShapeControlPoint {
   CPoint2D         point_;
   ControlPointType type_;
 };
+
+//------
 
 class CQIllustratorShapeNearestPoint2D {
  public:
@@ -452,6 +468,8 @@ class CQIllustratorShapeNearestPoint2D {
   CQIllustratorShapeControlPoint *p_;
 };
 
+//------
+
 class CQIllustratorShapeGeometry {
  public:
   CQIllustratorShapeGeometry(bool fixed, const CPoint2D &rcenter, const CMatrix2D &m) :
@@ -467,6 +485,8 @@ class CQIllustratorShapeGeometry {
   CPoint2D  rcenter_;
   CMatrix2D m_;
 };
+
+//------
 
 class CQIllustratorShapeLGradientControlPoint : public CQIllustratorShapeControlPoint {
  public:
@@ -487,6 +507,8 @@ class CQIllustratorShapeLGradientControlPoint : public CQIllustratorShapeControl
   Position pos_;
 };
 
+//------
+
 class CQIllustratorShapeRGradientControlPoint : public CQIllustratorShapeControlPoint {
  public:
   enum Position { CENTER, FOCUS, RADIUS };
@@ -505,6 +527,8 @@ class CQIllustratorShapeRGradientControlPoint : public CQIllustratorShapeControl
  protected:
   Position pos_;
 };
+
+//------
 
 #include <CPathShape.h>
 
@@ -716,6 +740,8 @@ class CQIllustratorShape {
   mutable bool              bbox_valid_;
 };
 
+//------
+
 class CQIllustratorRectGeometry : public CQIllustratorShapeGeometry {
  public:
   CQIllustratorRectGeometry(bool fixed=false, const CPoint2D &rcenter=CPoint2D(0,0),
@@ -742,6 +768,8 @@ class CQIllustratorRectGeometry : public CQIllustratorShapeGeometry {
   CPoint2D p1_, p2_;
   double   rx_, ry_;
 };
+
+//------
 
 class CQIllustratorRectShape : public CQIllustratorShape {
  public:
@@ -809,6 +837,8 @@ class CQIllustratorRectShape : public CQIllustratorShape {
   double   rx_, ry_;
 };
 
+//------
+
 class CQIllustratorRectShapeControlPoint : public CQIllustratorShapeControlPoint {
  public:
   CQIllustratorRectShapeControlPoint(CQIllustratorRectShape::ControlPointType type,
@@ -826,7 +856,7 @@ class CQIllustratorRectShapeControlPoint : public CQIllustratorShapeControlPoint
   CQIllustratorRectShape::ControlPointType type_;
 };
 
-//----------------
+//------
 
 enum CEllipseConnectType {
   CELLIPSE_CONNECT_LINE,  // Line
@@ -863,6 +893,8 @@ class CQIllustratorEllipseGeometry : public CQIllustratorShapeGeometry {
   double              angle1_, angle2_;
   CEllipseConnectType connectType_;
 };
+
+//------
 
 class CQIllustratorEllipseShape : public CQIllustratorShape {
  public:
@@ -937,6 +969,8 @@ class CQIllustratorEllipseShape : public CQIllustratorShape {
   CEllipseConnectType connectType_;
 };
 
+//------
+
 class CQIllustratorEllipseShapeControlPoint : public CQIllustratorShapeControlPoint {
  public:
   CQIllustratorEllipseShapeControlPoint(CQIllustratorEllipseShape::ControlPointType type,
@@ -954,7 +988,7 @@ class CQIllustratorEllipseShapeControlPoint : public CQIllustratorShapeControlPo
   CQIllustratorEllipseShape::ControlPointType type_;
 };
 
-//----------------
+//------
 
 class CQIllustratorNPolyGeometry : public CQIllustratorShapeGeometry {
  public:
@@ -984,6 +1018,8 @@ class CQIllustratorNPolyGeometry : public CQIllustratorShapeGeometry {
   double   r_;
   double   a_;
 };
+
+//------
 
 class CQIllustratorNPolyShape : public CQIllustratorShape {
  public:
@@ -1057,6 +1093,8 @@ class CQIllustratorNPolyShape : public CQIllustratorShape {
   double   a_;
 };
 
+//------
+
 class CQIllustratorNPolyShapeControlPoint : public CQIllustratorShapeControlPoint {
  public:
   CQIllustratorNPolyShapeControlPoint(CQIllustratorNPolyShape::ControlPointType type,
@@ -1074,7 +1112,7 @@ class CQIllustratorNPolyShapeControlPoint : public CQIllustratorShapeControlPoin
   CQIllustratorNPolyShape::ControlPointType type_;
 };
 
-//----------------
+//------
 
 class CQIllustratorStarGeometry : public CQIllustratorShapeGeometry {
  public:
@@ -1104,6 +1142,8 @@ class CQIllustratorStarGeometry : public CQIllustratorShapeGeometry {
   double   r1_, r2_;
   double   a1_, a2_;
 };
+
+//------
 
 class CQIllustratorStarShape : public CQIllustratorShape {
  public:
@@ -1185,6 +1225,8 @@ class CQIllustratorStarShape : public CQIllustratorShape {
   double   a1_, a2_;
 };
 
+//------
+
 class CQIllustratorStarShapeControlPoint : public CQIllustratorShapeControlPoint {
  public:
   CQIllustratorStarShapeControlPoint(CQIllustratorStarShape::ControlPointType type,
@@ -1202,7 +1244,7 @@ class CQIllustratorStarShapeControlPoint : public CQIllustratorShapeControlPoint
   CQIllustratorStarShape::ControlPointType type_;
 };
 
-//----------------
+//------
 
 class CQIllustratorPolygonGeometry : public CQIllustratorShapeGeometry {
  public:
@@ -1230,6 +1272,8 @@ class CQIllustratorPolygonGeometry : public CQIllustratorShapeGeometry {
  protected:
   PointList points_;
 };
+
+//------
 
 class CQIllustratorPolygonShape : public CQIllustratorShape {
  public:
@@ -1287,6 +1331,8 @@ class CQIllustratorPolygonShape : public CQIllustratorShape {
   PointList points_;
 };
 
+//------
+
 class CQIllustratorPolygonShapeControlPoint : public CQIllustratorShapeControlPoint {
  public:
   CQIllustratorPolygonShapeControlPoint(uint ind, const CPoint2D &p);
@@ -1303,7 +1349,7 @@ class CQIllustratorPolygonShapeControlPoint : public CQIllustratorShapeControlPo
   int ind_;
 };
 
-//----------------
+//------
 
 class CQIllustratorPathGeometry : public CQIllustratorShapeGeometry {
  public:
@@ -1331,10 +1377,11 @@ class CQIllustratorPathGeometry : public CQIllustratorShapeGeometry {
   CPathShapePartList parts_;
 };
 
+//------
+
 class CPathShape : public CQIllustratorShape {
  public:
-  CPathShape(const CPathShapePartList &parts=
-                          CPathShapePartList());
+  CPathShape(const CPathShapePartList &parts=CPathShapePartList());
   CPathShape(const CPathShape &path);
 
   CPathShape *dup() const;
@@ -1414,6 +1461,8 @@ class CPathShape : public CQIllustratorShape {
   mutable int                    group_;
 };
 
+//------
+
 class CPathShapeControlLine : public CQIllustratorShapeControlLine {
  public:
   CPathShapeControlLine(uint ind, const CLine2D &l);
@@ -1431,6 +1480,8 @@ class CPathShapeControlLine : public CQIllustratorShapeControlLine {
  protected:
   uint ind_;
 };
+
+//------
 
 class CPathShapeControlPoint : public CQIllustratorShapeControlPoint {
  public:
@@ -1457,7 +1508,7 @@ class CPathShapeControlPoint : public CQIllustratorShapeControlPoint {
   uint ind1_;
 };
 
-//----------------
+//------
 
 class CQIllustratorTextGeometry : public CQIllustratorShapeGeometry {
  public:
@@ -1491,6 +1542,8 @@ class CQIllustratorTextGeometry : public CQIllustratorShapeGeometry {
   CHAlignType halign_;
   CVAlignType valign_;
 };
+
+//------
 
 class CQIllustratorTextShape : public CQIllustratorShape {
  public:
@@ -1572,6 +1625,8 @@ class CQIllustratorTextShape : public CQIllustratorShape {
   int         cursorPos_;
 };
 
+//------
+
 class CQIllustratorTextShapeControlPoint : public CQIllustratorShapeControlPoint {
  public:
   CQIllustratorTextShapeControlPoint(CQIllustratorTextShape::ControlPointType type,
@@ -1589,7 +1644,7 @@ class CQIllustratorTextShapeControlPoint : public CQIllustratorShapeControlPoint
   CQIllustratorTextShape::ControlPointType type_;
 };
 
-//----------------
+//------
 
 class CQIllustratorGroupGeometry : public CQIllustratorShapeGeometry {
  public:
@@ -1611,6 +1666,8 @@ class CQIllustratorGroupGeometry : public CQIllustratorShapeGeometry {
  private:
   CQIllustratorGroupGeometry &operator=(const CQIllustratorGroupGeometry &);
 };
+
+//------
 
 class CQIllustratorGroupShape : public CQIllustratorShape {
  public:
@@ -1656,6 +1713,8 @@ class CQIllustratorGroupShape : public CQIllustratorShape {
  protected:
   void updateBBox() const;
 };
+
+//------
 
 class CQIllustratorGroupShapeControlPoint : public CQIllustratorShapeControlPoint {
  public:

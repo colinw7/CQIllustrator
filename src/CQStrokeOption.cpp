@@ -32,12 +32,15 @@ CQStrokeOptionTool::
 CQStrokeOptionTool(CQIllustrator *illustrator) :
  CQOptionTool(), illustrator_(illustrator), dialog_(0)
 {
+  setObjectName("stroke");
+
   dialog_ = new CQStrokeOptionDialog(this);
 
   QVBoxLayout *layout = new QVBoxLayout(this);
   layout->setMargin(0); layout->setSpacing(0);
 
   QLabel *label = new QLabel("<small><b>Stroke</b></small>");
+  label->setObjectName("label");
 
   layout->addWidget(label);
 
@@ -93,6 +96,8 @@ CQStrokeOptionSwab::
 CQStrokeOptionSwab(CQStrokeOptionDialog *dialog) :
  dialog_(dialog)
 {
+  setObjectName("swab");
+
   QFontMetrics fm(font());
 
   tw_ = fm.width("XX.XX");
@@ -140,6 +145,8 @@ CQStrokeOptionDialog::
 CQStrokeOptionDialog(CQStrokeOptionTool *tool) :
  CQOptionToolDialog(), tool_(tool), colorChooser_(0)
 {
+  setObjectName("dialog");
+
   initWidgets();
 }
 
@@ -157,6 +164,7 @@ CQStrokeOptionDialog::
 initWidgets()
 {
   QVBoxLayout *layout = new QVBoxLayout(this);
+  layout->setMargin(0); layout->setSpacing(0);
 
   QGridLayout *gridLayout = new QGridLayout;
 

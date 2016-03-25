@@ -7,9 +7,10 @@
 #include <QToolButton>
 #include <QFrame>
 #include <QHBoxLayout>
+#include <QStyle>
 
-#include <xpm/CREATE_edit.xpm>
-#include <xpm/create_EDIT.xpm>
+#include <svg/create_edit_svg.h>
+#include <svg/edit_create_svg.h>
 
 CQIllustratorToolbar::
 CQIllustratorToolbar(CQIllustratorMode *mode) :
@@ -28,6 +29,7 @@ init()
   buttonLayout->setMargin(0); buttonLayout->setSpacing(0);
 
   QPushButton *modeButton = new QPushButton;
+  modeButton->setObjectName("mode");
 
   connect(modeButton, SIGNAL(clicked()), this, SLOT(modeSlot()));
 
@@ -38,12 +40,15 @@ init()
   buttonLayout->addWidget(modeButton);
 
   if (mode_->isCreateMode()) {
-    createEditButton_ = new QToolButton;
+    int is = style()->pixelMetric(QStyle::PM_LargeIconSize);
 
-    createEditButton_->setIcon(QIcon(QPixmap(CREATE_edit_data)));
+    createEditButton_ = new QToolButton;
+    createEditButton_->setObjectName("create_edit");
+    createEditButton_->setIcon(CQPixmapCacheInst->getIcon("CREATE_EDIT"));
 
     createEditButton_->setAutoRaise(true);
-    createEditButton_->setFixedSize(QSize(20,12));
+    createEditButton_->setIconSize(QSize(is, is/2));
+    createEditButton_->setFixedSize(QSize(is + 4, is/2 + 4));
 
     createEditButton_->setToolTip("Switch between create or edit modes");
 
@@ -55,6 +60,7 @@ init()
   layout->addLayout(buttonLayout);
 
   QFrame *frame = new QFrame;
+  frame->setObjectName("frame");
 
   frame->setFixedWidth(4);
 
@@ -100,11 +106,11 @@ createEditSlot()
   if (mode_->getEditMode() == CQIllustratorMode::CREATE_MODE) {
     mode_->setEditMode(CQIllustratorMode::EDIT_MODE);
 
-    createEditButton_->setIcon(QIcon(QPixmap(create_EDIT_data)));
+    createEditButton_->setIcon(CQPixmapCacheInst->getIcon("EDIT_CREATE"));
   }
   else {
     mode_->setEditMode(CQIllustratorMode::CREATE_MODE);
 
-    createEditButton_->setIcon(QIcon(QPixmap(CREATE_edit_data)));
+    createEditButton_->setIcon(CQPixmapCacheInst->getIcon("CREATE_EDIT"));
   }
 }
