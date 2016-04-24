@@ -53,6 +53,9 @@ class CCSS {
  public:
   CCSS();
 
+  bool isDebug() const { return debug_; }
+  void setDebug(bool b) { debug_ = b; }
+
   bool processFile(const std::string &fileName);
 
   bool processLine(const std::string &line);
@@ -76,6 +79,7 @@ class CCSS {
   bool parseAttr(const std::string &str, StyleData &styleData);
 
  private:
+  bool         debug_ { false };
   StyleDataMap styleData_;
 };
 

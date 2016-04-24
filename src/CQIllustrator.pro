@@ -8,6 +8,8 @@ QT += widgets
 
 QMAKE_CXXFLAGS += -std=c++11
 
+MOC_DIR = .moc
+
 CONFIG += debug
 
 # Input
@@ -69,7 +71,6 @@ CQIllustratorUndoDock.cpp \
 CQIllustratorZoomMode.cpp \
 CQImageButton.cpp \
 CQImagePreview.cpp \
-CQIntegerEdit.cpp \
 CQLayerOption.cpp \
 CQLineCap.cpp \
 CQLineDash.cpp \
@@ -80,7 +81,6 @@ CQOptionToolSet.cpp \
 CQPointEdit.cpp \
 CQPropertiesOption.cpp \
 CQRadioButtons.cpp \
-CQRealEdit.cpp \
 CQScrollArea.cpp \
 CQStrokeOption.cpp \
 CQSwatch.cpp \
@@ -94,9 +94,7 @@ CBooleanOp.h \
 CCSS.h \
 CDelaunay.h \
 CEncode64.h \
-CGaussianBlur.h \
 CGenPoly.h \
-CGiftWrap.h \
 CHull3D.h \
 CKuhnMunkres.h \
 CListLink.h \
@@ -150,9 +148,7 @@ CQIllustratorUndoDock.h \
 CQIllustratorUndo.h \
 CQIllustratorZoomMode.h \
 CQImageButton.h \
-CQImageGaussianBlur.h \
 CQImagePreview.h \
-CQIntegerEdit.h \
 CQLayerOption.h \
 CQLineCap.h \
 CQLineDash.h \
@@ -163,7 +159,6 @@ CQOptionToolSet.h \
 CQPointEdit.h \
 CQPropertiesOption.h \
 CQRadioButtons.h \
-CQRealEdit.h \
 CQScrollArea.h \
 CQStrokeOption.h \
 CQSwatch.h \
