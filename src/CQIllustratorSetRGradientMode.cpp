@@ -21,7 +21,7 @@
 
 CQIllustratorSetRGradientMode::
 CQIllustratorSetRGradientMode(CQIllustrator *illustrator) :
- CQIllustratorMode(illustrator, CQIllustrator::MODE_RGRADIENT)
+ CQIllustratorMode(illustrator, (uint) CQIllustrator::Mode::RGRADIENT)
 {
 }
 
@@ -129,6 +129,7 @@ drawOverlay(CQIllustratorShapeDrawer *drawer)
 
       pen.setColor(QColor(0,0,0));
       pen.setStyle(Qt::DashLine);
+      pen.setWidth(0);
 
       painter->setPen(pen);
       painter->setBrush(Qt::NoBrush);
@@ -327,6 +328,7 @@ drawHandles(QPainter *painter, const CQIllustratorShape *shape)
 
     pen.setColor(QColor(0,0,0));
     pen.setStyle(Qt::DashLine);
+    pen.setWidth(0);
 
     painter->setPen(pen);
     painter->setBrush(Qt::NoBrush);

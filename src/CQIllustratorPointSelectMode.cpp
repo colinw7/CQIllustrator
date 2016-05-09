@@ -22,7 +22,7 @@
 
 CQIllustratorPointSelectMode::
 CQIllustratorPointSelectMode(CQIllustrator *illustrator) :
- CQIllustratorMode(illustrator, CQIllustrator::MODE_POINT_SELECT)
+ CQIllustratorMode(illustrator, (uint) CQIllustrator::Mode::POINT_SELECT)
 {
   setCursor(select_bits, selectmask_bits, 2, 2);
 }
@@ -129,6 +129,7 @@ drawOverlay(CQIllustratorShapeDrawer *drawer)
 
       pen.setColor(QColor(0,0,0));
       pen.setStyle(Qt::DashLine);
+      pen.setWidth(0);
 
       painter->setPen(pen);
       painter->setBrush(Qt::NoBrush);

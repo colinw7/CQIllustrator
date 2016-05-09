@@ -70,24 +70,26 @@ class CQIllustratorCreatePathToolbar : public CQIllustratorToolbar {
   void updateMode();
 
  private:
-  CQIllustratorCreatePathMode *mode_;
-  CreateMode                   createMode_;
-  QRadioButton                *createRadio_;
-  QRadioButton                *editRadio_;
-  CQImageButton               *pathFreeButton_;
-  CQImageButton               *pathRectButton_;
-  CQImageButton               *path45Button_;
-  QRadioButton                *pointRadio_;
-  QRadioButton                *lineRadio_;
-  CQImageButton               *pathLineButton_;
-  CQImageButton               *pathCurve2Button_;
-  CQImageButton               *pathCurve3Button_;
-  CQImageButton               *nodeCornerButton_;
-  CQImageButton               *nodeCurveButton_;
-  CQImageButton               *addNodeButton_;
-  CQImageButton               *removeNodeButton_;
-  CQPointEdit                 *pointEdit_;
+  CQIllustratorCreatePathMode *mode_ { 0 };
+  CreateMode                   createMode_ { CREATE_FREE_MODE };
+  QRadioButton                *createRadio_ { 0 };
+  QRadioButton                *editRadio_ { 0 };
+  CQImageButton               *pathFreeButton_ { 0 };
+  CQImageButton               *pathRectButton_ { 0 };
+  CQImageButton               *path45Button_ { 0 };
+  QRadioButton                *pointRadio_ { 0 };
+  QRadioButton                *lineRadio_ { 0 };
+  CQImageButton               *pathLineButton_ { 0 };
+  CQImageButton               *pathCurve2Button_ { 0 };
+  CQImageButton               *pathCurve3Button_ { 0 };
+  CQImageButton               *nodeCornerButton_ { 0 };
+  CQImageButton               *nodeCurveButton_ { 0 };
+  CQImageButton               *addNodeButton_ { 0 };
+  CQImageButton               *removeNodeButton_ { 0 };
+  CQPointEdit                 *pointEdit_ { 0 };
 };
+
+//------
 
 class CQIllustratorCreatePathSizer : public CQIllustratorModeSizer {
  public:
@@ -97,6 +99,8 @@ class CQIllustratorCreatePathSizer : public CQIllustratorModeSizer {
 
   void updateHandles(uint numHandles);
 };
+
+//------
 
 class CQIllustratorCreatePathMode : public CQIllustratorMode {
  public:
@@ -176,14 +180,14 @@ class CQIllustratorCreatePathMode : public CQIllustratorMode {
 
   typedef std::vector<PathPoint> PathPointList;
 
-  CQIllustratorCreatePathToolbar     *toolbar_;
-  CQIllustratorCreatePathSizer       *sizer_;
-  SelMode                             selMode_;
-  CPathPartType                       pathMode_;
+  CQIllustratorCreatePathToolbar     *toolbar_ { 0 };
+  CQIllustratorCreatePathSizer       *sizer_ { 0 };
+  SelMode                             selMode_ { POINT_SEL };
+  CPathPartType                       pathMode_ { CPATH_PART_TYPE_LINE_TO };
   std::vector<CQIllustratorHandle *>  closeHandles_;
-  uint                                closeHandleNum_;
+  uint                                closeHandleNum_ { 0 };
   std::vector<CQIllustratorHandle *>  snapHandles_;
-  uint                                snapHandleNum_;
+  uint                                snapHandleNum_ { 0 };
   QPoint                              pathStart_;
   PathPointList                       pathPoints_;
 };

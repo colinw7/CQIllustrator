@@ -44,7 +44,7 @@ class CQFillOptionSwab : public QWidget {
 
 CQFillOptionTool::
 CQFillOptionTool(CQIllustrator *illustrator) :
- CQOptionTool(), illustrator_(illustrator), dialog_(0)
+ CQOptionTool(), illustrator_(illustrator)
 {
   setObjectName("fill");
 
@@ -67,10 +67,8 @@ CQFillOptionTool(CQIllustrator *illustrator) :
   connect(dialog_, SIGNAL(clipChanged(bool)),
           this, SIGNAL(clipChanged(bool)));
 
-  connect(illustrator_, SIGNAL(selectionChanged()),
-          this, SLOT(selectionChangedSlot()));
-  connect(illustrator_, SIGNAL(fillChanged()),
-          this, SLOT(selectionChangedSlot()));
+  connect(illustrator_, SIGNAL(selectionChanged()), this, SLOT(selectionChangedSlot()));
+  connect(illustrator_, SIGNAL(fillChanged()), this, SLOT(selectionChangedSlot()));
 }
 
 CQOptionToolDialog *
@@ -163,7 +161,7 @@ paintEvent(QPaintEvent *)
 
 CQFillOptionDialog::
 CQFillOptionDialog(CQFillOptionTool *tool) :
- CQOptionToolDialog(), tool_(tool), colorChooser_(0)
+ CQOptionToolDialog(), tool_(tool)
 {
   initWidgets();
 }
@@ -223,19 +221,22 @@ initWidgets()
   //-----
 
   // Normal Fill
-
   QWidget *flatPanel = new QWidget;
 
   stack_->addWidget(flatPanel);
 
   QGridLayout *flatLayout = new QGridLayout(flatPanel);
-
   flatLayout->setMargin(2); flatLayout->setSpacing(2);
 
-  flatLayout->addWidget(new QLabel("Color"  ), 0, 0);
-  flatLayout->addWidget(new QLabel("Opacity"), 1, 0);
-  flatLayout->addWidget(new QLabel("Rule"   ), 2, 0);
-  flatLayout->addWidget(new QLabel("Clip"   ), 3, 0);
+  flatLayout->addWidget(new QLabel("Shown"  ), 0, 0);
+  flatLayout->addWidget(new QLabel("Color"  ), 1, 0);
+  flatLayout->addWidget(new QLabel("Opacity"), 2, 0);
+  flatLayout->addWidget(new QLabel("Rule"   ), 3, 0);
+  flatLayout->addWidget(new QLabel("Clip"   ), 4, 0);
+
+  shownCheck_ = new QCheckBox;
+
+  connect(shownCheck_, SIGNAL(stateChanged(int)), this, SLOT(shownSlot(int)));
 
   colorChooser_ = new CQColorChooser;
 
@@ -265,12 +266,13 @@ initWidgets()
 
   connect(clipCheck_, SIGNAL(clicked(bool)), this, SLOT(clipSlot()));
 
-  flatLayout->addWidget(colorChooser_, 0, 1);
-  flatLayout->addWidget(opacityEdit_ , 1, 1);
-  flatLayout->addWidget(fillRule_    , 2, 1);
-  flatLayout->addWidget(clipCheck_   , 3, 1);
+  flatLayout->addWidget(shownCheck_  , 0, 1);
+  flatLayout->addWidget(colorChooser_, 1, 1);
+  flatLayout->addWidget(opacityEdit_ , 2, 1);
+  flatLayout->addWidget(fillRule_    , 3, 1);
+  flatLayout->addWidget(clipCheck_   , 4, 1);
 
-  flatLayout->setRowStretch(4, 1);
+  flatLayout->setRowStretch(5, 1);
 
   //-----
 
@@ -597,8 +599,9 @@ updateWidgets()
   else {
     stack_->setCurrentIndex(0);
 
-    colorChooser_->setColor(CQUtil::rgbaToColor(fill_.getColor()));
-    opacityEdit_ ->setValue(fill_.getOpacity());
+    shownCheck_  ->setChecked     (fill_.isFilled());
+    colorChooser_->setColor       (CQUtil::rgbaToColor(fill_.getColor()));
+    opacityEdit_ ->setValue       (fill_.getOpacity());
     fillRule_    ->setCurrentIndex(fill_.getFillRule() == FILL_TYPE_WINDING ? 0 : 1);
   }
 
@@ -616,6 +619,17 @@ updateWidgets()
   rgradStops_->setEnabled(rg != 0);
 
   imagePreview_->setEnabled(is_image);
+}
+
+void
+CQFillOptionDialog::
+shownSlot(int state)
+{
+  fill_.setFilled(state);
+
+  tool_->update();
+
+  emit valueChanged(fill_);
 }
 
 void

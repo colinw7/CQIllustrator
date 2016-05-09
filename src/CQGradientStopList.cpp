@@ -115,7 +115,7 @@ updateStopsSlot()
 
 CQGradientStopColorItem::
 CQGradientStopColorItem(CQGradientStopTable *t, uint ind, const CRGBA &rgba) :
- CQTableWidgetItem(t), table_(t), ind_(ind), rgba_(rgba), edit_(0)
+ CQTableWidgetItem(t), table_(t), ind_(ind), rgba_(rgba)
 {
 }
 
@@ -198,7 +198,7 @@ paint(QPainter *painter, const QStyleOptionViewItem &option) const
 
 CQGradientStopAlphaItem::
 CQGradientStopAlphaItem(CQGradientStopTable *t, uint ind, double alpha) :
- CQTableWidgetItem(t), table_(t), ind_(ind), alpha_(alpha), edit_(0)
+ CQTableWidgetItem(t), table_(t), ind_(ind), alpha_(alpha)
 {
 }
 
@@ -256,7 +256,7 @@ toString() const
 
 CQGradientStopOffsetItem::
 CQGradientStopOffsetItem(CQGradientStopTable *t, uint ind, double offset) :
- CQTableWidgetItem(t), table_(t), ind_(ind), offset_(offset), edit_(0)
+ CQTableWidgetItem(t), table_(t), ind_(ind), offset_(offset)
 {
 }
 

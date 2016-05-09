@@ -41,8 +41,7 @@
 
 CQIllustratorCreatePathMode::
 CQIllustratorCreatePathMode(CQIllustrator *illustrator) :
- CQIllustratorMode(illustrator, CQIllustrator::MODE_PATH), selMode_(POINT_SEL),
- pathMode_(CPATH_PART_TYPE_LINE_TO)
+ CQIllustratorMode(illustrator, (uint) CQIllustrator::Mode::PATH)
 {
   setCursor(select_bits, selectmask_bits, 2, 2);
 }
@@ -552,6 +551,7 @@ drawOverlay(CQIllustratorShapeDrawer *drawer)
 
         pen.setColor(QColor(0,0,0));
         pen.setStyle(Qt::DashLine);
+        pen.setWidth(0);
 
         painter->setPen(pen);
         painter->setBrush(Qt::NoBrush);
@@ -595,6 +595,7 @@ drawPathPoints(QPainter *painter)
 
   pen.setColor(QColor(0,0,0));
   pen.setStyle(Qt::DashLine);
+  pen.setWidth(0);
 
   painter->setPen(pen);
   painter->setBrush(Qt::NoBrush);
@@ -842,7 +843,7 @@ removeNodeFromCurrent()
 
 CQIllustratorCreatePathToolbar::
 CQIllustratorCreatePathToolbar(CQIllustratorCreatePathMode *mode) :
- CQIllustratorToolbar(mode), mode_(mode), createMode_(CREATE_FREE_MODE)
+ CQIllustratorToolbar(mode), mode_(mode)
 {
 }
 

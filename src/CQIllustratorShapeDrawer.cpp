@@ -15,13 +15,7 @@
 
 CQIllustratorShapeDrawer::
 CQIllustratorShapeDrawer(CQIllustrator *illustrator, QPainter *painter) :
- illustrator_(illustrator),
- painter_    (painter),
- bbox_       (),
- path_       (0),
- qfont_      (),
- m_          (CMATRIX_TYPE_IDENTITY),
- matrices_   ()
+ illustrator_(illustrator), painter_(painter)
 {
   path_ = new QPainterPath;
 
@@ -361,6 +355,7 @@ drawControlLine(const CPoint2D &p1, const CPoint2D &p2)
 
   pen.setColor(QColor(255,0,0));
   pen.setStyle(Qt::DashLine);
+  pen.setWidth(0);
 
   painter_->setPen(pen);
   painter_->setBrush(Qt::NoBrush);
@@ -376,6 +371,7 @@ drawGridLine(const CPoint2D &p1, const CPoint2D &p2)
 
   pen.setColor(QColor(100,100,255));
   pen.setStyle(Qt::DashLine);
+  pen.setWidth(0);
 
   painter_->setPen(pen);
   painter_->setBrush(Qt::NoBrush);
@@ -391,6 +387,7 @@ drawGridSubLine(const CPoint2D &p1, const CPoint2D &p2)
 
   pen.setColor(QColor(200,200,255));
   pen.setStyle(Qt::DashLine);
+  pen.setWidth(0);
 
   painter_->setPen(pen);
   painter_->setBrush(Qt::NoBrush);

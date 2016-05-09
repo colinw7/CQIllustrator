@@ -86,12 +86,14 @@ class CQIllustratorAlignToolbar : public CQIllustratorToolbar {
 
  private:
   CQIllustratorAlignMode *mode_;
-  CQAlignButtons         *alignw_;
-  CQDistButtons          *distw_;
-  CQSpreadButtons        *spreadw_;
-  CQRealEdit             *offset_;
-  CQAlignAnchor          *anchor_;
+  CQAlignButtons         *alignw_ { 0 };
+  CQDistButtons          *distw_ { 0 };
+  CQSpreadButtons        *spreadw_ { 0 };
+  CQRealEdit             *offset_ { 0 };
+  CQAlignAnchor          *anchor_ { 0 };
 };
+
+//------
 
 class CQIllustratorAlignMode : public CQIllustratorMode {
   Q_OBJECT
@@ -116,9 +118,6 @@ class CQIllustratorAlignMode : public CQIllustratorMode {
 
   void align(CQIllustrator::AlignSide side, bool commit);
 
- private:
-  CQIllustratorAlignToolbar *toolbar_;
-
  private slots:
   void alignLSlot();
   void alignLPreviewSlot();
@@ -133,7 +132,12 @@ class CQIllustratorAlignMode : public CQIllustratorMode {
   void alignVSlot();
   void alignVPreviewSlot();
   void alignPreviewClearSlot();
+
+ private:
+  CQIllustratorAlignToolbar *toolbar_ { 0 };
 };
+
+//------
 
 class CQAlignButtons : public QWidget {
   Q_OBJECT
@@ -159,15 +163,21 @@ class CQAlignButtons : public QWidget {
   void alignPreviewClear();
 };
 
+//------
+
 class CQDistButtons : public QWidget {
  public:
   CQDistButtons();
 };
 
+//------
+
 class CQSpreadButtons : public QWidget {
  public:
   CQSpreadButtons();
 };
+
+//------
 
 class CQAlignAnchorObject;
 class CQAlignAnchorPoint;
@@ -199,14 +209,6 @@ class CQAlignAnchor : public QWidget {
  private:
   void updateState();
 
- private:
-  AnchorMode           mode_;
-  QComboBox           *objectCombo_;
-  QStackedWidget      *anchorStack_;
-  QWidget             *anchorLabel_;
-  CQAlignAnchorObject *anchorObject_;
-  CQAlignAnchorPoint  *anchorPoint_;
-
  signals:
   void selectObject();
   void selectPosition();
@@ -214,7 +216,17 @@ class CQAlignAnchor : public QWidget {
 
  private slots:
   void objectSlot(const QString &obj);
+
+ private:
+  AnchorMode           mode_ { CQIllustratorAlignToolbar::SELECTION_MODE };
+  QComboBox           *objectCombo_ { 0 };
+  QStackedWidget      *anchorStack_ { 0 };
+  QWidget             *anchorLabel_ { 0 };
+  CQAlignAnchorObject *anchorObject_ { 0 };
+  CQAlignAnchorPoint  *anchorPoint_ { 0 };
 };
+
+//------
 
 class CQAlignAnchorObject : public QWidget {
   Q_OBJECT
@@ -233,12 +245,6 @@ class CQAlignAnchorObject : public QWidget {
 
   void resetSelectMode();
 
- private:
-  ObjectEdgeType  edgeType_;
-  QLineEdit      *nameEdit_;
-  QToolButton    *edgeButton_;
-  QToolButton    *selButton_;
-
  signals:
   void selectObject();
   void cancelSelect();
@@ -246,7 +252,15 @@ class CQAlignAnchorObject : public QWidget {
  private slots:
   void edgeSlot(QAction *);
   void selectSlot(bool);
+
+ private:
+  ObjectEdgeType  edgeType_ { CQIllustratorAlignToolbar::EDGE_LEFT_BOTTOM };
+  QLineEdit      *nameEdit_ { 0 };
+  QToolButton    *edgeButton_ { 0 };
+  QToolButton    *selButton_ { 0 };
 };
+
+//------
 
 class CQAlignAnchorPoint : public QWidget {
   Q_OBJECT
@@ -260,17 +274,19 @@ class CQAlignAnchorPoint : public QWidget {
 
   void resetSelectMode();
 
- private:
-  CQPointEdit *pointEdit_;
-  QToolButton *selButton_;
-
  signals:
   void selectPoint();
   void cancelSelect();
 
  private slots:
   void selectSlot(bool);
+
+ private:
+  CQPointEdit *pointEdit_ { 0 };
+  QToolButton *selButton_ { 0 };
 };
+
+//------
 
 class CQToolButton : public QToolButton {
   Q_OBJECT
@@ -286,7 +302,7 @@ class CQToolButton : public QToolButton {
   void previewStop();
 
  private:
-  bool preview_;
+  bool preview_ { false };
 };
 
 #endif

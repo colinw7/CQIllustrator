@@ -333,7 +333,7 @@ moveCurrent(const CPoint2D &d)
 
     if (shape->getFixed()) continue;
 
-    const CBBox2D &bbox = shape->getBBox();
+    const CBBox2D &bbox = shape->getFlatBBox();
 
     CPoint2D ll = bbox.getLL() + d;
 
@@ -416,7 +416,7 @@ resizeCurrent(const CBBox2D &d)
 
     if (shape->getFixed()) continue;
 
-    const CBBox2D &bbox = shape->getBBox();
+    const CBBox2D &bbox = shape->getFlatBBox();
 
     CPoint2D ll = bbox.getLL() + d.getLL();
     CPoint2D ur = bbox.getUR() + d.getUR();

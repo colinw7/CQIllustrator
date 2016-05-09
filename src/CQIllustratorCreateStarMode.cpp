@@ -28,7 +28,7 @@
 
 CQIllustratorCreateStarMode::
 CQIllustratorCreateStarMode(CQIllustrator *illustrator) :
- CQIllustratorMode(illustrator, CQIllustrator::MODE_STAR)
+ CQIllustratorMode(illustrator, (uint) CQIllustrator::Mode::STAR)
 {
   setCursor(star_bits, starmask_bits, 2, 2);
 }
@@ -160,6 +160,7 @@ drawOverlay(CQIllustratorShapeDrawer *drawer)
 
       pen.setColor(QColor(0,0,0));
       pen.setStyle(Qt::DashLine);
+      pen.setWidth(0);
 
       painter->setPen(pen);
       painter->setBrush(Qt::NoBrush);

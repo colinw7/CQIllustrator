@@ -15,10 +15,10 @@ CXX           = g++
 DEFINES       = -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -m64 -pipe -g -Wall -W -D_REENTRANT -fPIE $(DEFINES)
 CXXFLAGS      = -m64 -pipe -std=c++11 -g -Wall -W -D_REENTRANT -fPIE $(DEFINES)
-INCPATH       = -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I. -I../include -I../../CSVG/include -I../../CQUtil/include -I../../CImageLib/include -I../../CConfig/include -I../../CArgs/include -I../../CFile/include -I../../CFont/include -I../../CRegExp/include -I../../CStrUtil/include -I../../COS/include -I../../CMath/include -I../../CRGBName/include -I../../CUndo/include -I../../CUtil/include -I. -I/usr/include/qt5 -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtCore -I.moc
+INCPATH       = -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I. -I../include -I../../CSVG/include -I../../CQPropertyTree/include -I../../CQUtil/include -I../../CImageLib/include -I../../CConfig/include -I../../CArgs/include -I../../CFile/include -I../../CFont/include -I../../CRegExp/include -I../../CStrUtil/include -I../../COS/include -I../../CMath/include -I../../CRGBName/include -I../../CUndo/include -I../../CUtil/include -I. -I/usr/include/qt5 -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtCore -I.moc
 LINK          = g++
 LFLAGS        = -m64
-LIBS          = $(SUBLIBS) -L/usr/X11R6/lib64 -L../lib -L../../CSVG/lib -L../../CQUtil/lib -L../../CXML/lib -L../../CImageLib/lib -L../../CArgs/lib -L../../CConfig/lib -L../../CFont/lib -L../../CRegExp/lib -L../../CFile/lib -L../../CMath/lib -L../../CStrUtil/lib -L../../CRGBName/lib -L../../CUndo/lib -L../../CUtil/lib -L../../COS/lib -lCSVG -lCXML -lCQUtil -lCImageLib -lCFont -lCArgs -lCConfig -lCUndo -lCFile -lCRGBName -lCUtil -lCOS -lCRegExp -lCStrUtil -ljpeg -lpng -ltre -lQt5Widgets -L/usr/lib/x86_64-linux-gnu -lQt5Gui -lQt5Core -lGL -lpthread 
+LIBS          = $(SUBLIBS) -L/usr/X11R6/lib64 -L../lib -L../../CSVG/lib -L../../CQPropertyTree/lib -L../../CQUtil/lib -L../../CXML/lib -L../../CImageLib/lib -L../../CArgs/lib -L../../CConfig/lib -L../../CFont/lib -L../../CRegExp/lib -L../../CFile/lib -L../../CMath/lib -L../../CStrUtil/lib -L../../CRGBName/lib -L../../CUndo/lib -L../../CUtil/lib -L../../COS/lib -lCSVG -lCXML -lCQPropertyTree -lCQUtil -lCImageLib -lCFont -lCArgs -lCConfig -lCUndo -lCFile -lCRGBName -lCUtil -lCOS -lCRegExp -lCStrUtil -ljpeg -lpng -ltre -lQt5Widgets -L/usr/lib/x86_64-linux-gnu -lQt5Gui -lQt5Core -lGL -lpthread 
 AR            = ar cqs
 RANLIB        = 
 QMAKE         = /usr/lib/x86_64-linux-gnu/qt5/bin/qmake
@@ -100,6 +100,7 @@ SOURCES       = CArcToBezier.cpp \
 		CQIllustratorUndo.cpp \
 		CQIllustratorUndoDock.cpp \
 		CQIllustratorZoomMode.cpp \
+		CQIllustratorPropertiesDlg.cpp \
 		CQImageButton.cpp \
 		CQImagePreview.cpp \
 		CQLayerOption.cpp \
@@ -143,6 +144,7 @@ SOURCES       = CArcToBezier.cpp \
 		.moc/moc_CQIllustratorSetImageMode.cpp \
 		.moc/moc_CQIllustratorSetLGradientMode.cpp \
 		.moc/moc_CQIllustratorSetRGradientMode.cpp \
+		.moc/moc_CQIllustratorShape.cpp \
 		.moc/moc_CQIllustratorSliceMode.cpp \
 		.moc/moc_CQIllustratorSnap.cpp \
 		.moc/moc_CQIllustratorToolbar.cpp \
@@ -150,6 +152,7 @@ SOURCES       = CArcToBezier.cpp \
 		.moc/moc_CQIllustratorUndoDock.cpp \
 		.moc/moc_CQIllustratorUndo.cpp \
 		.moc/moc_CQIllustratorZoomMode.cpp \
+		.moc/moc_CQIllustratorPropertiesDlg.cpp \
 		.moc/moc_CQImageButton.cpp \
 		.moc/moc_CQImagePreview.cpp \
 		.moc/moc_CQLayerOption.cpp \
@@ -221,6 +224,7 @@ OBJECTS       = ../obj/CArcToBezier.o \
 		../obj/CQIllustratorUndo.o \
 		../obj/CQIllustratorUndoDock.o \
 		../obj/CQIllustratorZoomMode.o \
+		../obj/CQIllustratorPropertiesDlg.o \
 		../obj/CQImageButton.o \
 		../obj/CQImagePreview.o \
 		../obj/CQLayerOption.o \
@@ -265,6 +269,7 @@ OBJECTS       = ../obj/CArcToBezier.o \
 		../obj/moc_CQIllustratorSetImageMode.o \
 		../obj/moc_CQIllustratorSetLGradientMode.o \
 		../obj/moc_CQIllustratorSetRGradientMode.o \
+		../obj/moc_CQIllustratorShape.o \
 		../obj/moc_CQIllustratorSliceMode.o \
 		../obj/moc_CQIllustratorSnap.o \
 		../obj/moc_CQIllustratorToolbar.o \
@@ -272,6 +277,7 @@ OBJECTS       = ../obj/CArcToBezier.o \
 		../obj/moc_CQIllustratorUndoDock.o \
 		../obj/moc_CQIllustratorUndo.o \
 		../obj/moc_CQIllustratorZoomMode.o \
+		../obj/moc_CQIllustratorPropertiesDlg.o \
 		../obj/moc_CQImageButton.o \
 		../obj/moc_CQImagePreview.o \
 		../obj/moc_CQLayerOption.o \
@@ -553,7 +559,7 @@ qmake_all: FORCE
 
 dist: 
 	@test -d ../obj/CQIllustrator1.0.0 || mkdir -p ../obj/CQIllustrator1.0.0
-	$(COPY_FILE) --parents $(SOURCES) $(DIST) ../obj/CQIllustrator1.0.0/ && $(COPY_FILE) --parents CAxis2D.h CBooleanOp.h CCSS.h CDelaunay.h CEncode64.h CGenPoly.h CHull3D.h CKuhnMunkres.h CListLink.h CLog.h CMathGeom2D.h CPathPartType.h CPathShape.h CQAccelerate.h CQAngleSpinBox.h CQDockWidget.h CQFillOption.h CQFontOption.h CQGradientStopList.h CQIllustratorAlignMode.h CQIllustratorCanvas.h CQIllustratorCmd.h CQIllustratorCreateEllipseMode.h CQIllustratorCreatePathMode.h CQIllustratorCreatePolygonMode.h CQIllustratorCreateRectMode.h CQIllustratorCreateStarMode.h CQIllustratorCreateTextMode.h CQIllustratorData.h CQIllustrator.h CQIllustratorHandle.h CQIllustratorInfo.h CQIllustratorInfoTip.h CQIllustratorLayer.h CQIllustratorMode.h CQIllustratorOffsetPathMode.h CQIllustratorPanMode.h CQIllustratorPointSelectMode.h CQIllustratorPreference.h CQIllustratorSandbox.h CQIllustratorSaveData.h CQIllustratorSelection.h CQIllustratorSelectMode.h CQIllustratorSetAnchorObjectMode.h CQIllustratorSetAnchorPositionMode.h CQIllustratorSetImageMode.h CQIllustratorSetLGradientMode.h CQIllustratorSetRGradientMode.h CQIllustratorShapeDrawer.h CQIllustratorShape.h CQIllustratorSizer.h CQIllustratorSliceMode.h CQIllustratorSnap.h CQIllustratorToolbar.h CQIllustratorTransformMode.h CQIllustratorUndoDock.h CQIllustratorUndo.h CQIllustratorZoomMode.h CQImageButton.h CQImagePreview.h CQLayerOption.h CQLineCap.h CQLineDash.h CQLineJoin.h CQMatrix2D.h CQObjectOption.h CQOptionToolSet.h CQPointEdit.h CQPropertiesOption.h CQRadioButtons.h CQScrollArea.h CQStrokeOption.h CQSwatch.h CQTableWidget.h CQToolBar.h CQuadTree.h CQWinWidget.h CStack.h CStateIterator.h CTriangulate2D.h ../obj/CQIllustrator1.0.0/ && $(COPY_FILE) --parents CArcToBezier.cpp CAxis2D.cpp CBezierToLine.cpp CDelaunay.cpp CEncode64.cpp CCSS.cpp CGenPoly.cpp CGiftWrap.cpp CHull3D.cpp CKuhnMunkres.cpp CLog.cpp CMathGeom2D.cpp CPathShape.cpp CQAccelerate.cpp CQAngleSpinBox.cpp CQFillOption.cpp CQFontOption.cpp CQGradientStopList.cpp CQIllustratorAlignMode.cpp CQIllustratorCanvas.cpp CQIllustratorCmd.cpp CQIllustrator.cpp CQIllustratorCreateEllipseMode.cpp CQIllustratorCreatePathMode.cpp CQIllustratorCreatePolygonMode.cpp CQIllustratorCreateRectMode.cpp CQIllustratorCreateStarMode.cpp CQIllustratorCreateTextMode.cpp CQIllustratorData.cpp CQIllustratorHandle.cpp CQIllustratorInfo.cpp CQIllustratorLayer.cpp CQIllustratorMode.cpp CQIllustratorOffsetPathMode.cpp CQIllustratorPanMode.cpp CQIllustratorPointSelectMode.cpp CQIllustratorPreference.cpp CQIllustratorSandbox.cpp CQIllustratorSelection.cpp CQIllustratorSelectMode.cpp CQIllustratorSetAnchorObjectMode.cpp CQIllustratorSetAnchorPositionMode.cpp CQIllustratorSetImageMode.cpp CQIllustratorSetLGradientMode.cpp CQIllustratorSetRGradientMode.cpp CQIllustratorShape.cpp CQIllustratorShapeDrawer.cpp CQIllustratorSizer.cpp CQIllustratorSliceMode.cpp CQIllustratorSnap.cpp CQIllustratorToolbar.cpp CQIllustratorTransformMode.cpp CQIllustratorUndo.cpp CQIllustratorUndoDock.cpp CQIllustratorZoomMode.cpp CQImageButton.cpp CQImagePreview.cpp CQLayerOption.cpp CQLineCap.cpp CQLineDash.cpp CQLineJoin.cpp CQMatrix2D.cpp CQObjectOption.cpp CQOptionToolSet.cpp CQPointEdit.cpp CQPropertiesOption.cpp CQRadioButtons.cpp CQScrollArea.cpp CQStrokeOption.cpp CQSwatch.cpp CQTableWidget.cpp CQWinWidget.cpp CTriangulate2D.cpp ../obj/CQIllustrator1.0.0/ && (cd `dirname ../obj/CQIllustrator1.0.0` && $(TAR) CQIllustrator1.0.0.tar CQIllustrator1.0.0 && $(COMPRESS) CQIllustrator1.0.0.tar) && $(MOVE) `dirname ../obj/CQIllustrator1.0.0`/CQIllustrator1.0.0.tar.gz . && $(DEL_FILE) -r ../obj/CQIllustrator1.0.0
+	$(COPY_FILE) --parents $(SOURCES) $(DIST) ../obj/CQIllustrator1.0.0/ && $(COPY_FILE) --parents CAxis2D.h CBooleanOp.h CCSS.h CDelaunay.h CEncode64.h CGenPoly.h CHull3D.h CKuhnMunkres.h CListLink.h CLog.h CMathGeom2D.h CPathPartType.h CPathShape.h CQAccelerate.h CQAngleSpinBox.h CQDockWidget.h CQFillOption.h CQFontOption.h CQGradientStopList.h CQIllustratorAlignMode.h CQIllustratorCanvas.h CQIllustratorCmd.h CQIllustratorCreateEllipseMode.h CQIllustratorCreatePathMode.h CQIllustratorCreatePolygonMode.h CQIllustratorCreateRectMode.h CQIllustratorCreateStarMode.h CQIllustratorCreateTextMode.h CQIllustratorData.h CQIllustrator.h CQIllustratorHandle.h CQIllustratorInfo.h CQIllustratorInfoTip.h CQIllustratorLayer.h CQIllustratorMode.h CQIllustratorOffsetPathMode.h CQIllustratorPanMode.h CQIllustratorPointSelectMode.h CQIllustratorPreference.h CQIllustratorSandbox.h CQIllustratorSaveData.h CQIllustratorSelection.h CQIllustratorSelectMode.h CQIllustratorSetAnchorObjectMode.h CQIllustratorSetAnchorPositionMode.h CQIllustratorSetImageMode.h CQIllustratorSetLGradientMode.h CQIllustratorSetRGradientMode.h CQIllustratorShapeDrawer.h CQIllustratorShape.h CQIllustratorSizer.h CQIllustratorSliceMode.h CQIllustratorSnap.h CQIllustratorToolbar.h CQIllustratorTransformMode.h CQIllustratorUndoDock.h CQIllustratorUndo.h CQIllustratorZoomMode.h CQIllustratorPropertiesDlg.h CQImageButton.h CQImagePreview.h CQLayerOption.h CQLineCap.h CQLineDash.h CQLineJoin.h CQMatrix2D.h CQObjectOption.h CQOptionToolSet.h CQPointEdit.h CQPropertiesOption.h CQRadioButtons.h CQScrollArea.h CQStrokeOption.h CQSwatch.h CQTableWidget.h CQToolBar.h CQuadTree.h CQWinWidget.h CStack.h CStateIterator.h CTriangulate2D.h ../obj/CQIllustrator1.0.0/ && $(COPY_FILE) --parents CArcToBezier.cpp CAxis2D.cpp CBezierToLine.cpp CDelaunay.cpp CEncode64.cpp CCSS.cpp CGenPoly.cpp CGiftWrap.cpp CHull3D.cpp CKuhnMunkres.cpp CLog.cpp CMathGeom2D.cpp CPathShape.cpp CQAccelerate.cpp CQAngleSpinBox.cpp CQFillOption.cpp CQFontOption.cpp CQGradientStopList.cpp CQIllustratorAlignMode.cpp CQIllustratorCanvas.cpp CQIllustratorCmd.cpp CQIllustrator.cpp CQIllustratorCreateEllipseMode.cpp CQIllustratorCreatePathMode.cpp CQIllustratorCreatePolygonMode.cpp CQIllustratorCreateRectMode.cpp CQIllustratorCreateStarMode.cpp CQIllustratorCreateTextMode.cpp CQIllustratorData.cpp CQIllustratorHandle.cpp CQIllustratorInfo.cpp CQIllustratorLayer.cpp CQIllustratorMode.cpp CQIllustratorOffsetPathMode.cpp CQIllustratorPanMode.cpp CQIllustratorPointSelectMode.cpp CQIllustratorPreference.cpp CQIllustratorSandbox.cpp CQIllustratorSelection.cpp CQIllustratorSelectMode.cpp CQIllustratorSetAnchorObjectMode.cpp CQIllustratorSetAnchorPositionMode.cpp CQIllustratorSetImageMode.cpp CQIllustratorSetLGradientMode.cpp CQIllustratorSetRGradientMode.cpp CQIllustratorShape.cpp CQIllustratorShapeDrawer.cpp CQIllustratorSizer.cpp CQIllustratorSliceMode.cpp CQIllustratorSnap.cpp CQIllustratorToolbar.cpp CQIllustratorTransformMode.cpp CQIllustratorUndo.cpp CQIllustratorUndoDock.cpp CQIllustratorZoomMode.cpp CQIllustratorPropertiesDlg.cpp CQImageButton.cpp CQImagePreview.cpp CQLayerOption.cpp CQLineCap.cpp CQLineDash.cpp CQLineJoin.cpp CQMatrix2D.cpp CQObjectOption.cpp CQOptionToolSet.cpp CQPointEdit.cpp CQPropertiesOption.cpp CQRadioButtons.cpp CQScrollArea.cpp CQStrokeOption.cpp CQSwatch.cpp CQTableWidget.cpp CQWinWidget.cpp CTriangulate2D.cpp ../obj/CQIllustrator1.0.0/ && (cd `dirname ../obj/CQIllustrator1.0.0` && $(TAR) CQIllustrator1.0.0.tar CQIllustrator1.0.0 && $(COMPRESS) CQIllustrator1.0.0.tar) && $(MOVE) `dirname ../obj/CQIllustrator1.0.0`/CQIllustrator1.0.0.tar.gz . && $(DEL_FILE) -r ../obj/CQIllustrator1.0.0
 
 
 clean:compiler_clean 
@@ -576,9 +582,9 @@ check: first
 
 compiler_rcc_make_all:
 compiler_rcc_clean:
-compiler_moc_header_make_all: .moc/moc_CQAngleSpinBox.cpp .moc/moc_CQFillOption.cpp .moc/moc_CQFontOption.cpp .moc/moc_CQGradientStopList.cpp .moc/moc_CQIllustratorAlignMode.cpp .moc/moc_CQIllustratorCanvas.cpp .moc/moc_CQIllustratorCreateEllipseMode.cpp .moc/moc_CQIllustratorCreatePathMode.cpp .moc/moc_CQIllustratorCreatePolygonMode.cpp .moc/moc_CQIllustratorCreateRectMode.cpp .moc/moc_CQIllustratorCreateStarMode.cpp .moc/moc_CQIllustratorCreateTextMode.cpp .moc/moc_CQIllustratorData.cpp .moc/moc_CQIllustrator.cpp .moc/moc_CQIllustratorInfo.cpp .moc/moc_CQIllustratorLayer.cpp .moc/moc_CQIllustratorMode.cpp .moc/moc_CQIllustratorOffsetPathMode.cpp .moc/moc_CQIllustratorPanMode.cpp .moc/moc_CQIllustratorPointSelectMode.cpp .moc/moc_CQIllustratorPreference.cpp .moc/moc_CQIllustratorSelection.cpp .moc/moc_CQIllustratorSelectMode.cpp .moc/moc_CQIllustratorSetImageMode.cpp .moc/moc_CQIllustratorSetLGradientMode.cpp .moc/moc_CQIllustratorSetRGradientMode.cpp .moc/moc_CQIllustratorSliceMode.cpp .moc/moc_CQIllustratorSnap.cpp .moc/moc_CQIllustratorToolbar.cpp .moc/moc_CQIllustratorTransformMode.cpp .moc/moc_CQIllustratorUndoDock.cpp .moc/moc_CQIllustratorUndo.cpp .moc/moc_CQIllustratorZoomMode.cpp .moc/moc_CQImageButton.cpp .moc/moc_CQImagePreview.cpp .moc/moc_CQLayerOption.cpp .moc/moc_CQLineCap.cpp .moc/moc_CQLineDash.cpp .moc/moc_CQLineJoin.cpp .moc/moc_CQMatrix2D.cpp .moc/moc_CQObjectOption.cpp .moc/moc_CQOptionToolSet.cpp .moc/moc_CQPointEdit.cpp .moc/moc_CQPropertiesOption.cpp .moc/moc_CQRadioButtons.cpp .moc/moc_CQScrollArea.cpp .moc/moc_CQStrokeOption.cpp .moc/moc_CQTableWidget.cpp .moc/moc_CQWinWidget.cpp
+compiler_moc_header_make_all: .moc/moc_CQAngleSpinBox.cpp .moc/moc_CQFillOption.cpp .moc/moc_CQFontOption.cpp .moc/moc_CQGradientStopList.cpp .moc/moc_CQIllustratorAlignMode.cpp .moc/moc_CQIllustratorCanvas.cpp .moc/moc_CQIllustratorCreateEllipseMode.cpp .moc/moc_CQIllustratorCreatePathMode.cpp .moc/moc_CQIllustratorCreatePolygonMode.cpp .moc/moc_CQIllustratorCreateRectMode.cpp .moc/moc_CQIllustratorCreateStarMode.cpp .moc/moc_CQIllustratorCreateTextMode.cpp .moc/moc_CQIllustratorData.cpp .moc/moc_CQIllustrator.cpp .moc/moc_CQIllustratorInfo.cpp .moc/moc_CQIllustratorLayer.cpp .moc/moc_CQIllustratorMode.cpp .moc/moc_CQIllustratorOffsetPathMode.cpp .moc/moc_CQIllustratorPanMode.cpp .moc/moc_CQIllustratorPointSelectMode.cpp .moc/moc_CQIllustratorPreference.cpp .moc/moc_CQIllustratorSelection.cpp .moc/moc_CQIllustratorSelectMode.cpp .moc/moc_CQIllustratorSetImageMode.cpp .moc/moc_CQIllustratorSetLGradientMode.cpp .moc/moc_CQIllustratorSetRGradientMode.cpp .moc/moc_CQIllustratorShape.cpp .moc/moc_CQIllustratorSliceMode.cpp .moc/moc_CQIllustratorSnap.cpp .moc/moc_CQIllustratorToolbar.cpp .moc/moc_CQIllustratorTransformMode.cpp .moc/moc_CQIllustratorUndoDock.cpp .moc/moc_CQIllustratorUndo.cpp .moc/moc_CQIllustratorZoomMode.cpp .moc/moc_CQIllustratorPropertiesDlg.cpp .moc/moc_CQImageButton.cpp .moc/moc_CQImagePreview.cpp .moc/moc_CQLayerOption.cpp .moc/moc_CQLineCap.cpp .moc/moc_CQLineDash.cpp .moc/moc_CQLineJoin.cpp .moc/moc_CQMatrix2D.cpp .moc/moc_CQObjectOption.cpp .moc/moc_CQOptionToolSet.cpp .moc/moc_CQPointEdit.cpp .moc/moc_CQPropertiesOption.cpp .moc/moc_CQRadioButtons.cpp .moc/moc_CQScrollArea.cpp .moc/moc_CQStrokeOption.cpp .moc/moc_CQTableWidget.cpp .moc/moc_CQWinWidget.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) .moc/moc_CQAngleSpinBox.cpp .moc/moc_CQFillOption.cpp .moc/moc_CQFontOption.cpp .moc/moc_CQGradientStopList.cpp .moc/moc_CQIllustratorAlignMode.cpp .moc/moc_CQIllustratorCanvas.cpp .moc/moc_CQIllustratorCreateEllipseMode.cpp .moc/moc_CQIllustratorCreatePathMode.cpp .moc/moc_CQIllustratorCreatePolygonMode.cpp .moc/moc_CQIllustratorCreateRectMode.cpp .moc/moc_CQIllustratorCreateStarMode.cpp .moc/moc_CQIllustratorCreateTextMode.cpp .moc/moc_CQIllustratorData.cpp .moc/moc_CQIllustrator.cpp .moc/moc_CQIllustratorInfo.cpp .moc/moc_CQIllustratorLayer.cpp .moc/moc_CQIllustratorMode.cpp .moc/moc_CQIllustratorOffsetPathMode.cpp .moc/moc_CQIllustratorPanMode.cpp .moc/moc_CQIllustratorPointSelectMode.cpp .moc/moc_CQIllustratorPreference.cpp .moc/moc_CQIllustratorSelection.cpp .moc/moc_CQIllustratorSelectMode.cpp .moc/moc_CQIllustratorSetImageMode.cpp .moc/moc_CQIllustratorSetLGradientMode.cpp .moc/moc_CQIllustratorSetRGradientMode.cpp .moc/moc_CQIllustratorSliceMode.cpp .moc/moc_CQIllustratorSnap.cpp .moc/moc_CQIllustratorToolbar.cpp .moc/moc_CQIllustratorTransformMode.cpp .moc/moc_CQIllustratorUndoDock.cpp .moc/moc_CQIllustratorUndo.cpp .moc/moc_CQIllustratorZoomMode.cpp .moc/moc_CQImageButton.cpp .moc/moc_CQImagePreview.cpp .moc/moc_CQLayerOption.cpp .moc/moc_CQLineCap.cpp .moc/moc_CQLineDash.cpp .moc/moc_CQLineJoin.cpp .moc/moc_CQMatrix2D.cpp .moc/moc_CQObjectOption.cpp .moc/moc_CQOptionToolSet.cpp .moc/moc_CQPointEdit.cpp .moc/moc_CQPropertiesOption.cpp .moc/moc_CQRadioButtons.cpp .moc/moc_CQScrollArea.cpp .moc/moc_CQStrokeOption.cpp .moc/moc_CQTableWidget.cpp .moc/moc_CQWinWidget.cpp
+	-$(DEL_FILE) .moc/moc_CQAngleSpinBox.cpp .moc/moc_CQFillOption.cpp .moc/moc_CQFontOption.cpp .moc/moc_CQGradientStopList.cpp .moc/moc_CQIllustratorAlignMode.cpp .moc/moc_CQIllustratorCanvas.cpp .moc/moc_CQIllustratorCreateEllipseMode.cpp .moc/moc_CQIllustratorCreatePathMode.cpp .moc/moc_CQIllustratorCreatePolygonMode.cpp .moc/moc_CQIllustratorCreateRectMode.cpp .moc/moc_CQIllustratorCreateStarMode.cpp .moc/moc_CQIllustratorCreateTextMode.cpp .moc/moc_CQIllustratorData.cpp .moc/moc_CQIllustrator.cpp .moc/moc_CQIllustratorInfo.cpp .moc/moc_CQIllustratorLayer.cpp .moc/moc_CQIllustratorMode.cpp .moc/moc_CQIllustratorOffsetPathMode.cpp .moc/moc_CQIllustratorPanMode.cpp .moc/moc_CQIllustratorPointSelectMode.cpp .moc/moc_CQIllustratorPreference.cpp .moc/moc_CQIllustratorSelection.cpp .moc/moc_CQIllustratorSelectMode.cpp .moc/moc_CQIllustratorSetImageMode.cpp .moc/moc_CQIllustratorSetLGradientMode.cpp .moc/moc_CQIllustratorSetRGradientMode.cpp .moc/moc_CQIllustratorShape.cpp .moc/moc_CQIllustratorSliceMode.cpp .moc/moc_CQIllustratorSnap.cpp .moc/moc_CQIllustratorToolbar.cpp .moc/moc_CQIllustratorTransformMode.cpp .moc/moc_CQIllustratorUndoDock.cpp .moc/moc_CQIllustratorUndo.cpp .moc/moc_CQIllustratorZoomMode.cpp .moc/moc_CQIllustratorPropertiesDlg.cpp .moc/moc_CQImageButton.cpp .moc/moc_CQImagePreview.cpp .moc/moc_CQLayerOption.cpp .moc/moc_CQLineCap.cpp .moc/moc_CQLineDash.cpp .moc/moc_CQLineJoin.cpp .moc/moc_CQMatrix2D.cpp .moc/moc_CQObjectOption.cpp .moc/moc_CQOptionToolSet.cpp .moc/moc_CQPointEdit.cpp .moc/moc_CQPropertiesOption.cpp .moc/moc_CQRadioButtons.cpp .moc/moc_CQScrollArea.cpp .moc/moc_CQStrokeOption.cpp .moc/moc_CQTableWidget.cpp .moc/moc_CQWinWidget.cpp
 .moc/moc_CQAngleSpinBox.cpp: ../../CMath/include/CAngle.h \
 		/usr/include/qt5/QtWidgets/QDoubleSpinBox \
 		/usr/include/qt5/QtWidgets/qspinbox.h \
@@ -868,6 +874,7 @@ compiler_moc_header_clean:
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -906,11 +913,12 @@ compiler_moc_header_clean:
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CQIllustratorSaveData.h \
 		CQIllustratorData.h \
 		/usr/include/qt5/QtCore/QObject \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CPathShape.h \
 		CBooleanOp.h \
 		CQFillOption.h
@@ -1375,7 +1383,7 @@ compiler_moc_header_clean:
 		/usr/include/qt5/QtGui/QCursor \
 		/usr/include/qt5/QtGui/QTransform \
 		CQIllustratorData.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -1391,6 +1399,7 @@ compiler_moc_header_clean:
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CLineDash.h \
@@ -1402,6 +1411,7 @@ compiler_moc_header_clean:
 		../../CFont/include/CFontStyle.h \
 		../../CUtil/include/CFlags.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CPathShape.h \
 		CQIllustratorSelection.h \
 		CQIllustratorUndo.h \
@@ -1531,6 +1541,7 @@ compiler_moc_header_clean:
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CIPoint2D.h \
 		../../CMath/include/CVector2D.h \
@@ -1632,7 +1643,7 @@ compiler_moc_header_clean:
 		../../CMath/include/CISize2D.h \
 		CQIllustratorData.h \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -1648,6 +1659,7 @@ compiler_moc_header_clean:
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -1686,6 +1698,7 @@ compiler_moc_header_clean:
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CQIllustratorSaveData.h \
 		CPathShape.h \
 		CBooleanOp.h \
@@ -1834,7 +1847,7 @@ compiler_moc_header_clean:
 		../../CMath/include/CISize2D.h \
 		CQIllustratorData.h \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -1850,6 +1863,7 @@ compiler_moc_header_clean:
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -1888,6 +1902,7 @@ compiler_moc_header_clean:
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CQIllustratorSaveData.h \
 		CPathShape.h \
 		CBooleanOp.h \
@@ -2020,7 +2035,7 @@ compiler_moc_header_clean:
 		../../CMath/include/CISize2D.h \
 		CQIllustratorData.h \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -2036,6 +2051,7 @@ compiler_moc_header_clean:
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -2074,6 +2090,7 @@ compiler_moc_header_clean:
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CQIllustratorSaveData.h \
 		CPathShape.h \
 		CBooleanOp.h \
@@ -2206,7 +2223,7 @@ compiler_moc_header_clean:
 		../../CMath/include/CISize2D.h \
 		CQIllustratorData.h \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -2222,6 +2239,7 @@ compiler_moc_header_clean:
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -2260,6 +2278,7 @@ compiler_moc_header_clean:
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CQIllustratorSaveData.h \
 		CPathShape.h \
 		CBooleanOp.h \
@@ -2392,7 +2411,7 @@ compiler_moc_header_clean:
 		../../CMath/include/CISize2D.h \
 		CQIllustratorData.h \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -2408,6 +2427,7 @@ compiler_moc_header_clean:
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -2446,6 +2466,7 @@ compiler_moc_header_clean:
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CQIllustratorSaveData.h \
 		CPathShape.h \
 		CBooleanOp.h \
@@ -2596,7 +2617,7 @@ compiler_moc_header_clean:
 		../../CMath/include/CISize2D.h \
 		CQIllustratorData.h \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -2612,6 +2633,7 @@ compiler_moc_header_clean:
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -2650,6 +2672,7 @@ compiler_moc_header_clean:
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CQIllustratorSaveData.h \
 		CPathShape.h \
 		CBooleanOp.h \
@@ -2759,7 +2782,7 @@ compiler_moc_header_clean:
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorData.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/include/c++/4.8 -I/usr/include/x86_64-linux-gnu/c++/4.8 -I/usr/include/c++/4.8/backward -I/usr/lib/gcc/x86_64-linux-gnu/4.8/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include CQIllustratorData.h -o .moc/moc_CQIllustratorData.cpp
 
@@ -2922,7 +2945,7 @@ compiler_moc_header_clean:
 		/usr/include/qt5/QtGui/QCursor \
 		/usr/include/qt5/QtGui/QTransform \
 		CQIllustratorData.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -2938,6 +2961,7 @@ compiler_moc_header_clean:
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CLineDash.h \
@@ -2949,6 +2973,7 @@ compiler_moc_header_clean:
 		../../CFont/include/CFontStyle.h \
 		../../CUtil/include/CFlags.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CPathShape.h \
 		CQIllustratorSelection.h \
 		CQIllustratorUndo.h \
@@ -3139,7 +3164,7 @@ compiler_moc_header_clean:
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorLayer.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/include/c++/4.8 -I/usr/include/x86_64-linux-gnu/c++/4.8 -I/usr/include/c++/4.8/backward -I/usr/lib/gcc/x86_64-linux-gnu/4.8/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include CQIllustratorLayer.h -o .moc/moc_CQIllustratorLayer.cpp
 
@@ -3231,7 +3256,7 @@ compiler_moc_header_clean:
 		../../CMath/include/CISize2D.h \
 		CQIllustratorData.h \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -3247,6 +3272,7 @@ compiler_moc_header_clean:
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -3285,6 +3311,7 @@ compiler_moc_header_clean:
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CQIllustratorSaveData.h \
 		CPathShape.h \
 		CBooleanOp.h \
@@ -3380,7 +3407,7 @@ compiler_moc_header_clean:
 		../../CMath/include/CISize2D.h \
 		CQIllustratorData.h \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -3396,6 +3423,7 @@ compiler_moc_header_clean:
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -3434,6 +3462,7 @@ compiler_moc_header_clean:
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CQIllustratorSaveData.h \
 		CPathShape.h \
 		CBooleanOp.h \
@@ -3566,7 +3595,7 @@ compiler_moc_header_clean:
 		../../CMath/include/CISize2D.h \
 		CQIllustratorData.h \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -3582,6 +3611,7 @@ compiler_moc_header_clean:
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -3620,6 +3650,7 @@ compiler_moc_header_clean:
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CQIllustratorSaveData.h \
 		CPathShape.h \
 		CBooleanOp.h \
@@ -3752,7 +3783,7 @@ compiler_moc_header_clean:
 		../../CMath/include/CISize2D.h \
 		CQIllustratorData.h \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -3768,6 +3799,7 @@ compiler_moc_header_clean:
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -3806,6 +3838,7 @@ compiler_moc_header_clean:
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CQIllustratorSaveData.h \
 		CPathShape.h \
 		CBooleanOp.h \
@@ -4040,6 +4073,7 @@ compiler_moc_header_clean:
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -4078,10 +4112,14 @@ compiler_moc_header_clean:
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
+		/usr/include/qt5/QtCore/qrect.h \
+		/usr/include/qt5/QtCore/qsize.h \
+		/usr/include/qt5/QtCore/qpoint.h \
 		CQIllustratorSaveData.h \
 		CQIllustratorData.h \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CPathShape.h \
 		CBooleanOp.h \
 		CQIllustratorSelection.h
@@ -4177,7 +4215,7 @@ compiler_moc_header_clean:
 		../../CMath/include/CISize2D.h \
 		CQIllustratorData.h \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -4193,6 +4231,7 @@ compiler_moc_header_clean:
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -4231,6 +4270,7 @@ compiler_moc_header_clean:
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CQIllustratorSaveData.h \
 		CPathShape.h \
 		CBooleanOp.h \
@@ -4366,7 +4406,7 @@ compiler_moc_header_clean:
 		../../CMath/include/CISize2D.h \
 		CQIllustratorData.h \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -4382,6 +4422,7 @@ compiler_moc_header_clean:
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -4420,6 +4461,7 @@ compiler_moc_header_clean:
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CQIllustratorSaveData.h \
 		CPathShape.h \
 		CBooleanOp.h \
@@ -4567,7 +4609,7 @@ compiler_moc_header_clean:
 		../../CMath/include/CISize2D.h \
 		CQIllustratorData.h \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -4583,6 +4625,7 @@ compiler_moc_header_clean:
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -4621,6 +4664,7 @@ compiler_moc_header_clean:
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CQIllustratorSaveData.h \
 		CPathShape.h \
 		CBooleanOp.h \
@@ -4768,7 +4812,7 @@ compiler_moc_header_clean:
 		../../CMath/include/CISize2D.h \
 		CQIllustratorData.h \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -4784,6 +4828,7 @@ compiler_moc_header_clean:
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -4822,6 +4867,7 @@ compiler_moc_header_clean:
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CQIllustratorSaveData.h \
 		CPathShape.h \
 		CBooleanOp.h \
@@ -4878,6 +4924,137 @@ compiler_moc_header_clean:
 		CQIllustratorLayer.h \
 		CQIllustratorSetRGradientMode.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/include/c++/4.8 -I/usr/include/x86_64-linux-gnu/c++/4.8 -I/usr/include/c++/4.8/backward -I/usr/lib/gcc/x86_64-linux-gnu/4.8/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include CQIllustratorSetRGradientMode.h -o .moc/moc_CQIllustratorSetRGradientMode.cpp
+
+.moc/moc_CQIllustratorShape.cpp: ../../CUtil/include/CAutoPtrVector.h \
+		../../CMath/include/CBBox2D.h \
+		../../CMath/include/CMathGen.h \
+		../../COS/include/NaN.h \
+		../../CMath/include/CPoint2D.h \
+		../../CMath/include/CIPoint2D.h \
+		../../CMath/include/CVector2D.h \
+		../../CMath/include/CSize2D.h \
+		../../CMath/include/CISize2D.h \
+		../../CMath/include/CPolygon2D.h \
+		../../CMath/include/CShape2D.h \
+		../../CMath/include/CLine2D.h \
+		CMathGeom2D.h \
+		../../CMath/include/CPolygonOrientation.h \
+		../../CUtil/include/CLineJoinType.h \
+		../../CMath/include/C3Bezier2D.h \
+		../../CMath/include/C2Bezier2D.h \
+		../../CMath/include/CTriangle2D.h \
+		CStateIterator.h \
+		../../CUtil/include/CGeneric.h \
+		../../CUtil/include/CTypeTraits.h \
+		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
+		../../CMath/include/CMatrixType.h \
+		../../CUtil/include/CThrow.h \
+		../../CUtil/include/CRGBA.h \
+		../../CUtil/include/CRGB.h \
+		../../CUtil/include/CHSV.h \
+		../../CUtil/include/CRGBUtil.h \
+		../../CUtil/include/CCMYK.h \
+		../../CUtil/include/CHSL.h \
+		../../CUtil/include/CHSB.h \
+		../../CUtil/include/CHSI.h \
+		../../CRGBName/include/CRGBName.h \
+		../../CUtil/include/CColorComponent.h \
+		../../CUtil/include/CLineDash.h \
+		../../CUtil/include/CILineDash.h \
+		../../CUtil/include/CLineCapType.h \
+		../../CUtil/include/CFillType.h \
+		CPathPartType.h \
+		../../CFont/include/CFont.h \
+		../../CUtil/include/CRefPtr.h \
+		../../CFont/include/CFontStyle.h \
+		../../CUtil/include/CFlags.h \
+		../../CImageLib/include/CImageLib.h \
+		../../CFile/include/CFile.h \
+		../../CFile/include/CFileBase.h \
+		../../CFile/include/CFileType.h \
+		../../CUtil/include/CAlignType.h \
+		../../CImageLib/include/CImageState.h \
+		../../CImageLib/include/CImage.h \
+		../../CUtil/include/CRGBACombineDef.h \
+		../../CMath/include/CIBBox2D.h \
+		../../CMath/include/CIVector2D.h \
+		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImagePtr.h \
+		../../CImageLib/include/CImageMgr.h \
+		../../CStrUtil/include/CStrUtil.h \
+		../../CImageLib/include/CImageAnim.h \
+		../../CImageLib/include/CImageFile.h \
+		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
+		/usr/include/qt5/QtCore/qrect.h \
+		/usr/include/qt5/QtCore/qsize.h \
+		/usr/include/qt5/QtCore/qnamespace.h \
+		/usr/include/qt5/QtCore/qglobal.h \
+		/usr/include/qt5/QtCore/qconfig.h \
+		/usr/include/qt5/QtCore/qfeatures.h \
+		/usr/include/qt5/QtCore/qsystemdetection.h \
+		/usr/include/qt5/QtCore/qprocessordetection.h \
+		/usr/include/qt5/QtCore/qcompilerdetection.h \
+		/usr/include/qt5/QtCore/qglobalstatic.h \
+		/usr/include/qt5/QtCore/qatomic.h \
+		/usr/include/qt5/QtCore/qbasicatomic.h \
+		/usr/include/qt5/QtCore/qatomic_bootstrap.h \
+		/usr/include/qt5/QtCore/qgenericatomic.h \
+		/usr/include/qt5/QtCore/qatomic_msvc.h \
+		/usr/include/qt5/QtCore/qatomic_integrity.h \
+		/usr/include/qt5/QtCore/qoldbasicatomic.h \
+		/usr/include/qt5/QtCore/qatomic_vxworks.h \
+		/usr/include/qt5/QtCore/qatomic_power.h \
+		/usr/include/qt5/QtCore/qatomic_alpha.h \
+		/usr/include/qt5/QtCore/qatomic_armv7.h \
+		/usr/include/qt5/QtCore/qatomic_armv6.h \
+		/usr/include/qt5/QtCore/qatomic_armv5.h \
+		/usr/include/qt5/QtCore/qatomic_bfin.h \
+		/usr/include/qt5/QtCore/qatomic_ia64.h \
+		/usr/include/qt5/QtCore/qatomic_mips.h \
+		/usr/include/qt5/QtCore/qatomic_s390.h \
+		/usr/include/qt5/QtCore/qatomic_sh4a.h \
+		/usr/include/qt5/QtCore/qatomic_sparc.h \
+		/usr/include/qt5/QtCore/qatomic_gcc.h \
+		/usr/include/qt5/QtCore/qatomic_x86.h \
+		/usr/include/qt5/QtCore/qatomic_cxx11.h \
+		/usr/include/qt5/QtCore/qatomic_unix.h \
+		/usr/include/qt5/QtCore/qmutex.h \
+		/usr/include/qt5/QtCore/qlogging.h \
+		/usr/include/qt5/QtCore/qflags.h \
+		/usr/include/qt5/QtCore/qtypeinfo.h \
+		/usr/include/qt5/QtCore/qtypetraits.h \
+		/usr/include/qt5/QtCore/qsysinfo.h \
+		/usr/include/qt5/QtCore/qpoint.h \
+		CQIllustratorSaveData.h \
+		CQIllustratorData.h \
+		/usr/include/qt5/QtCore/QObject \
+		/usr/include/qt5/QtCore/qobject.h \
+		/usr/include/qt5/QtCore/qobjectdefs.h \
+		/usr/include/qt5/QtCore/qobjectdefs_impl.h \
+		/usr/include/qt5/QtCore/qstring.h \
+		/usr/include/qt5/QtCore/qchar.h \
+		/usr/include/qt5/QtCore/qbytearray.h \
+		/usr/include/qt5/QtCore/qrefcount.h \
+		/usr/include/qt5/QtCore/qarraydata.h \
+		/usr/include/qt5/QtCore/qstringbuilder.h \
+		/usr/include/qt5/QtCore/qlist.h \
+		/usr/include/qt5/QtCore/qalgorithms.h \
+		/usr/include/qt5/QtCore/qiterator.h \
+		/usr/include/qt5/QtCore/qcoreevent.h \
+		/usr/include/qt5/QtCore/qscopedpointer.h \
+		/usr/include/qt5/QtCore/qmetatype.h \
+		/usr/include/qt5/QtCore/qvarlengtharray.h \
+		/usr/include/qt5/QtCore/qcontainerfwd.h \
+		/usr/include/qt5/QtCore/qisenum.h \
+		/usr/include/qt5/QtCore/qobject_impl.h \
+		CStack.h \
+		CQIllustratorQuadTree.h \
+		CPathShape.h \
+		CBooleanOp.h \
+		CQIllustratorShape.h
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/include/c++/4.8 -I/usr/include/x86_64-linux-gnu/c++/4.8 -I/usr/include/c++/4.8/backward -I/usr/lib/gcc/x86_64-linux-gnu/4.8/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include CQIllustratorShape.h -o .moc/moc_CQIllustratorShape.cpp
 
 .moc/moc_CQIllustratorSliceMode.cpp: CQIllustratorMode.h \
 		/usr/include/qt5/QtCore/QObject \
@@ -4968,7 +5145,7 @@ compiler_moc_header_clean:
 		../../CMath/include/CISize2D.h \
 		CQIllustratorData.h \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -4984,6 +5161,7 @@ compiler_moc_header_clean:
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -5022,6 +5200,7 @@ compiler_moc_header_clean:
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CQIllustratorSaveData.h \
 		CPathShape.h \
 		CBooleanOp.h \
@@ -5447,7 +5626,7 @@ compiler_moc_header_clean:
 		/usr/include/qt5/QtGui/QCursor \
 		/usr/include/qt5/QtGui/QTransform \
 		CQIllustratorData.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -5463,6 +5642,7 @@ compiler_moc_header_clean:
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CLineDash.h \
@@ -5474,6 +5654,7 @@ compiler_moc_header_clean:
 		../../CFont/include/CFontStyle.h \
 		../../CUtil/include/CFlags.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CPathShape.h \
 		CQIllustratorSelection.h \
 		CQIllustratorUndo.h \
@@ -5667,7 +5848,7 @@ compiler_moc_header_clean:
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -5683,6 +5864,7 @@ compiler_moc_header_clean:
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -5721,6 +5903,10 @@ compiler_moc_header_clean:
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
+		/usr/include/qt5/QtCore/qrect.h \
+		/usr/include/qt5/QtCore/qsize.h \
+		/usr/include/qt5/QtCore/qpoint.h \
 		CQIllustratorSaveData.h \
 		CPathShape.h \
 		CBooleanOp.h \
@@ -5816,7 +6002,7 @@ compiler_moc_header_clean:
 		../../CMath/include/CISize2D.h \
 		CQIllustratorData.h \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -5832,6 +6018,7 @@ compiler_moc_header_clean:
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -5870,6 +6057,7 @@ compiler_moc_header_clean:
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CQIllustratorSaveData.h \
 		CPathShape.h \
 		CBooleanOp.h \
@@ -5912,6 +6100,118 @@ compiler_moc_header_clean:
 		/usr/include/qt5/QtGui/qtouchdevice.h \
 		CQIllustratorZoomMode.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/include/c++/4.8 -I/usr/include/x86_64-linux-gnu/c++/4.8 -I/usr/include/c++/4.8/backward -I/usr/lib/gcc/x86_64-linux-gnu/4.8/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include CQIllustratorZoomMode.h -o .moc/moc_CQIllustratorZoomMode.cpp
+
+.moc/moc_CQIllustratorPropertiesDlg.cpp: /usr/include/qt5/QtWidgets/QFrame \
+		/usr/include/qt5/QtWidgets/qframe.h \
+		/usr/include/qt5/QtWidgets/qwidget.h \
+		/usr/include/qt5/QtGui/qwindowdefs.h \
+		/usr/include/qt5/QtCore/qglobal.h \
+		/usr/include/qt5/QtCore/qconfig.h \
+		/usr/include/qt5/QtCore/qfeatures.h \
+		/usr/include/qt5/QtCore/qsystemdetection.h \
+		/usr/include/qt5/QtCore/qprocessordetection.h \
+		/usr/include/qt5/QtCore/qcompilerdetection.h \
+		/usr/include/qt5/QtCore/qglobalstatic.h \
+		/usr/include/qt5/QtCore/qatomic.h \
+		/usr/include/qt5/QtCore/qbasicatomic.h \
+		/usr/include/qt5/QtCore/qatomic_bootstrap.h \
+		/usr/include/qt5/QtCore/qgenericatomic.h \
+		/usr/include/qt5/QtCore/qatomic_msvc.h \
+		/usr/include/qt5/QtCore/qatomic_integrity.h \
+		/usr/include/qt5/QtCore/qoldbasicatomic.h \
+		/usr/include/qt5/QtCore/qatomic_vxworks.h \
+		/usr/include/qt5/QtCore/qatomic_power.h \
+		/usr/include/qt5/QtCore/qatomic_alpha.h \
+		/usr/include/qt5/QtCore/qatomic_armv7.h \
+		/usr/include/qt5/QtCore/qatomic_armv6.h \
+		/usr/include/qt5/QtCore/qatomic_armv5.h \
+		/usr/include/qt5/QtCore/qatomic_bfin.h \
+		/usr/include/qt5/QtCore/qatomic_ia64.h \
+		/usr/include/qt5/QtCore/qatomic_mips.h \
+		/usr/include/qt5/QtCore/qatomic_s390.h \
+		/usr/include/qt5/QtCore/qatomic_sh4a.h \
+		/usr/include/qt5/QtCore/qatomic_sparc.h \
+		/usr/include/qt5/QtCore/qatomic_gcc.h \
+		/usr/include/qt5/QtCore/qatomic_x86.h \
+		/usr/include/qt5/QtCore/qatomic_cxx11.h \
+		/usr/include/qt5/QtCore/qatomic_unix.h \
+		/usr/include/qt5/QtCore/qmutex.h \
+		/usr/include/qt5/QtCore/qlogging.h \
+		/usr/include/qt5/QtCore/qflags.h \
+		/usr/include/qt5/QtCore/qtypeinfo.h \
+		/usr/include/qt5/QtCore/qtypetraits.h \
+		/usr/include/qt5/QtCore/qsysinfo.h \
+		/usr/include/qt5/QtCore/qobjectdefs.h \
+		/usr/include/qt5/QtCore/qnamespace.h \
+		/usr/include/qt5/QtCore/qobjectdefs_impl.h \
+		/usr/include/qt5/QtGui/qwindowdefs_win.h \
+		/usr/include/qt5/QtCore/qobject.h \
+		/usr/include/qt5/QtCore/qstring.h \
+		/usr/include/qt5/QtCore/qchar.h \
+		/usr/include/qt5/QtCore/qbytearray.h \
+		/usr/include/qt5/QtCore/qrefcount.h \
+		/usr/include/qt5/QtCore/qarraydata.h \
+		/usr/include/qt5/QtCore/qstringbuilder.h \
+		/usr/include/qt5/QtCore/qlist.h \
+		/usr/include/qt5/QtCore/qalgorithms.h \
+		/usr/include/qt5/QtCore/qiterator.h \
+		/usr/include/qt5/QtCore/qcoreevent.h \
+		/usr/include/qt5/QtCore/qscopedpointer.h \
+		/usr/include/qt5/QtCore/qmetatype.h \
+		/usr/include/qt5/QtCore/qvarlengtharray.h \
+		/usr/include/qt5/QtCore/qcontainerfwd.h \
+		/usr/include/qt5/QtCore/qisenum.h \
+		/usr/include/qt5/QtCore/qobject_impl.h \
+		/usr/include/qt5/QtCore/qmargins.h \
+		/usr/include/qt5/QtCore/qrect.h \
+		/usr/include/qt5/QtCore/qsize.h \
+		/usr/include/qt5/QtCore/qpoint.h \
+		/usr/include/qt5/QtGui/qpaintdevice.h \
+		/usr/include/qt5/QtGui/qpalette.h \
+		/usr/include/qt5/QtGui/qcolor.h \
+		/usr/include/qt5/QtGui/qrgb.h \
+		/usr/include/qt5/QtCore/qstringlist.h \
+		/usr/include/qt5/QtCore/qdatastream.h \
+		/usr/include/qt5/QtCore/qiodevice.h \
+		/usr/include/qt5/QtCore/qpair.h \
+		/usr/include/qt5/QtCore/qregexp.h \
+		/usr/include/qt5/QtCore/qstringmatcher.h \
+		/usr/include/qt5/QtGui/qbrush.h \
+		/usr/include/qt5/QtCore/qvector.h \
+		/usr/include/qt5/QtGui/qmatrix.h \
+		/usr/include/qt5/QtGui/qpolygon.h \
+		/usr/include/qt5/QtGui/qregion.h \
+		/usr/include/qt5/QtCore/qline.h \
+		/usr/include/qt5/QtGui/qtransform.h \
+		/usr/include/qt5/QtGui/qpainterpath.h \
+		/usr/include/qt5/QtGui/qimage.h \
+		/usr/include/qt5/QtGui/qpixmap.h \
+		/usr/include/qt5/QtCore/qsharedpointer.h \
+		/usr/include/qt5/QtCore/qshareddata.h \
+		/usr/include/qt5/QtCore/qsharedpointer_impl.h \
+		/usr/include/qt5/QtCore/qhash.h \
+		/usr/include/qt5/QtGui/qfont.h \
+		/usr/include/qt5/QtGui/qfontmetrics.h \
+		/usr/include/qt5/QtGui/qfontinfo.h \
+		/usr/include/qt5/QtWidgets/qsizepolicy.h \
+		/usr/include/qt5/QtGui/qcursor.h \
+		/usr/include/qt5/QtGui/qkeysequence.h \
+		/usr/include/qt5/QtGui/qevent.h \
+		/usr/include/qt5/QtCore/qvariant.h \
+		/usr/include/qt5/QtCore/qmap.h \
+		/usr/include/qt5/QtCore/qdebug.h \
+		/usr/include/qt5/QtCore/qtextstream.h \
+		/usr/include/qt5/QtCore/qlocale.h \
+		/usr/include/qt5/QtCore/qset.h \
+		/usr/include/qt5/QtCore/qcontiguouscache.h \
+		/usr/include/qt5/QtCore/qurl.h \
+		/usr/include/qt5/QtCore/qurlquery.h \
+		/usr/include/qt5/QtCore/qfile.h \
+		/usr/include/qt5/QtCore/qfiledevice.h \
+		/usr/include/qt5/QtGui/qvector2d.h \
+		/usr/include/qt5/QtGui/qtouchdevice.h \
+		CQIllustratorPropertiesDlg.h
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/include/c++/4.8 -I/usr/include/x86_64-linux-gnu/c++/4.8 -I/usr/include/c++/4.8/backward -I/usr/lib/gcc/x86_64-linux-gnu/4.8/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include CQIllustratorPropertiesDlg.h -o .moc/moc_CQIllustratorPropertiesDlg.cpp
 
 .moc/moc_CQImageButton.cpp: /usr/include/qt5/QtWidgets/QToolButton \
 		/usr/include/qt5/QtWidgets/qtoolbutton.h \
@@ -6837,6 +7137,7 @@ compiler_moc_header_clean:
 		../../CMath/include/CMatrix2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CIPoint2D.h \
 		../../CMath/include/CVector2D.h \
@@ -7450,6 +7751,7 @@ compiler_moc_header_clean:
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -7488,11 +7790,12 @@ compiler_moc_header_clean:
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CQIllustratorSaveData.h \
 		CQIllustratorData.h \
 		/usr/include/qt5/QtCore/QObject \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CPathShape.h \
 		CBooleanOp.h \
 		/usr/include/qt5/QtCore/QPointer \
@@ -7897,6 +8200,7 @@ compiler_moc_header_clean:
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -7933,11 +8237,12 @@ compiler_moc_header_clean:
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CQIllustratorSaveData.h \
 		CQIllustratorData.h \
 		/usr/include/qt5/QtCore/QObject \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CPathShape.h \
 		CBooleanOp.h \
 		CQStrokeOption.h
@@ -8362,6 +8667,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		CPathPartType.h \
@@ -8792,6 +9098,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -8830,11 +9137,12 @@ compiler_clean: compiler_moc_header_clean
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CQIllustratorSaveData.h \
 		CQIllustratorData.h \
 		/usr/include/qt5/QtCore/QObject \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CPathShape.h \
 		CBooleanOp.h \
 		CQIllustrator.h \
@@ -9116,6 +9424,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		/usr/include/qt5/QtWidgets/QVBoxLayout \
@@ -9313,6 +9622,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CQUtil/include/CQColorChooser.h \
@@ -9496,7 +9806,7 @@ compiler_clean: compiler_moc_header_clean
 		/usr/include/qt5/QtGui/QCursor \
 		/usr/include/qt5/QtGui/QTransform \
 		CQIllustratorData.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -9512,6 +9822,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CLineDash.h \
@@ -9523,6 +9834,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CFont/include/CFontStyle.h \
 		../../CUtil/include/CFlags.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CPathShape.h \
 		CQIllustratorSelection.h \
 		CQIllustratorUndo.h \
@@ -9734,6 +10046,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CIPoint2D.h \
 		../../CMath/include/CVector2D.h \
@@ -9788,7 +10101,7 @@ compiler_clean: compiler_moc_header_clean
 		/usr/include/qt5/QtGui/QCursor \
 		/usr/include/qt5/QtGui/QTransform \
 		CQIllustratorData.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -9812,6 +10125,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CFont/include/CFontStyle.h \
 		../../CUtil/include/CFlags.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CPathShape.h \
 		CQIllustratorSelection.h \
 		CQIllustratorUndo.h \
@@ -10023,7 +10337,7 @@ compiler_clean: compiler_moc_header_clean
 		/usr/include/qt5/QtGui/QCursor \
 		/usr/include/qt5/QtGui/QTransform \
 		CQIllustratorData.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -10039,6 +10353,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CLineDash.h \
@@ -10050,6 +10365,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CFont/include/CFontStyle.h \
 		../../CUtil/include/CFlags.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CPathShape.h \
 		CQIllustratorSelection.h \
 		CQIllustratorUndo.h \
@@ -10221,7 +10537,7 @@ compiler_clean: compiler_moc_header_clean
 		/usr/include/qt5/QtGui/QCursor \
 		/usr/include/qt5/QtGui/QTransform \
 		CQIllustratorData.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -10237,6 +10553,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CLineDash.h \
@@ -10248,6 +10565,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CFont/include/CFontStyle.h \
 		../../CUtil/include/CFlags.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CPathShape.h \
 		CQIllustratorSelection.h \
 		CQIllustratorUndo.h \
@@ -10257,89 +10575,6 @@ compiler_clean: compiler_moc_header_clean
 		/usr/include/qt5/QtGui/QFont \
 		/usr/include/qt5/QtGui/QImage \
 		CQIllustratorLayer.h \
-		../../CQUtil/include/CQApp.h \
-		/usr/include/qt5/QtWidgets/QApplication \
-		/usr/include/qt5/QtWidgets/qapplication.h \
-		/usr/include/qt5/QtCore/qcoreapplication.h \
-		/usr/include/qt5/QtCore/qeventloop.h \
-		/usr/include/qt5/QtWidgets/qdesktopwidget.h \
-		/usr/include/qt5/QtGui/qguiapplication.h \
-		/usr/include/qt5/QtGui/qinputmethod.h \
-		../../CQUtil/include/CQStyle.h \
-		/usr/include/qt5/QtWidgets/QProxyStyle \
-		/usr/include/qt5/QtWidgets/qproxystyle.h \
-		/usr/include/qt5/QtWidgets/QCommonStyle \
-		/usr/include/qt5/QtWidgets/qcommonstyle.h \
-		/usr/include/qt5/QtWidgets/qstyle.h \
-		../../CQUtil/include/CQMenu.h \
-		/usr/include/qt5/QtWidgets/QMenu \
-		/usr/include/qt5/QtWidgets/qmenu.h \
-		/usr/include/qt5/QtWidgets/qaction.h \
-		/usr/include/qt5/QtWidgets/qactiongroup.h \
-		/usr/include/qt5/QtWidgets/QAction \
-		/usr/include/qt5/QtWidgets/QMenuBar \
-		/usr/include/qt5/QtWidgets/qmenubar.h \
-		../../CQUtil/include/CQImage.h \
-		CQToolBar.h \
-		/usr/include/qt5/QtWidgets/QToolBar \
-		/usr/include/qt5/QtWidgets/qtoolbar.h \
-		/usr/include/qt5/QtWidgets/QAbstractButton \
-		/usr/include/qt5/QtWidgets/qabstractbutton.h \
-		CQDockWidget.h \
-		/usr/include/qt5/QtWidgets/QDockWidget \
-		/usr/include/qt5/QtWidgets/qdockwidget.h \
-		../../CQUtil/include/CQUtil.h \
-		/usr/include/qt5/QtCore/Qt \
-		/usr/include/qt5/QtGui/QColor \
-		/usr/include/qt5/QtCore/QEvent \
-		/usr/include/qt5/QtCore/QVariant \
-		/usr/include/qt5/QtWidgets/QTableWidget \
-		/usr/include/qt5/QtWidgets/qtablewidget.h \
-		/usr/include/qt5/QtWidgets/qtableview.h \
-		/usr/include/qt5/QtWidgets/qabstractitemview.h \
-		/usr/include/qt5/QtWidgets/qabstractscrollarea.h \
-		/usr/include/qt5/QtWidgets/qframe.h \
-		/usr/include/qt5/QtCore/qabstractitemmodel.h \
-		/usr/include/qt5/QtCore/qitemselectionmodel.h \
-		/usr/include/qt5/QtWidgets/qabstractitemdelegate.h \
-		/usr/include/qt5/QtWidgets/qstyleoption.h \
-		/usr/include/qt5/QtWidgets/qabstractspinbox.h \
-		/usr/include/qt5/QtGui/qvalidator.h \
-		/usr/include/qt5/QtCore/qregularexpression.h \
-		/usr/include/qt5/QtWidgets/qslider.h \
-		/usr/include/qt5/QtWidgets/qabstractslider.h \
-		/usr/include/qt5/QtWidgets/qtabbar.h \
-		/usr/include/qt5/QtWidgets/qrubberband.h \
-		/usr/include/qt5/QtGui/QPen \
-		/usr/include/qt5/QtGui/qpen.h \
-		../../CMath/include/CAngle.h \
-		../../CSVG/include/CSVG.h \
-		../../CSVG/include/CSVGStroke.h \
-		../../CSVG/include/CSVGFill.h \
-		../../CSVG/include/CSVGClip.h \
-		../../CSVG/include/CSVGFontDef.h \
-		../../CSVG/include/CSVGLengthValue.h \
-		../../CSVG/include/CSVGTypes.h \
-		../../CSVG/include/CSVGBlock.h \
-		../../CSVG/include/CSVGObject.h \
-		../../CSVG/include/CSVGTimeValue.h \
-		../../CSVG/include/CSVGEventValue.h \
-		../../CSVG/include/CSVGXLink.h \
-		../../CSVG/include/CSVGPreserveAspect.h \
-		../../CSVG/include/CSVGAnimation.h \
-		../../CSVG/include/CObjTypeOld.h \
-		CGenPoly.h \
-		CAxis2D.h \
-		CQAccelerate.h \
-		/usr/include/qt5/QtCore/QCoreApplication \
-		/usr/include/qt5/QtCore/QList \
-		/usr/include/qt5/QtCore/QPair \
-		/usr/include/qt5/QtCore/QStringList \
-		CTriangulate2D.h \
-		CListLink.h \
-		../../CMath/include/CGiftWrap.h \
-		CDelaunay.h \
-		CHull3D.h \
 		CQIllustratorCanvas.h \
 		/usr/include/qt5/QtWidgets/QWidget \
 		../../CMath/include/CDisplayRange2D.h \
@@ -10347,11 +10582,24 @@ compiler_clean: compiler_moc_header_clean
 		CQIllustratorToolbar.h \
 		/usr/include/qt5/QtWidgets/QToolButton \
 		/usr/include/qt5/QtWidgets/qtoolbutton.h \
+		/usr/include/qt5/QtWidgets/qabstractbutton.h \
 		CQIllustratorTransformMode.h \
 		CQIllustratorCreateRectMode.h \
 		CQIllustratorCreateEllipseMode.h \
 		/usr/include/qt5/QtWidgets/QComboBox \
 		/usr/include/qt5/QtWidgets/qcombobox.h \
+		/usr/include/qt5/QtWidgets/qabstractitemdelegate.h \
+		/usr/include/qt5/QtWidgets/qstyleoption.h \
+		/usr/include/qt5/QtWidgets/qabstractspinbox.h \
+		/usr/include/qt5/QtGui/qvalidator.h \
+		/usr/include/qt5/QtCore/qregularexpression.h \
+		/usr/include/qt5/QtWidgets/qslider.h \
+		/usr/include/qt5/QtWidgets/qabstractslider.h \
+		/usr/include/qt5/QtWidgets/qstyle.h \
+		/usr/include/qt5/QtWidgets/qtabbar.h \
+		/usr/include/qt5/QtWidgets/qrubberband.h \
+		/usr/include/qt5/QtWidgets/qframe.h \
+		/usr/include/qt5/QtCore/qabstractitemmodel.h \
 		CQIllustratorCreatePathMode.h \
 		CQIllustratorCreatePolygonMode.h \
 		CQIllustratorCreateStarMode.h \
@@ -10377,13 +10625,30 @@ compiler_clean: compiler_moc_header_clean
 		CQIllustratorHandle.h \
 		CQIllustratorCmd.h \
 		../../CArgs/include/CArgs.h \
+		CQIllustratorPropertiesDlg.h \
+		/usr/include/qt5/QtWidgets/QFrame \
 		../../CSVG/include/CSVGCircle.h \
+		../../CSVG/include/CSVGObject.h \
+		../../CSVG/include/CSVGTypes.h \
+		../../CSVG/include/CSVGStroke.h \
+		../../CSVG/include/CSVGFill.h \
+		../../CSVG/include/CSVGClip.h \
+		../../CSVG/include/CSVGLengthValue.h \
+		../../CSVG/include/CSVGTimeValue.h \
+		../../CSVG/include/CSVGEventValue.h \
+		../../CSVG/include/CSVGXLink.h \
+		../../CSVG/include/CSVGPreserveAspect.h \
+		../../CSVG/include/CSVGAnimation.h \
+		../../CMath/include/CMatrixStack2D.h \
+		../../CSVG/include/CSVGFontDef.h \
+		../../CSVG/include/CSVGPathPart.h \
+		../../CSVG/include/CSVGObjectMarker.h \
+		../../CSVG/include/CObjTypeOld.h \
 		../../CSVG/include/CSVGEllipse.h \
 		../../CSVG/include/CSVGImage.h \
 		../../CSVG/include/CSVGLine.h \
 		../../CSVG/include/CSVGLinearGradient.h \
 		../../CSVG/include/CSVGPath.h \
-		../../CSVG/include/CSVGPathPart.h \
 		../../CSVG/include/CSVGPolygon.h \
 		../../CSVG/include/CSVGPolyLine.h \
 		../../CSVG/include/CSVGRadialGradient.h \
@@ -10396,9 +10661,9 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CLinearGradient.h \
 		CQStrokeOption.h \
 		CQOptionToolSet.h \
-		/usr/include/qt5/QtWidgets/QFrame \
 		/usr/include/qt5/QtWidgets/QScrollArea \
 		/usr/include/qt5/QtWidgets/qscrollarea.h \
+		/usr/include/qt5/QtWidgets/qabstractscrollarea.h \
 		CQWinWidget.h \
 		/usr/include/qt5/QtWidgets/QTextEdit \
 		/usr/include/qt5/QtWidgets/qtextedit.h \
@@ -10406,8 +10671,14 @@ compiler_clean: compiler_moc_header_clean
 		/usr/include/qt5/QtGui/qtextoption.h \
 		/usr/include/qt5/QtGui/qtextcursor.h \
 		/usr/include/qt5/QtGui/qtextformat.h \
+		/usr/include/qt5/QtGui/qpen.h \
 		/usr/include/qt5/QtWidgets/QLabel \
 		/usr/include/qt5/QtWidgets/qlabel.h \
+		/usr/include/qt5/QtWidgets/QTableWidget \
+		/usr/include/qt5/QtWidgets/qtablewidget.h \
+		/usr/include/qt5/QtWidgets/qtableview.h \
+		/usr/include/qt5/QtWidgets/qabstractitemview.h \
+		/usr/include/qt5/QtCore/qitemselectionmodel.h \
 		/usr/include/qt5/QtWidgets/QTreeWidget \
 		/usr/include/qt5/QtWidgets/qtreewidget.h \
 		/usr/include/qt5/QtWidgets/qtreeview.h \
@@ -10424,6 +10695,58 @@ compiler_clean: compiler_moc_header_clean
 		/usr/include/qt5/QtCore/QPointer \
 		/usr/include/qt5/QtCore/qpointer.h \
 		CPSViewShapeRenderer.h \
+		../../CQUtil/include/CQApp.h \
+		/usr/include/qt5/QtWidgets/QApplication \
+		/usr/include/qt5/QtWidgets/qapplication.h \
+		/usr/include/qt5/QtCore/qcoreapplication.h \
+		/usr/include/qt5/QtCore/qeventloop.h \
+		/usr/include/qt5/QtWidgets/qdesktopwidget.h \
+		/usr/include/qt5/QtGui/qguiapplication.h \
+		/usr/include/qt5/QtGui/qinputmethod.h \
+		../../CQUtil/include/CQStyle.h \
+		/usr/include/qt5/QtWidgets/QProxyStyle \
+		/usr/include/qt5/QtWidgets/qproxystyle.h \
+		/usr/include/qt5/QtWidgets/QCommonStyle \
+		/usr/include/qt5/QtWidgets/qcommonstyle.h \
+		../../CQUtil/include/CQMenu.h \
+		/usr/include/qt5/QtWidgets/QMenu \
+		/usr/include/qt5/QtWidgets/qmenu.h \
+		/usr/include/qt5/QtWidgets/qaction.h \
+		/usr/include/qt5/QtWidgets/qactiongroup.h \
+		/usr/include/qt5/QtWidgets/QAction \
+		/usr/include/qt5/QtWidgets/QMenuBar \
+		/usr/include/qt5/QtWidgets/qmenubar.h \
+		../../CQUtil/include/CQImage.h \
+		CQToolBar.h \
+		/usr/include/qt5/QtWidgets/QToolBar \
+		/usr/include/qt5/QtWidgets/qtoolbar.h \
+		/usr/include/qt5/QtWidgets/QAbstractButton \
+		CQDockWidget.h \
+		/usr/include/qt5/QtWidgets/QDockWidget \
+		/usr/include/qt5/QtWidgets/qdockwidget.h \
+		../../CQUtil/include/CQUtil.h \
+		/usr/include/qt5/QtCore/Qt \
+		/usr/include/qt5/QtGui/QColor \
+		/usr/include/qt5/QtCore/QEvent \
+		/usr/include/qt5/QtCore/QVariant \
+		/usr/include/qt5/QtGui/QPen \
+		../../CMath/include/CAngle.h \
+		../../CSVG/include/CSVG.h \
+		../../CSVG/include/CSVGBlock.h \
+		CCSS.h \
+		CGenPoly.h \
+		../../CSVG/include/CFileUtil.h \
+		CAxis2D.h \
+		CQAccelerate.h \
+		/usr/include/qt5/QtCore/QCoreApplication \
+		/usr/include/qt5/QtCore/QList \
+		/usr/include/qt5/QtCore/QPair \
+		/usr/include/qt5/QtCore/QStringList \
+		CTriangulate2D.h \
+		CListLink.h \
+		../../CMath/include/CGiftWrap.h \
+		CDelaunay.h \
+		CHull3D.h \
 		../../COS/include/COSFile.h \
 		/usr/include/qt5/QtWidgets/QStackedWidget \
 		/usr/include/qt5/QtWidgets/qstackedwidget.h \
@@ -10549,7 +10872,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CISize2D.h \
 		CQIllustratorData.h \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -10565,6 +10888,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -10603,6 +10927,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CQIllustratorSaveData.h \
 		CPathShape.h \
 		CBooleanOp.h \
@@ -10816,7 +11141,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CISize2D.h \
 		CQIllustratorData.h \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -10832,6 +11157,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -10870,6 +11196,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CQIllustratorSaveData.h \
 		CPathShape.h \
 		CBooleanOp.h \
@@ -11096,7 +11423,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CISize2D.h \
 		CQIllustratorData.h \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -11112,6 +11439,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -11150,6 +11478,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CQIllustratorSaveData.h \
 		CPathShape.h \
 		CBooleanOp.h \
@@ -11370,7 +11699,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CISize2D.h \
 		CQIllustratorData.h \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -11386,6 +11715,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -11424,6 +11754,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CQIllustratorSaveData.h \
 		CPathShape.h \
 		CBooleanOp.h \
@@ -11632,7 +11963,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CISize2D.h \
 		CQIllustratorData.h \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -11648,6 +11979,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -11686,6 +12018,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CQIllustratorSaveData.h \
 		CPathShape.h \
 		CBooleanOp.h \
@@ -11907,7 +12240,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CISize2D.h \
 		CQIllustratorData.h \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -11923,6 +12256,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -11961,6 +12295,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CQIllustratorSaveData.h \
 		CPathShape.h \
 		CBooleanOp.h \
@@ -12158,7 +12493,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -12174,6 +12509,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -12212,6 +12548,10 @@ compiler_clean: compiler_moc_header_clean
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
+		/usr/include/qt5/QtCore/qrect.h \
+		/usr/include/qt5/QtCore/qsize.h \
+		/usr/include/qt5/QtCore/qpoint.h \
 		CQIllustratorSaveData.h \
 		CPathShape.h \
 		CBooleanOp.h
@@ -12379,7 +12719,7 @@ compiler_clean: compiler_moc_header_clean
 		/usr/include/qt5/QtGui/QCursor \
 		/usr/include/qt5/QtGui/QTransform \
 		CQIllustratorData.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -12395,6 +12735,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CLineDash.h \
@@ -12406,6 +12747,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CFont/include/CFontStyle.h \
 		../../CUtil/include/CFlags.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CPathShape.h \
 		CQIllustratorSelection.h \
 		CQIllustratorUndo.h \
@@ -12561,6 +12903,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CIPoint2D.h \
 		../../CMath/include/CVector2D.h \
@@ -12619,11 +12962,12 @@ compiler_clean: compiler_moc_header_clean
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CQIllustratorSaveData.h \
 		CQIllustratorData.h \
 		/usr/include/qt5/QtCore/QObject \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CPathShape.h \
 		CBooleanOp.h \
 		/usr/include/qt5/QtWidgets/QVBoxLayout \
@@ -12733,7 +13077,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		../../CStrUtil/include/CStrUtil.h \
 		/usr/include/qt5/QtCore/QString
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CQIllustratorLayer.o CQIllustratorLayer.cpp
@@ -12827,7 +13171,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CISize2D.h \
 		CQIllustratorData.h \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -12843,6 +13187,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -12881,6 +13226,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CQIllustratorSaveData.h \
 		CPathShape.h \
 		CBooleanOp.h \
@@ -13067,7 +13413,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CISize2D.h \
 		CQIllustratorData.h \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -13083,6 +13429,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -13121,6 +13468,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CQIllustratorSaveData.h \
 		CPathShape.h \
 		CBooleanOp.h \
@@ -13327,7 +13675,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CISize2D.h \
 		CQIllustratorData.h \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -13343,6 +13691,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -13381,6 +13730,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CQIllustratorSaveData.h \
 		CPathShape.h \
 		CBooleanOp.h \
@@ -13541,7 +13891,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CISize2D.h \
 		CQIllustratorData.h \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -13557,6 +13907,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -13595,6 +13946,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CQIllustratorSaveData.h \
 		CPathShape.h \
 		CBooleanOp.h \
@@ -13870,7 +14222,7 @@ compiler_clean: compiler_moc_header_clean
 		/usr/include/qt5/QtGui/QCursor \
 		/usr/include/qt5/QtGui/QTransform \
 		CQIllustratorData.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -13886,6 +14238,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CLineDash.h \
@@ -13897,6 +14250,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CFont/include/CFontStyle.h \
 		../../CUtil/include/CFlags.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CPathShape.h \
 		CQIllustratorSelection.h \
 		CQIllustratorUndo.h \
@@ -13995,7 +14349,7 @@ compiler_clean: compiler_moc_header_clean
 		/usr/include/qt5/QtCore/qisenum.h \
 		/usr/include/qt5/QtCore/qobject_impl.h \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustrator.h \
 		../../CQUtil/include/CQMainWindow.h \
 		/usr/include/qt5/QtWidgets/QMainWindow \
@@ -14104,6 +14458,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CLineDash.h \
@@ -14115,6 +14470,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CFont/include/CFontStyle.h \
 		../../CUtil/include/CFlags.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CPathShape.h \
 		CQIllustratorSelection.h \
 		CQIllustratorUndo.h \
@@ -14206,6 +14562,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -14244,10 +14601,14 @@ compiler_clean: compiler_moc_header_clean
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
+		/usr/include/qt5/QtCore/qrect.h \
+		/usr/include/qt5/QtCore/qsize.h \
+		/usr/include/qt5/QtCore/qpoint.h \
 		CQIllustratorSaveData.h \
 		CQIllustratorData.h \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CPathShape.h \
 		CBooleanOp.h \
 		CQIllustrator.h \
@@ -14258,9 +14619,6 @@ compiler_clean: compiler_moc_header_clean
 		/usr/include/qt5/QtGui/qwindowdefs.h \
 		/usr/include/qt5/QtGui/qwindowdefs_win.h \
 		/usr/include/qt5/QtCore/qmargins.h \
-		/usr/include/qt5/QtCore/qrect.h \
-		/usr/include/qt5/QtCore/qsize.h \
-		/usr/include/qt5/QtCore/qpoint.h \
 		/usr/include/qt5/QtGui/qpaintdevice.h \
 		/usr/include/qt5/QtGui/qpalette.h \
 		/usr/include/qt5/QtGui/qcolor.h \
@@ -14414,7 +14772,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CISize2D.h \
 		CQIllustratorData.h \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -14430,6 +14788,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -14468,6 +14827,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CQIllustratorSaveData.h \
 		CPathShape.h \
 		CBooleanOp.h \
@@ -14673,7 +15033,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CISize2D.h \
 		CQIllustratorData.h \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -14689,6 +15049,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -14727,6 +15088,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CQIllustratorSaveData.h \
 		CPathShape.h \
 		CBooleanOp.h \
@@ -14917,7 +15279,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CISize2D.h \
 		CQIllustratorData.h \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -14933,6 +15295,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -14971,6 +15334,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CQIllustratorSaveData.h \
 		CPathShape.h \
 		CBooleanOp.h \
@@ -15136,7 +15500,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CISize2D.h \
 		CQIllustratorData.h \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -15152,6 +15516,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -15190,6 +15555,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CQIllustratorSaveData.h \
 		CPathShape.h \
 		CBooleanOp.h \
@@ -15406,7 +15772,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CISize2D.h \
 		CQIllustratorData.h \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -15422,6 +15788,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -15460,6 +15827,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CQIllustratorSaveData.h \
 		CPathShape.h \
 		CBooleanOp.h \
@@ -15668,7 +16036,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CISize2D.h \
 		CQIllustratorData.h \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -15684,6 +16052,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -15722,6 +16091,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CQIllustratorSaveData.h \
 		CPathShape.h \
 		CBooleanOp.h \
@@ -15859,6 +16229,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -15897,11 +16268,9 @@ compiler_clean: compiler_moc_header_clean
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
-		CQIllustratorSaveData.h \
-		CQIllustratorData.h \
-		/usr/include/qt5/QtCore/QObject \
-		/usr/include/qt5/QtCore/qobject.h \
-		/usr/include/qt5/QtCore/qobjectdefs.h \
+		/usr/include/qt5/QtCore/QRectF \
+		/usr/include/qt5/QtCore/qrect.h \
+		/usr/include/qt5/QtCore/qsize.h \
 		/usr/include/qt5/QtCore/qnamespace.h \
 		/usr/include/qt5/QtCore/qglobal.h \
 		/usr/include/qt5/QtCore/qconfig.h \
@@ -15939,6 +16308,12 @@ compiler_clean: compiler_moc_header_clean
 		/usr/include/qt5/QtCore/qtypeinfo.h \
 		/usr/include/qt5/QtCore/qtypetraits.h \
 		/usr/include/qt5/QtCore/qsysinfo.h \
+		/usr/include/qt5/QtCore/qpoint.h \
+		CQIllustratorSaveData.h \
+		CQIllustratorData.h \
+		/usr/include/qt5/QtCore/QObject \
+		/usr/include/qt5/QtCore/qobject.h \
+		/usr/include/qt5/QtCore/qobjectdefs.h \
 		/usr/include/qt5/QtCore/qobjectdefs_impl.h \
 		/usr/include/qt5/QtCore/qstring.h \
 		/usr/include/qt5/QtCore/qchar.h \
@@ -15957,7 +16332,7 @@ compiler_clean: compiler_moc_header_clean
 		/usr/include/qt5/QtCore/qisenum.h \
 		/usr/include/qt5/QtCore/qobject_impl.h \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CPathShape.h \
 		CBooleanOp.h \
 		CQIllustratorShapeDrawer.h \
@@ -15975,9 +16350,6 @@ compiler_clean: compiler_moc_header_clean
 		/usr/include/qt5/QtGui/qmatrix.h \
 		/usr/include/qt5/QtGui/qpolygon.h \
 		/usr/include/qt5/QtCore/qvector.h \
-		/usr/include/qt5/QtCore/qpoint.h \
-		/usr/include/qt5/QtCore/qrect.h \
-		/usr/include/qt5/QtCore/qsize.h \
 		/usr/include/qt5/QtGui/qregion.h \
 		/usr/include/qt5/QtCore/qdatastream.h \
 		/usr/include/qt5/QtCore/qiodevice.h \
@@ -15990,19 +16362,68 @@ compiler_clean: compiler_moc_header_clean
 		/usr/include/qt5/QtCore/qstringlist.h \
 		/usr/include/qt5/QtCore/qregexp.h \
 		/usr/include/qt5/QtCore/qstringmatcher.h \
-		/usr/include/qt5/QtGui/QPainter \
-		/usr/include/qt5/QtGui/qpainter.h \
-		/usr/include/qt5/QtGui/qpixmap.h \
+		../../CQUtil/include/CQUtil.h \
+		/usr/include/qt5/QtCore/Qt \
+		/usr/include/qt5/QtGui/QColor \
 		/usr/include/qt5/QtGui/qcolor.h \
-		/usr/include/qt5/QtGui/qtextoption.h \
-		/usr/include/qt5/QtGui/qpen.h \
+		/usr/include/qt5/QtCore/QEvent \
+		/usr/include/qt5/QtCore/QVariant \
+		/usr/include/qt5/QtCore/qvariant.h \
+		/usr/include/qt5/QtCore/qmap.h \
+		/usr/include/qt5/QtCore/qdebug.h \
+		/usr/include/qt5/QtCore/qtextstream.h \
+		/usr/include/qt5/QtCore/qlocale.h \
+		/usr/include/qt5/QtCore/qset.h \
+		/usr/include/qt5/QtCore/qcontiguouscache.h \
+		/usr/include/qt5/QtWidgets/QTableWidget \
+		/usr/include/qt5/QtWidgets/qtablewidget.h \
+		/usr/include/qt5/QtWidgets/qtableview.h \
+		/usr/include/qt5/QtWidgets/qabstractitemview.h \
+		/usr/include/qt5/QtWidgets/qabstractscrollarea.h \
+		/usr/include/qt5/QtWidgets/qframe.h \
+		/usr/include/qt5/QtWidgets/qwidget.h \
+		/usr/include/qt5/QtCore/qmargins.h \
+		/usr/include/qt5/QtGui/qpalette.h \
 		/usr/include/qt5/QtGui/qbrush.h \
-		/usr/include/qt5/QtGui/qfontinfo.h \
+		/usr/include/qt5/QtGui/qpixmap.h \
 		/usr/include/qt5/QtGui/qfontmetrics.h \
+		/usr/include/qt5/QtGui/qfontinfo.h \
+		/usr/include/qt5/QtWidgets/qsizepolicy.h \
+		/usr/include/qt5/QtGui/qcursor.h \
+		/usr/include/qt5/QtGui/qkeysequence.h \
+		/usr/include/qt5/QtGui/qevent.h \
+		/usr/include/qt5/QtCore/qurl.h \
+		/usr/include/qt5/QtCore/qurlquery.h \
+		/usr/include/qt5/QtCore/qfile.h \
+		/usr/include/qt5/QtCore/qfiledevice.h \
+		/usr/include/qt5/QtGui/qvector2d.h \
+		/usr/include/qt5/QtGui/qtouchdevice.h \
+		/usr/include/qt5/QtCore/qabstractitemmodel.h \
+		/usr/include/qt5/QtCore/qitemselectionmodel.h \
+		/usr/include/qt5/QtWidgets/qabstractitemdelegate.h \
+		/usr/include/qt5/QtWidgets/qstyleoption.h \
+		/usr/include/qt5/QtWidgets/qabstractspinbox.h \
+		/usr/include/qt5/QtGui/qvalidator.h \
+		/usr/include/qt5/QtCore/qregularexpression.h \
+		/usr/include/qt5/QtGui/qicon.h \
+		/usr/include/qt5/QtWidgets/qslider.h \
+		/usr/include/qt5/QtWidgets/qabstractslider.h \
+		/usr/include/qt5/QtWidgets/qstyle.h \
+		/usr/include/qt5/QtWidgets/qtabbar.h \
+		/usr/include/qt5/QtWidgets/qtabwidget.h \
+		/usr/include/qt5/QtWidgets/qrubberband.h \
+		/usr/include/qt5/QtGui/QPen \
+		/usr/include/qt5/QtGui/qpen.h \
+		../../CUtil/include/CEvent.h \
+		../../CUtil/include/CKeyType.h \
+		../../CMath/include/CAngle.h \
+		../../CQUtil/include/CQImageGaussianBlur.h \
+		../../CMath/include/CGaussianBlur.h \
 		../../CMath/include/CLinearGradient.h \
 		../../CMath/include/CRadialGradient.h \
-		../../CQUtil/include/CQImageGaussianBlur.h \
-		../../CMath/include/CGaussianBlur.h
+		/usr/include/qt5/QtGui/QPainter \
+		/usr/include/qt5/QtGui/qpainter.h \
+		/usr/include/qt5/QtGui/qtextoption.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CQIllustratorShape.o CQIllustratorShape.cpp
 
 ../obj/CQIllustratorShapeDrawer.o: CQIllustratorShapeDrawer.cpp CQIllustratorShapeDrawer.h \
@@ -16100,6 +16521,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CFont/include/CFont.h \
@@ -16178,7 +16600,7 @@ compiler_clean: compiler_moc_header_clean
 		/usr/include/qt5/QtCore/QPoint \
 		/usr/include/qt5/QtGui/QCursor \
 		CQIllustratorData.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -16198,6 +16620,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CLineCapType.h \
 		CPathPartType.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CPathShape.h \
 		CQIllustratorSelection.h \
 		CQIllustratorUndo.h \
@@ -16402,7 +16825,7 @@ compiler_clean: compiler_moc_header_clean
 		/usr/include/qt5/QtCore/QPoint \
 		/usr/include/qt5/QtGui/QCursor \
 		CQIllustratorData.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -16418,6 +16841,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CLineDash.h \
@@ -16429,6 +16853,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CFont/include/CFontStyle.h \
 		../../CUtil/include/CFlags.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CPathShape.h \
 		CQIllustratorSelection.h \
 		CQIllustratorUndo.h \
@@ -16553,7 +16978,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CISize2D.h \
 		CQIllustratorData.h \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -16569,6 +16994,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -16607,6 +17033,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CQIllustratorSaveData.h \
 		CPathShape.h \
 		CBooleanOp.h \
@@ -16880,7 +17307,7 @@ compiler_clean: compiler_moc_header_clean
 		/usr/include/qt5/QtGui/QCursor \
 		/usr/include/qt5/QtGui/QTransform \
 		CQIllustratorData.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -16896,6 +17323,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CLineDash.h \
@@ -16907,6 +17335,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CFont/include/CFontStyle.h \
 		../../CUtil/include/CFlags.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CPathShape.h \
 		CQIllustratorSelection.h \
 		CQIllustratorUndo.h \
@@ -17096,7 +17525,7 @@ compiler_clean: compiler_moc_header_clean
 		/usr/include/qt5/QtGui/QCursor \
 		/usr/include/qt5/QtGui/QTransform \
 		CQIllustratorData.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -17112,6 +17541,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CLineDash.h \
@@ -17123,6 +17553,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CFont/include/CFontStyle.h \
 		../../CUtil/include/CFlags.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CPathShape.h \
 		CQIllustratorSelection.h \
 		CQIllustratorUndo.h \
@@ -17317,7 +17748,7 @@ compiler_clean: compiler_moc_header_clean
 		/usr/include/qt5/QtGui/QCursor \
 		/usr/include/qt5/QtGui/QTransform \
 		CQIllustratorData.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -17333,6 +17764,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CLineDash.h \
@@ -17344,6 +17776,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CFont/include/CFontStyle.h \
 		../../CUtil/include/CFlags.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CPathShape.h \
 		CQIllustratorSelection.h \
 		CQIllustratorUndo.h \
@@ -17496,7 +17929,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -17512,6 +17945,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -17550,6 +17984,10 @@ compiler_clean: compiler_moc_header_clean
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
+		/usr/include/qt5/QtCore/qrect.h \
+		/usr/include/qt5/QtCore/qsize.h \
+		/usr/include/qt5/QtCore/qpoint.h \
 		CQIllustratorSaveData.h \
 		CPathShape.h \
 		CBooleanOp.h \
@@ -17561,9 +17999,6 @@ compiler_clean: compiler_moc_header_clean
 		/usr/include/qt5/QtGui/qwindowdefs.h \
 		/usr/include/qt5/QtGui/qwindowdefs_win.h \
 		/usr/include/qt5/QtCore/qmargins.h \
-		/usr/include/qt5/QtCore/qrect.h \
-		/usr/include/qt5/QtCore/qsize.h \
-		/usr/include/qt5/QtCore/qpoint.h \
 		/usr/include/qt5/QtGui/qpaintdevice.h \
 		/usr/include/qt5/QtGui/qpalette.h \
 		/usr/include/qt5/QtGui/qcolor.h \
@@ -17787,7 +18222,7 @@ compiler_clean: compiler_moc_header_clean
 		/usr/include/qt5/QtGui/QCursor \
 		/usr/include/qt5/QtGui/QTransform \
 		CQIllustratorData.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -17803,6 +18238,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CLineDash.h \
@@ -17814,6 +18250,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CFont/include/CFontStyle.h \
 		../../CUtil/include/CFlags.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CPathShape.h \
 		CQIllustratorSelection.h \
 		CQIllustratorUndo.h \
@@ -17942,7 +18379,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CISize2D.h \
 		CQIllustratorData.h \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -17958,6 +18395,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -17996,6 +18434,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CQIllustratorSaveData.h \
 		CPathShape.h \
 		CBooleanOp.h \
@@ -18110,6 +18549,233 @@ compiler_clean: compiler_moc_header_clean
 		cursors/zoom.xbm \
 		cursors/zoommask.xbm
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CQIllustratorZoomMode.o CQIllustratorZoomMode.cpp
+
+../obj/CQIllustratorPropertiesDlg.o: CQIllustratorPropertiesDlg.cpp CQIllustratorPropertiesDlg.h \
+		/usr/include/qt5/QtWidgets/QFrame \
+		/usr/include/qt5/QtWidgets/qframe.h \
+		/usr/include/qt5/QtWidgets/qwidget.h \
+		/usr/include/qt5/QtGui/qwindowdefs.h \
+		/usr/include/qt5/QtCore/qglobal.h \
+		/usr/include/qt5/QtCore/qconfig.h \
+		/usr/include/qt5/QtCore/qfeatures.h \
+		/usr/include/qt5/QtCore/qsystemdetection.h \
+		/usr/include/qt5/QtCore/qprocessordetection.h \
+		/usr/include/qt5/QtCore/qcompilerdetection.h \
+		/usr/include/qt5/QtCore/qglobalstatic.h \
+		/usr/include/qt5/QtCore/qatomic.h \
+		/usr/include/qt5/QtCore/qbasicatomic.h \
+		/usr/include/qt5/QtCore/qatomic_bootstrap.h \
+		/usr/include/qt5/QtCore/qgenericatomic.h \
+		/usr/include/qt5/QtCore/qatomic_msvc.h \
+		/usr/include/qt5/QtCore/qatomic_integrity.h \
+		/usr/include/qt5/QtCore/qoldbasicatomic.h \
+		/usr/include/qt5/QtCore/qatomic_vxworks.h \
+		/usr/include/qt5/QtCore/qatomic_power.h \
+		/usr/include/qt5/QtCore/qatomic_alpha.h \
+		/usr/include/qt5/QtCore/qatomic_armv7.h \
+		/usr/include/qt5/QtCore/qatomic_armv6.h \
+		/usr/include/qt5/QtCore/qatomic_armv5.h \
+		/usr/include/qt5/QtCore/qatomic_bfin.h \
+		/usr/include/qt5/QtCore/qatomic_ia64.h \
+		/usr/include/qt5/QtCore/qatomic_mips.h \
+		/usr/include/qt5/QtCore/qatomic_s390.h \
+		/usr/include/qt5/QtCore/qatomic_sh4a.h \
+		/usr/include/qt5/QtCore/qatomic_sparc.h \
+		/usr/include/qt5/QtCore/qatomic_gcc.h \
+		/usr/include/qt5/QtCore/qatomic_x86.h \
+		/usr/include/qt5/QtCore/qatomic_cxx11.h \
+		/usr/include/qt5/QtCore/qatomic_unix.h \
+		/usr/include/qt5/QtCore/qmutex.h \
+		/usr/include/qt5/QtCore/qlogging.h \
+		/usr/include/qt5/QtCore/qflags.h \
+		/usr/include/qt5/QtCore/qtypeinfo.h \
+		/usr/include/qt5/QtCore/qtypetraits.h \
+		/usr/include/qt5/QtCore/qsysinfo.h \
+		/usr/include/qt5/QtCore/qobjectdefs.h \
+		/usr/include/qt5/QtCore/qnamespace.h \
+		/usr/include/qt5/QtCore/qobjectdefs_impl.h \
+		/usr/include/qt5/QtGui/qwindowdefs_win.h \
+		/usr/include/qt5/QtCore/qobject.h \
+		/usr/include/qt5/QtCore/qstring.h \
+		/usr/include/qt5/QtCore/qchar.h \
+		/usr/include/qt5/QtCore/qbytearray.h \
+		/usr/include/qt5/QtCore/qrefcount.h \
+		/usr/include/qt5/QtCore/qarraydata.h \
+		/usr/include/qt5/QtCore/qstringbuilder.h \
+		/usr/include/qt5/QtCore/qlist.h \
+		/usr/include/qt5/QtCore/qalgorithms.h \
+		/usr/include/qt5/QtCore/qiterator.h \
+		/usr/include/qt5/QtCore/qcoreevent.h \
+		/usr/include/qt5/QtCore/qscopedpointer.h \
+		/usr/include/qt5/QtCore/qmetatype.h \
+		/usr/include/qt5/QtCore/qvarlengtharray.h \
+		/usr/include/qt5/QtCore/qcontainerfwd.h \
+		/usr/include/qt5/QtCore/qisenum.h \
+		/usr/include/qt5/QtCore/qobject_impl.h \
+		/usr/include/qt5/QtCore/qmargins.h \
+		/usr/include/qt5/QtCore/qrect.h \
+		/usr/include/qt5/QtCore/qsize.h \
+		/usr/include/qt5/QtCore/qpoint.h \
+		/usr/include/qt5/QtGui/qpaintdevice.h \
+		/usr/include/qt5/QtGui/qpalette.h \
+		/usr/include/qt5/QtGui/qcolor.h \
+		/usr/include/qt5/QtGui/qrgb.h \
+		/usr/include/qt5/QtCore/qstringlist.h \
+		/usr/include/qt5/QtCore/qdatastream.h \
+		/usr/include/qt5/QtCore/qiodevice.h \
+		/usr/include/qt5/QtCore/qpair.h \
+		/usr/include/qt5/QtCore/qregexp.h \
+		/usr/include/qt5/QtCore/qstringmatcher.h \
+		/usr/include/qt5/QtGui/qbrush.h \
+		/usr/include/qt5/QtCore/qvector.h \
+		/usr/include/qt5/QtGui/qmatrix.h \
+		/usr/include/qt5/QtGui/qpolygon.h \
+		/usr/include/qt5/QtGui/qregion.h \
+		/usr/include/qt5/QtCore/qline.h \
+		/usr/include/qt5/QtGui/qtransform.h \
+		/usr/include/qt5/QtGui/qpainterpath.h \
+		/usr/include/qt5/QtGui/qimage.h \
+		/usr/include/qt5/QtGui/qpixmap.h \
+		/usr/include/qt5/QtCore/qsharedpointer.h \
+		/usr/include/qt5/QtCore/qshareddata.h \
+		/usr/include/qt5/QtCore/qsharedpointer_impl.h \
+		/usr/include/qt5/QtCore/qhash.h \
+		/usr/include/qt5/QtGui/qfont.h \
+		/usr/include/qt5/QtGui/qfontmetrics.h \
+		/usr/include/qt5/QtGui/qfontinfo.h \
+		/usr/include/qt5/QtWidgets/qsizepolicy.h \
+		/usr/include/qt5/QtGui/qcursor.h \
+		/usr/include/qt5/QtGui/qkeysequence.h \
+		/usr/include/qt5/QtGui/qevent.h \
+		/usr/include/qt5/QtCore/qvariant.h \
+		/usr/include/qt5/QtCore/qmap.h \
+		/usr/include/qt5/QtCore/qdebug.h \
+		/usr/include/qt5/QtCore/qtextstream.h \
+		/usr/include/qt5/QtCore/qlocale.h \
+		/usr/include/qt5/QtCore/qset.h \
+		/usr/include/qt5/QtCore/qcontiguouscache.h \
+		/usr/include/qt5/QtCore/qurl.h \
+		/usr/include/qt5/QtCore/qurlquery.h \
+		/usr/include/qt5/QtCore/qfile.h \
+		/usr/include/qt5/QtCore/qfiledevice.h \
+		/usr/include/qt5/QtGui/qvector2d.h \
+		/usr/include/qt5/QtGui/qtouchdevice.h \
+		CQIllustrator.h \
+		../../CQUtil/include/CQMainWindow.h \
+		/usr/include/qt5/QtWidgets/QMainWindow \
+		/usr/include/qt5/QtWidgets/qmainwindow.h \
+		/usr/include/qt5/QtWidgets/qtabwidget.h \
+		/usr/include/qt5/QtGui/qicon.h \
+		../../CUtil/include/CAutoPtr.h \
+		../../CMath/include/CPoint2D.h \
+		../../CMath/include/CIPoint2D.h \
+		../../CImageLib/include/CImageLib.h \
+		../../CFile/include/CFile.h \
+		../../CFile/include/CFileBase.h \
+		../../CFile/include/CFileType.h \
+		../../CUtil/include/CAlignType.h \
+		../../CUtil/include/CRGBA.h \
+		../../CUtil/include/CRGB.h \
+		../../CUtil/include/CHSV.h \
+		../../CUtil/include/CRGBUtil.h \
+		../../CUtil/include/CCMYK.h \
+		../../CUtil/include/CHSL.h \
+		../../CUtil/include/CHSB.h \
+		../../CUtil/include/CHSI.h \
+		../../CMath/include/CMathGen.h \
+		../../COS/include/NaN.h \
+		../../CRGBName/include/CRGBName.h \
+		../../CUtil/include/CColorComponent.h \
+		../../CImageLib/include/CImageState.h \
+		../../CImageLib/include/CImage.h \
+		../../CUtil/include/CRGBACombineDef.h \
+		../../CMath/include/CISize2D.h \
+		../../CMath/include/CIBBox2D.h \
+		../../CMath/include/CIVector2D.h \
+		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImagePtr.h \
+		../../CUtil/include/CRefPtr.h \
+		../../CImageLib/include/CImageMgr.h \
+		../../CStrUtil/include/CStrUtil.h \
+		../../CImageLib/include/CImageAnim.h \
+		../../CImageLib/include/CImageFile.h \
+		../../CUtil/include/CEvent.h \
+		../../CUtil/include/CKeyType.h \
+		CBooleanOp.h \
+		CStack.h \
+		CQIllustratorSaveData.h \
+		../../CMath/include/CBBox2D.h \
+		../../CMath/include/CVector2D.h \
+		../../CMath/include/CSize2D.h \
+		CQIllustratorMode.h \
+		/usr/include/qt5/QtCore/QObject \
+		/usr/include/qt5/QtCore/QPoint \
+		/usr/include/qt5/QtGui/QCursor \
+		/usr/include/qt5/QtGui/QTransform \
+		CQIllustratorData.h \
+		CQIllustratorQuadTree.h \
+		CQIllustratorShape.h \
+		../../CUtil/include/CAutoPtrVector.h \
+		../../CMath/include/CPolygon2D.h \
+		../../CMath/include/CShape2D.h \
+		../../CMath/include/CLine2D.h \
+		CMathGeom2D.h \
+		../../CMath/include/CPolygonOrientation.h \
+		../../CUtil/include/CLineJoinType.h \
+		../../CMath/include/C3Bezier2D.h \
+		../../CMath/include/C2Bezier2D.h \
+		../../CMath/include/CTriangle2D.h \
+		CStateIterator.h \
+		../../CUtil/include/CGeneric.h \
+		../../CUtil/include/CTypeTraits.h \
+		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
+		../../CMath/include/CMatrixType.h \
+		../../CUtil/include/CThrow.h \
+		../../CUtil/include/CLineDash.h \
+		../../CUtil/include/CILineDash.h \
+		../../CUtil/include/CLineCapType.h \
+		../../CUtil/include/CFillType.h \
+		CPathPartType.h \
+		../../CFont/include/CFont.h \
+		../../CFont/include/CFontStyle.h \
+		../../CUtil/include/CFlags.h \
+		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
+		CPathShape.h \
+		CQIllustratorSelection.h \
+		CQIllustratorUndo.h \
+		../../CUndo/include/CUndo.h \
+		CQIllustratorSandbox.h \
+		CQIllustratorShapeDrawer.h \
+		/usr/include/qt5/QtGui/QFont \
+		/usr/include/qt5/QtGui/QImage \
+		CQIllustratorLayer.h \
+		../../CQPropertyTree/include/CQPropertyTree.h \
+		/usr/include/qt5/QtWidgets/QTreeWidget \
+		/usr/include/qt5/QtWidgets/qtreewidget.h \
+		/usr/include/qt5/QtWidgets/qtreeview.h \
+		/usr/include/qt5/QtWidgets/qabstractitemview.h \
+		/usr/include/qt5/QtWidgets/qabstractscrollarea.h \
+		/usr/include/qt5/QtCore/qabstractitemmodel.h \
+		/usr/include/qt5/QtCore/qitemselectionmodel.h \
+		/usr/include/qt5/QtWidgets/qabstractitemdelegate.h \
+		/usr/include/qt5/QtWidgets/qstyleoption.h \
+		/usr/include/qt5/QtWidgets/qabstractspinbox.h \
+		/usr/include/qt5/QtGui/qvalidator.h \
+		/usr/include/qt5/QtCore/qregularexpression.h \
+		/usr/include/qt5/QtWidgets/qslider.h \
+		/usr/include/qt5/QtWidgets/qabstractslider.h \
+		/usr/include/qt5/QtWidgets/qstyle.h \
+		/usr/include/qt5/QtWidgets/qtabbar.h \
+		/usr/include/qt5/QtWidgets/qrubberband.h \
+		/usr/include/qt5/QtWidgets/qtreewidgetitemiterator.h \
+		/usr/include/qt5/QtWidgets/QVBoxLayout \
+		/usr/include/qt5/QtWidgets/qboxlayout.h \
+		/usr/include/qt5/QtWidgets/qlayout.h \
+		/usr/include/qt5/QtWidgets/qlayoutitem.h \
+		/usr/include/qt5/QtWidgets/qgridlayout.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CQIllustratorPropertiesDlg.o CQIllustratorPropertiesDlg.cpp
 
 ../obj/CQImageButton.o: CQImageButton.cpp CQImageButton.h \
 		/usr/include/qt5/QtWidgets/QToolButton \
@@ -18438,6 +19104,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		CQScrollArea.h \
@@ -18656,7 +19323,7 @@ compiler_clean: compiler_moc_header_clean
 		/usr/include/qt5/QtGui/QCursor \
 		/usr/include/qt5/QtGui/QTransform \
 		CQIllustratorData.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -18672,6 +19339,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CLineDash.h \
@@ -18683,6 +19351,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CFont/include/CFontStyle.h \
 		../../CUtil/include/CFlags.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CPathShape.h \
 		CQIllustratorSelection.h \
 		CQIllustratorUndo.h \
@@ -18890,6 +19559,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		/usr/include/qt5/QtWidgets/QAction \
@@ -19084,6 +19754,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		/usr/include/qt5/QtGui/QContextMenuEvent \
@@ -19277,6 +19948,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		/usr/include/qt5/QtWidgets/QAction \
@@ -19399,6 +20071,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CMatrix2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CIPoint2D.h \
 		../../CMath/include/CVector2D.h \
@@ -19646,7 +20319,7 @@ compiler_clean: compiler_moc_header_clean
 		/usr/include/qt5/QtGui/QCursor \
 		/usr/include/qt5/QtGui/QTransform \
 		CQIllustratorData.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
@@ -19662,6 +20335,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CLineDash.h \
@@ -19673,6 +20347,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CFont/include/CFontStyle.h \
 		../../CUtil/include/CFlags.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CPathShape.h \
 		CQIllustratorSelection.h \
 		CQIllustratorUndo.h \
@@ -20153,6 +20828,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -20191,11 +20867,12 @@ compiler_clean: compiler_moc_header_clean
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CQIllustratorSaveData.h \
 		CQIllustratorData.h \
 		/usr/include/qt5/QtCore/QObject \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CPathShape.h \
 		CBooleanOp.h \
 		/usr/include/qt5/QtCore/QPointer \
@@ -20658,6 +21335,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
 		../../CUtil/include/CRGBA.h \
@@ -20694,11 +21372,12 @@ compiler_clean: compiler_moc_header_clean
 		../../CImageLib/include/CImageAnim.h \
 		../../CImageLib/include/CImageFile.h \
 		../../CMath/include/CGenGradient.h \
+		/usr/include/qt5/QtCore/QRectF \
 		CQIllustratorSaveData.h \
 		CQIllustratorData.h \
 		/usr/include/qt5/QtCore/QObject \
 		CStack.h \
-		CQuadTree.h \
+		CQIllustratorQuadTree.h \
 		CPathShape.h \
 		CBooleanOp.h \
 		CQIllustrator.h \
@@ -20744,6 +21423,8 @@ compiler_clean: compiler_moc_header_clean
 		/usr/include/qt5/QtWidgets/qspinbox.h \
 		/usr/include/qt5/QtWidgets/QPushButton \
 		/usr/include/qt5/QtWidgets/qpushbutton.h \
+		/usr/include/qt5/QtWidgets/QCheckBox \
+		/usr/include/qt5/QtWidgets/qcheckbox.h \
 		/usr/include/qt5/QtGui/QPainter \
 		/usr/include/qt5/QtGui/qpainter.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CQStrokeOption.o CQStrokeOption.cpp
@@ -21278,6 +21959,9 @@ compiler_clean: compiler_moc_header_clean
 ../obj/moc_CQIllustratorSetRGradientMode.o: .moc/moc_CQIllustratorSetRGradientMode.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/moc_CQIllustratorSetRGradientMode.o .moc/moc_CQIllustratorSetRGradientMode.cpp
 
+../obj/moc_CQIllustratorShape.o: .moc/moc_CQIllustratorShape.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/moc_CQIllustratorShape.o .moc/moc_CQIllustratorShape.cpp
+
 ../obj/moc_CQIllustratorSliceMode.o: .moc/moc_CQIllustratorSliceMode.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/moc_CQIllustratorSliceMode.o .moc/moc_CQIllustratorSliceMode.cpp
 
@@ -21298,6 +21982,9 @@ compiler_clean: compiler_moc_header_clean
 
 ../obj/moc_CQIllustratorZoomMode.o: .moc/moc_CQIllustratorZoomMode.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/moc_CQIllustratorZoomMode.o .moc/moc_CQIllustratorZoomMode.cpp
+
+../obj/moc_CQIllustratorPropertiesDlg.o: .moc/moc_CQIllustratorPropertiesDlg.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/moc_CQIllustratorPropertiesDlg.o .moc/moc_CQIllustratorPropertiesDlg.cpp
 
 ../obj/moc_CQImageButton.o: .moc/moc_CQImageButton.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/moc_CQImageButton.o .moc/moc_CQImageButton.cpp

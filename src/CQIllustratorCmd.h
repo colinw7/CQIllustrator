@@ -20,9 +20,11 @@ class CQIllustratorCmdMgr {
  private:
   typedef std::map<std::string, CQIllustratorCmd *> CmdList;
 
-  CQIllustrator *illustrator_;
+  CQIllustrator *illustrator_ { 0 };
   CmdList        cmdList_;
 };
+
+//------
 
 class CQIllustratorCmd {
  public:
@@ -37,7 +39,7 @@ class CQIllustratorCmd {
   void setIllustrator(CQIllustrator *illustrator) { illustrator_ = illustrator; }
 
  protected:
-  CQIllustrator *illustrator_;
+  CQIllustrator *illustrator_ { 0 };
   CArgs          args_;
 };
 

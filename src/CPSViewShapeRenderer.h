@@ -33,10 +33,10 @@ class CPSViewShapeRenderer : public CPSViewRenderer {
   CPoint2D convertPoint(const CPoint2D &p);
 
  private:
-  CQIllustrator            *illustrator_;
+  CQIllustrator            *illustrator_ { 0 };
   CQIllustratorShapeStroke  stroke_;
   CQIllustratorShapeFill    fill_;
-  CPathShape               *path_;
+  CPathShape               *path_ { 0 };
 };
 
 #endif

@@ -1,12 +1,6 @@
 #include <CQOptionToolSet.h>
 #include <CQIllustratorShape.h>
 
-class QPaintEvent;
-class QStackedWidget;
-class QComboBox;
-class QCheckBox;
-class QDoubleSpinBox;
-
 class CQFillOptionDialog;
 class CQFillOptionSwab;
 class CQImageButton;
@@ -16,6 +10,12 @@ class CQPointEdit;
 class CQGradientStopList;
 class CQImagePreview;
 class CQIllustratorShapeFill;
+
+class QPaintEvent;
+class QStackedWidget;
+class QComboBox;
+class QCheckBox;
+class QDoubleSpinBox;
 
 class CQFillOptionTool : public CQOptionTool {
   Q_OBJECT
@@ -35,10 +35,12 @@ class CQFillOptionTool : public CQOptionTool {
   void clipChanged(bool);
 
  private:
-  CQIllustrator      *illustrator_;
-  CQFillOptionDialog *dialog_;
-  CQFillOptionSwab   *swab_;
+  CQIllustrator      *illustrator_ { 0 };
+  CQFillOptionDialog *dialog_      { 0 };
+  CQFillOptionSwab   *swab_        { 0 };
 };
+
+//---
 
 class CQFillOptionDialog : public CQOptionToolDialog {
   Q_OBJECT
@@ -61,6 +63,7 @@ class CQFillOptionDialog : public CQOptionToolDialog {
   void rgradSlot();
   void imageSlot();
 
+  void shownSlot   (int state);
   void colorSlot   (const QColor &color);
   void opacitySlot (double value);
   void fillRuleSlot(const QString &value);
@@ -87,38 +90,36 @@ class CQFillOptionDialog : public CQOptionToolDialog {
   void clipChanged(bool);
 
  private:
-  CQFillOptionTool       *tool_;
+  CQFillOptionTool       *tool_ { 0 };
   CQIllustratorShapeFill  fill_;
 
-  CQImageButton *flatButton_;
-  CQImageButton *lgradButton_;
-  CQImageButton *rgradButton_;
-  CQImageButton *imageButton_;
+  // Mode Buttons
+  CQImageButton *flatButton_  { 0 };
+  CQImageButton *lgradButton_ { 0 };
+  CQImageButton *rgradButton_ { 0 };
+  CQImageButton *imageButton_ { 0 };
 
-  QStackedWidget *stack_;
+  QStackedWidget *stack_ { 0 };
 
   // Flat Widgets
-
-  CQColorChooser *colorChooser_;
-  QDoubleSpinBox *opacityEdit_;
-  QComboBox      *fillRule_;
-  QCheckBox      *clipCheck_;
+  QCheckBox*      shownCheck_   { 0 };
+  CQColorChooser* colorChooser_ { 0 };
+  QDoubleSpinBox* opacityEdit_  { 0 };
+  QComboBox*      fillRule_     { 0 };
+  QCheckBox*      clipCheck_    { 0 };
 
   // Linear Gradient Widgets
-
-  CQPointEdit        *lgrad1_;
-  CQPointEdit        *lgrad2_;
-  CQGradientStopList *lgradStops_;
+  CQPointEdit        *lgrad1_     { 0 };
+  CQPointEdit        *lgrad2_     { 0 };
+  CQGradientStopList *lgradStops_ { 0 };
 
   // Radial Gradient Widgets
-
-  CQPointEdit        *rgradC_;
-  CQRealEdit         *rgradR_;
-  CQPointEdit        *rgradF_;
-  CQGradientStopList *rgradStops_;
+  CQPointEdit        *rgradC_     { 0 };
+  CQRealEdit         *rgradR_     { 0 };
+  CQPointEdit        *rgradF_     { 0 };
+  CQGradientStopList *rgradStops_ { 0 };
 
   // Image Widgets
-
-  CQImagePreview *imagePreview_;
-  QComboBox      *imageScale_;
+  CQImagePreview *imagePreview_ { 0 };
+  QComboBox      *imageScale_   { 0 };
 };

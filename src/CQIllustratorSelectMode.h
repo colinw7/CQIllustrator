@@ -6,8 +6,6 @@
 #include <CQIllustratorToolbar.h>
 #include <CQIllustratorSizer.h>
 
-#include <CQIllustratorMode.h>
-
 class CQImageButton;
 class CQIllustratorSelectMode;
 

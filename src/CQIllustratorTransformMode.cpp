@@ -26,7 +26,7 @@
 
 CQIllustratorTransformMode::
 CQIllustratorTransformMode(CQIllustrator *illustrator) :
- CQIllustratorMode(illustrator, CQIllustrator::MODE_TRANSFORM)
+ CQIllustratorMode(illustrator, (uint) CQIllustrator::Mode::TRANSFORM)
 {
 }
 
@@ -272,7 +272,7 @@ apply()
 
     if (shape->getFixed()) continue;
 
-    const CBBox2D &bbox = shape->getBBox();
+    const CBBox2D &bbox = shape->getFlatBBox();
 
     CPoint2D ll;
 
@@ -343,7 +343,7 @@ apply()
 
     if (shape->getFixed()) continue;
 
-    CBBox2D bbox = shape->getBBox();
+    CBBox2D bbox = shape->getFlatBBox();
 
     bbox.setWidth (bbox.getWidth ()*dw);
     bbox.setHeight(bbox.getHeight()*dh);

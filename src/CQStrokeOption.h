@@ -11,6 +11,7 @@ class CQLineDash;
 class CQLineCap;
 class CQLineJoin;
 class QDoubleSpinBox;
+class QCheckBox;
 
 class CQStrokeOptionTool : public CQOptionTool {
   Q_OBJECT
@@ -29,9 +30,9 @@ class CQStrokeOptionTool : public CQOptionTool {
   void selectionChangedSlot();
 
  private:
-  CQIllustrator        *illustrator_;
-  CQStrokeOptionDialog *dialog_;
-  CQStrokeOptionSwab   *swab_;
+  CQIllustrator        *illustrator_ { 0 };
+  CQStrokeOptionDialog *dialog_ { 0 };
+  CQStrokeOptionSwab   *swab_ { 0 };
 };
 
 class CQStrokeOptionDialog : public CQOptionToolDialog {
@@ -49,6 +50,7 @@ class CQStrokeOptionDialog : public CQOptionToolDialog {
   void updateWidgets();
 
  private slots:
+  void shownSlot  (int state);
   void colorSlot  (const QColor &color);
   void widthSlot  (double);
   void opacitySlot(double);
@@ -63,13 +65,14 @@ class CQStrokeOptionDialog : public CQOptionToolDialog {
   void valueChanged(const CQIllustratorShapeStroke &stroke);
 
  private:
-  CQStrokeOptionTool       *tool_;
-  CQIllustratorShapeStroke  stroke_;
-  CQColorChooser           *colorChooser_;
-  QDoubleSpinBox           *widthEdit_;
-  QDoubleSpinBox           *opacityEdit_;
-  CQLineDash               *dashEdit_;
-  CQLineCap                *capEdit_;
-  CQLineJoin               *joinEdit_;
-  QDoubleSpinBox           *mitreEdit_;
+  CQStrokeOptionTool*      tool_ { 0 };
+  CQIllustratorShapeStroke stroke_;
+  QCheckBox*               shownCheck_ { 0 };
+  CQColorChooser*          colorChooser_ { 0 };
+  QDoubleSpinBox*          widthEdit_ { 0 };
+  QDoubleSpinBox*          opacityEdit_ { 0 };
+  CQLineDash*              dashEdit_ { 0 };
+  CQLineCap*               capEdit_ { 0 };
+  CQLineJoin*              joinEdit_ { 0 };
+  QDoubleSpinBox*          mitreEdit_ { 0 };
 };

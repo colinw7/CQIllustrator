@@ -70,12 +70,12 @@ class CQIllustratorShapeDrawer {
  protected:
   typedef std::vector<CMatrix2D> MatrixStack;
 
-  CQIllustrator *illustrator_;
-  QPainter      *painter_;
+  CQIllustrator *illustrator_ { 0 };
+  QPainter      *painter_ { 0 };
   CBBox2D        bbox_;
-  QPainterPath  *path_;
+  QPainterPath  *path_ { 0 };
   QFont          qfont_;
-  CMatrix2D      m_;
+  CMatrix2D      m_ { CMATRIX_TYPE_IDENTITY };
   MatrixStack    matrices_;
 
   CImagePtr control_point_image_;
@@ -89,6 +89,8 @@ class CQIllustratorShapeDrawer {
   QImage qi2_curve_;
 };
 
+//------
+
 class CQIllustratorFilterShapeDrawer : public CQIllustratorShapeDrawer {
  public:
   CQIllustratorFilterShapeDrawer(CQIllustratorShapeDrawer *drawer,
@@ -99,8 +101,8 @@ class CQIllustratorFilterShapeDrawer : public CQIllustratorShapeDrawer {
   QImage &getImage();
 
  private:
-  CQIllustrator            *illustrator_;
-  const CQIllustratorShape *shape_;
+  CQIllustrator            *illustrator_ { 0 };
+  const CQIllustratorShape *shape_ { 0 };
   QImage                    qimage_;
   CBBox2D                   bbox_;
 };

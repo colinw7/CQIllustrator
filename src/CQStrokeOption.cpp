@@ -12,6 +12,7 @@
 #include <QLabel>
 #include <QDoubleSpinBox>
 #include <QPushButton>
+#include <QCheckBox>
 #include <QPainter>
 
 class CQStrokeOptionSwab : public QWidget {
@@ -143,7 +144,7 @@ paintEvent(QPaintEvent *)
 
 CQStrokeOptionDialog::
 CQStrokeOptionDialog(CQStrokeOptionTool *tool) :
- CQOptionToolDialog(), tool_(tool), colorChooser_(0)
+ CQOptionToolDialog(), tool_(tool)
 {
   setObjectName("dialog");
 
@@ -168,14 +169,16 @@ initWidgets()
 
   QGridLayout *gridLayout = new QGridLayout;
 
-  gridLayout->addWidget(new QLabel("Color"      ), 0, 0);
-  gridLayout->addWidget(new QLabel("Width"      ), 1, 0);
-  gridLayout->addWidget(new QLabel("Opacity"    ), 2, 0);
-  gridLayout->addWidget(new QLabel("Dash"       ), 3, 0);
-  gridLayout->addWidget(new QLabel("Line Cap"   ), 4, 0);
-  gridLayout->addWidget(new QLabel("Line Join"  ), 5, 0);
-  gridLayout->addWidget(new QLabel("Mitre Limit"), 6, 0);
+  gridLayout->addWidget(new QLabel("Shown"      ), 0, 0);
+  gridLayout->addWidget(new QLabel("Color"      ), 1, 0);
+  gridLayout->addWidget(new QLabel("Width"      ), 2, 0);
+  gridLayout->addWidget(new QLabel("Opacity"    ), 3, 0);
+  gridLayout->addWidget(new QLabel("Dash"       ), 4, 0);
+  gridLayout->addWidget(new QLabel("Line Cap"   ), 5, 0);
+  gridLayout->addWidget(new QLabel("Line Join"  ), 6, 0);
+  gridLayout->addWidget(new QLabel("Mitre Limit"), 7, 0);
 
+  shownCheck_   = new QCheckBox;
   colorChooser_ = new CQColorChooser;
   widthEdit_    = new QDoubleSpinBox;
   opacityEdit_  = new QDoubleSpinBox;
@@ -201,6 +204,8 @@ initWidgets()
 
   colorChooser_->setStyles(CQColorChooser::ColorButton);
 
+  connect(shownCheck_  , SIGNAL(stateChanged(int)),
+          this, SLOT(shownSlot(int)));
   connect(colorChooser_, SIGNAL(colorChanged(const QColor &)),
           this, SLOT(colorSlot(const QColor &)));
   connect(widthEdit_   , SIGNAL(valueChanged(double)),
@@ -216,13 +221,14 @@ initWidgets()
   connect(mitreEdit_   , SIGNAL(valueChanged(double)),
           this, SLOT(mitreSlot(double)));
 
-  gridLayout->addWidget(colorChooser_, 0, 1);
-  gridLayout->addWidget(widthEdit_   , 1, 1);
-  gridLayout->addWidget(opacityEdit_ , 2, 1);
-  gridLayout->addWidget(dashEdit_    , 3, 1);
-  gridLayout->addWidget(capEdit_     , 4, 1);
-  gridLayout->addWidget(joinEdit_    , 5, 1);
-  gridLayout->addWidget(mitreEdit_   , 6, 1);
+  gridLayout->addWidget(shownCheck_  , 0, 1);
+  gridLayout->addWidget(colorChooser_, 1, 1);
+  gridLayout->addWidget(widthEdit_   , 2, 1);
+  gridLayout->addWidget(opacityEdit_ , 3, 1);
+  gridLayout->addWidget(dashEdit_    , 4, 1);
+  gridLayout->addWidget(capEdit_     , 5, 1);
+  gridLayout->addWidget(joinEdit_    , 6, 1);
+  gridLayout->addWidget(mitreEdit_   , 7, 1);
 
   layout->addLayout(gridLayout);
 
@@ -239,6 +245,7 @@ void
 CQStrokeOptionDialog::
 updateWidgets()
 {
+  shownCheck_  ->setChecked (stroke_.isStroked());
   colorChooser_->setColor   (CQUtil::rgbaToColor(stroke_.getColor()));
   widthEdit_   ->setValue   (stroke_.getWidth());
   opacityEdit_ ->setValue   (stroke_.getOpacity());
@@ -246,6 +253,17 @@ updateWidgets()
   capEdit_     ->setLineCap (stroke_.getLineCap());
   joinEdit_    ->setLineJoin(stroke_.getLineJoin());
   mitreEdit_   ->setValue   (stroke_.getMitreLimit());
+}
+
+void
+CQStrokeOptionDialog::
+shownSlot(int state)
+{
+  stroke_.setStroked(state);
+
+  tool_->update();
+
+  emit valueChanged(stroke_);
 }
 
 void

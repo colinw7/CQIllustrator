@@ -36,8 +36,8 @@ class CQGradientStopColorItem : public CQTableWidgetItem {
   bool paint(QPainter *painter, const QStyleOptionViewItem &option) const;
 
  private:
-  CQGradientStopTable              *table_;
-  uint                              ind_;
+  CQGradientStopTable              *table_ { 0 };
+  uint                              ind_ { 0 };
   CRGBA                             rgba_;
   mutable QPointer<CQColorChooser>  edit_;
 };
@@ -65,9 +65,9 @@ class CQGradientStopAlphaItem : public CQTableWidgetItem {
   QString toString() const;
 
  private:
-  CQGradientStopTable          *table_;
-  uint                          ind_;
-  double                        alpha_;
+  CQGradientStopTable          *table_ { 0 };
+  uint                          ind_ { 0 };
+  double                        alpha_ { 0 };
   mutable QPointer<CQRealEdit>  edit_;
 };
 
@@ -94,9 +94,9 @@ class CQGradientStopOffsetItem : public CQTableWidgetItem {
   QString toString() const;
 
  private:
-  CQGradientStopTable          *table_;
-  uint                          ind_;
-  double                        offset_;
+  CQGradientStopTable          *table_ { 0 };
+  uint                          ind_ { 0 };
+  double                        offset_ { 0 };
   mutable QPointer<CQRealEdit>  edit_;
 };
 
@@ -110,11 +110,11 @@ class CQGradientStopTable : public CQTableWidget {
 
   void clear();
 
- private:
-  CQGradientStopList *list_;
-
  private slots:
   void updateStopsSlot();
+
+ private:
+  CQGradientStopList *list_ { 0 };
 };
 
 //------
@@ -137,7 +137,7 @@ class CQGradientStopList : public QWidget {
   void stopsChanged();
 
  private:
-  CQGradientStopTable    *table_;
+  CQGradientStopTable    *table_ { 0 };
   CGenGradient::StopList  stops_;
 };
 

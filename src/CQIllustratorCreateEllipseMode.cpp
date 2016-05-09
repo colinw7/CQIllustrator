@@ -30,7 +30,7 @@ class CQIllustratorCreateEllipseCmd : public CQIllustratorCmd {
 
 CQIllustratorCreateEllipseMode::
 CQIllustratorCreateEllipseMode(CQIllustrator *illustrator) :
- CQIllustratorMode(illustrator, CQIllustrator::MODE_ELLIPSE), equalSize_(false)
+ CQIllustratorMode(illustrator, (uint) CQIllustrator::Mode::ELLIPSE)
 {
   setCursor(circle_bits, circlemask_bits, 2, 2);
 
@@ -182,6 +182,7 @@ drawOverlay(CQIllustratorShapeDrawer *drawer)
 
       pen.setColor(QColor(0,0,0));
       pen.setStyle(Qt::DashLine);
+      pen.setWidth(0);
 
       painter->setPen(pen);
       painter->setBrush(Qt::NoBrush);

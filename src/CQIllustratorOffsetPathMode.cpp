@@ -19,7 +19,7 @@
 
 CQIllustratorOffsetPathMode::
 CQIllustratorOffsetPathMode(CQIllustrator *illustrator) :
- CQIllustratorMode(illustrator, CQIllustrator::MODE_OFFSET_PATH), w_(0.0)
+ CQIllustratorMode(illustrator, (uint) CQIllustrator::Mode::OFFSET_PATH), w_(0.0)
 {
   setCursor(rect_bits, rectmask_bits, 2, 2);
 }
@@ -155,6 +155,7 @@ drawOverlay(CQIllustratorShapeDrawer *drawer)
 
       pen.setColor(QColor(0,0,0));
       pen.setStyle(Qt::DashLine);
+      pen.setWidth(0);
 
       painter->setPen(pen);
       painter->setBrush(Qt::NoBrush);

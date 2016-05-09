@@ -37,7 +37,7 @@ addShape(CQIllustratorShape *shape)
 
   shapes_.push(shape);
 
-  if (shape->getBBox().isSet())
+  if (shape->getFlatBBox().isSet())
     quadTree_->add(shape);
 
   emit objectCreated(shape);
@@ -137,7 +137,7 @@ getObjectAt(const CPoint2D &p) const
   for (ps1 = shapes.begin(), ps2 = shapes.end(); ps1 != ps2; ++ps1) {
     CQIllustratorShape *shape = *ps1;
 
-    double area = shape->getBBox().area();
+    double area = shape->getFlatBBox().area();
 
     if (select_shape == 0 || area < select_area) {
       select_shape = shape;

@@ -69,6 +69,7 @@ CQIllustratorTransformMode.cpp \
 CQIllustratorUndo.cpp \
 CQIllustratorUndoDock.cpp \
 CQIllustratorZoomMode.cpp \
+CQIllustratorPropertiesDlg.cpp \
 CQImageButton.cpp \
 CQImagePreview.cpp \
 CQLayerOption.cpp \
@@ -147,6 +148,7 @@ CQIllustratorTransformMode.h \
 CQIllustratorUndoDock.h \
 CQIllustratorUndo.h \
 CQIllustratorZoomMode.h \
+CQIllustratorPropertiesDlg.h \
 CQImageButton.h \
 CQImagePreview.h \
 CQLayerOption.h \
@@ -177,6 +179,7 @@ LIB_DIR     = ../lib
 INCLUDEPATH += \
 ../include \
 ../../CSVG/include \
+../../CQPropertyTree/include \
 ../../CQUtil/include \
 ../../CImageLib/include \
 ../../CConfig/include \
@@ -195,6 +198,7 @@ INCLUDEPATH += \
 unix:LIBS += \
 -L$$LIB_DIR \
 -L../../CSVG/lib \
+-L../../CQPropertyTree/lib \
 -L../../CQUtil/lib \
 -L../../CXML/lib \
 -L../../CImageLib/lib \
@@ -211,6 +215,7 @@ unix:LIBS += \
 -L../../COS/lib \
 -lCSVG \
 -lCXML \
+-lCQPropertyTree \
 -lCQUtil \
 -lCImageLib \
 -lCFont \

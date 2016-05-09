@@ -8,8 +8,8 @@
 
 CQIllustratorSetAnchorPositionMode::
 CQIllustratorSetAnchorPositionMode(CQIllustrator *illustrator) :
- CQIllustratorMode(illustrator->getMode(CQIllustrator::MODE_ALIGN),
-                   CQIllustrator::MODE_ANCHOR_POSITION)
+ CQIllustratorMode(illustrator->getMode(CQIllustrator::Mode::ALIGN),
+                   (int) CQIllustrator::Mode::ANCHOR_POSITION)
 {
 }
 

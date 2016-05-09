@@ -22,7 +22,7 @@ enum { ROTATE_SMALL = 1, ROTATE_NORMAL = 15, ROTATE_LARGE = 90 };
 
 CQIllustratorSelectMode::
 CQIllustratorSelectMode(CQIllustrator *illustrator) :
- CQIllustratorMode(illustrator, CQIllustrator::MODE_SELECT), sizing_(false), inside_(true)
+ CQIllustratorMode(illustrator, (uint) CQIllustrator::Mode::SELECT), sizing_(false), inside_(true)
 {
   setCursor(select_bits, selectmask_bits, 2, 2);
 
@@ -82,7 +82,7 @@ handleMousePress(const MouseEvent &)
     for (ps1 = selection->begin(), ps2 = selection->end(); ps1 != ps2; ++ps1) {
       CQIllustratorShape *shape = (*ps1).getShape();
 
-      const CBBox2D &bbox = shape->getBBox();
+      const CBBox2D &bbox = shape->getFlatBBox();
 
       if (bbox.inside(p)) {
         dragging_ = true;
@@ -97,7 +97,7 @@ handleMousePress(const MouseEvent &)
     if (illustrator_->getSandbox()->getNumShapes() == 1) {
       CQIllustratorShape *shape = illustrator_->getSandbox()->frontShape();
 
-      drag_bbox_   = shape->getBBox();
+      drag_bbox_   = shape->getFlatBBox();
       drag_center_ = shape->getRotateCenter();
       drag_matrix_ = shape->getMatrix();
     }
@@ -267,6 +267,7 @@ drawOverlay(CQIllustratorShapeDrawer *drawer)
 
       pen.setColor(QColor(0,0,0));
       pen.setStyle(Qt::DashLine);
+      pen.setWidth(0);
 
       painter->setPen(pen);
       painter->setBrush(Qt::NoBrush);

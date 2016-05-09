@@ -29,7 +29,7 @@ class CQIllustratorCreateRectCmd : public CQIllustratorCmd {
 
 CQIllustratorCreateRectMode::
 CQIllustratorCreateRectMode(CQIllustrator *illustrator) :
- CQIllustratorMode(illustrator, CQIllustrator::MODE_RECT), equalSize_(false)
+ CQIllustratorMode(illustrator, (uint) CQIllustrator::Mode::RECT), equalSize_(false)
 {
   setCursor(rect_bits, rectmask_bits, 2, 2);
 
@@ -191,6 +191,7 @@ drawOverlay(CQIllustratorShapeDrawer *drawer)
 
       pen.setColor(QColor(0,0,0));
       pen.setStyle(Qt::DashLine);
+      pen.setWidth(0);
 
       painter->setPen(pen);
       painter->setBrush(Qt::NoBrush);

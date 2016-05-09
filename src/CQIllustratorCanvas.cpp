@@ -13,7 +13,7 @@ enum { TIMEOUT = 500 };
 
 CQIllustratorCanvas::
 CQIllustratorCanvas(CQIllustrator *illustrator) :
- illustrator_(illustrator), popupMenu_(0), pressed_(false), infoShape_(0)
+ illustrator_(illustrator)
 {
   setFocusPolicy(Qt::StrongFocus);
 

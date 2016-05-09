@@ -237,6 +237,9 @@ draw(CQIllustratorShapeDrawer *drawer, const CQIllustratorShape *shape)
 
   CBBox2D bbox = shape->getFlatBBox();
 
+  if (! bbox.isSet())
+    return;
+
   const CPoint2D &rcenter = shape->getRotateCenter();
 
   QPainter *painter = drawer->getPainter();

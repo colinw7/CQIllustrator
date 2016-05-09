@@ -21,7 +21,7 @@
 
 CQIllustratorZoomMode::
 CQIllustratorZoomMode(CQIllustrator *illustrator) :
- CQIllustratorMode(illustrator, CQIllustrator::MODE_ZOOM)
+ CQIllustratorMode(illustrator, (uint) CQIllustrator::Mode::ZOOM)
 {
   setCursor(zoom_bits, zoommask_bits, 2, 2);
 }
@@ -134,6 +134,7 @@ drawOverlay(CQIllustratorShapeDrawer *drawer)
 
     pen.setColor(QColor(0,0,0));
     pen.setStyle(Qt::DashLine);
+    pen.setWidth(0);
 
     painter->setPen(pen);
     painter->setBrush(Qt::NoBrush);

@@ -95,7 +95,7 @@ getBBox() const
   for (ps1 = edit_shapes_.begin(), ps2 = edit_shapes_.end(); ps1 != ps2; ++ps1) {
     CQIllustratorShape *shape = *ps1;
 
-    bbox += shape->getBBox();
+    bbox += shape->getFlatBBox();
   }
 
   return bbox;

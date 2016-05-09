@@ -28,7 +28,7 @@
 
 CQIllustratorCreateTextMode::
 CQIllustratorCreateTextMode(CQIllustrator *illustrator) :
- CQIllustratorMode(illustrator, CQIllustrator::MODE_TEXT), equalSize_(false),
+ CQIllustratorMode(illustrator, (uint) CQIllustrator::Mode::TEXT), equalSize_(false),
  text_("Hello"), cursor_pos_(0)
 {
   setCursor(text_bits, textmask_bits, 2, 2);
@@ -224,6 +224,7 @@ drawOverlay(CQIllustratorShapeDrawer *drawer)
 
       pen.setColor(QColor(0,0,0));
       pen.setStyle(Qt::DashLine);
+      pen.setWidth(0);
 
       painter->setPen(pen);
       painter->setBrush(Qt::NoBrush);

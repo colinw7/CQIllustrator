@@ -20,8 +20,10 @@ class CQFontOptionTool : public CQOptionTool {
   void valueChanged(const QFont &);
 
  private:
-  CQFontOptionDialog *dialog_;
+  CQFontOptionDialog *dialog_ { 0 };
 };
+
+//------
 
 class CQFontOptionDialog : public CQOptionToolDialog {
   Q_OBJECT
@@ -44,7 +46,7 @@ class CQFontOptionDialog : public CQOptionToolDialog {
   void valueChanged(const QFont &);
 
  private:
-  CQFontOptionTool *tool_;
+  CQFontOptionTool *tool_ { 0 };
   QFont             font_;
-  CQFontChooser    *fontChooser_;
+  CQFontChooser    *fontChooser_ { 0 };
 };

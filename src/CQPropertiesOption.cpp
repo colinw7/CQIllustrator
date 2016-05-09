@@ -202,8 +202,15 @@ update(const CQIllustratorShape *shape)
 
     nameEdit_ ->setText (name_.c_str());
     classEdit_->setText (shape->getClassName());
-    posEdit_  ->setValue(bbox.getLL());
-    sizeEdit_ ->setValue(CPoint2D(bbox.getWidth(), bbox.getHeight()));
+
+    if (bbox.isSet()) {
+      posEdit_ ->setValue(bbox.getLL());
+      sizeEdit_->setValue(CPoint2D(bbox.getWidth(), bbox.getHeight()));
+    }
+    else {
+      posEdit_ ->setValue(CPoint2D(0,0));
+      sizeEdit_->setValue(CPoint2D(0,0));
+    }
 
     const CQIllustratorTextShape *text = dynamic_cast<const CQIllustratorTextShape *>(shape);
 
@@ -379,22 +386,22 @@ CQControlPointsTable::
 updatePointsSlot()
 {
 #if 0
+  int ind      = 0;
   int num_rows = rowCount();
-
-  int ind = 0;
 
   CGenGradient::StopList &stops = list_->getStops();
 
-  CGenGradient::StopList::iterator p1, p2;
-
-  for (p1 = stops.begin(), p2 = stops.end(); p1 != p2 && ind < num_rows; ++p1, ++ind) {
-    CGradientStop &stop = *p1;
+  for (const auto &stop : stops) {
+    if (ind >= num_rows)
+      break;
 
     CQControlPointItem *item = getItem<CQControlPointItem >(ind, 1);
 
     CPoint2D p = item->getValue();
 
     shape->setControlPoint(p);
+
+    ++ind;
   }
 
   list_->emitStopsChanged();

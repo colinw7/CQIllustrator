@@ -33,8 +33,10 @@ class CQEllipseShape2DConnectType : public QComboBox {
  private:
   std::map<QString,CEllipseConnectType> nameValue_;
   std::map<CEllipseConnectType,QString> valueName_;
-  CEllipseConnectType                   value_;
+  CEllipseConnectType                   value_ { CELLIPSE_CONNECT_LINE };
 };
+
+//------
 
 class CQIllustratorCreateEllipseToolbar : public CQIllustratorToolbar {
   Q_OBJECT
@@ -56,14 +58,16 @@ class CQIllustratorCreateEllipseToolbar : public CQIllustratorToolbar {
   void updateShape();
 
  private:
-  CQIllustratorCreateEllipseMode *mode_;
-  CQPointEdit                    *posEdit_;
-  CQRealEdit                     *widthEdit_;
-  CQRealEdit                     *heightEdit_;
-  CQAngleSpinBox                 *angle1Edit_;
-  CQAngleSpinBox                 *angle2Edit_;
-  CQEllipseShape2DConnectType    *connectEdit_;
+  CQIllustratorCreateEllipseMode *mode_ { 0 };
+  CQPointEdit                    *posEdit_ { 0 };
+  CQRealEdit                     *widthEdit_ { 0 };
+  CQRealEdit                     *heightEdit_ { 0 };
+  CQAngleSpinBox                 *angle1Edit_ { 0 };
+  CQAngleSpinBox                 *angle2Edit_ { 0 };
+  CQEllipseShape2DConnectType    *connectEdit_ { 0 };
 };
+
+//------
 
 class CQIllustratorCreateEllipseSizer : public CQIllustratorModeSizer {
  public:
@@ -72,11 +76,13 @@ class CQIllustratorCreateEllipseSizer : public CQIllustratorModeSizer {
   void drawHandles(QPainter *painter, const CQIllustratorShape *shape);
 
  private:
-  CQIllustratorControlPointHandle *rx_handle_;
-  CQIllustratorControlPointHandle *ry_handle_;
-  CQIllustratorControlPointHandle *a1_handle_;
-  CQIllustratorControlPointHandle *a2_handle_;
+  CQIllustratorControlPointHandle *rx_handle_ { 0 };
+  CQIllustratorControlPointHandle *ry_handle_ { 0 };
+  CQIllustratorControlPointHandle *a1_handle_ { 0 };
+  CQIllustratorControlPointHandle *a2_handle_ { 0 };
 };
+
+//------
 
 class CQIllustratorCreateEllipseMode : public CQIllustratorMode {
   Q_OBJECT
@@ -104,9 +110,9 @@ class CQIllustratorCreateEllipseMode : public CQIllustratorMode {
   void drawOverlay(CQIllustratorShapeDrawer *drawer);
 
  private:
-  CQIllustratorCreateEllipseToolbar *toolbar_;
-  CQIllustratorCreateEllipseSizer   *sizer_;
-  bool                               equalSize_;
+  CQIllustratorCreateEllipseToolbar *toolbar_ { 0 };
+  CQIllustratorCreateEllipseSizer   *sizer_ { 0 };
+  bool                               equalSize_ { false };
 };
 
 #endif

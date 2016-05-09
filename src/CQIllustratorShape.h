@@ -15,6 +15,7 @@
 #include <CFont.h>
 #include <CImageLib.h>
 #include <CGenGradient.h>
+#include <QRectF>
 
 class CQIllustratorShape;
 class CQIllustratorShapeDrawer;
@@ -24,19 +25,18 @@ class CQIllustratorShapeDrawer;
 
 struct CQIllustratorShapeStroke {
  public:
-  CQIllustratorShapeStroke() :
-   color_(0,0,0), width_(1), opacity_(1), dash_(), cap_(LINE_CAP_TYPE_SQUARE),
-   join_(LINE_JOIN_TYPE_MITRE), mlimit_(3) {
-  }
+  CQIllustratorShapeStroke() { }
 
   CQIllustratorShapeStroke(const CQIllustratorShapeStroke &stroke) :
-   color_(stroke.color_), width_(stroke.width_), opacity_(stroke.opacity_),
-   dash_(stroke.dash_), cap_(stroke.cap_), join_(stroke.join_), mlimit_(stroke.mlimit_) {
+   stroked_(stroke.stroked_), color_(stroke.color_), width_(stroke.width_),
+   opacity_(stroke.opacity_), dash_(stroke.dash_), cap_(stroke.cap_), join_(stroke.join_),
+   mlimit_(stroke.mlimit_) {
   }
 
   virtual ~CQIllustratorShapeStroke() { }
 
   const CQIllustratorShapeStroke &operator=(const CQIllustratorShapeStroke &stroke) {
+    stroked_ = stroke.stroked_;
     color_   = stroke.color_;
     width_   = stroke.width_;
     opacity_ = stroke.opacity_;
@@ -47,6 +47,9 @@ struct CQIllustratorShapeStroke {
 
     return *this;
   }
+
+  bool isStroked() const { return stroked_; }
+  void setStroked(bool b) { stroked_ = b; }
 
   const CRGBA &getColor() const { return color_; }
   void setColor(const CRGBA &color) { color_ = color; }
@@ -72,13 +75,14 @@ struct CQIllustratorShapeStroke {
   void draw(const CQIllustratorShape *shape, CQIllustratorShapeDrawer *drawer) const;
 
  private:
-  CRGBA         color_;
-  double        width_;
-  double        opacity_;
+  bool          stroked_ { false };
+  CRGBA         color_ { 0, 0, 0 };
+  double        width_ { 1 };
+  double        opacity_ { 1 };
   CLineDash     dash_;
-  CLineCapType  cap_;
-  CLineJoinType join_;
-  double        mlimit_;
+  CLineCapType  cap_ { LINE_CAP_TYPE_SQUARE };
+  CLineJoinType join_ { LINE_JOIN_TYPE_MITRE };
+  double        mlimit_ { 3 };
 };
 
 //------
@@ -92,9 +96,7 @@ class CQIllustratorImageFill {
   };
 
  public:
-  CQIllustratorImageFill() :
-   image_(), scale_(SCALE_NONE), halign_(CHALIGN_TYPE_LEFT), valign_(CVALIGN_TYPE_BOTTOM) {
-  }
+  CQIllustratorImageFill() { }
 
   CQIllustratorImageFill(const CQIllustratorImageFill &image) :
    image_(image.image_), scale_(image.scale_), halign_(image.halign_), valign_(image.valign_) {
@@ -116,9 +118,9 @@ class CQIllustratorImageFill {
 
  private:
   CImagePtr   image_;
-  Scale       scale_;
-  CHAlignType halign_;
-  CVAlignType valign_;
+  Scale       scale_ { SCALE_NONE };
+  CHAlignType halign_ { CHALIGN_TYPE_LEFT };
+  CVAlignType valign_ { CVALIGN_TYPE_BOTTOM };
 };
 
 //------
@@ -132,12 +134,10 @@ class CQIllustratorShapeFill {
   };
 
  public:
-  CQIllustratorShapeFill() :
-   color_(1,1,1), opacity_(1), rule_(FILL_TYPE_EVEN_ODD), gradient_(0), image_(0) {
-  }
+  CQIllustratorShapeFill() { }
 
   CQIllustratorShapeFill(const CQIllustratorShapeFill &fill) :
-   color_(fill.color_), opacity_(fill.opacity_), rule_(fill.rule_), gradient_(0), image_(0) {
+   filled_(fill.filled_), color_(fill.color_), opacity_(fill.opacity_), rule_(fill.rule_) {
     if (fill.gradient_)
       gradient_ = fill.gradient_->dup();
 
@@ -146,6 +146,7 @@ class CQIllustratorShapeFill {
   }
 
   const CQIllustratorShapeFill &operator=(const CQIllustratorShapeFill &fill) {
+    filled_  = fill.filled_;
     color_   = fill.color_;
     opacity_ = fill.opacity_;
     rule_    = fill.rule_;
@@ -172,6 +173,9 @@ class CQIllustratorShapeFill {
     delete image_;
   }
 
+  bool isFilled() const { return filled_; }
+  void setFilled(bool b) { filled_ = b; }
+
   const CRGBA &getColor() const { return color_; }
   void setColor(const CRGBA &color) { color_ = color; }
 
@@ -193,7 +197,6 @@ class CQIllustratorShapeFill {
   }
 
   const CGenGradient *getGradient() const { return gradient_; }
-
   CGenGradient *getGradient() { return gradient_; }
 
   bool hasImage() const { return (image_ != 0); }
@@ -278,11 +281,12 @@ class CQIllustratorShapeFill {
   void draw(const CQIllustratorShape *shape, CQIllustratorShapeDrawer *drawer) const;
 
  private:
-  CRGBA                   color_;
-  double                  opacity_;
-  CFillType               rule_;
-  CGenGradient           *gradient_;
-  CQIllustratorImageFill *image_;
+  bool                    filled_ { true };
+  CRGBA                   color_ { 1, 1, 1 };
+  double                  opacity_ { 1 };
+  CFillType               rule_ { FILL_TYPE_EVEN_ODD };
+  CGenGradient           *gradient_ { 0 };
+  CQIllustratorImageFill *image_ { 0 };
 };
 
 //------
@@ -307,7 +311,7 @@ class CQIllustratorShapeFilterMgr {
   typedef std::map<uint,CQIllustratorShapeFilter *> FilterMap;
 
   FilterMap filterMap_;
-  uint      id_;
+  uint      id_ { 0 };
 };
 
 //------
@@ -326,7 +330,7 @@ class CQIllustratorShapeFilter {
   void setId(uint id) { id_ = id; }
 
  protected:
-  uint id_;
+  uint id_ { 0 };
 };
 
 //------
@@ -371,7 +375,7 @@ class CQIllustratorShapeControlLine {
   virtual void moveLineTo(CQIllustratorShape *shape, const CLine2D &line);
 
  protected:
-  uint    id_;
+  uint    id_ { 0 };
   CLine2D line_;
 };
 
@@ -416,7 +420,7 @@ class CQIllustratorShapeControlPoint {
   static double pointDist(const CPoint2D &p1, const CPoint2D &p2);
 
  protected:
-  uint             id_;
+  uint             id_ { 0 };
   CPoint2D         point_;
   ControlPointType type_;
 };
@@ -532,7 +536,15 @@ class CQIllustratorShapeRGradientControlPoint : public CQIllustratorShapeControl
 
 #include <CPathShape.h>
 
-class CQIllustratorShape {
+class CQIllustratorShape : public QObject {
+  Q_OBJECT
+
+  Q_PROPERTY(int     id      READ getId      WRITE setId)
+  Q_PROPERTY(QString name    READ getQName   WRITE setQName)
+  Q_PROPERTY(QRectF  bbox    READ getQRect)
+  Q_PROPERTY(bool    fixed   READ getFixed   WRITE setFixed)
+  Q_PROPERTY(bool    visible READ getVisible WRITE setVisible)
+
  public:
   enum ControlType {
     CONTROL_GEOMETRY,
@@ -556,20 +568,21 @@ class CQIllustratorShape {
   virtual CQIllustratorShape *dup() const = 0;
 
   CQIllustratorData *getData() const { return data_; }
-
   void setData(CQIllustratorData *data) { data_ = data; }
 
-  uint getId() const { return id_; }
-
-  void setId(uint id) { id_ = id; }
+  int getId() const { return id_; }
+  void setId(int id) { id_ = id; }
 
   virtual const char *getClassName() const { return "shape"; }
 
   const std::string &getName() const { return name_; }
-
   void setName(const std::string &name);
 
+  QString getQName() const { return name_.c_str(); }
+  void setQName(const QString &name) { setName(name.toStdString()); }
+
   const CBBox2D &getBBox() const;
+  QRectF getQRect() const;
 
   virtual CPoint2D getCenter() const;
 
@@ -582,14 +595,12 @@ class CQIllustratorShape {
   CBBox2D getFlatBBox() const;
 
   const CMatrix2D &getMatrix() const { return m_; }
-
   void setMatrix(const CMatrix2D &m);
 
   virtual void addChild   (CQIllustratorShape *child);
   virtual void removeChild(CQIllustratorShape *child);
 
   CQIllustratorShape *getParent() const { return parent_; }
-
   virtual void setParent(CQIllustratorShape *newParent);
 
   virtual void childrenChanged() { }
@@ -719,25 +730,25 @@ class CQIllustratorShape {
   CQIllustratorShape &operator=(const CQIllustratorShape &rhs);
 
  protected:
-  static uint last_id_;
+  static int last_id_;
 
-  CQIllustratorData        *data_;
-  uint                      id_;
-  CQIllustratorShape       *parent_;
+  CQIllustratorData        *data_ { 0 };
+  int                       id_ { 0 };
+  CQIllustratorShape       *parent_ { 0 };
   ShapeList                 shapes_;
   std::string               name_;
   CQIllustratorShapeStroke  stroke_;
   CQIllustratorShapeFill    fill_;
-  uint                      filter_id_;
-  bool                      clip_;
-  bool                      fixed_;
-  bool                      visible_;
+  uint                      filter_id_ { 0 };
+  bool                      clip_ { false };
+  bool                      fixed_ { false };
+  bool                      visible_ { true };
   CPoint2D                  rcenter_;
   CMatrix2D                 m_;
-  int                       lock_count_;
+  int                       lock_count_ { 0 };
 
   mutable CBBox2D           bbox_;
-  mutable bool              bbox_valid_;
+  mutable bool              bbox_valid_ { false };
 };
 
 //------
@@ -1355,8 +1366,7 @@ class CQIllustratorPathGeometry : public CQIllustratorShapeGeometry {
  public:
   CQIllustratorPathGeometry(bool fixed=false, const CPoint2D &rcenter=CPoint2D(0,0),
                             const CMatrix2D m=CMatrix2D(),
-                            const CPathShapePartList &parts=
-                              CPathShapePartList()) :
+                            const CPathShapePartList &parts=CPathShapePartList()) :
    CQIllustratorShapeGeometry(fixed, rcenter, m), parts_(parts) {
   }
 
@@ -1458,7 +1468,7 @@ class CPathShape : public CQIllustratorShape {
 
  protected:
   CPathShapePartList parts_;
-  mutable int                    group_;
+  mutable int        group_ { 0 };
 };
 
 //------
@@ -1504,8 +1514,8 @@ class CPathShapeControlPoint : public CQIllustratorShapeControlPoint {
   void setCurveNode (CQIllustratorShape *shape) const;
 
  protected:
-  uint ind_;
-  uint ind1_;
+  uint ind_  { 0 };
+  uint ind1_ { 0 };
 };
 
 //------

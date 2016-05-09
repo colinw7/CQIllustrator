@@ -34,7 +34,7 @@
 
 CQIllustratorCreatePolygonMode::
 CQIllustratorCreatePolygonMode(CQIllustrator *illustrator) :
- CQIllustratorMode(illustrator, CQIllustrator::MODE_POLYGON)
+ CQIllustratorMode(illustrator, (uint) CQIllustrator::Mode::POLYGON)
 {
   setCursor(select_bits, selectmask_bits, 2, 2);
 }
@@ -485,6 +485,7 @@ drawOverlay(CQIllustratorShapeDrawer *drawer)
 
         pen.setColor(QColor(0,0,0));
         pen.setStyle(Qt::DashLine);
+        pen.setWidth(0);
 
         painter->setPen(pen);
         painter->setBrush(Qt::NoBrush);
@@ -529,6 +530,7 @@ drawPolygonPoints(QPainter *painter)
 
   pen.setColor(QColor(0,0,0));
   pen.setStyle(Qt::DashLine);
+  pen.setWidth(0);
 
   painter->setPen(pen);
   painter->setBrush(Qt::NoBrush);

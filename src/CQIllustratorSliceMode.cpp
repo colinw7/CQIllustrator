@@ -17,7 +17,7 @@
 
 CQIllustratorSliceMode::
 CQIllustratorSliceMode(CQIllustrator *illustrator) :
- CQIllustratorMode(illustrator, CQIllustrator::MODE_SLICE)
+ CQIllustratorMode(illustrator, (uint) CQIllustrator::Mode::SLICE)
 {
   setCursor(slice_bits, slicemask_bits, 2, 2);
 }
@@ -152,6 +152,7 @@ drawOverlay(CQIllustratorShapeDrawer *drawer)
 
     pen.setColor(QColor(0,0,0));
     pen.setStyle(Qt::DashLine);
+    pen.setWidth(0);
 
     painter->setPen(pen);
     painter->setBrush(Qt::NoBrush);

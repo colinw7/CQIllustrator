@@ -2,54 +2,37 @@
 #include <CQIllustratorData.h>
 #include <CQIllustratorShapeDrawer.h>
 
-#include <QPainter>
-#include <CMathGeom2D.h>
+#include <CQUtil.h>
+#include <CQImageGaussianBlur.h>
 #include <CLinearGradient.h>
 #include <CRadialGradient.h>
-#include <CQImageGaussianBlur.h>
+#include <CMathGeom2D.h>
+#include <QPainter>
 
-uint CQIllustratorShape:: last_id_ = 1;
+int CQIllustratorShape:: last_id_ = 1;
 
 CQIllustratorShape::
 CQIllustratorShape(CQIllustratorShape *parent) :
- data_      (0),
- id_        (last_id_++),
- parent_    (parent),
- shapes_    (),
- name_      (""),
- stroke_    (),
- fill_      (),
- filter_id_ (0),
- clip_      (false),
- fixed_     (false),
- visible_   (true),
- rcenter_   (),
- m_         (),
- lock_count_(0),
- bbox_      (),
- bbox_valid_(false)
+ QObject(), id_(last_id_++), parent_(parent)
 {
   m_.setIdentity();
 }
 
 CQIllustratorShape::
 CQIllustratorShape(const CQIllustratorShape &shape) :
- data_      (0),
- id_        (last_id_++),
- parent_    (shape.parent_),
- shapes_    (shape.shapes_),
- name_      (shape.name_),
- stroke_    (shape.stroke_),
- fill_      (shape.fill_),
- filter_id_ (shape.filter_id_),
- clip_      (shape.clip_),
- fixed_     (shape.fixed_),
- visible_   (shape.visible_),
- rcenter_   (shape.rcenter_),
- m_         (shape.m_),
- lock_count_(0),
- bbox_      (),
- bbox_valid_(false)
+ QObject   (),
+ id_       (last_id_++),
+ parent_   (shape.parent_),
+ shapes_   (shape.shapes_),
+ name_     (shape.name_),
+ stroke_   (shape.stroke_),
+ fill_     (shape.fill_),
+ filter_id_(shape.filter_id_),
+ clip_     (shape.clip_),
+ fixed_    (shape.fixed_),
+ visible_  (shape.visible_),
+ rcenter_  (shape.rcenter_),
+ m_        (shape.m_)
 {
 }
 
@@ -102,6 +85,9 @@ getFlatBBox() const
 {
   CBBox2D bbox = getBBox();
 
+  if (! bbox.isSet())
+    return bbox;
+
   if (parent_) {
     const CMatrix2D &m = getFlatMatrix();
 
@@ -110,17 +96,31 @@ getFlatBBox() const
     CPoint2D p3 = m*bbox.getUL();
     CPoint2D p4 = m*bbox.getUR();
 
-    CBBox2D bbox1;
+    CBBox2D bbox1(p1, p2);
 
-    bbox1 += p1;
-    bbox1 += p2;
     bbox1 += p3;
     bbox1 += p4;
 
     return bbox1;
   }
-  else
-    return bbox;
+  else {
+    const CMatrix2D &m = getMatrix();
+
+    if (! bbox.isSet())
+      return bbox;
+
+    CPoint2D p1 = m*bbox.getLL();
+    CPoint2D p2 = m*bbox.getLR();
+    CPoint2D p3 = m*bbox.getUL();
+    CPoint2D p4 = m*bbox.getUR();
+
+    CBBox2D bbox1(p1, p2);
+
+    bbox1 += p3;
+    bbox1 += p4;
+
+    return bbox1;
+  }
 }
 
 void
@@ -264,11 +264,23 @@ getBBox() const
   return bbox_;
 }
 
+QRectF
+CQIllustratorShape::
+getQRect() const
+{
+  CBBox2D bbox = getBBox();
+
+  if (bbox.isSet())
+    return CQUtil::toQRect(bbox);
+  else
+    return QRectF();
+}
+
 CPoint2D
 CQIllustratorShape::
 getCenter() const
 {
-  return getBBox().getCenter();
+  return getFlatBBox().getCenter();
 }
 
 CQIllustratorShapeStroke &
@@ -423,7 +435,7 @@ bool
 CQIllustratorShape::
 inside(const CPoint2D &p) const
 {
-  const CBBox2D &bbox = getBBox();
+  const CBBox2D &bbox = getFlatBBox();
 
   return bbox.inside(p);
 }
@@ -478,7 +490,7 @@ double
 CQIllustratorShape::
 distance(const CPoint2D &p) const
 {
-  const CBBox2D &bbox = getBBox();
+  const CBBox2D &bbox = getFlatBBox();
 
   const CPoint2D &p1 = bbox.getLL();
   const CPoint2D &p2 = bbox.getUR();
@@ -525,7 +537,7 @@ void
 CQIllustratorShape::
 moveTo(const CPoint2D &pos)
 {
-  const CBBox2D &bbox = getBBox();
+  const CBBox2D &bbox = getFlatBBox();
 
   CPoint2D d = pos - bbox.getLL();
 
@@ -553,7 +565,7 @@ void
 CQIllustratorShape::
 resizeTo(double w, double h)
 {
-  const CBBox2D &bbox = getBBox();
+  const CBBox2D &bbox = getFlatBBox();
 
   double dw = w - bbox.getWidth ();
   double dh = h - bbox.getHeight();
@@ -565,7 +577,7 @@ void
 CQIllustratorShape::
 resizeBy(double dw, double dh)
 {
-  const CBBox2D &bbox = getBBox();
+  const CBBox2D &bbox = getFlatBBox();
 
   double w = bbox.getWidth ();
   double h = bbox.getHeight();
@@ -723,7 +735,7 @@ draw(CQIllustratorShapeDrawer *drawer) const
     drawShape(drawer);
 
   if (getFixed()) {
-    const CBBox2D &bbox = getBBox();
+    const CBBox2D &bbox = getFlatBBox();
 
     drawer->pathInit();
     drawer->pathMoveTo(bbox.getLL());
@@ -793,15 +805,17 @@ drawSelect(CQIllustratorShapeDrawer *drawer)
 {
   CBBox2D bbox = getFlatBBox();
 
-  CPoint2D p1 = bbox.getLL();
-  CPoint2D p2 = bbox.getLR();
-  CPoint2D p3 = bbox.getUR();
-  CPoint2D p4 = bbox.getUL();
+  if (bbox.isSet()) {
+    CPoint2D p1 = bbox.getLL();
+    CPoint2D p2 = bbox.getLR();
+    CPoint2D p3 = bbox.getUR();
+    CPoint2D p4 = bbox.getUL();
 
-  drawer->drawControlLine(p1, p2);
-  drawer->drawControlLine(p2, p3);
-  drawer->drawControlLine(p3, p4);
-  drawer->drawControlLine(p4, p1);
+    drawer->drawControlLine(p1, p2);
+    drawer->drawControlLine(p2, p3);
+    drawer->drawControlLine(p3, p4);
+    drawer->drawControlLine(p4, p1);
+  }
 }
 
 bool
@@ -1137,8 +1151,7 @@ setPoint(CQIllustratorShape *shape, const CPoint2D &point)
 CQIllustratorRectShape::
 CQIllustratorRectShape(const CPoint2D &p1, const CPoint2D &p2, double rx, double ry) :
  CQIllustratorShape(), p1_(std::min(p1.x, p2.x), std::min(p1.y, p2.y)),
- p2_(std::max(p1.x, p2.x), std::max(p1.y, p2.y)),
- rx_(rx), ry_(ry)
+ p2_(std::max(p1.x, p2.x), std::max(p1.y, p2.y)), rx_(rx), ry_(ry)
 {
 }
 
@@ -1331,8 +1344,8 @@ updateBBox() const
     CPoint2D p3 = m*CPoint2D(p2_.x, p2_.y);
     CPoint2D p4 = m*CPoint2D(p1_.x, p2_.y);
 
-    bbox_ += p1;
-    bbox_ += p2;
+    bbox_ = CBBox2D(p1, p2);
+
     bbox_ += p3;
     bbox_ += p4;
 
@@ -1935,8 +1948,8 @@ updateBBox() const
     CPoint2D p3 = m*CPoint2D(p2_.x, p2_.y);
     CPoint2D p4 = m*CPoint2D(p1_.x, p2_.y);
 
-    bbox_ += p1;
-    bbox_ += p2;
+    bbox_ = CBBox2D(p1, p2);
+
     bbox_ += p3;
     bbox_ += p4;
 
@@ -3620,7 +3633,7 @@ class CPathShapePolygonProcess : public CPathShapeProcess {
 
 CPathShape::
 CPathShape(const CPathShapePartList &parts) :
- CQIllustratorShape(), parts_(parts), group_(0)
+ CQIllustratorShape(), parts_(parts)
 {
 }
 
@@ -3667,7 +3680,7 @@ void
 CPathShape::
 moveBy(const CPoint2D &d)
 {
-  const CMatrix2D &m = getFlatMatrix();
+  const CMatrix2D &m = getMatrix();
 
   CMatrix2D im = m.inverse();
 
@@ -4888,7 +4901,7 @@ setType(CQIllustratorShape *shape, CPathPartType type)
 
 CPathShapeControlPoint::
 CPathShapeControlPoint(uint ind, const CPoint2D &p) :
- CQIllustratorShapeControlPoint((ind << 4), p), ind_(ind), ind1_(0)
+ CQIllustratorShapeControlPoint((ind << 4), p), ind_(ind)
 {
 }
 
@@ -5107,8 +5120,8 @@ updateBBox() const
     CPoint2D p3 = m*CPoint2D(p2_.x, p2_.y);
     CPoint2D p4 = m*CPoint2D(p1_.x, p2_.y);
 
-    bbox_ += p1;
-    bbox_ += p2;
+    bbox_ = CBBox2D(p1, p2);
+
     bbox_ += p3;
     bbox_ += p4;
 
@@ -5371,13 +5384,15 @@ CQIllustratorGroupShape::
 getControlPoints(ControlPointList &points, ControlType type) const
 {
   if (type == CONTROL_GEOMETRY) {
-    const CBBox2D &bbox = getBBox();
+    const CBBox2D &bbox = getFlatBBox();
 
-    CPoint2D p1 = bbox.getLL();
-    CPoint2D p2 = bbox.getUR();
+    if (bbox.isSet()) {
+      CPoint2D p1 = bbox.getLL();
+      CPoint2D p2 = bbox.getUR();
 
-    points.push_back(new CQIllustratorGroupShapeControlPoint(0, p1));
-    points.push_back(new CQIllustratorGroupShapeControlPoint(1, p2));
+      points.push_back(new CQIllustratorGroupShapeControlPoint(0, p1));
+      points.push_back(new CQIllustratorGroupShapeControlPoint(1, p2));
+    }
   }
   else
     CQIllustratorShape::getControlPoints(points, type);
@@ -5424,22 +5439,17 @@ updateBBox() const
   if (! bbox_valid_) {
     CBBox2D bbox;
 
-    ShapeList::const_iterator ps1, ps2;
+    for (const auto &shape : shapes_) {
+      const CBBox2D &shapeBBox = shape->getBBox();
 
-    for (ps1 = shapes_.begin(), ps2 = shapes_.end(); ps1 != ps2; ++ps1)
-      bbox += (*ps1)->getBBox();
+      if (shapeBBox.isSet())
+        bbox += shapeBBox;
+    }
 
-    CPoint2D p1 = bbox.getLL();
-    CPoint2D p2 = bbox.getLR();
-    CPoint2D p3 = bbox.getUL();
-    CPoint2D p4 = bbox.getUR();
-
-    bbox_ = CBBox2D(p1, p3);
-
-    bbox_ += p2;
-    bbox_ += p4;
-
-    bbox_valid_ = true;
+    if (bbox.isSet()) {
+      bbox_       = bbox;
+      bbox_valid_ = true;
+    }
   }
 }
 
@@ -5620,6 +5630,9 @@ void
 CQIllustratorShapeStroke::
 draw(const CQIllustratorShape *shape, CQIllustratorShapeDrawer *drawer) const
 {
+  if (! isStroked())
+    return;
+
   drawer->setStroke(shape, *this);
 
   drawer->pathStroke();
@@ -5629,6 +5642,9 @@ void
 CQIllustratorShapeFill::
 draw(const CQIllustratorShape *shape, CQIllustratorShapeDrawer *drawer) const
 {
+  if (! isFilled())
+    return;
+
   drawer->setFill(shape, *this);
 
   drawer->pathFill(rule_);
@@ -5789,8 +5805,7 @@ getInstance()
 }
 
 CQIllustratorShapeFilterMgr::
-CQIllustratorShapeFilterMgr() :
- id_(0)
+CQIllustratorShapeFilterMgr()
 {
   addFilter(new CQIllustratorShapeGaussianFilter(2.0));
 }

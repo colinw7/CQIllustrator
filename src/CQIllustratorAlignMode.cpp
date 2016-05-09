@@ -42,7 +42,7 @@
 
 CQIllustratorAlignMode::
 CQIllustratorAlignMode(CQIllustrator *illustrator) :
- CQIllustratorMode(illustrator, CQIllustrator::MODE_ALIGN)
+ CQIllustratorMode(illustrator, (uint) CQIllustrator::Mode::ALIGN)
 {
 }
 
@@ -147,6 +147,7 @@ drawOverlay(CQIllustratorShapeDrawer *drawer)
 
     pen.setColor(QColor(255,0,0));
     pen.setStyle(Qt::DashLine);
+    pen.setWidth(0);
 
     QPointF ps1 = illustrator_->getITransform().map(QPointF(0, 0));
     QPointF ps2 = illustrator_->getITransform().map(QPointF(8, 8));
@@ -312,7 +313,7 @@ align(CQIllustrator::AlignSide side, bool commit)
     for ( ; ps1 != ps2; ++ps1) {
       CQIllustratorShape *shape = (*ps1).getShape();
 
-      bbbox += shape->getBBox();
+      bbbox += shape->getFlatBBox();
     }
 
     ps1 = selection->begin();
@@ -320,7 +321,7 @@ align(CQIllustrator::AlignSide side, bool commit)
     for ( ; ps1 != ps2; ++ps1) {
       CQIllustratorShape *shape = (*ps1).getShape();
 
-      const CBBox2D &bbox = shape->getBBox();
+      const CBBox2D &bbox = shape->getFlatBBox();
 
       if (! abbox.isSet() || (! afixed && shape->getFixed())) {
         ashape = shape;
@@ -353,7 +354,7 @@ align(CQIllustrator::AlignSide side, bool commit)
     CQIllustratorAlignToolbar::ObjectEdgeType edgeType =
       toolbar_->getAnchorObjectEdgeType();
 
-    abbox = shape->getBBox();
+    abbox = shape->getFlatBBox();
 
     if      (edgeType == CQIllustratorAlignToolbar::EDGE_LEFT_BOTTOM)
       abbox = CBBox2D(abbox.getLL(), abbox.getLR());
@@ -374,7 +375,7 @@ align(CQIllustrator::AlignSide side, bool commit)
     for ( ; ps1 != ps2; ++ps1) {
       CQIllustratorShape *shape = (*ps1).getShape();
 
-      const CBBox2D &bbox = shape->getBBox();
+      const CBBox2D &bbox = shape->getFlatBBox();
 
       bbbox += bbox;
     }
@@ -396,7 +397,7 @@ align(CQIllustrator::AlignSide side, bool commit)
 
       if (shape->getFixed()) continue;
 
-      const CBBox2D &bbox = shape->getBBox();
+      const CBBox2D &bbox = shape->getFlatBBox();
 
       double dx = 0.0, dy = 0.0;
 
@@ -437,7 +438,7 @@ align(CQIllustrator::AlignSide side, bool commit)
 
       if (shape->getFixed()) continue;
 
-      const CBBox2D &bbox = shape->getBBox();
+      const CBBox2D &bbox = shape->getFlatBBox();
 
       double dx = 0.0, dy = 0.0;
 
@@ -771,7 +772,7 @@ CQSpreadButtons() :
 
 CQAlignAnchor::
 CQAlignAnchor(QWidget *parent) :
- QWidget(parent), mode_(CQIllustratorAlignToolbar::SELECTION_MODE)
+ QWidget(parent)
 {
   QGridLayout *layout = new QGridLayout(this);
   layout->setMargin(0); layout->setSpacing(2);
@@ -891,7 +892,7 @@ objectSlot(const QString &obj)
 
 CQAlignAnchorObject::
 CQAlignAnchorObject(QWidget *parent) :
- QWidget(parent), edgeType_(CQIllustratorAlignToolbar::EDGE_LEFT_BOTTOM)
+ QWidget(parent)
 {
   QHBoxLayout *layout = new QHBoxLayout(this);
   layout->setMargin(0); layout->setSpacing(2);
@@ -1042,7 +1043,7 @@ selectSlot(bool enabled)
 
 CQToolButton::
 CQToolButton(const char **xpmData) :
- QToolButton(0), preview_(false)
+ QToolButton(0)
 {
   setAutoRaise(true);
 

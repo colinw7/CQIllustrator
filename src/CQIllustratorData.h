@@ -5,7 +5,7 @@
 
 #include <CStack.h>
 #include <CBBox2D.h>
-#include <CQuadTree.h>
+#include <CQIllustratorQuadTree.h>
 
 class CQIllustrator;
 class CQIllustratorShape;
@@ -23,9 +23,9 @@ class CQIllustratorData : public QObject {
     CHANGE_GENERIC
   };
 
-  typedef CStack<CQIllustratorShape>            ShapeStack;
-  typedef std::vector<CQIllustratorShape *>     ShapeList;
-  typedef CQuadTree<CQIllustratorShape,CBBox2D> QuadTree;
+  typedef CStack<CQIllustratorShape>                        ShapeStack;
+  typedef std::vector<CQIllustratorShape *>                 ShapeList;
+  typedef CQIllustratorQuadTree<CQIllustratorShape,CBBox2D> QuadTree;
 
  public:
   CQIllustratorData(CQIllustrator *illustrator);
