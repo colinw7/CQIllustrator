@@ -7,10 +7,10 @@
 #include <QLabel>
 #include <QListWidget>
 
-#include <xpm/layer_up.xpm>
-#include <xpm/layer_down.xpm>
-#include <xpm/layer_add.xpm>
-#include <xpm/layer_remove.xpm>
+#include <svg/layer_up_svg.h>
+#include <svg/layer_down_svg.h>
+#include <svg/layer_add_svg.h>
+#include <svg/layer_remove_svg.h>
 
 CQLayerOptionTool::
 CQLayerOptionTool(CQIllustrator *illustrator) :
@@ -103,10 +103,10 @@ initWidgets()
 
   QHBoxLayout *buttonLayout = new QHBoxLayout;
 
-  CQImageButton *upButton     = new CQImageButton(QPixmap(up_data   ));
-  CQImageButton *downButton   = new CQImageButton(QPixmap(down_data ));
-  CQImageButton *addButton    = new CQImageButton(QPixmap(plus_data ));
-  CQImageButton *removeButton = new CQImageButton(QPixmap(minus_data));
+  CQImageButton *upButton     = new CQImageButton(CQPixmapCacheInst->getIcon("LAYER_UP"    ));
+  CQImageButton *downButton   = new CQImageButton(CQPixmapCacheInst->getIcon("LAYER_DOWN"  ));
+  CQImageButton *addButton    = new CQImageButton(CQPixmapCacheInst->getIcon("LAYER_ADD"   ));
+  CQImageButton *removeButton = new CQImageButton(CQPixmapCacheInst->getIcon("LAYER_REMOVE"));
 
   connect(addButton, SIGNAL(clicked()), this, SLOT(addLayerSlot()));
 

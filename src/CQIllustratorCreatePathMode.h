@@ -15,10 +15,10 @@ class CQIllustratorCreatePathToolbar : public CQIllustratorToolbar {
   Q_OBJECT
 
  public:
-  enum CreateMode {
-    CREATE_FREE_MODE,
-    CREATE_RECT_MODE,
-    CREATE_45_MODE
+  enum class CreateMode {
+    FREE,
+    RECT,
+    ANGLE_45
   };
 
  public:
@@ -71,7 +71,7 @@ class CQIllustratorCreatePathToolbar : public CQIllustratorToolbar {
 
  private:
   CQIllustratorCreatePathMode *mode_ { 0 };
-  CreateMode                   createMode_ { CREATE_FREE_MODE };
+  CreateMode                   createMode_ { CreateMode::FREE };
   QRadioButton                *createRadio_ { 0 };
   QRadioButton                *editRadio_ { 0 };
   CQImageButton               *pathFreeButton_ { 0 };
@@ -104,9 +104,9 @@ class CQIllustratorCreatePathSizer : public CQIllustratorModeSizer {
 
 class CQIllustratorCreatePathMode : public CQIllustratorMode {
  public:
-  enum SelMode {
-    POINT_SEL,
-    LINE_SEL
+  enum class SelMode {
+    POINT,
+    LINE
   };
 
  public:
@@ -182,7 +182,7 @@ class CQIllustratorCreatePathMode : public CQIllustratorMode {
 
   CQIllustratorCreatePathToolbar     *toolbar_ { 0 };
   CQIllustratorCreatePathSizer       *sizer_ { 0 };
-  SelMode                             selMode_ { POINT_SEL };
+  SelMode                             selMode_ { SelMode::POINT };
   CPathPartType                       pathMode_ { CPATH_PART_TYPE_LINE_TO };
   std::vector<CQIllustratorHandle *>  closeHandles_;
   uint                                closeHandleNum_ { 0 };

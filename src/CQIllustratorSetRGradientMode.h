@@ -65,11 +65,11 @@ class CQIllustratorSetRGradientMode : public CQIllustratorMode {
   CQIllustratorSetRGradientToolbar *getToolbar() const { return toolbar_; }
 
   CQIllustratorData::ChangeType getChangeType() const {
-    return CQIllustratorData::CHANGE_FILL;
+    return CQIllustratorData::ChangeType::FILL;
   }
 
   CQIllustratorShape::ControlType getControlType() const {
-    return CQIllustratorShape::CONTROL_RGRADIENT;
+    return CQIllustratorShape::ControlType::RGRADIENT;
   }
 
   void handleMouseRelease(const MouseEvent &e);

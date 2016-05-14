@@ -1,7 +1,9 @@
 #include <CQIllustratorOffsetPathMode.h>
+#include <CQIllustratorPathShape.h>
 #include <CQIllustrator.h>
 #include <CQIllustratorHandle.h>
 #include <CQIllustratorShapeDrawer.h>
+#include <CQIllustratorUtil.h>
 
 #include <QPainter>
 #include <QHBoxLayout>
@@ -84,7 +86,7 @@ handleMouseRelease(const MouseEvent &e)
 
         parts.offsetPath(w_, shape->getCenter(), parts1);
 
-        CPathShape *pshape = illustrator_->createPathShape();
+        CQIllustratorPathShape *pshape = illustrator_->createPathShape();
 
         pshape->setParts(parts1);
 
@@ -268,7 +270,7 @@ updateShape()
 
     parts.offsetPath(width, shape->getCenter(), parts1);
 
-    CPathShape *pshape = illustrator->createPathShape();
+    CQIllustratorPathShape *pshape = illustrator->createPathShape();
 
     pshape->setParts(parts1);
 
@@ -329,7 +331,7 @@ updatePoint(CQIllustratorShape *shape, const QPointF &p)
 {
   if (! shape_) return;
 
-  CPathShape *path = dynamic_cast<CPathShape *>(shape);
+  CQIllustratorPathShape *path = dynamic_cast<CQIllustratorPathShape *>(shape);
 
   if (! path) return;
 

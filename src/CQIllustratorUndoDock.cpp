@@ -7,7 +7,7 @@
 #include <QListWidget>
 #include <QListWidgetItem>
 
-#include <xpm/undo_redo_png.h>
+#include <svg/undo_redo_svg.h>
 
 class CQIllustratorUndoListGroupItem : public QListWidgetItem {
  public:
@@ -50,9 +50,9 @@ CQIllustratorUndoDock(CQIllustrator *illustrator) :
 
   QLabel *label = new QLabel;
 
-  QPixmap pixmap;
+  QIcon icon = CQPixmapCacheInst->getIcon("UNDO_REDO");
 
-  pixmap.loadFromData(undo_redo_data, UNDO_REDO_DATA_LEN);
+  QPixmap pixmap = icon.pixmap(16, 128);
 
   label->setPixmap(pixmap);
 

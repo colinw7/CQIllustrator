@@ -1,6 +1,16 @@
 //#define SVG_FLIP 1
 
 #include <CQIllustrator.h>
+#include <CQIllustratorEllipseShape.h>
+#include <CQIllustratorGroupShape.h>
+#include <CQIllustratorNPolyShape.h>
+#include <CQIllustratorPathShape.h>
+#include <CQIllustratorPolygonShape.h>
+#include <CQIllustratorRectShape.h>
+#include <CQIllustratorStarShape.h>
+#include <CQIllustratorTextShape.h>
+#include <CQIllustratorShapeControlLine.h>
+
 #include <CQIllustratorCanvas.h>
 #include <CQIllustratorLayer.h>
 #include <CQIllustratorUndo.h>
@@ -26,7 +36,7 @@
 #include <CQIllustratorOffsetPathMode.h>
 #include <CQIllustratorUndoDock.h>
 #include <CQIllustratorPreference.h>
-#include <CQIllustratorSnap.h>
+#include <CQIllustratorSnapDock.h>
 #include <CQIllustratorHandle.h>
 #include <CQIllustratorCmd.h>
 #include <CQIllustratorPropertiesDlg.h>
@@ -44,6 +54,7 @@
 #include <CSVGRect.h>
 #include <CSVGStop.h>
 #include <CSVGText.h>
+#include <CSVGTSpan.h>
 #include <CSVGUse.h>
 #include <CSVGUtil.h>
 
@@ -94,12 +105,12 @@
 #include <svg/group_svg.h>
 #include <svg/ungroup_svg.h>
 #include <svg/copy_svg.h>
-#include <xpm/copy_color.xpm>
+#include <svg/copy_color_svg.h>
 #include <svg/delete_svg.h>
 #include <svg/raise_svg.h>
 #include <svg/lower_svg.h>
-#include <xpm/flip_x.xpm>
-#include <xpm/flip_y.xpm>
+#include <svg/flip_x_svg.h>
+#include <svg/flip_y_svg.h>
 #include <svg/lock_svg.h>
 #include <svg/unlock_svg.h>
 #include <svg/add_layer_svg.h>
@@ -481,17 +492,17 @@ createMenus()
 
   connect(lowerItem_->getAction(), SIGNAL(triggered()), this, SLOT(lowerSlot()));
 
-  flipXItem_ = new CQMenuItem(editMenu_, "Flip X");
+  flipXItem_ = new CQMenuItem(editMenu_,
+    CQPixmapCacheInst->getIcon("FLIP_X"), "Flip X");
 
   flipXItem_->setStatusTip("Flip Objects in X Axis");
-  flipXItem_->setXPMIcon(flip_x_data);
 
   connect(flipXItem_->getAction(), SIGNAL(triggered()), this, SLOT(flipXSlot()));
 
-  flipYItem_ = new CQMenuItem(editMenu_, "Flip Y");
+  flipYItem_ = new CQMenuItem(editMenu_,
+    CQPixmapCacheInst->getIcon("FLIP_Y"), "Flip Y");
 
   flipYItem_->setStatusTip("Flip Objects in Y Axis");
-  flipYItem_->setXPMIcon(flip_y_data);
 
   connect(flipYItem_->getAction(), SIGNAL(triggered()), this, SLOT(flipYSlot()));
 
@@ -507,10 +518,10 @@ createMenus()
 
   connect(unlockItem_->getAction(), SIGNAL(triggered()), this, SLOT(unlockSlot()));
 
-  copyStroke_ = new CQMenuItem(editMenu_, "Copy Stroke and Fill");
+  copyStroke_ = new CQMenuItem(editMenu_,
+    CQPixmapCacheInst->getIcon("COPY_COLOR"), "Copy Stroke and Fill");
 
   copyStroke_->setStatusTip("Copy Stroke and Fill");
-  copyStroke_->setXPMIcon(copy_color_data);
 
   connect(copyStroke_->getAction(), SIGNAL(triggered()), this, SLOT(copyStrokeSlot()));
 
@@ -997,20 +1008,38 @@ keyPress(const KeyEvent &e)
     case CKEY_TYPE_DEL:
       deleteSlot();
       break;
-    case CKEY_TYPE_Up:
-      if (e.event->isShiftKey())
-        resizeSelectedShapes(CBBox2D(0,0,0,1));
-      else
-        moveSelectedShapes(CPoint2D(0,1));
+    case CKEY_TYPE_Up: {
+      if (! getFlipY()) {
+        if (e.event->isShiftKey())
+          resizeSelectedShapes(CBBox2D(0,0,0,1));
+        else
+          moveSelectedShapes(CPoint2D(0,1));
+      }
+      else {
+        if (e.event->isShiftKey())
+          resizeSelectedShapes(CBBox2D(0,0,0,-1));
+        else
+          moveSelectedShapes(CPoint2D(0,-1));
+      }
 
       break;
-    case CKEY_TYPE_Down:
-      if (e.event->isShiftKey())
-        resizeSelectedShapes(CBBox2D(0,-1,0,0));
-      else
-        moveSelectedShapes(CPoint2D(0,-1));
+    }
+    case CKEY_TYPE_Down: {
+      if (! getFlipY()) {
+        if (e.event->isShiftKey())
+          resizeSelectedShapes(CBBox2D(0,-1,0,0));
+        else
+          moveSelectedShapes(CPoint2D(0,-1));
+      }
+      else {
+        if (e.event->isShiftKey())
+          resizeSelectedShapes(CBBox2D(0,1,0,0));
+        else
+          moveSelectedShapes(CPoint2D(0,1));
+      }
 
       break;
+    }
     case CKEY_TYPE_Left:
       if (e.event->isShiftKey())
         resizeSelectedShapes(CBBox2D(-1,0,0,0));
@@ -1102,9 +1131,9 @@ void
 CQIllustrator::
 setFlipY(bool flip)
 {
-  flip_y_ = flip;
+  flipY_ = flip;
 
-  flipViewItem_->setChecked(flip);
+  flipViewItem_->setChecked(flipY_);
 }
 
 const CQIllustratorData::ShapeStack &
@@ -1744,49 +1773,53 @@ ungroupSlot()
   CQIllustratorSelectedShapes::iterator ps1, ps2;
 
   for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
+    // get parent group matrix
     CQIllustratorShape *shape = (*ps1).getShape();
 
     const CQIllustratorGroupShape *group = dynamic_cast<CQIllustratorGroupShape *>(shape);
-
     if (! group) continue;
-
-    CQIllustratorShape *parent = group->getParent();
 
     const CMatrix2D &m = group->getMatrix();
 
-    const CQIllustratorShape::ShapeList &groupShapes = group->getChildren();
+    //---
 
+    // adjust child shape matrices
     std::vector<CQIllustratorShape *> shapes;
 
-    CQIllustratorShape::ShapeList::const_iterator pg1, pg2;
+    for (const auto &groupShape : group->getChildren()) {
+      const CMatrix2D &m1 = groupShape->getMatrix();
 
-    for (pg1 = groupShapes.begin(), pg2 = groupShapes.end(); pg1 != pg2; ++pg1) {
-      CQIllustratorShape *groupShape = *pg1;
-
-      groupShape->setMatrix(m*groupShape->getMatrix());
+      groupShape->setMatrix(m*m1);
 
       shapes.push_back(groupShape);
     }
 
+    //---
+
+    // save group
     groups.push_back(shape);
 
-    uint num_shapes = shapes.size();
+    //---
 
-    for (uint i = 0; i < num_shapes; ++i) {
-      CQIllustratorShape *groupShape = shapes[i];
+    // move shapes to new parent (or none)
+    CQIllustratorShape *parent = group->getParent();
 
-      if (parent)
-        parent->addChild(groupShape);
-      else
-        groupShape->setParent(0);
-    }
+    for (auto &groupShape : shapes)
+      groupShape->setParent(parent);
   }
 
-  uint num_groups = groups.size();
+  //---
 
-  for (uint i = 0; i < num_groups; ++i)
-    removeShape(groups[i]);
+  // reparent groups (now empty)
+  for (auto &group : groups) {
+    CQIllustratorShape *parent = group->getParent();
 
+    group->setParent(parent);
+  }
+
+  //---
+
+  // reset selection
   clearSelection();
 }
 
@@ -1869,11 +1902,11 @@ flipXSlot()
   for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
     CQIllustratorShape *shape = (*ps1).getShape();
 
-    checkoutShape(shape, CQIllustratorData::CHANGE_GEOMETRY);
+    checkoutShape(shape, CQIllustratorData::ChangeType::GEOMETRY);
 
     shape->flip(true);
 
-    checkinShape(shape, CQIllustratorData::CHANGE_GEOMETRY);
+    checkinShape(shape, CQIllustratorData::ChangeType::GEOMETRY);
   }
 }
 
@@ -1886,11 +1919,11 @@ flipYSlot()
   for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
     CQIllustratorShape *shape = (*ps1).getShape();
 
-    checkoutShape(shape, CQIllustratorData::CHANGE_GEOMETRY);
+    checkoutShape(shape, CQIllustratorData::ChangeType::GEOMETRY);
 
     shape->flip(false);
 
-    checkinShape(shape, CQIllustratorData::CHANGE_GEOMETRY);
+    checkinShape(shape, CQIllustratorData::ChangeType::GEOMETRY);
   }
 }
 
@@ -1903,11 +1936,11 @@ lockSlot()
   for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
     CQIllustratorShape *shape = (*ps1).getShape();
 
-    checkoutShape(shape, CQIllustratorData::CHANGE_GEOMETRY);
+    checkoutShape(shape, CQIllustratorData::ChangeType::GEOMETRY);
 
     shape->setFixed(true);
 
-    checkinShape(shape, CQIllustratorData::CHANGE_GEOMETRY);
+    checkinShape(shape, CQIllustratorData::ChangeType::GEOMETRY);
   }
 }
 
@@ -1920,11 +1953,11 @@ unlockSlot()
   for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
     CQIllustratorShape *shape = (*ps1).getShape();
 
-    checkoutShape(shape, CQIllustratorData::CHANGE_GEOMETRY);
+    checkoutShape(shape, CQIllustratorData::ChangeType::GEOMETRY);
 
     shape->setFixed(false);
 
-    checkinShape(shape, CQIllustratorData::CHANGE_GEOMETRY);
+    checkinShape(shape, CQIllustratorData::ChangeType::GEOMETRY);
   }
 }
 
@@ -1951,19 +1984,19 @@ pasteStrokeSlot()
 
     //------
 
-    checkoutShape(shape, CQIllustratorData::CHANGE_STROKE);
+    checkoutShape(shape, CQIllustratorData::ChangeType::STROKE);
 
     shape->setStroke(save_stroke_);
 
-    checkinShape(shape, CQIllustratorData::CHANGE_STROKE);
+    checkinShape(shape, CQIllustratorData::ChangeType::STROKE);
 
     //------
 
-    checkoutShape(shape, CQIllustratorData::CHANGE_FILL);
+    checkoutShape(shape, CQIllustratorData::ChangeType::FILL);
 
     shape->setFill(save_fill_);
 
-    checkinShape(shape, CQIllustratorData::CHANGE_FILL);
+    checkinShape(shape, CQIllustratorData::ChangeType::FILL);
   }
 }
 
@@ -2415,7 +2448,7 @@ addSVGObject(CSVGObject *, CSVGObject *object)
     case CSVGObjTypeId::PATH: {
       CPoint2D lp(0,0);
 
-      CPathShape *pathShape = createPathShape();
+      CQIllustratorPathShape *pathShape = createPathShape();
 
       pathShape->startGroup();
 
@@ -2617,7 +2650,7 @@ addSVGObject(CSVGObject *, CSVGObject *object)
       break;
     }
     case CSVGObjTypeId::POLYGON: {
-      CPathShape *pathShape = createPathShape();
+      CQIllustratorPathShape *pathShape = createPathShape();
 
       shape = pathShape;
 
@@ -2707,7 +2740,7 @@ addSVGObject(CSVGObject *, CSVGObject *object)
       break;
     }
     case CSVGObjTypeId::LINE: {
-      CPathShape *pathShape = createPathShape();
+      CQIllustratorPathShape *pathShape = createPathShape();
 
       shape = pathShape;
 
@@ -2724,7 +2757,7 @@ addSVGObject(CSVGObject *, CSVGObject *object)
       break;
     }
     case CSVGObjTypeId::POLYLINE: {
-      CPathShape *pathShape = createPathShape();
+      CQIllustratorPathShape *pathShape = createPathShape();
 
       shape = pathShape;
 
@@ -2766,6 +2799,22 @@ addSVGObject(CSVGObject *, CSVGObject *object)
       shape = textShape;
 
       setShapeSVGStrokeAndFill(textShape, object);
+
+      //---
+
+      for (const auto &childObject : object->children()) {
+        CSVGTSpan *tspan = dynamic_cast<CSVGTSpan *>(childObject);
+
+        if (! tspan)
+          continue;
+
+        const std::string &str = tspan->getText();
+
+        if (textShape->getText() == "")
+          textShape->setText(str);
+        else
+          textShape->setText(textShape->getText() + " " + str);
+      }
 
       break;
     }
@@ -3050,7 +3099,7 @@ toPathSlot()
     if (! shape->getPath(parts))
       continue;
 
-    CPathShape *pshape = createPathShape();
+    CQIllustratorPathShape *pshape = createPathShape();
 
     pshape->setParts(parts);
 
@@ -3113,7 +3162,7 @@ toCurve()
     if (! parts.removeArcs(parts1))
       parts1 = parts;
 
-    CPathShape *pshape = createPathShape();
+    CQIllustratorPathShape *pshape = createPathShape();
 
     pshape->setParts(parts1);
 
@@ -3173,7 +3222,7 @@ offsetPath(double o)
 
     parts.offsetPath(o, shape->getCenter(), parts1);
 
-    CPathShape *pshape = createPathShape();
+    CQIllustratorPathShape *pshape = createPathShape();
 
     pshape->setParts(parts1);
 
@@ -3229,7 +3278,7 @@ strokePath(double d)
 
     parts.strokePath(d, parts1);
 
-    CPathShape *pshape = createPathShape();
+    CQIllustratorPathShape *pshape = createPathShape();
 
     pshape->setParts(parts1);
 
@@ -3572,7 +3621,7 @@ intersectOp(CBooleanOp op, bool split, bool keepOld)
   }
 
   for (uint i = 0; i < numParts; ++i) {
-    CPathShape *path1 = createPathShape();
+    CQIllustratorPathShape *path1 = createPathShape();
 
     path1->setParts(ipartsList[i]);
 
@@ -3621,7 +3670,7 @@ combineSlot()
   removeShape(shape1);
   removeShape(shape2);
 
-  CPathShape *path1 = createPathShape();
+  CQIllustratorPathShape *path1 = createPathShape();
 
   path1->setParts(cparts);
 
@@ -4030,7 +4079,7 @@ deleteSelectedPoints()
     const CQIllustratorSelectedShape &sshape = *ps1;
 
     CQIllustratorSelectedShape &sshape1 =
-      selection_->checkoutShape(sshape, CQIllustratorData::CHANGE_GEOMETRY);
+      selection_->checkoutShape(sshape, CQIllustratorData::ChangeType::GEOMETRY);
 
     uint num_points = sshape.numPoints();
 
@@ -4146,13 +4195,13 @@ fontSlot(const QFont &font)
     CQIllustratorTextShape *text = dynamic_cast<CQIllustratorTextShape *>(shape);
 
     if (text) {
-      checkoutShape(shape, CQIllustratorData::CHANGE_FONT);
+      checkoutShape(shape, CQIllustratorData::ChangeType::FONT);
 
       CQIllustratorTextShape *text = dynamic_cast<CQIllustratorTextShape *>(shape);
 
       text->setFont(cfont);
 
-      checkinShape(shape, CQIllustratorData::CHANGE_FONT);
+      checkinShape(shape, CQIllustratorData::ChangeType::FONT);
     }
   }
 
@@ -4800,7 +4849,7 @@ setFill(QPainter *painter, const CQIllustratorShape *,
       QTransform t  = getTransform();
       QTransform it = getITransform();
 
-      if      (scale == CQIllustratorShapeFill::IMAGE_SCALE_NONE) {
+      if      (scale == CQIllustratorShapeFill::ImageScale::NONE) {
         double x, y;
 
         if      (halign == CHALIGN_TYPE_LEFT)   x = bbox.getXMin();
@@ -4823,7 +4872,7 @@ setFill(QPainter *painter, const CQIllustratorShape *,
 
         brush.setTransform(t1*it);
       }
-      else if (scale == CQIllustratorShapeFill::IMAGE_SCALE_FIT) {
+      else if (scale == CQIllustratorShapeFill::ImageScale::FIT) {
         double x = bbox.getXMin();
         double y = bbox.getYMin();
 
@@ -4849,7 +4898,7 @@ setFill(QPainter *painter, const CQIllustratorShape *,
 
         brush.setTransform(t2*t1*it);
       }
-      else if (scale == CQIllustratorShapeFill::IMAGE_SCALE_EQUAL) {
+      else if (scale == CQIllustratorShapeFill::ImageScale::EQUAL) {
         double x = bbox.getXMin();
         double y = bbox.getYMin();
 
@@ -4948,11 +4997,11 @@ createPolygonShape(const std::vector<CPoint2D> &points)
   return polygon;
 }
 
-CPathShape *
+CQIllustratorPathShape *
 CQIllustrator::
 createPathShape()
 {
-  CPathShape *path = new CPathShape();
+  CQIllustratorPathShape *path = new CQIllustratorPathShape();
 
   path->setStroke(def_stroke_);
   path->setFill  (def_fill_);

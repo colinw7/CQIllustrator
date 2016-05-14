@@ -11,8 +11,24 @@
 #include <CStack.h>
 
 class CQIllustrator;
+class CQIllustratorEllipseShape;
+class CQIllustratorGroupShape;
+class CQIllustratorNPolyShape;
+class CQIllustratorPathShape;
+class CQIllustratorPolygonShape;
+class CQIllustratorRectShape;
+class CQIllustratorStarShape;
+class CQIllustratorTextShape;
+
 class CQIllustratorCanvas;
 class CQIllustratorToolbar;
+class CQIllustratorAlignToolbar;
+class CQIllustratorTranformToolbar;
+class CQIllustratorLayerStack;
+class CQIllustratorUndoDock;
+class CQIllustratorPreferenceDock;
+class CQIllustratorSnapDock;
+class CQIllustratorPropertiesDlg;
 
 class CQMenu;
 class CQMenuItem;
@@ -24,13 +40,6 @@ class CQFillOptionTool;
 class CQObjectOptionTool;
 class CQLayerOptionTool;
 class CQPropertiesOptionTool;
-class CQIllustratorAlignToolbar;
-class CQIllustratorTranformToolbar;
-class CQIllustratorLayerStack;
-class CQIllustratorUndoDock;
-class CQIllustratorPreferenceDock;
-class CQIllustratorSnapDock;
-class CQIllustratorPropertiesDlg;
 
 class QLabel;
 class QLineEdit;
@@ -50,52 +59,19 @@ class CQIllustratorCmdMgr;
 #include <CQIllustratorShapeDrawer.h>
 #include <CQIllustratorLayer.h>
 #include <CQIllustratorShape.h>
-
-class CQIllustratorGrid {
- public:
-  CQIllustratorGrid() { }
-
-  bool getEnabled() const { return enabled_; }
-  void setEnabled(bool enabled) { enabled_ = enabled; }
-
-  void draw(CQIllustratorShapeDrawer *drawer, const CBBox2D &bbox);
-
- private:
-  bool     enabled_ { false };
-  CPoint2D origin_ { 0, 0 };
-  double   dx_ { 10 }, dy_ { 10 };
-};
-
-//------
-
-class CQIllustratorSnap {
- public:
-  CQIllustratorSnap() { }
-
-  bool getEnabled() const { return enabled_; }
-  void setEnabled(bool enabled) { enabled_ = enabled; }
-
-  double getXPitch() const { return xpitch_; }
-  void setXPitch(double xpitch) { xpitch_ = xpitch; }
-
-  double getYPitch() const { return ypitch_; }
-  void setYPitch(double ypitch) { ypitch_ = ypitch; }
-
-  CPoint2D snapPoint(const CPoint2D &point) const;
-
- private:
-  bool   enabled_ { false };
-  double xpitch_ { 1 }, ypitch_ { 1 };
-};
-
-//------
+#include <CQIllustratorGrid.h>
+#include <CQIllustratorSnap.h>
 
 class CQIllustrator : public CQMainWindow {
   Q_OBJECT
 
-  Q_PROPERTY(QColor background READ getQBackground WRITE setQBackground)
-  Q_PROPERTY(QRectF rect       READ getQRect       WRITE setQRect      )
-  Q_PROPERTY(QRectF fullRect   READ getQFullRect   WRITE setQFullRect  )
+  Q_PROPERTY(bool   flipY       READ getFlipY       WRITE setFlipY      )
+  Q_PROPERTY(QRectF rect        READ getQRect       WRITE setQRect      )
+  Q_PROPERTY(QRectF fullRect    READ getQFullRect   WRITE setQFullRect  )
+  Q_PROPERTY(QColor background  READ getQBackground WRITE setQBackground)
+  Q_PROPERTY(bool   snapEnabled READ getSnapEnabled WRITE setSnapEnabled)
+  Q_PROPERTY(double snapXPitch  READ getSnapXPitch  WRITE setSnapXPitch )
+  Q_PROPERTY(double snapYPitch  READ getSnapYPitch  WRITE setSnapYPitch )
 
  public:
   enum class Mode {
@@ -203,8 +179,7 @@ class CQIllustrator : public CQMainWindow {
 
   void keyPress(const KeyEvent &e);
 
-  bool getFlipY() const { return flip_y_; }
-
+  bool getFlipY() const { return flipY_; }
   void setFlipY(bool flip);
 
   const CQIllustratorData::ShapeStack &getShapes() const;
@@ -533,7 +508,7 @@ class CQIllustrator : public CQMainWindow {
   CQIllustratorEllipseShape *createEllipseShape(const CPoint2D &p1, const CPoint2D &p2);
   CQIllustratorPolygonShape *createPolygonShape(const std::vector<CPoint2D> &points=
                                                  std::vector<CPoint2D>());
-  CPathShape                *createPathShape();
+  CQIllustratorPathShape    *createPathShape();
   CQIllustratorTextShape    *createTextShape(const CPoint2D &p1, const CPoint2D &p2,
                                              const std::string &str);
   CQIllustratorNPolyShape   *createNPolyShape(const CPoint2D &c, uint n, double r, double a);
@@ -619,7 +594,7 @@ class CQIllustrator : public CQMainWindow {
   QString                            fileName_;
   CFileType                          fileType_ { CFILE_TYPE_NONE };
 
-  bool                               flip_y_ { false };
+  bool                               flipY_ { false };
   bool                               changed_ { true };
   bool                               escape_ { false };
   QImage                             qimage_;
@@ -650,33 +625,5 @@ class CQIllustrator : public CQMainWindow {
   CQIllustratorShapeFill             save_fill_;
   CQIllustratorPropertiesDlg*        propertiesDlg_ { 0 };
 };
-
-//------
-
-namespace CQIllustratorUtil {
-  template<typename T>
-  T *getCurrentShape(CQIllustrator *illustrator) {
-    T *shape = 0;
-
-    CQIllustratorSelectedShapes *selection = illustrator->getSelection();
-
-    CQIllustratorSelectedShapes::iterator ps1, ps2;
-
-    for (ps1 = selection->begin(), ps2 = selection->end(); ps1 != ps2; ++ps1) {
-      CQIllustratorShape *shape1 = (*ps1).getShape();
-
-      T *tshape = dynamic_cast<T *>(shape1);
-
-      if (tshape == 0) continue;
-
-      if (shape == 0)
-        shape = tshape;
-      else
-        break;
-    }
-
-    return shape;
-  }
-}
 
 #endif

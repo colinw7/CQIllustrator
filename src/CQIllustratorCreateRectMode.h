@@ -31,13 +31,15 @@ class CQIllustratorCreateRectToolbar : public CQIllustratorToolbar {
   void updateShape();
 
  private:
-  CQIllustratorCreateRectMode *mode_;
-  CQPointEdit                 *posEdit_;
-  CQRealEdit                  *widthEdit_;
-  CQRealEdit                  *heightEdit_;
-  CQRealEdit                  *xRadEdit_;
-  CQRealEdit                  *yRadEdit_;
+  CQIllustratorCreateRectMode *mode_ { 0 };
+  CQPointEdit                 *posEdit_ { 0 };
+  CQRealEdit                  *widthEdit_ { 0 };
+  CQRealEdit                  *heightEdit_ { 0 };
+  CQRealEdit                  *xRadEdit_ { 0 };
+  CQRealEdit                  *yRadEdit_ { 0 };
 };
+
+//------
 
 class CQIllustratorCreateRectSizer : public CQIllustratorModeSizer {
  public:
@@ -46,11 +48,13 @@ class CQIllustratorCreateRectSizer : public CQIllustratorModeSizer {
   void drawHandles(QPainter *painter, const CQIllustratorShape *shape);
 
  private:
-  CQIllustratorControlPointHandle *ll_handle_;
-  CQIllustratorControlPointHandle *ur_handle_;
-  CQIllustratorControlPointHandle *rx_handle_;
-  CQIllustratorControlPointHandle *ry_handle_;
+  CQIllustratorControlPointHandle *ll_handle_ { 0 };
+  CQIllustratorControlPointHandle *ur_handle_ { 0 };
+  CQIllustratorControlPointHandle *rx_handle_ { 0 };
+  CQIllustratorControlPointHandle *ry_handle_ { 0 };
 };
+
+//------
 
 class CQIllustratorCreateRectMode : public CQIllustratorMode {
   Q_OBJECT
@@ -78,9 +82,9 @@ class CQIllustratorCreateRectMode : public CQIllustratorMode {
   void drawOverlay(CQIllustratorShapeDrawer *drawer);
 
  private:
-  CQIllustratorCreateRectToolbar *toolbar_;
-  CQIllustratorCreateRectSizer   *sizer_;
-  bool                            equalSize_;
+  CQIllustratorCreateRectToolbar *toolbar_ { 0 };
+  CQIllustratorCreateRectSizer   *sizer_ { 0 };
+  bool                            equalSize_ { false };
 };
 
 #endif

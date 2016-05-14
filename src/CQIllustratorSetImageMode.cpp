@@ -1,7 +1,9 @@
 #include <CQIllustratorSetImageMode.h>
+#include <CQIllustratorRectShape.h>
 #include <CQIllustrator.h>
 #include <CQIllustratorHandle.h>
 #include <CQIllustratorShapeDrawer.h>
+#include <CQIllustratorUtil.h>
 
 #include <QPainter>
 #include <QComboBox>
@@ -16,14 +18,12 @@
 #include <CQSwatch.h>
 
 #include <svg/image_svg.h>
-#include <xpm/lalign.xpm>
-#include <xpm/hcalign.xpm>
-#include <xpm/ralign.xpm>
-#include <xpm/balign.xpm>
-#include <xpm/vcalign.xpm>
-#include <xpm/talign.xpm>
-
-#define IMAGE_DATA(I) I, sizeof(I)/sizeof(char *)
+#include <svg/lalign_svg.h>
+#include <svg/hcalign_svg.h>
+#include <svg/ralign_svg.h>
+#include <svg/balign_svg.h>
+#include <svg/vcalign_svg.h>
+#include <svg/talign_svg.h>
 
 CQIllustratorSetImageMode::
 CQIllustratorSetImageMode(CQIllustrator *illustrator) :
@@ -79,7 +79,7 @@ handleMouseRelease(const MouseEvent &)
   }
   // dragging finished so commit
   else {
-    illustrator_->getSandbox()->commit(CQIllustratorData::CHANGE_FILL);
+    illustrator_->getSandbox()->commit(CQIllustratorData::ChangeType::FILL);
   }
 
   dragging_ = false;
@@ -156,7 +156,7 @@ getCursor() const
 
 CQIllustratorSetImageToolbar::
 CQIllustratorSetImageToolbar(CQIllustratorSetImageMode *mode) :
- CQIllustratorToolbar(mode), mode_(mode), scale_(CQIllustratorShapeFill::IMAGE_SCALE_NONE),
+ CQIllustratorToolbar(mode), mode_(mode), scale_(CQIllustratorShapeFill::ImageScale::NONE),
  halign_(CHALIGN_TYPE_CENTER), valign_(CVALIGN_TYPE_CENTER)
 {
 }
@@ -200,9 +200,9 @@ addWidgets()
 
   //-----
 
-  lalignButton_  = new CQImageButton(QPixmap(lalign_data ));
-  hcalignButton_ = new CQImageButton(QPixmap(hcalign_data));
-  ralignButton_  = new CQImageButton(QPixmap(ralign_data ));
+  lalignButton_  = new CQImageButton(CQPixmapCacheInst->getIcon("LALIGN" ));
+  hcalignButton_ = new CQImageButton(CQPixmapCacheInst->getIcon("HCALIGN"));
+  ralignButton_  = new CQImageButton(CQPixmapCacheInst->getIcon("RALIGN" ));
 
   lalignButton_ ->setCheckable(true);
   hcalignButton_->setCheckable(true);
@@ -223,9 +223,9 @@ addWidgets()
 
   //-----
 
-  talignButton_  = new CQImageButton(QPixmap(talign_data ));
-  vcalignButton_ = new CQImageButton(QPixmap(vcalign_data));
-  balignButton_  = new CQImageButton(QPixmap(balign_data ));
+  talignButton_  = new CQImageButton(CQPixmapCacheInst->getIcon("TALIGN" ));
+  vcalignButton_ = new CQImageButton(CQPixmapCacheInst->getIcon("VCALIGN"));
+  balignButton_  = new CQImageButton(CQPixmapCacheInst->getIcon("BALIGN" ));
 
   talignButton_ ->setCheckable(true);
   vcalignButton_->setCheckable(true);
@@ -276,7 +276,7 @@ updateShape()
     CQIllustratorUtil::getCurrentShape<CQIllustratorShape>(illustrator);
 
   if (shape) {
-    illustrator->checkoutShape(shape, CQIllustratorData::CHANGE_GEOMETRY);
+    illustrator->checkoutShape(shape, CQIllustratorData::ChangeType::GEOMETRY);
 
     shape = dynamic_cast<CQIllustratorShape *>(shape);
 
@@ -288,7 +288,7 @@ updateShape()
       fill.setImageVAlign(valign_);
     }
 
-    illustrator->checkinShape(shape, CQIllustratorData::CHANGE_GEOMETRY);
+    illustrator->checkinShape(shape, CQIllustratorData::ChangeType::GEOMETRY);
   }
 
   illustrator->redraw();
@@ -298,9 +298,12 @@ void
 CQIllustratorSetImageToolbar::
 updateWidgets()
 {
-  if      (scale_ == CQIllustratorShapeFill::IMAGE_SCALE_NONE) scaleCombo_->setCurrentIndex(0);
-  else if (scale_ == CQIllustratorShapeFill::IMAGE_SCALE_FIT ) scaleCombo_->setCurrentIndex(1);
-  else                                             scaleCombo_->setCurrentIndex(2);
+  if      (scale_ == CQIllustratorShapeFill::ImageScale::NONE)
+    scaleCombo_->setCurrentIndex(0);
+  else if (scale_ == CQIllustratorShapeFill::ImageScale::FIT)
+    scaleCombo_->setCurrentIndex(1);
+  else
+    scaleCombo_->setCurrentIndex(2);
 
   lalignButton_ ->setChecked(halign_ == CHALIGN_TYPE_LEFT);
   hcalignButton_->setChecked(halign_ == CHALIGN_TYPE_CENTER);
@@ -372,7 +375,7 @@ setShapeImage(CQIllustratorShape *shape, CImagePtr image)
 
   fill.setImage(image);
 
-  fill.setImageScale(CQIllustratorShapeFill::IMAGE_SCALE_FIT);
+  fill.setImageScale(CQIllustratorShapeFill::ImageScale::FIT);
 
   shape->setFill(fill);
 
@@ -385,9 +388,9 @@ void
 CQIllustratorSetImageToolbar::
 setScaleSlot(int ind)
 {
-  if      (ind == 0) scale_ = CQIllustratorShapeFill::IMAGE_SCALE_NONE;
-  else if (ind == 1) scale_ = CQIllustratorShapeFill::IMAGE_SCALE_FIT;
-  else               scale_ = CQIllustratorShapeFill::IMAGE_SCALE_EQUAL;
+  if      (ind == 0) scale_ = CQIllustratorShapeFill::ImageScale::NONE;
+  else if (ind == 1) scale_ = CQIllustratorShapeFill::ImageScale::FIT;
+  else               scale_ = CQIllustratorShapeFill::ImageScale::EQUAL;
 
   updateShape();
 }

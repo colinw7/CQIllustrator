@@ -1,6 +1,7 @@
 #include <CQIllustratorSelection.h>
 #include <CQIllustrator.h>
 #include <CQIllustratorShape.h>
+#include <CQIllustratorShapeControlLine.h>
 
 CQIllustratorSelectedShapes::
 CQIllustratorSelectedShapes(CQIllustrator *illustrator) :

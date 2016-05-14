@@ -2,7 +2,7 @@
 #define CQIllustratorCreateTextMode_H
 
 #include <CQIllustratorMode.h>
-#include <CQIllustratorToolbar.h>
+#include <CQIllustratorCreateTextToolbar.h>
 
 class QFontComboBox;
 class QComboBox;
@@ -12,68 +12,7 @@ class CQImageButton;
 class CQIllustrator;
 class CQIllustratorControlPointHandle;
 class CQIllustratorCreateTextMode;
-class CQIllustratorCreateTextSizer;
-
-class CQIllustratorCreateTextToolbar : public CQIllustratorToolbar {
-  Q_OBJECT
-
- public:
-  CQIllustratorCreateTextToolbar(CQIllustratorCreateTextMode *createTextMode);
-
-  const char *getTitle() const { return "Create Text"; }
-
-  QFont getFont() const { return qfont_; }
-
-  QIcon getIcon();
-
-  void addWidgets();
-
-  void setSelectedShape(const CQIllustratorShape *shape);
-
-  void setSize(const CBBox2D &bbox);
-
- private:
-  void updateWidgets();
-  void updateFontWidgets();
-  void updateFontFromWidgets();
-
- private slots:
-  void updateShape();
-
-  void fontComboSlot();
-  void sizeComboSlot();
-  void boldSlot();
-  void italicSlot();
-
-  void lalignSlot();
-  void hcalignSlot();
-  void ralignSlot();
-
-  void talignSlot();
-  void vcalignSlot();
-  void balignSlot();
-
- private:
-  CQIllustratorCreateTextMode *mode_;
-  QFont                        qfont_;
-  int                          font_ind_;
-  int                          font_size_;
-  CHAlignType                  halign_;
-  CVAlignType                  valign_;
-  QFontComboBox               *fontCombo_;
-  QComboBox                   *sizeCombo_;
-  CQImageButton               *boldButton_;
-  CQImageButton               *italicButton_;
-  QLineEdit                   *textEdit_;
-  CQRealEdit                  *widthEdit_;
-  CQRealEdit                  *heightEdit_;
-  CQImageButton               *lalignButton_;
-  CQImageButton               *hcalignButton_;
-  CQImageButton               *ralignButton_;
-  CQImageButton               *talignButton_;
-  CQImageButton               *vcalignButton_;
-  CQImageButton               *balignButton_;
-};
+class CQIllustratorCreateTextToolbar;
 
 class CQIllustratorCreateTextSizer : public CQIllustratorModeSizer {
  public:
@@ -82,9 +21,11 @@ class CQIllustratorCreateTextSizer : public CQIllustratorModeSizer {
   void drawHandles(QPainter *painter, const CQIllustratorShape *shape);
 
  private:
-  CQIllustratorControlPointHandle *ll_handle_;
-  CQIllustratorControlPointHandle *ur_handle_;
+  CQIllustratorControlPointHandle *ll_handle_ { 0 };
+  CQIllustratorControlPointHandle *ur_handle_ { 0 };
 };
+
+//------
 
 class CQIllustratorCreateTextMode : public CQIllustratorMode {
   Q_OBJECT
@@ -118,11 +59,11 @@ class CQIllustratorCreateTextMode : public CQIllustratorMode {
   void setText(const QString &text);
 
  private:
-  CQIllustratorCreateTextToolbar *toolbar_;
-  CQIllustratorCreateTextSizer   *sizer_;
-  bool                            equalSize_;
+  CQIllustratorCreateTextToolbar *toolbar_ { 0 };
+  CQIllustratorCreateTextSizer   *sizer_ { 0 };
+  bool                            equalSize_ { false };
   QString                         text_;
-  int                             cursor_pos_;
+  int                             cursor_pos_ { 0 };
 };
 
 #endif

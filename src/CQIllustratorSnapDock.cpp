@@ -1,4 +1,4 @@
-#include <CQIllustratorSnap.h>
+#include <CQIllustratorSnapDock.h>
 #include <CQIllustrator.h>
 
 #include <QVBoxLayout>

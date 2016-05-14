@@ -6,26 +6,22 @@
 
 #include <QPainter>
 
-//#include <xpm/control_point.xpm>
-//#include <xpm/control_point_active.xpm>
-
 CQIllustratorHandle::
 CQIllustratorHandle(CQIllustrator *illustrator) :
- illustrator_(illustrator), style_(RECT_STYLE), active_(false), visible_(true), pos_(0,0)
+ illustrator_(illustrator)
 {
 }
 
 void
 CQIllustratorHandle::
-setImage(const char **strings, uint num_strings,
-         const char **active_strings, uint num_active_strings)
+setImage(const QIcon &icon, const QIcon &active_icon)
 {
-  image_ = CImageMgrInst->createImage(CImageXPMSrc(strings, num_strings));
+  icon_ = icon;
 
-  if (active_strings)
-    active_image_ = CImageMgrInst->createImage(CImageXPMSrc(active_strings, num_active_strings));
+  if (! active_icon.isNull())
+    active_icon_ = active_icon;
   else
-    active_image_ = image_;
+    active_icon_ = icon;
 
   style_ = IMAGE_STYLE;
 }
@@ -41,10 +37,13 @@ CISize2D
 CQIllustratorHandle::
 getSize()
 {
-  if (image_.isValid())
-    return CISize2D(image_->getWidth(), image_->getHeight());
+#if 0
+  if (icon_.isValid())
+    return CISize2D(icon_->getWidth(), icon_->getHeight());
   else
     return CISize2D(7, 7);
+#endif
+  return CISize2D(13, 13);
 }
 
 bool
@@ -109,21 +108,21 @@ void
 CQIllustratorHandle::
 drawI(QPainter *painter)
 {
-  if (style_ == IMAGE_STYLE && image_.isValid()) {
+  if (style_ == IMAGE_STYLE && ! icon_.isNull()) {
     QPointF p1 = illustrator_->getTransform().map(CQUtil::toQPoint(pos_));
 
-    QImage image1;
+    QPixmap pixmap;
 
     if (! active_)
-      image1 = image_.cast<CQImage>()->getQImage();
+      pixmap = icon_.pixmap(QSize(16,16));
     else
-      image1 = active_image_.cast<CQImage>()->getQImage();
+      pixmap = active_icon_.pixmap(QSize(16,16));
 
     QPointF ll = p1 - CQUtil::toQPoint(offset_);
 
     painter->setWorldMatrixEnabled(false);
 
-    painter->drawImage(ll, image1);
+    painter->drawPixmap(ll, pixmap);
 
     painter->setWorldMatrixEnabled(true);
   }
@@ -140,19 +139,21 @@ drawI(QPainter *painter)
 
     QRectF rect(p1.x() - pw/2.0, p1.y() - ph/2.0, pw, ph);
 
+    QPen   pen;
     QBrush brush;
 
     if (active_) {
+      pen   = QPen(QColor(0,0,0));
       brush = QBrush(QColor(0,255,0));
-
-      painter->setPen(QColor(0,0,0));
     }
     else {
+      pen   = QPen(QColor(80,80,80));
       brush = QBrush(Qt::NoBrush);
-
-      painter->setPen(QColor(80,80,80));
     }
 
+    pen.setWidth(0);
+
+    painter->setPen  (pen);
     painter->setBrush(brush);
 
     if (style_ == RECT_STYLE)
@@ -167,13 +168,10 @@ drawI(QPainter *painter)
 
 //----------
 
-#define IMAGE_DATA(I) I, sizeof(I)/sizeof(char *)
-
 CQIllustratorControlPointHandle::
 CQIllustratorControlPointHandle(CQIllustrator *illustrator) :
  CQIllustratorHandle(illustrator), point_(0)
 {
-  //setImage(IMAGE_DATA(control_point_data), IMAGE_DATA(control_point_active_data));
 }
 
 CQIllustratorControlPointHandle::

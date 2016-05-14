@@ -1,7 +1,9 @@
 #include <CQIllustratorCreatePolygonMode.h>
+#include <CQIllustratorPolygonShape.h>
 #include <CQIllustrator.h>
 #include <CQIllustratorHandle.h>
 #include <CQIllustratorShapeDrawer.h>
+#include <CQIllustratorUtil.h>
 
 #include <QPainter>
 #include <QHBoxLayout>
@@ -14,23 +16,21 @@
 #include <CQSwatch.h>
 
 #include <svg/polygon_svg.h>
-#include <xpm/path_add.xpm>
-#include <xpm/path_remove.xpm>
+#include <svg/path_add_svg.h>
+#include <svg/path_remove_svg.h>
 
-#include <xpm/poly_free.xpm>
-#include <xpm/poly_rect.xpm>
-#include <xpm/poly_45.xpm>
+#include <svg/poly_free_svg.h>
+#include <svg/poly_rect_svg.h>
+#include <svg/poly_45_svg.h>
 
-#include <xpm/control_point.xpm>
-#include <xpm/control_point_active.xpm>
+#include <svg/control_point_svg.h>
+#include <svg/control_point_active_svg.h>
 
-#include <xpm/snap_point.xpm>
-#include <xpm/snap_point_active.xpm>
+#include <svg/snap_point_svg.h>
+#include <svg/snap_point_active_svg.h>
 
 #include <cursors/select.xbm>
 #include <cursors/selectmask.xbm>
-
-#define IMAGE_DATA(I) I, sizeof(I)/sizeof(char *)
 
 CQIllustratorCreatePolygonMode::
 CQIllustratorCreatePolygonMode(CQIllustrator *illustrator) :
@@ -79,7 +79,7 @@ handleMousePress(const MouseEvent &e)
   CQIllustratorMode::handleMousePress(e);
 
   if (! dragging_) {
-    if (editMode_ == CREATE_MODE) {
+    if (editMode_ == EditMode::CREATE) {
       addPoint(e.window, e.pixel);
     }
   }
@@ -98,12 +98,12 @@ handleMouseRelease(const MouseEvent &e)
     }
     // dragging finished so commit
     else {
-      illustrator_->getSandbox()->commit(CQIllustratorData::CHANGE_GEOMETRY);
+      illustrator_->getSandbox()->commit(CQIllustratorData::ChangeType::GEOMETRY);
     }
   }
   // not dragging so do a select
   else {
-    if (editMode_ == CREATE_MODE) {
+    if (editMode_ == EditMode::CREATE) {
     }
     else {
       // point click - select at point
@@ -114,7 +114,7 @@ handleMouseRelease(const MouseEvent &e)
       else {
         CBBox2D bbox(p1, p2);
 
-        illustrator_->selectPointsIn(bbox, CQIllustratorShape::CONTROL_GEOMETRY,
+        illustrator_->selectPointsIn(bbox, CQIllustratorShape::ControlType::GEOMETRY,
                                      e.event->isControlKey(), e.event->isShiftKey());
       }
     }
@@ -138,7 +138,7 @@ handleMouseDrag(const MouseEvent &e)
     toolbar_->setSelectionPoint(CQUtil::fromQPoint(e.window));
   }
   else {
-    if (editMode_ == CREATE_MODE) {
+    if (editMode_ == EditMode::CREATE) {
     }
     else {
     }
@@ -266,7 +266,7 @@ snapPoint(CPoint2D &p)
 
   CQIllustratorCreatePolygonToolbar::CreateMode createMode = toolbar_->getCreateMode();
 
-  if      (createMode == CQIllustratorCreatePolygonToolbar::CREATE_RECT_MODE) {
+  if      (createMode == CQIllustratorCreatePolygonToolbar::CreateMode::RECT) {
     if      (num_points > 1) {
       const CPoint2D &p1 = polygonPoints_[num_points - 2];
       const CPoint2D &p2 = polygonPoints_[num_points - 1];
@@ -313,7 +313,7 @@ snapPoint(CPoint2D &p)
       }
     }
   }
-  else if (createMode == CQIllustratorCreatePolygonToolbar::CREATE_45_MODE) {
+  else if (createMode == CQIllustratorCreatePolygonToolbar::CreateMode::ANGLE_45) {
     if (num_points > 0) {
       const CPoint2D &p1 = polygonPoints_[num_points - 1];
 
@@ -369,7 +369,8 @@ addCloseHandle(const CPoint2D &cp, const CPoint2D &p)
   while (closeHandleNum_ >= closeHandles_.size()) {
     CQIllustratorHandle *closeHandle = new CQIllustratorHandle(illustrator_);
 
-    closeHandle->setImage(IMAGE_DATA(control_point_data), IMAGE_DATA(control_point_active_data));
+    closeHandle->setImage(CQPixmapCacheInst->getIcon("CONTROL_POINT"),
+                          CQPixmapCacheInst->getIcon("CONTROL_POINT_ACTIVE"));
 
     closeHandles_.push_back(closeHandle);
 
@@ -407,7 +408,8 @@ addSnapHandle(const CPoint2D &cp, const CPoint2D &p)
   while (snapHandleNum_ >= snapHandles_.size()) {
     CQIllustratorHandle *snapHandle = new CQIllustratorHandle(illustrator_);
 
-    snapHandle->setImage(IMAGE_DATA(snap_point_data), IMAGE_DATA(snap_point_active_data));
+    snapHandle->setImage(CQPixmapCacheInst->getIcon("SNAP_POINT"),
+                         CQPixmapCacheInst->getIcon("SNAP_POINT_ACTIVE"));
 
     snapHandles_.push_back(snapHandle);
 
@@ -477,7 +479,7 @@ drawOverlay(CQIllustratorShapeDrawer *drawer)
 
   if (! dragging_) {
     if (pressed_) {
-      if (editMode_ == CREATE_MODE) {
+      if (editMode_ == EditMode::CREATE) {
       }
       else {
         // draw rubber band
@@ -640,7 +642,7 @@ addPointToCurrent()
   else
     polygon->addPoint(controlPoint1, (p1 + p2)/2);
 
-  illustrator_->getSandbox()->commit(CQIllustratorData::CHANGE_GEOMETRY);
+  illustrator_->getSandbox()->commit(CQIllustratorData::ChangeType::GEOMETRY);
 }
 
 void
@@ -670,14 +672,14 @@ removePointFromCurrent()
     polygon->removePoint(controlPoint);
   }
 
-  illustrator_->getSandbox()->commit(CQIllustratorData::CHANGE_GEOMETRY);
+  illustrator_->getSandbox()->commit(CQIllustratorData::ChangeType::GEOMETRY);
 }
 
 //------------
 
 CQIllustratorCreatePolygonToolbar::
 CQIllustratorCreatePolygonToolbar(CQIllustratorCreatePolygonMode *mode) :
- CQIllustratorToolbar(mode), mode_(mode), createMode_(CREATE_FREE_MODE)
+ CQIllustratorToolbar(mode), mode_(mode), createMode_(CreateMode::FREE)
 {
 }
 
@@ -721,9 +723,13 @@ addWidgets()
 
   //-----
 
-  polyFreeButton_ = new CQImageButton(QPixmap(poly_free_data));
-  polyRectButton_ = new CQImageButton(QPixmap(poly_rect_data));
-  poly45Button_   = new CQImageButton(QPixmap(poly_45_data));
+  polyFreeButton_ = new CQImageButton(CQPixmapCacheInst->getIcon("POLY_FREE"));
+  polyRectButton_ = new CQImageButton(CQPixmapCacheInst->getIcon("POLY_RECT"));
+  poly45Button_   = new CQImageButton(CQPixmapCacheInst->getIcon("POLY_45"));
+
+  polyFreeButton_->setToolTip("Polygon (Free)");
+  polyRectButton_->setToolTip("Polygon (Rectilinear)");
+  poly45Button_  ->setToolTip("Polygon (45 degree)");
 
   connect(polyFreeButton_, SIGNAL(toggled(bool)), this, SLOT(polyFreeSlot(bool)));
   connect(polyRectButton_, SIGNAL(toggled(bool)), this, SLOT(polyRectSlot(bool)));
@@ -742,8 +748,8 @@ addWidgets()
 
   //-----
 
-  addPointButton_    = new CQImageButton(QPixmap(path_add_data));
-  removePointButton_ = new CQImageButton(QPixmap(path_remove_data));
+  addPointButton_    = new CQImageButton(CQPixmapCacheInst->getIcon("PATH_ADD"));
+  removePointButton_ = new CQImageButton(CQPixmapCacheInst->getIcon("PATH_REMOVE"));
 
   addPointButton_   ->setToolTip("Add Point");
   removePointButton_->setToolTip("Remove Point");
@@ -751,7 +757,7 @@ addWidgets()
   connect(addPointButton_   , SIGNAL(clicked()), this, SLOT(addPointSlot   ()));
   connect(removePointButton_, SIGNAL(clicked()), this, SLOT(removePointSlot()));
 
-  CQSwatch *modifySwatch = new CQSwatch("Modify<2>", addPointButton_, removePointButton_);
+  CQSwatch *modifySwatch = new CQSwatch("Modify", addPointButton_, removePointButton_);
 
   layout->addWidget(modifySwatch);
 
@@ -771,9 +777,9 @@ CQIllustratorCreatePolygonToolbar::
 modeChangedSlot()
 {
   if (createRadio_->isChecked())
-    mode_->setEditMode(CQIllustratorMode::CREATE_MODE);
+    mode_->setEditMode(CQIllustratorMode::EditMode::CREATE);
   else
-    mode_->setEditMode(CQIllustratorMode::EDIT_MODE);
+    mode_->setEditMode(CQIllustratorMode::EditMode::EDIT);
 }
 
 void
@@ -781,7 +787,7 @@ CQIllustratorCreatePolygonToolbar::
 polyFreeSlot(bool state)
 {
   if (state) {
-    createMode_ = CREATE_FREE_MODE;
+    createMode_ = CreateMode::FREE;
 
     polyRectButton_->setChecked(false);
     poly45Button_  ->setChecked(false);
@@ -793,7 +799,7 @@ CQIllustratorCreatePolygonToolbar::
 polyRectSlot(bool state)
 {
   if (state) {
-    createMode_ = CREATE_RECT_MODE;
+    createMode_ = CreateMode::RECT;
 
     polyFreeButton_->setChecked(false);
     poly45Button_  ->setChecked(false);
@@ -805,7 +811,7 @@ CQIllustratorCreatePolygonToolbar::
 poly45Slot(bool state)
 {
   if (state) {
-    createMode_ = CREATE_45_MODE;
+    createMode_ = CreateMode::ANGLE_45;
 
     polyRectButton_->setChecked(false);
     polyFreeButton_->setChecked(false);

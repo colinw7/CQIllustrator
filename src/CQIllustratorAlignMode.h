@@ -26,16 +26,16 @@ class CQIllustratorAlignToolbar : public CQIllustratorToolbar {
   Q_OBJECT
 
  public:
-  enum AnchorMode {
-    SELECTION_MODE,
-    OBJECT_MODE,
-    POSITION_MODE
+  enum class AnchorMode {
+    SELECTION,
+    OBJECT,
+    POSITION
   };
 
-  enum ObjectEdgeType {
-    EDGE_LEFT_BOTTOM,
-    EDGE_RIGHT_TOP,
-    EDGE_MIDDLE
+  enum class ObjectEdgeType {
+    LEFT_BOTTOM,
+    RIGHT_TOP,
+    MIDDLE
   };
 
  public:
@@ -218,7 +218,7 @@ class CQAlignAnchor : public QWidget {
   void objectSlot(const QString &obj);
 
  private:
-  AnchorMode           mode_ { CQIllustratorAlignToolbar::SELECTION_MODE };
+  AnchorMode           mode_ { AnchorMode::SELECTION};
   QComboBox           *objectCombo_ { 0 };
   QStackedWidget      *anchorStack_ { 0 };
   QWidget             *anchorLabel_ { 0 };
@@ -254,7 +254,7 @@ class CQAlignAnchorObject : public QWidget {
   void selectSlot(bool);
 
  private:
-  ObjectEdgeType  edgeType_ { CQIllustratorAlignToolbar::EDGE_LEFT_BOTTOM };
+  ObjectEdgeType  edgeType_ { CQIllustratorAlignToolbar::ObjectEdgeType::LEFT_BOTTOM };
   QLineEdit      *nameEdit_ { 0 };
   QToolButton    *edgeButton_ { 0 };
   QToolButton    *selButton_ { 0 };
@@ -292,7 +292,7 @@ class CQToolButton : public QToolButton {
   Q_OBJECT
 
  public:
-  CQToolButton(const char **xpmData);
+  CQToolButton(const QIcon &icon);
 
  private:
   bool event(QEvent*);

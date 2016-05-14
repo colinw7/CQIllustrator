@@ -2,6 +2,7 @@
 #include <CQIllustrator.h>
 #include <CQIllustratorHandle.h>
 #include <CQIllustratorToolbar.h>
+#include <CQIllustratorShapeControlLine.h>
 #include <CQIllustratorShapeDrawer.h>
 #include <CQUtil.h>
 
@@ -10,23 +11,19 @@
 #include <QMouseEvent>
 #include <QStackedWidget>
 
-#include <xpm/selected_point.xpm>
-#include <xpm/selected_hline.xpm>
-#include <xpm/selected_vline.xpm>
-
-#define IMAGE_DATA(I) I, sizeof(I)/sizeof(char *)
+#include <svg/selected_point_svg.h>
+#include <svg/selected_hline_svg.h>
+#include <svg/selected_vline_svg.h>
 
 CQIllustratorMode::
 CQIllustratorMode(CQIllustrator *illustrator, uint id) :
- illustrator_(illustrator), parentMode_(0), id_(id), menuItem_(0),
- editMode_(CREATE_MODE), stack_(0), pressed_(false), moving_(false), dragging_(false)
+ illustrator_(illustrator), id_(id)
 {
 }
 
 CQIllustratorMode::
 CQIllustratorMode(CQIllustratorMode *parentMode, uint id) :
- illustrator_(parentMode->getIllustrator()), parentMode_(parentMode), id_(id), menuItem_(0),
- editMode_(CREATE_MODE), pressed_(false), moving_(false), dragging_(false)
+ illustrator_(parentMode->getIllustrator()), parentMode_(parentMode), id_(id)
 {
 }
 
@@ -672,9 +669,9 @@ drawSelectionHandles(QPainter *painter, const CQIllustratorSelectedShape &sshape
     lineSelectionHandles_[i]->setPosition((l.start() + l.end())/2);
 
     if (dx > dy)
-      lineSelectionHandles_[i]->setImage(IMAGE_DATA(selected_hline_data));
+      lineSelectionHandles_[i]->setImage(CQPixmapCacheInst->getIcon("SELECTED_HLINE"));
     else
-      lineSelectionHandles_[i]->setImage(IMAGE_DATA(selected_vline_data));
+      lineSelectionHandles_[i]->setImage(CQPixmapCacheInst->getIcon("SELECTED_VLINE"));
 
     lineSelectionHandles_[i]->draw(painter);
   }
@@ -713,9 +710,9 @@ updateSelectionHandles(const CQIllustratorSelectedShape &sshape)
     lineSelectionHandles_[i]->setPosition((l.start() + l.end())/2);
 
     if (dx > dy)
-      lineSelectionHandles_[i]->setImage(IMAGE_DATA(selected_hline_data));
+      lineSelectionHandles_[i]->setImage(CQPixmapCacheInst->getIcon("SELECTED_HLINE"));
     else
-      lineSelectionHandles_[i]->setImage(IMAGE_DATA(selected_vline_data));
+      lineSelectionHandles_[i]->setImage(CQPixmapCacheInst->getIcon("SELECTED_VLINE"));
   }
 }
 
@@ -728,7 +725,7 @@ updatePointSelectionHandles(uint num)
   while (pointSelectionHandles_.size() < num) {
     CQIllustratorHandle *selectionHandle = new CQIllustratorHandle(illustrator);
 
-    selectionHandle->setImage(IMAGE_DATA(selected_point_data));
+    selectionHandle->setImage(CQPixmapCacheInst->getIcon("SELECTED_POINT"));
 
     pointSelectionHandles_.push_back(selectionHandle);
   }
@@ -743,7 +740,7 @@ updateLineSelectionHandles(uint num)
   while (lineSelectionHandles_.size() < num) {
     CQIllustratorHandle *selectionHandle = new CQIllustratorHandle(illustrator);
 
-    selectionHandle->setImage(IMAGE_DATA(selected_hline_data));
+    selectionHandle->setImage(CQPixmapCacheInst->getIcon("SELECTED_HLINE"));
 
     lineSelectionHandles_.push_back(selectionHandle);
   }

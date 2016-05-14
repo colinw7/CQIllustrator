@@ -14,13 +14,13 @@ class CQIllustratorData : public QObject {
   Q_OBJECT
 
  public:
-  enum ChangeType {
-    CHANGE_NAME,
-    CHANGE_GEOMETRY,
-    CHANGE_STROKE,
-    CHANGE_FILL,
-    CHANGE_FONT,
-    CHANGE_GENERIC
+  enum class ChangeType {
+    NAME,
+    GEOMETRY,
+    STROKE,
+    FILL,
+    FONT,
+    GENERIC
   };
 
   typedef CStack<CQIllustratorShape>                        ShapeStack;
@@ -63,9 +63,9 @@ class CQIllustratorData : public QObject {
   void objectPostModify(CQIllustratorShape *shape, ChangeType changeType);
 
  private:
-  CQIllustrator *illustrator_;
+  CQIllustrator *illustrator_ { 0 };
   ShapeStack     shapes_;
-  QuadTree      *quadTree_;
+  QuadTree      *quadTree_ { 0 };
 };
 
 #endif

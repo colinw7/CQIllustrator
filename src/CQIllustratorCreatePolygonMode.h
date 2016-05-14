@@ -15,10 +15,10 @@ class CQIllustratorCreatePolygonToolbar : public CQIllustratorToolbar {
   Q_OBJECT
 
  public:
-  enum CreateMode {
-    CREATE_FREE_MODE,
-    CREATE_RECT_MODE,
-    CREATE_45_MODE
+  enum class CreateMode {
+    FREE,
+    RECT,
+    ANGLE_45
   };
 
  public:
@@ -127,12 +127,12 @@ class CQIllustratorCreatePolygonMode : public CQIllustratorMode {
  private:
   typedef std::vector<CPoint2D> PointList;
 
-  CQIllustratorCreatePolygonToolbar  *toolbar_;
-  CQIllustratorCreatePolygonSizer    *sizer_;
+  CQIllustratorCreatePolygonToolbar  *toolbar_ { 0 };
+  CQIllustratorCreatePolygonSizer    *sizer_ { 0 };
   std::vector<CQIllustratorHandle *>  closeHandles_;
-  uint                                closeHandleNum_;
+  uint                                closeHandleNum_ { 0 };
   std::vector<CQIllustratorHandle *>  snapHandles_;
-  uint                                snapHandleNum_;
+  uint                                snapHandleNum_ { 0 };
   QPoint                              polygonStart_;
   PointList                           polygonPoints_;
 };

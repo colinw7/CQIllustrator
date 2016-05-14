@@ -5,31 +5,27 @@
 
 #include <QPainter>
 
-#include <xpm/corner_bl.xpm>
-#include <xpm/corner_bl_active.xpm>
-#include <xpm/corner_tl.xpm>
-#include <xpm/corner_tl_active.xpm>
+#include <svg/corner_bl_svg.h>
+#include <svg/corner_bl_active_svg.h>
+#include <svg/corner_tl_svg.h>
+#include <svg/corner_tl_active_svg.h>
 
-#include <xpm/rotate_bl.xpm>
-#include <xpm/rotate_bl_active.xpm>
-#include <xpm/rotate_br.xpm>
-#include <xpm/rotate_br_active.xpm>
-#include <xpm/rotate_tl.xpm>
-#include <xpm/rotate_tl_active.xpm>
-#include <xpm/rotate_tr.xpm>
-#include <xpm/rotate_tr_active.xpm>
+#include <svg/rotate_bl_svg.h>
+#include <svg/rotate_bl_active_svg.h>
+#include <svg/rotate_br_svg.h>
+#include <svg/rotate_br_active_svg.h>
+#include <svg/rotate_tl_svg.h>
+#include <svg/rotate_tl_active_svg.h>
+#include <svg/rotate_tr_svg.h>
+#include <svg/rotate_tr_active_svg.h>
 
-#include <xpm/side_lr.xpm>
-#include <xpm/side_lr_active.xpm>
-#include <xpm/side_tb.xpm>
-#include <xpm/side_tb_active.xpm>
+#include <svg/side_lr_svg.h>
+#include <svg/side_lr_active_svg.h>
+#include <svg/side_tb_svg.h>
+#include <svg/side_tb_active_svg.h>
 
-#include <xpm/rcenter.xpm>
-#include <xpm/rcenter_active.xpm>
-
-#define IMAGE_DATA(I) I##_data, sizeof(I##_data)/sizeof(char *)
-
-#define ACTIVE_IMAGE_DATA(I) IMAGE_DATA(I), IMAGE_DATA(I##_active)
+#include <svg/rcenter_svg.h>
+#include <svg/rcenter_active_svg.h>
 
 CQIllustratorSizer::
 CQIllustratorSizer(CQIllustrator *illustrator) :
@@ -40,10 +36,14 @@ CQIllustratorSizer(CQIllustrator *illustrator) :
   tl_corner_handle_ = new CQIllustratorHandle(illustrator);
   br_corner_handle_ = new CQIllustratorHandle(illustrator);
 
-  bl_corner_handle_->setImage(ACTIVE_IMAGE_DATA(corner_bl));
-  tr_corner_handle_->setImage(ACTIVE_IMAGE_DATA(corner_bl));
-  tl_corner_handle_->setImage(ACTIVE_IMAGE_DATA(corner_tl));
-  br_corner_handle_->setImage(ACTIVE_IMAGE_DATA(corner_tl));
+  bl_corner_handle_->setImage(CQPixmapCacheInst->getIcon("CORNER_BL"),
+                              CQPixmapCacheInst->getIcon("CORNER_BL_ACTIVE"));
+  tr_corner_handle_->setImage(CQPixmapCacheInst->getIcon("CORNER_BL"),
+                              CQPixmapCacheInst->getIcon("CORNER_BL_ACTIVE"));
+  tl_corner_handle_->setImage(CQPixmapCacheInst->getIcon("CORNER_TL"),
+                              CQPixmapCacheInst->getIcon("CORNER_TL_ACTIVE"));
+  br_corner_handle_->setImage(CQPixmapCacheInst->getIcon("CORNER_TL"),
+                              CQPixmapCacheInst->getIcon("CORNER_TL_ACTIVE"));
 
   //----
 
@@ -52,10 +52,14 @@ CQIllustratorSizer(CQIllustrator *illustrator) :
   tl_rotate_handle_ = new CQIllustratorHandle(illustrator);
   tr_rotate_handle_ = new CQIllustratorHandle(illustrator);
 
-  bl_rotate_handle_->setImage(ACTIVE_IMAGE_DATA(rotate_bl));
-  br_rotate_handle_->setImage(ACTIVE_IMAGE_DATA(rotate_br));
-  tl_rotate_handle_->setImage(ACTIVE_IMAGE_DATA(rotate_tl));
-  tr_rotate_handle_->setImage(ACTIVE_IMAGE_DATA(rotate_tr));
+  bl_rotate_handle_->setImage(CQPixmapCacheInst->getIcon("ROTATE_BL"),
+                              CQPixmapCacheInst->getIcon("ROTATE_BL_ACTIVE"));
+  br_rotate_handle_->setImage(CQPixmapCacheInst->getIcon("ROTATE_BR"),
+                              CQPixmapCacheInst->getIcon("ROTATE_BR_ACTIVE"));
+  tl_rotate_handle_->setImage(CQPixmapCacheInst->getIcon("ROTATE_TL"),
+                              CQPixmapCacheInst->getIcon("ROTATE_TL_ACTIVE"));
+  tr_rotate_handle_->setImage(CQPixmapCacheInst->getIcon("ROTATE_TR"),
+                              CQPixmapCacheInst->getIcon("ROTATE_TR_ACTIVE"));
 
   //----
 
@@ -64,16 +68,21 @@ CQIllustratorSizer(CQIllustrator *illustrator) :
   r_side_handle_ = new CQIllustratorHandle(illustrator);
   t_side_handle_ = new CQIllustratorHandle(illustrator);
 
-  l_side_handle_->setImage(ACTIVE_IMAGE_DATA(side_lr));
-  b_side_handle_->setImage(ACTIVE_IMAGE_DATA(side_tb));
-  r_side_handle_->setImage(ACTIVE_IMAGE_DATA(side_lr));
-  t_side_handle_->setImage(ACTIVE_IMAGE_DATA(side_tb));
+  l_side_handle_->setImage(CQPixmapCacheInst->getIcon("SIDE_LR"),
+                           CQPixmapCacheInst->getIcon("SIDE_LR_ACTIVE"));
+  b_side_handle_->setImage(CQPixmapCacheInst->getIcon("SIDE_TB"),
+                           CQPixmapCacheInst->getIcon("SIDE_TB_ACTIVE"));
+  r_side_handle_->setImage(CQPixmapCacheInst->getIcon("SIDE_LR"),
+                           CQPixmapCacheInst->getIcon("SIDE_LR_ACTIVE"));
+  t_side_handle_->setImage(CQPixmapCacheInst->getIcon("SIDE_TB"),
+                           CQPixmapCacheInst->getIcon("SIDE_TB_ACTIVE"));
 
   //----
 
   rcenter_handle_ = new CQIllustratorHandle(illustrator);
 
-  rcenter_handle_->setImage(ACTIVE_IMAGE_DATA(rcenter));
+  rcenter_handle_->setImage(CQPixmapCacheInst->getIcon("RCENTER"),
+                            CQPixmapCacheInst->getIcon("RCENTER_ACTIVE"));
 }
 
 bool

@@ -20,9 +20,9 @@ class CQIllustratorCreateStarToolbar : public CQIllustratorToolbar {
   Q_OBJECT
 
  public:
-  enum CreateMode {
-    CREATE_STAR_MODE,
-    CREATE_POLY_MODE
+  enum class CreateMode {
+    STAR,
+    POLY
   };
 
  public:
@@ -47,17 +47,19 @@ class CQIllustratorCreateStarToolbar : public CQIllustratorToolbar {
   void updateShape();
 
  private:
-  CQIllustratorCreateStarMode *mode_;
-  CreateMode                   createMode_;
-  CQImageButton               *starButton_;
-  CQImageButton               *polyButton_;
-  CQPointEdit                 *centerEdit_;
-  QSpinBox                    *numEdit_;
-  CQRealEdit                  *radius1Edit_;
-  CQRealEdit                  *radius2Edit_;
-  CQAngleSpinBox              *angle1Edit_;
-  CQAngleSpinBox              *angle2Edit_;
+  CQIllustratorCreateStarMode *mode_ { 0 };
+  CreateMode                   createMode_ { CreateMode::STAR };
+  CQImageButton               *starButton_ { 0 };
+  CQImageButton               *polyButton_ { 0 };
+  CQPointEdit                 *centerEdit_ { 0 };
+  QSpinBox                    *numEdit_ { 0 };
+  CQRealEdit                  *radius1Edit_ { 0 };
+  CQRealEdit                  *radius2Edit_ { 0 };
+  CQAngleSpinBox              *angle1Edit_ { 0 };
+  CQAngleSpinBox              *angle2Edit_ { 0 };
 };
+
+//------
 
 class CQIllustratorCreateStarSizer : public CQIllustratorModeSizer {
  public:
@@ -66,10 +68,12 @@ class CQIllustratorCreateStarSizer : public CQIllustratorModeSizer {
   void drawHandles(QPainter *painter, const CQIllustratorShape *shape);
 
  private:
-  CQIllustratorControlPointHandle *c_handle_;
-  CQIllustratorControlPointHandle *ir_handle_;
-  CQIllustratorControlPointHandle *or_handle_;
+  CQIllustratorControlPointHandle *c_handle_ { 0 };
+  CQIllustratorControlPointHandle *ir_handle_ { 0 };
+  CQIllustratorControlPointHandle *or_handle_ { 0 };
 };
+
+//------
 
 class CQIllustratorCreateStarMode : public CQIllustratorMode {
   Q_OBJECT
@@ -97,8 +101,8 @@ class CQIllustratorCreateStarMode : public CQIllustratorMode {
   void drawOverlay(CQIllustratorShapeDrawer *drawer);
 
  private:
-  CQIllustratorCreateStarToolbar *toolbar_;
-  CQIllustratorCreateStarSizer   *sizer_;
+  CQIllustratorCreateStarToolbar *toolbar_ { 0 };
+  CQIllustratorCreateStarSizer   *sizer_ { 0 };
 };
 
 #endif

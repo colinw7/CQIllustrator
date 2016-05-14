@@ -160,7 +160,7 @@ handleMouseRelease(const MouseEvent &e)
     if (sizing_)
       sizer_->mouseRelease(e.window);
 
-    illustrator_->getSandbox()->commit(CQIllustratorData::CHANGE_GEOMETRY);
+    illustrator_->getSandbox()->commit(CQIllustratorData::ChangeType::GEOMETRY);
   }
 
   dragging_ = false;
@@ -226,7 +226,7 @@ handleKeyPress(const KeyEvent &e)
       else
         shape->rotate( ROTATE_SMALL *M_PI/180.0);
 
-      illustrator_->getSandbox()->commit(CQIllustratorData::CHANGE_GEOMETRY);
+      illustrator_->getSandbox()->commit(CQIllustratorData::ChangeType::GEOMETRY);
 
       return true;
     }
@@ -242,7 +242,7 @@ handleKeyPress(const KeyEvent &e)
       else
         shape->rotate(-ROTATE_SMALL *M_PI/180.0);
 
-      illustrator_->getSandbox()->commit(CQIllustratorData::CHANGE_GEOMETRY);
+      illustrator_->getSandbox()->commit(CQIllustratorData::ChangeType::GEOMETRY);
 
       return true;
     }
@@ -320,6 +320,9 @@ addWidgets()
   selectAllButton_  = new CQImageButton(CQPixmapCacheInst->getIcon("SELECT_ALL" ));
   selectNoneButton_ = new CQImageButton(CQPixmapCacheInst->getIcon("SELECT_NONE"));
 
+  selectAllButton_ ->setObjectName("selectAll");
+  selectNoneButton_->setObjectName("selectNone");
+
   selectAllButton_ ->setToolTip("Select All");
   selectNoneButton_->setToolTip("Select None");
 
@@ -327,6 +330,8 @@ addWidgets()
   connect(selectNoneButton_, SIGNAL(clicked()), this, SLOT(selectNoneSlot()));
 
   CQSwatch *selectSwatch = new CQSwatch("Select", selectAllButton_, selectNoneButton_);
+
+  selectSwatch->setObjectName("select");
 
   layout->addWidget(selectSwatch);
 
@@ -340,6 +345,8 @@ addWidgets()
   connect(buttons, SIGNAL(valueChanged(int)), this, SLOT(setMode(int)));
 
   CQSwatch *modeSwatch = new CQSwatch("Mode", buttons);
+
+  modeSwatch->setObjectName("mode");
 
   layout->addWidget(modeSwatch);
 }

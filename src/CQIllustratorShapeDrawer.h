@@ -78,15 +78,15 @@ class CQIllustratorShapeDrawer {
   CMatrix2D      m_ { CMATRIX_TYPE_IDENTITY };
   MatrixStack    matrices_;
 
-  CImagePtr control_point_image_;
-  CImagePtr control_point_active_image_;
-  CImagePtr curve_point_image_;
-  CImagePtr curve_point_active_image_;
+  //CImagePtr control_point_image_;
+  //CImagePtr control_point_active_image_;
+  //CImagePtr curve_point_image_;
+  //CImagePtr curve_point_active_image_;
 
-  QImage qi1_control_;
-  QImage qi2_control_;
-  QImage qi1_curve_;
-  QImage qi2_curve_;
+  //QImage qi1_control_;
+  //QImage qi2_control_;
+  //QImage qi1_curve_;
+  //QImage qi2_curve_;
 };
 
 //------

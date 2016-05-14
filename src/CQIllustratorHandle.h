@@ -1,10 +1,10 @@
 #ifndef CQIllustratorHandle_H
 #define CQIllustratorHandle_H
 
-#include <QPointF>
 #include <CPoint2D.h>
 #include <CISize2D.h>
-#include <CImagePtr.h>
+#include <QPointF>
+#include <QIcon>
 
 class CQIllustrator;
 class QPainter;
@@ -26,8 +26,7 @@ class CQIllustratorHandle {
 
   virtual ~CQIllustratorHandle() { }
 
-  void setImage(const char **strings, uint num_strings,
-                const char **active_strings=0, uint num_active_strings=0);
+  void setImage(const QIcon &normal, const QIcon &active=QIcon());
 
   void setStyle(Style style);
 
@@ -53,14 +52,14 @@ class CQIllustratorHandle {
   void drawI(QPainter *painter);
 
  protected:
-  CQIllustrator *illustrator_;
-  Style          style_;
-  bool           active_;
-  bool           visible_;
-  CPoint2D       pos_;
-  CIPoint2D      offset_;
-  CImagePtr      image_;
-  CImagePtr      active_image_;
+  CQIllustrator *illustrator_{ 0 };
+  Style          style_ { RECT_STYLE };
+  bool           active_ { false };
+  bool           visible_ { true };
+  CPoint2D       pos_ { 0, 0 };
+  CIPoint2D      offset_ { 0, 0 };
+  QIcon          icon_;
+  QIcon          active_icon_;
 };
 
 class CQIllustratorControlPointHandle : public CQIllustratorHandle {

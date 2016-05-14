@@ -1,5 +1,7 @@
 #include <CQPropertiesOption.h>
 #include <CQIllustrator.h>
+#include <CQIllustratorTextShape.h>
+#include <CQIllustratorShapeFilter.h>
 
 #include <CQPointEdit.h>
 #include <CQMatrix2D.h>
@@ -266,7 +268,7 @@ updateShape()
   CQIllustratorShape *shape = illustrator->getShape(name_);
 
   if (shape) {
-    illustrator->checkoutShape(shape, CQIllustratorData::CHANGE_GEOMETRY);
+    illustrator->checkoutShape(shape, CQIllustratorData::ChangeType::GEOMETRY);
 
     shape->setName(nameEdit_->text().toStdString());
 
@@ -290,7 +292,7 @@ updateShape()
     else
       shape->unsetFilter();
 
-    illustrator->checkinShape(shape, CQIllustratorData::CHANGE_GEOMETRY);
+    illustrator->checkinShape(shape, CQIllustratorData::ChangeType::GEOMETRY);
   }
 
   tool_->emitValueChanged();
@@ -473,11 +475,11 @@ getEditorData(QString &str)
   if (point != point1) {
     CQIllustratorShape *shape = const_cast<CQIllustratorShape *>(shape_);
 
-    illustrator->checkoutShape(shape, CQIllustratorData::CHANGE_GEOMETRY);
+    illustrator->checkoutShape(shape, CQIllustratorData::ChangeType::GEOMETRY);
 
     point_->setPoint(shape, point);
 
-    illustrator->checkinShape(shape, CQIllustratorData::CHANGE_GEOMETRY);
+    illustrator->checkinShape(shape, CQIllustratorData::ChangeType::GEOMETRY);
   }
 }
 

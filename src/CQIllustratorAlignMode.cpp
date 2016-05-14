@@ -23,22 +23,24 @@
 
 #include <svg/align_svg.h>
 
-#include <align_xpm/align_to_bottom_16_xpm.xpm>
-#include <align_xpm/align_to_left_16_xpm.xpm>
-#include <align_xpm/align_to_right_16_xpm.xpm>
-#include <align_xpm/align_to_top_16_xpm.xpm>
-#include <align_xpm/align_horizontally_16_xpm.xpm>
-#include <align_xpm/align_vertically_16_xpm.xpm>
-#include <align_xpm/distribute_bottom_16_xpm.xpm>
-#include <align_xpm/distribute_left_16_xpm.xpm>
-#include <align_xpm/distribute_right_16_xpm.xpm>
-#include <align_xpm/distribute_top_16_xpm.xpm>
-#include <align_xpm/spread_horz_16_xpm.xpm>
-#include <align_xpm/spread_vert_16_xpm.xpm>
-#include <align_xpm/select.xpm>
-#include <align_xpm/left_bottom.xpm>
-#include <align_xpm/right_top.xpm>
-#include <align_xpm/middle_middle.xpm>
+#include <svg/align_to_bottom_svg.h>
+#include <svg/align_to_left_svg.h>
+#include <svg/align_to_right_svg.h>
+#include <svg/align_to_top_svg.h>
+#include <svg/align_horizontally_svg.h>
+#include <svg/align_vertically_svg.h>
+
+#include <svg/distribute_bottom_svg.h>
+#include <svg/distribute_left_svg.h>
+#include <svg/distribute_right_svg.h>
+#include <svg/distribute_top_svg.h>
+#include <svg/spread_horiz_svg.h>
+#include <svg/spread_vert_svg.h>
+
+#include <svg/align_select_svg.h>
+#include <svg/align_left_bottom_svg.h>
+#include <svg/align_right_top_svg.h>
+#include <svg/align_middle_middle_svg.h>
 
 CQIllustratorAlignMode::
 CQIllustratorAlignMode(CQIllustrator *illustrator) :
@@ -140,7 +142,7 @@ drawOverlay(CQIllustratorShapeDrawer *drawer)
 
   CQIllustratorAlignToolbar::AnchorMode anchorMode = toolbar_->getAnchorMode();
 
-  if (anchorMode == CQIllustratorAlignToolbar::POSITION_MODE) {
+  if (anchorMode == CQIllustratorAlignToolbar::AnchorMode::POSITION) {
     QPointF pos = toolbar_->getAnchorPosition();
 
     QPen pen;
@@ -302,7 +304,7 @@ align(CQIllustrator::AlignSide side, bool commit)
 
   CQIllustratorAlignToolbar::AnchorMode anchorMode = toolbar_->getAnchorMode();
 
-  if      (anchorMode == CQIllustratorAlignToolbar::SELECTION_MODE) {
+  if      (anchorMode == CQIllustratorAlignToolbar::AnchorMode::SELECTION) {
     // get anchor shape for side
 
     CQIllustratorSelectedShapes::iterator ps1, ps2;
@@ -346,7 +348,7 @@ align(CQIllustrator::AlignSide side, bool commit)
       }
     }
   }
-  else if (anchorMode == CQIllustratorAlignToolbar::OBJECT_MODE) {
+  else if (anchorMode == CQIllustratorAlignToolbar::AnchorMode::OBJECT) {
     CQIllustratorShape *shape = illustrator_->getShape(toolbar_->getAnchorObject().toStdString());
 
     if (shape == 0) return;
@@ -356,16 +358,16 @@ align(CQIllustrator::AlignSide side, bool commit)
 
     abbox = shape->getFlatBBox();
 
-    if      (edgeType == CQIllustratorAlignToolbar::EDGE_LEFT_BOTTOM)
+    if      (edgeType == CQIllustratorAlignToolbar::ObjectEdgeType::LEFT_BOTTOM)
       abbox = CBBox2D(abbox.getLL(), abbox.getLR());
-    else if (edgeType == CQIllustratorAlignToolbar::EDGE_RIGHT_TOP)
+    else if (edgeType == CQIllustratorAlignToolbar::ObjectEdgeType::RIGHT_TOP)
       abbox = CBBox2D(abbox.getUR(), abbox.getUR());
-    else if (edgeType == CQIllustratorAlignToolbar::EDGE_MIDDLE)
+    else if (edgeType == CQIllustratorAlignToolbar::ObjectEdgeType::MIDDLE)
       abbox = CBBox2D(abbox.getCenter(), abbox.getCenter());
 
     bbbox = abbox;
   }
-  else if (anchorMode == CQIllustratorAlignToolbar::POSITION_MODE) {
+  else if (anchorMode == CQIllustratorAlignToolbar::AnchorMode::POSITION) {
     QPointF pos = toolbar_->getAnchorPosition();
 
     abbox = CBBox2D(CQUtil::fromQPoint(pos), CQUtil::fromQPoint(pos));
@@ -683,12 +685,12 @@ CQAlignButtons() :
   QGridLayout *agrid = new QGridLayout(this);
   agrid->setMargin(0); agrid->setSpacing(8);
 
-  CQToolButton *alignl  = new CQToolButton(align_to_left_16_xpm);
-  CQToolButton *alignb  = new CQToolButton(align_to_bottom_16_xpm);
-  CQToolButton *alignr  = new CQToolButton(align_to_right_16_xpm);
-  CQToolButton *alignt  = new CQToolButton(align_to_top_16_xpm);
-  CQToolButton *alignhc = new CQToolButton(align_horizontally_16_xpm);
-  CQToolButton *alignvc = new CQToolButton(align_vertically_16_xpm);
+  CQToolButton *alignl  = new CQToolButton(CQPixmapCacheInst->getIcon("ALIGN_TO_LEFT"));
+  CQToolButton *alignb  = new CQToolButton(CQPixmapCacheInst->getIcon("ALIGN_TO_BOTTOM"));
+  CQToolButton *alignr  = new CQToolButton(CQPixmapCacheInst->getIcon("ALIGN_TO_RIGHT"));
+  CQToolButton *alignt  = new CQToolButton(CQPixmapCacheInst->getIcon("ALIGN_TO_TOP"));
+  CQToolButton *alignhc = new CQToolButton(CQPixmapCacheInst->getIcon("ALIGN_HORIZONTALLY"));
+  CQToolButton *alignvc = new CQToolButton(CQPixmapCacheInst->getIcon("ALIGN_VERTICALLY"));
 
   alignl ->setToolTip("Align Left");
   alignb ->setToolTip("Align Bottom");
@@ -737,10 +739,10 @@ CQDistButtons() :
   QGridLayout *dgrid = new QGridLayout(this);
   dgrid->setMargin(0); dgrid->setSpacing(8);
 
-  CQToolButton *distl = new CQToolButton(distribute_left_16_xpm);
-  CQToolButton *distb = new CQToolButton(distribute_bottom_16_xpm);
-  CQToolButton *distt = new CQToolButton(distribute_right_16_xpm);
-  CQToolButton *distr = new CQToolButton(distribute_top_16_xpm);
+  CQToolButton *distl = new CQToolButton(CQPixmapCacheInst->getIcon("DISTRIBUTE_LEFT"));
+  CQToolButton *distb = new CQToolButton(CQPixmapCacheInst->getIcon("DISTRIBUTE_BOTTOM"));
+  CQToolButton *distt = new CQToolButton(CQPixmapCacheInst->getIcon("DISTRIBUTE_RIGHT"));
+  CQToolButton *distr = new CQToolButton(CQPixmapCacheInst->getIcon("DISTRIBUTE_TOP"));
 
   dgrid->addWidget(distl, 0, 0);
   dgrid->addWidget(distb, 0, 1);
@@ -759,8 +761,8 @@ CQSpreadButtons() :
   QGridLayout *sgrid = new QGridLayout(this);
   sgrid->setMargin(0); sgrid->setSpacing(8);
 
-  CQToolButton *spreadh = new CQToolButton(spread_horz_16_xpm);
-  CQToolButton *spreadv = new CQToolButton(spread_vert_16_xpm);
+  CQToolButton *spreadh = new CQToolButton(CQPixmapCacheInst->getIcon("SPREAD_HORIZ"));
+  CQToolButton *spreadv = new CQToolButton(CQPixmapCacheInst->getIcon("SPREAD_VERT"));
 
   sgrid->addWidget(spreadh, 0, 0);
   sgrid->addWidget(spreadv, 0, 1);
@@ -819,9 +821,12 @@ void
 CQAlignAnchor::
 updateState()
 {
-  if      (mode_ == CQIllustratorAlignToolbar::SELECTION_MODE) anchorStack_->setCurrentIndex(0);
-  else if (mode_ == CQIllustratorAlignToolbar::OBJECT_MODE   ) anchorStack_->setCurrentIndex(1);
-  else if (mode_ == CQIllustratorAlignToolbar::POSITION_MODE ) anchorStack_->setCurrentIndex(2);
+  if      (mode_ == CQIllustratorAlignToolbar::AnchorMode::SELECTION)
+    anchorStack_->setCurrentIndex(0);
+  else if (mode_ == CQIllustratorAlignToolbar::AnchorMode::OBJECT)
+    anchorStack_->setCurrentIndex(1);
+  else if (mode_ == CQIllustratorAlignToolbar::AnchorMode::POSITION)
+    anchorStack_->setCurrentIndex(2);
 }
 
 CQIllustratorAlignToolbar::AnchorMode
@@ -879,11 +884,11 @@ CQAlignAnchor::
 objectSlot(const QString &obj)
 {
   if      (obj == "Selection")
-    mode_ = CQIllustratorAlignToolbar::SELECTION_MODE;
+    mode_ = CQIllustratorAlignToolbar::AnchorMode::SELECTION;
   else if (obj == "Object")
-    mode_ = CQIllustratorAlignToolbar::OBJECT_MODE;
+    mode_ = CQIllustratorAlignToolbar::AnchorMode::OBJECT;
   else if (obj == "Position")
-    mode_ = CQIllustratorAlignToolbar::POSITION_MODE;
+    mode_ = CQIllustratorAlignToolbar::AnchorMode::POSITION;
 
   updateState();
 }
@@ -907,13 +912,13 @@ CQAlignAnchorObject(QWidget *parent) :
 
   edgeButton_->setPopupMode(QToolButton::MenuButtonPopup);
 
-  edgeButton_->setIcon(QIcon(QPixmap(left_bottom_data)));
+  edgeButton_->setIcon(CQPixmapCacheInst->getIcon("ALIGN_LEFT_BOTTOM"));
 
   QMenu *edgeMenu = new QMenu;
 
-  edgeMenu->addAction(QIcon(QPixmap(left_bottom_data  )), "Left/Bottom");
-  edgeMenu->addAction(QIcon(QPixmap(right_top_data    )), "Right/Top");
-  edgeMenu->addAction(QIcon(QPixmap(middle_middle_data)), "Middle");
+  edgeMenu->addAction(CQPixmapCacheInst->getIcon("ALIGN_LEFT_BOTTOM"  ), "Left/Bottom");
+  edgeMenu->addAction(CQPixmapCacheInst->getIcon("ALIGN_RIGHT_TOP"    ), "Right/Top");
+  edgeMenu->addAction(CQPixmapCacheInst->getIcon("ALIGN_MIDDLE_MIDDLE"), "Middle");
 
   edgeButton_->setMenu(edgeMenu);
 
@@ -926,7 +931,7 @@ CQAlignAnchorObject(QWidget *parent) :
   selButton_->setCheckable(true);
   selButton_->setAutoRaise(true);
 
-  selButton_->setIcon(QIcon(QPixmap(select_tool_16_xpm)));
+  selButton_->setIcon(CQPixmapCacheInst->getIcon("ALIGN_SELECT"));
 
   connect(selButton_, SIGNAL(clicked(bool)), this, SLOT(selectSlot(bool)));
 
@@ -962,11 +967,11 @@ edgeSlot(QAction *action)
   QString str = action->text();
 
   if      (str == "Left/Bottom")
-    edgeType_ = CQIllustratorAlignToolbar::EDGE_LEFT_BOTTOM;
+    edgeType_ = CQIllustratorAlignToolbar::ObjectEdgeType::LEFT_BOTTOM;
   else if (str == "Right/Top")
-    edgeType_ = CQIllustratorAlignToolbar::EDGE_RIGHT_TOP;
+    edgeType_ = CQIllustratorAlignToolbar::ObjectEdgeType::RIGHT_TOP;
   else if (str == "Middle")
-    edgeType_ = CQIllustratorAlignToolbar::EDGE_MIDDLE;
+    edgeType_ = CQIllustratorAlignToolbar::ObjectEdgeType::MIDDLE;
 
   edgeButton_->setIcon(action->icon());
 }
@@ -1001,7 +1006,7 @@ CQAlignAnchorPoint(QWidget *parent) :
   selButton_->setCheckable(true);
   selButton_->setAutoRaise(true);
 
-  selButton_->setIcon(QIcon(QPixmap(select_tool_16_xpm)));
+  selButton_->setIcon(CQPixmapCacheInst->getIcon("ALIGN_SELECT"));
 
   connect(selButton_, SIGNAL(clicked(bool)), this, SLOT(selectSlot(bool)));
 
@@ -1042,12 +1047,12 @@ selectSlot(bool enabled)
 //--------
 
 CQToolButton::
-CQToolButton(const char **xpmData) :
+CQToolButton(const QIcon &icon) :
  QToolButton(0)
 {
   setAutoRaise(true);
 
-  setIcon(QIcon(QPixmap(xpmData)));
+  setIcon(icon);
 }
 
 bool

@@ -1,11 +1,12 @@
 #include <CPSViewShapeRenderer.h>
 #include <CQIllustrator.h>
+#include <CQIllustratorPathShape.h>
 
 CPSViewShapeRenderer::
 CPSViewShapeRenderer(CQIllustrator *illustrator) :
  illustrator_(illustrator)
 {
-  path_ = new CPathShape;
+  path_ = new CQIllustratorPathShape;
 }
 
 CPSViewShapeRenderer *
@@ -46,7 +47,7 @@ pathInit()
 {
   delete path_;
 
-  path_ = new CPathShape;
+  path_ = new CQIllustratorPathShape;
 }
 
 void

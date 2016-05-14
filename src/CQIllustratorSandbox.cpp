@@ -1,4 +1,6 @@
 #include <CQIllustratorSandbox.h>
+#include <CQIllustratorPathShape.h>
+#include <CQIllustratorShapeGeometry.h>
 #include <CQIllustrator.h>
 
 CQIllustratorSandbox::
@@ -53,7 +55,7 @@ addSelectionPath()
 
     if (! shape->getPath(parts)) continue;
 
-    CPathShape *pshape = illustrator_->createPathShape();
+    CQIllustratorPathShape *pshape = illustrator_->createPathShape();
 
     pshape->setParts(parts);
 
@@ -128,19 +130,19 @@ commit(CQIllustratorData::ChangeType changeType)
     CQIllustratorShape *shape1 = illustrator_->getShape(shape->getId());
     assert(shape1);
 
-    if      (changeType == CQIllustratorData::CHANGE_GEOMETRY) {
+    if      (changeType == CQIllustratorData::ChangeType::GEOMETRY) {
       CQIllustratorShapeGeometry *geom = shape->getGeometry();
 
       shape1->setGeometry(geom);
 
       delete geom;
     }
-    else if (changeType == CQIllustratorData::CHANGE_STROKE) {
+    else if (changeType == CQIllustratorData::ChangeType::STROKE) {
       const CQIllustratorShapeStroke &stroke = shape->getStroke();
 
       shape1->setStroke(stroke);
     }
-    else if (changeType == CQIllustratorData::CHANGE_FILL) {
+    else if (changeType == CQIllustratorData::ChangeType::FILL) {
       const CQIllustratorShapeFill &fill = shape->getFill();
 
       shape1->setFill(fill);

@@ -15,6 +15,8 @@ CQIllustratorCanvas::
 CQIllustratorCanvas(CQIllustrator *illustrator) :
  illustrator_(illustrator)
 {
+  setObjectName("canvas");
+
   setFocusPolicy(Qt::StrongFocus);
 
   setMouseTracking(true);

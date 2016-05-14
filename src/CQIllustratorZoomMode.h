@@ -27,12 +27,14 @@ class CQIllustratorZoomToolbar : public CQIllustratorToolbar {
   void zoomOutSlot();
 
  private:
-  CQIllustratorZoomMode *mode_;
-  CQImageButton         *zoomFitButton_;
-  CQImageButton         *zoomSelButton_;
-  CQImageButton         *zoomInButton_;
-  CQImageButton         *zoomOutButton_;
+  CQIllustratorZoomMode *mode_ { 0 };
+  CQImageButton         *zoomFitButton_ { 0 };
+  CQImageButton         *zoomSelButton_ { 0 };
+  CQImageButton         *zoomInButton_ { 0 };
+  CQImageButton         *zoomOutButton_ { 0 };
 };
+
+//------
 
 class CQIllustratorZoomMode : public CQIllustratorMode {
  public:
@@ -54,7 +56,7 @@ class CQIllustratorZoomMode : public CQIllustratorMode {
   void drawOverlay(CQIllustratorShapeDrawer *drawer);
 
  private:
-  CQIllustratorZoomToolbar *toolbar_;
+  CQIllustratorZoomToolbar *toolbar_ { 0 };
 };
 
 #endif

@@ -1,5 +1,6 @@
 #include <CQIllustratorSliceMode.h>
 #include <CQIllustrator.h>
+#include <CQIllustratorPolygonShape.h>
 #include <CQIllustratorShapeDrawer.h>
 
 #include <QPainter>

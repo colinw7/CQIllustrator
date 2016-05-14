@@ -3,6 +3,8 @@
 
 #include <CQIllustratorMode.h>
 #include <CQIllustratorToolbar.h>
+#include <CQIllustratorCreateEllipseMode.h>
+#include <CQIllustratorEllipseShape.h>
 
 #include <QComboBox>
 
@@ -20,9 +22,9 @@ class CQEllipseShape2DConnectType : public QComboBox {
  public:
   CQEllipseShape2DConnectType(QWidget *parent=0);
 
-  void setType(CEllipseConnectType value);
+  void setType(CQIllustratorEllipseShape::ConnectType value);
 
-  CEllipseConnectType getType() const { return value_; }
+  CQIllustratorEllipseShape::ConnectType getType() const { return value_; }
 
  private slots:
   void itemSlot(const QString &name);
@@ -31,9 +33,14 @@ class CQEllipseShape2DConnectType : public QComboBox {
   void valueChanged();
 
  private:
-  std::map<QString,CEllipseConnectType> nameValue_;
-  std::map<CEllipseConnectType,QString> valueName_;
-  CEllipseConnectType                   value_ { CELLIPSE_CONNECT_LINE };
+  typedef CQIllustratorEllipseShape::ConnectType ConnectType;
+
+  typedef std::map<QString,CQIllustratorEllipseShape::ConnectType> NameValue;
+  typedef std::map<CQIllustratorEllipseShape::ConnectType,QString> ValueName;
+
+  NameValue   nameValue_;
+  ValueName   valueName_;
+  ConnectType value_ { ConnectType::LINE };
 };
 
 //------

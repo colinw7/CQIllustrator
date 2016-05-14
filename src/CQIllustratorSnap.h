@@ -1,23 +1,26 @@
-#include <QWidget>
+#ifndef CQIllustratorSnap_H
+#define CQIllustratorSnap_H
 
-class CQIllustrator;
-class QCheckBox;
-class QDoubleSpinBox;
+#include <CPoint2D.h>
 
-class CQIllustratorSnapDock : public QWidget {
-  Q_OBJECT
-
+class CQIllustratorSnap {
  public:
-  CQIllustratorSnapDock(CQIllustrator *illustrator);
+  CQIllustratorSnap() { }
 
- private slots:
-  void enabledSlot();
-  void xPitchSlot(double xpitch);
-  void yPitchSlot(double ypitch);
+  bool getEnabled() const { return enabled_; }
+  void setEnabled(bool enabled) { enabled_ = enabled; }
+
+  double getXPitch() const { return xpitch_; }
+  void setXPitch(double xpitch) { xpitch_ = xpitch; }
+
+  double getYPitch() const { return ypitch_; }
+  void setYPitch(double ypitch) { ypitch_ = ypitch; }
+
+  CPoint2D snapPoint(const CPoint2D &point) const;
 
  private:
-  CQIllustrator  *illustrator_;
-  QCheckBox      *enabledCheck_;
-  QDoubleSpinBox *xPitch_;
-  QDoubleSpinBox *yPitch_;
+  bool   enabled_ { false };
+  double xpitch_ { 1 }, ypitch_ { 1 };
 };
+
+#endif

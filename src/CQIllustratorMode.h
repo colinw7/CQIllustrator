@@ -31,9 +31,9 @@ class CQIllustratorMode : public QObject {
   Q_OBJECT
 
  public:
-  enum EditMode {
-    CREATE_MODE,
-    EDIT_MODE
+  enum class EditMode {
+    CREATE,
+    EDIT
   };
 
   struct MouseEvent {
@@ -73,11 +73,11 @@ class CQIllustratorMode : public QObject {
   uint getId() const { return id_; }
 
   virtual CQIllustratorData::ChangeType getChangeType() const {
-    return CQIllustratorData::CHANGE_GEOMETRY;
+    return CQIllustratorData::ChangeType::GEOMETRY;
   }
 
   virtual CQIllustratorShape::ControlType getControlType() const {
-    return CQIllustratorShape::CONTROL_GEOMETRY;
+    return CQIllustratorShape::ControlType::GEOMETRY;
   }
 
   CQMenuItem *getMenuItem() const { return menuItem_; }
@@ -146,18 +146,18 @@ class CQIllustratorMode : public QObject {
   void selectionSlot();
 
  protected:
-  CQIllustrator          *illustrator_;
-  CQIllustratorMode      *parentMode_;
-  uint                    id_;
-  CQIllustratorToolbar   *toolbar_;
-  CQIllustratorModeSizer *sizer_;
-  CQMenuItem             *menuItem_;
-  EditMode                editMode_;
-  QStackedWidget         *stack_;
+  CQIllustrator          *illustrator_ { 0 };
+  CQIllustratorMode      *parentMode_ { 0 };
+  uint                    id_ { 0 };
+  CQIllustratorToolbar   *toolbar_ { 0 };
+  CQIllustratorModeSizer *sizer_ { 0 };
+  CQMenuItem             *menuItem_ { 0 };
+  EditMode                editMode_ { EditMode::CREATE };
+  QStackedWidget         *stack_ { 0 };
   QCursor                 cursor_;
-  bool                    pressed_;
-  bool                    moving_;
-  bool                    dragging_;
+  bool                    pressed_ { false };
+  bool                    moving_ { false };
+  bool                    dragging_ { false };
   QPoint                  press_ppos_;
   QPointF                 press_wpos_;
   QPoint                  prev_ppos_;
@@ -167,6 +167,8 @@ class CQIllustratorMode : public QObject {
   QPoint                  release_ppos_;
   QPointF                 release_wpos_;
 };
+
+//------
 
 class CQIllustratorModeSizer : public QObject {
   Q_OBJECT
@@ -210,7 +212,7 @@ class CQIllustratorModeSizer : public QObject {
   typedef std::vector<CQIllustratorControlPointHandle *> ControlPointHandleList;
   typedef std::vector<CQIllustratorHandle *>             HandleList;
 
-  CQIllustratorMode      *mode_;
+  CQIllustratorMode      *mode_ { 0 };
   QTransform              transform_;
   ControlPointHandleList  controlPointHandles_;
   HandleList              handles_;

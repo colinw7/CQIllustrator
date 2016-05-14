@@ -1,8 +1,10 @@
 #include <CQIllustratorCreateRectMode.h>
+#include <CQIllustratorRectShape.h>
 #include <CQIllustrator.h>
 #include <CQIllustratorCmd.h>
 #include <CQIllustratorHandle.h>
 #include <CQIllustratorShapeDrawer.h>
+#include <CQIllustratorUtil.h>
 
 #include <QPainter>
 #include <QHBoxLayout>
@@ -27,9 +29,11 @@ class CQIllustratorCreateRectCmd : public CQIllustratorCmd {
   bool exec(const std::vector<std::string> &words);
 };
 
+//------
+
 CQIllustratorCreateRectMode::
 CQIllustratorCreateRectMode(CQIllustrator *illustrator) :
- CQIllustratorMode(illustrator, (uint) CQIllustrator::Mode::RECT), equalSize_(false)
+ CQIllustratorMode(illustrator, (uint) CQIllustrator::Mode::RECT)
 {
   setCursor(rect_bits, rectmask_bits, 2, 2);
 
@@ -82,12 +86,12 @@ handleMouseRelease(const MouseEvent &e)
     }
     // dragging finished so commit
     else {
-      illustrator_->getSandbox()->commit(CQIllustratorData::CHANGE_GEOMETRY);
+      illustrator_->getSandbox()->commit(CQIllustratorData::ChangeType::GEOMETRY);
     }
   }
   // not dragging so do a select
   else {
-    if (editMode_ == CREATE_MODE) {
+    if (editMode_ == EditMode::CREATE) {
       // drag then create rectangle using specified bbox
       if (moving_) {
         CBBox2D bbox(p1, p2);
@@ -119,7 +123,7 @@ handleMouseRelease(const MouseEvent &e)
       else {
         CBBox2D bbox(p1, p2);
 
-        illustrator_->selectPointsIn(bbox, CQIllustratorShape::CONTROL_GEOMETRY,
+        illustrator_->selectPointsIn(bbox, CQIllustratorShape::ControlType::GEOMETRY,
                                      e.event->isControlKey(), e.event->isShiftKey());
       }
     }
@@ -343,7 +347,7 @@ updateShape()
     double xRad = xRadEdit_->getValue();
     double yRad = yRadEdit_->getValue();
 
-    illustrator->checkoutShape(shape, CQIllustratorData::CHANGE_GEOMETRY);
+    illustrator->checkoutShape(shape, CQIllustratorData::ChangeType::GEOMETRY);
 
     CQIllustratorRectShape *rect = dynamic_cast<CQIllustratorRectShape *>(shape);
 
@@ -354,7 +358,7 @@ updateShape()
     rect->setRadiusX(xRad);
     rect->setRadiusY(yRad);
 
-    illustrator->checkinShape(shape, CQIllustratorData::CHANGE_GEOMETRY);
+    illustrator->checkinShape(shape, CQIllustratorData::ChangeType::GEOMETRY);
   }
 
   illustrator->redraw();

@@ -625,7 +625,12 @@ void
 CQFillOptionDialog::
 shownSlot(int state)
 {
-  fill_.setFilled(state);
+  bool shown = state;
+
+  if (shown == fill_.isFilled())
+    return;
+
+  fill_.setFilled(shown);
 
   tool_->update();
 
@@ -824,11 +829,11 @@ CQFillOptionDialog::
 imageScaleSlot(const QString &scale)
 {
   if      (scale == "None")
-    fill_.setImageScale(CQIllustratorShapeFill::IMAGE_SCALE_NONE);
+    fill_.setImageScale(CQIllustratorShapeFill::ImageScale::NONE);
   else if (scale == "Fit")
-    fill_.setImageScale(CQIllustratorShapeFill::IMAGE_SCALE_FIT);
+    fill_.setImageScale(CQIllustratorShapeFill::ImageScale::FIT);
   else if (scale == "Equal")
-    fill_.setImageScale(CQIllustratorShapeFill::IMAGE_SCALE_EQUAL);
+    fill_.setImageScale(CQIllustratorShapeFill::ImageScale::EQUAL);
 
   tool_->update();
 

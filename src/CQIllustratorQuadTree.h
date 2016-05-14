@@ -102,6 +102,11 @@ class CQIllustratorQuadTree {
   void add(DATA *data) {
     const BBOX &bbox = data->getFlatBBox();
 
+    if (! bbox.isSet()) {
+      std::cerr << "No BBox for QuadTree add" << std::endl;
+      return;
+    }
+
     if (! inside(bbox))
       grow(bbox);
 
@@ -182,7 +187,15 @@ class CQIllustratorQuadTree {
   void remove(DATA *data) {
     const BBOX &bbox = data->getFlatBBox();
 
-    assert(inside(bbox));
+    if (! bbox.isSet()) {
+      std::cerr << "No BBox for Quad Tree remove" << std::endl;
+      return;
+    }
+
+    if (! inside(bbox)) {
+      std::cerr << "Quad Tree BBox mismatch" << std::endl;
+      return;
+    }
 
     removeData(data, bbox);
   }
@@ -225,6 +238,8 @@ class CQIllustratorQuadTree {
 
       while (p1 != p2) {
         const BBOX &bbox = (*p1)->getFlatBBox();
+
+        if (! bbox.isSet()) { ++p1; continue; }
 
         if      (bl_tree_->inside(bbox)) bl_tree_->add(*p1);
         else if (br_tree_->inside(bbox)) br_tree_->add(*p1);
@@ -308,6 +323,9 @@ class CQIllustratorQuadTree {
       for (p1 = dataList_.begin(), p2 = dataList_.end(); p1 != p2; ++p1) {
         const BBOX &bbox1 = (*p1)->getFlatBBox();
 
+        if (! bbox1.isSet())
+          continue;
+
         if (inside(bbox1, bbox))
           dataList.push_back(*p1);
       }
@@ -341,6 +359,9 @@ class CQIllustratorQuadTree {
 
       for (p1 = dataList_.begin(), p2 = dataList_.end(); p1 != p2; ++p1) {
         const BBOX &bbox1 = (*p1)->getFlatBBox();
+
+        if (! bbox1.isSet())
+          continue;
 
         if (overlaps(bbox1, bbox))
           dataList.push_back(*p1);
@@ -384,6 +405,9 @@ class CQIllustratorQuadTree {
     for (p1 = dataList_.begin(), p2 = dataList_.end(); p1 != p2; ++p1) {
       const BBOX &bbox = (*p1)->getFlatBBox();
 
+      if (! bbox.isSet())
+        continue;
+
       if (x >= bbox.getLeft  () && x <= bbox.getRight() &&
           y >= bbox.getBottom() && y <= bbox.getTop  ())
         dataList.push_back(*p1);
@@ -419,6 +443,9 @@ class CQIllustratorQuadTree {
 
     for (p1 = dataList_.begin(), p2 = dataList_.end(); p1 != p2; ++p1) {
       const BBOX &bbox = (*p1)->getFlatBBox();
+
+      if (! bbox.isSet())
+        continue;
 
       if (x >= bbox.getLeft  () && x <= bbox.getRight() &&
           y >= bbox.getBottom() && y <= bbox.getTop  ())

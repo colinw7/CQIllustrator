@@ -1,5 +1,6 @@
 #include <CQIllustratorUndo.h>
 #include <CQIllustrator.h>
+#include <CQIllustratorShapeGeometry.h>
 
 CQIllustratorUndo::
 CQIllustratorUndo(CQIllustrator *illustrator) :
@@ -72,11 +73,11 @@ objectPreModify(CQIllustratorShape *shape, CQIllustratorData::ChangeType type)
 {
   if (locked()) return;
 
-  if      (type == CQIllustratorData::CHANGE_GEOMETRY)
+  if      (type == CQIllustratorData::ChangeType::GEOMETRY)
     addUndo(new CQIllustratorUndoSetShapeGeometry(this, shape));
-  else if (type == CQIllustratorData::CHANGE_STROKE)
+  else if (type == CQIllustratorData::ChangeType::STROKE)
     addUndo(new CQIllustratorUndoSetShapeStroke(this, shape));
-  else if (type == CQIllustratorData::CHANGE_FILL)
+  else if (type == CQIllustratorData::ChangeType::FILL)
     addUndo(new CQIllustratorUndoSetShapeFill(this, shape));
   else
     std::cerr << "object pre-modify (unknown)" << std::endl;
@@ -86,11 +87,11 @@ void
 CQIllustratorUndo::
 objectPostModify(CQIllustratorShape *, CQIllustratorData::ChangeType type)
 {
-  if      (type == CQIllustratorData::CHANGE_GEOMETRY) {
+  if      (type == CQIllustratorData::ChangeType::GEOMETRY) {
   }
-  else if (type == CQIllustratorData::CHANGE_STROKE) {
+  else if (type == CQIllustratorData::ChangeType::STROKE) {
   }
-  else if (type == CQIllustratorData::CHANGE_FILL) {
+  else if (type == CQIllustratorData::ChangeType::FILL) {
   }
   else
     std::cerr << "object post-modify (unknown)" << std::endl;

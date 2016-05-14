@@ -1,7 +1,11 @@
 #include <CQIllustratorCreatePathMode.h>
+#include <CQIllustratorPathShape.h>
+#include <CQIllustratorPathShapeControlPoint.h>
+#include <CQIllustratorShapeControlLine.h>
 #include <CQIllustrator.h>
 #include <CQIllustratorHandle.h>
 #include <CQIllustratorShapeDrawer.h>
+#include <CQIllustratorUtil.h>
 
 #include <QPainter>
 #include <QHBoxLayout>
@@ -15,29 +19,27 @@
 #include <CQSwatch.h>
 
 #include <svg/path_svg.h>
-#include <xpm/path_line.xpm>
-#include <xpm/path_curve2.xpm>
-#include <xpm/path_curve3.xpm>
+#include <svg/path_line_svg.h>
+#include <svg/path_curve2_svg.h>
+#include <svg/path_curve3_svg.h>
 
-#include <xpm/path_free.xpm>
-#include <xpm/path_rect.xpm>
-#include <xpm/path_45.xpm>
+#include <svg/path_free_svg.h>
+#include <svg/path_rect_svg.h>
+#include <svg/path_45_svg.h>
 
-#include <xpm/path_corner.xpm>
-#include <xpm/path_curve.xpm>
-#include <xpm/path_add.xpm>
-#include <xpm/path_remove.xpm>
+#include <svg/path_corner_svg.h>
+#include <svg/path_curve_svg.h>
+#include <svg/path_add_svg.h>
+#include <svg/path_remove_svg.h>
 
-#include <xpm/control_point.xpm>
-#include <xpm/control_point_active.xpm>
+#include <svg/control_point_svg.h>
+#include <svg/control_point_active_svg.h>
 
-#include <xpm/snap_point.xpm>
-#include <xpm/snap_point_active.xpm>
+#include <svg/snap_point_svg.h>
+#include <svg/snap_point_active_svg.h>
 
 #include <cursors/select.xbm>
 #include <cursors/selectmask.xbm>
-
-#define IMAGE_DATA(I) I, sizeof(I)/sizeof(char *)
 
 CQIllustratorCreatePathMode::
 CQIllustratorCreatePathMode(CQIllustrator *illustrator) :
@@ -100,7 +102,7 @@ handleMousePress(const MouseEvent &e)
   CQIllustratorMode::handleMousePress(e);
 
   if (! dragging_) {
-    if (editMode_ == CREATE_MODE) {
+    if (editMode_ == EditMode::CREATE) {
       addPoint(e.window, e.pixel);
     }
   }
@@ -140,12 +142,12 @@ handleMouseRelease(const MouseEvent &e)
     }
     // dragging finished so commit
     else {
-      illustrator_->getSandbox()->commit(CQIllustratorData::CHANGE_GEOMETRY);
+      illustrator_->getSandbox()->commit(CQIllustratorData::ChangeType::GEOMETRY);
     }
   }
   // not dragging so do a select
   else {
-    if (editMode_ == CREATE_MODE) {
+    if (editMode_ == EditMode::CREATE) {
     }
     else {
       // point click - select at point
@@ -156,8 +158,8 @@ handleMouseRelease(const MouseEvent &e)
       else {
         CBBox2D bbox(p1, p2);
 
-        if (selMode_ == POINT_SEL)
-          illustrator_->selectPointsIn(bbox, CQIllustratorShape::CONTROL_GEOMETRY,
+        if (selMode_ == SelMode::POINT)
+          illustrator_->selectPointsIn(bbox, CQIllustratorShape::ControlType::GEOMETRY,
                                        e.event->isControlKey(), e.event->isShiftKey());
         else
           illustrator_->selectLinesIn(bbox, e.event->isControlKey(), e.event->isShiftKey());
@@ -182,7 +184,7 @@ handleMouseDrag(const MouseEvent &e)
     toolbar_->setSelectionPoint(CQUtil::fromQPoint(e.window));
   }
   else {
-    if (editMode_ == CREATE_MODE) {
+    if (editMode_ == EditMode::CREATE) {
       //CPoint2D p1 = CQUtil::fromQPoint(press_wpos_);
       CPoint2D p2 = CQUtil::fromQPoint(e.window);
 
@@ -332,7 +334,7 @@ snapPoint(CPoint2D &p)
 
   CQIllustratorCreatePathToolbar::CreateMode createMode = toolbar_->getCreateMode();
 
-  if      (createMode == CQIllustratorCreatePathToolbar::CREATE_RECT_MODE) {
+  if      (createMode == CQIllustratorCreatePathToolbar::CreateMode::RECT) {
     if      (num_points > 1) {
       const CPoint2D &p1 = pathPoints_[num_points - 2].p;
       const CPoint2D &p2 = pathPoints_[num_points - 1].p;
@@ -379,7 +381,7 @@ snapPoint(CPoint2D &p)
       }
     }
   }
-  else if (createMode == CQIllustratorCreatePathToolbar::CREATE_45_MODE) {
+  else if (createMode == CQIllustratorCreatePathToolbar::CreateMode::ANGLE_45) {
     if (num_points > 0) {
       const CPoint2D &p1 = pathPoints_[num_points - 1].p;
 
@@ -435,7 +437,8 @@ addCloseHandle(const CPoint2D &cp, const CPoint2D &p)
   while (closeHandleNum_ >= closeHandles_.size()) {
     CQIllustratorHandle *closeHandle = new CQIllustratorHandle(illustrator_);
 
-    closeHandle->setImage(IMAGE_DATA(control_point_data), IMAGE_DATA(control_point_active_data));
+    closeHandle->setImage(CQPixmapCacheInst->getIcon("CONTROL_POINT"),
+                          CQPixmapCacheInst->getIcon("CONTROL_POINT_ACTIVE"));
 
     closeHandles_.push_back(closeHandle);
 
@@ -473,7 +476,8 @@ addSnapHandle(const CPoint2D &cp, const CPoint2D &p)
   while (snapHandleNum_ >= snapHandles_.size()) {
     CQIllustratorHandle *snapHandle = new CQIllustratorHandle(illustrator_);
 
-    snapHandle->setImage(IMAGE_DATA(snap_point_data), IMAGE_DATA(snap_point_active_data));
+    snapHandle->setImage(CQPixmapCacheInst->getIcon("SNAP_POINT"),
+                         CQPixmapCacheInst->getIcon("SNAP_POINT_ACTIVE"));
 
     snapHandles_.push_back(snapHandle);
 
@@ -543,7 +547,7 @@ drawOverlay(CQIllustratorShapeDrawer *drawer)
 
   if (! dragging_) {
     if (pressed_) {
-      if (editMode_ == CREATE_MODE) {
+      if (editMode_ == EditMode::CREATE) {
       }
       else {
         // draw rubber band
@@ -705,7 +709,7 @@ commitPathPoints(bool closed)
 
   if (num_points == 0) return;
 
-  CPathShape *path = illustrator_->createPathShape();
+  CQIllustratorPathShape *path = illustrator_->createPathShape();
 
   CQIllustratorShapeFill fill;
 
@@ -761,13 +765,13 @@ setCurrentToCornerNode()
   CQIllustratorShape *shape = illustrator_->getSandbox()->frontShape();
 
   for (uint i = 0; i < num; ++i) {
-    const CPathShapeControlPoint *controlPoint =
-      dynamic_cast<const CPathShapeControlPoint *>(sshape.getPoint(i));
+    const CQIllustratorPathShapeControlPoint *controlPoint =
+      dynamic_cast<const CQIllustratorPathShapeControlPoint *>(sshape.getPoint(i));
 
     controlPoint->setCornerNode(shape);
   }
 
-  illustrator_->getSandbox()->commit(CQIllustratorData::CHANGE_GEOMETRY);
+  illustrator_->getSandbox()->commit(CQIllustratorData::ChangeType::GEOMETRY);
 }
 
 void
@@ -789,13 +793,13 @@ setCurrentToCurveNode()
   CQIllustratorShape *shape = illustrator_->getSandbox()->frontShape();
 
   for (uint i = 0; i < num; ++i) {
-    const CPathShapeControlPoint *controlPoint =
-      dynamic_cast<const CPathShapeControlPoint *>(sshape.getPoint(i));
+    const CQIllustratorPathShapeControlPoint *controlPoint =
+      dynamic_cast<const CQIllustratorPathShapeControlPoint *>(sshape.getPoint(i));
 
     controlPoint->setCurveNode(shape);
   }
 
-  illustrator_->getSandbox()->commit(CQIllustratorData::CHANGE_GEOMETRY);
+  illustrator_->getSandbox()->commit(CQIllustratorData::ChangeType::GEOMETRY);
 }
 
 void
@@ -816,21 +820,21 @@ addNodeToCurrent()
 
   CQIllustratorShape *shape = illustrator_->getSandbox()->frontShape();
 
-  const CPathShapeControlPoint *controlPoint1 =
-    dynamic_cast<const CPathShapeControlPoint *>(sshape.getPoint(0));
-  const CPathShapeControlPoint *controlPoint2 =
-    dynamic_cast<const CPathShapeControlPoint *>(sshape.getPoint(1));
+  const CQIllustratorPathShapeControlPoint *controlPoint1 =
+    dynamic_cast<const CQIllustratorPathShapeControlPoint *>(sshape.getPoint(0));
+  const CQIllustratorPathShapeControlPoint *controlPoint2 =
+    dynamic_cast<const CQIllustratorPathShapeControlPoint *>(sshape.getPoint(1));
 
   CPoint2D p1 = controlPoint1->getPoint(shape);
   CPoint2D p2 = controlPoint2->getPoint(shape);
 
-  CPathShape *path = dynamic_cast<CPathShape *>(shape);
+  CQIllustratorPathShape *path = dynamic_cast<CQIllustratorPathShape *>(shape);
 
   int ind = std::min(controlPoint1->getInd(), controlPoint2->getInd());
 
   path->addLineTo(ind + 1, (p1 + p2)/2);
 
-  illustrator_->getSandbox()->commit(CQIllustratorData::CHANGE_GEOMETRY);
+  illustrator_->getSandbox()->commit(CQIllustratorData::ChangeType::GEOMETRY);
 }
 
 void
@@ -887,9 +891,13 @@ addWidgets()
 
   //-----
 
-  pathFreeButton_ = new CQImageButton(QPixmap(path_free_data));
-  pathRectButton_ = new CQImageButton(QPixmap(path_rect_data));
-  path45Button_   = new CQImageButton(QPixmap(path_45_data));
+  pathFreeButton_ = new CQImageButton(CQPixmapCacheInst->getIcon("PATH_FREE"));
+  pathRectButton_ = new CQImageButton(CQPixmapCacheInst->getIcon("PATH_RECT"));
+  path45Button_   = new CQImageButton(CQPixmapCacheInst->getIcon("PATH_45"));
+
+  pathFreeButton_->setToolTip("Free Mode");
+  pathRectButton_->setToolTip("Rectilinear Mode");
+  path45Button_  ->setToolTip("45 Degree Mode");
 
   connect(pathFreeButton_, SIGNAL(toggled(bool)), this, SLOT(pathFreeSlot(bool)));
   connect(pathRectButton_, SIGNAL(toggled(bool)), this, SLOT(pathRectSlot(bool)));
@@ -931,9 +939,9 @@ addWidgets()
 
   //-----
 
-  pathLineButton_   = new CQImageButton(QPixmap(path_line_data  ));
-  pathCurve2Button_ = new CQImageButton(QPixmap(path_curve2_data));
-  pathCurve3Button_ = new CQImageButton(QPixmap(path_curve3_data));
+  pathLineButton_   = new CQImageButton(CQPixmapCacheInst->getIcon("PATH_LINE"  ));
+  pathCurve2Button_ = new CQImageButton(CQPixmapCacheInst->getIcon("PATH_CURVE2"));
+  pathCurve3Button_ = new CQImageButton(CQPixmapCacheInst->getIcon("PATH_CURVE3"));
 
   pathLineButton_  ->setCheckable(true);
   pathCurve2Button_->setCheckable(true);
@@ -954,14 +962,14 @@ addWidgets()
   pathCurve3Button_->setChecked(pathMode == CPATH_PART_TYPE_CURVE3_TO);
 
   CQSwatch *createSwatch =
-    new CQSwatch("Line Type<2>", pathLineButton_, pathCurve2Button_, pathCurve3Button_);
+    new CQSwatch("Line Type", pathLineButton_, pathCurve2Button_, pathCurve3Button_);
 
   layout->addWidget(createSwatch);
 
   //-----
 
-  nodeCornerButton_ = new CQImageButton(QPixmap(path_corner_data));
-  nodeCurveButton_  = new CQImageButton(QPixmap(path_curve_data ));
+  nodeCornerButton_ = new CQImageButton(CQPixmapCacheInst->getIcon("PATH_CORNER"));
+  nodeCurveButton_  = new CQImageButton(CQPixmapCacheInst->getIcon("PATH_CURVE"));
 
   nodeCornerButton_->setToolTip("Point Node");
   nodeCurveButton_ ->setToolTip("Curve Node");
@@ -969,14 +977,14 @@ addWidgets()
   connect(nodeCornerButton_, SIGNAL(clicked()), this, SLOT(cornerNodeSlot()));
   connect(nodeCurveButton_ , SIGNAL(clicked()), this, SLOT(curveNodeSlot ()));
 
-  CQSwatch *nodeSwatch = new CQSwatch("Point Type<2>", nodeCornerButton_, nodeCurveButton_);
+  CQSwatch *nodeSwatch = new CQSwatch("Point Type", nodeCornerButton_, nodeCurveButton_);
 
   layout->addWidget(nodeSwatch);
 
   //-----
 
-  addNodeButton_    = new CQImageButton(QPixmap(path_add_data   ));
-  removeNodeButton_ = new CQImageButton(QPixmap(path_remove_data));
+  addNodeButton_    = new CQImageButton(CQPixmapCacheInst->getIcon("PATH_ADD"   ));
+  removeNodeButton_ = new CQImageButton(CQPixmapCacheInst->getIcon("PATH_REMOVE"));
 
   addNodeButton_   ->setToolTip("Add Node");
   removeNodeButton_->setToolTip("Remove Node");
@@ -984,7 +992,7 @@ addWidgets()
   connect(addNodeButton_   , SIGNAL(clicked()), this, SLOT(addNodeSlot   ()));
   connect(removeNodeButton_, SIGNAL(clicked()), this, SLOT(removeNodeSlot()));
 
-  CQSwatch *modifySwatch = new CQSwatch("Modify<2>", addNodeButton_, removeNodeButton_);
+  CQSwatch *modifySwatch = new CQSwatch("Modify", addNodeButton_, removeNodeButton_);
 
   layout->addWidget(modifySwatch);
 
@@ -1006,9 +1014,9 @@ CQIllustratorCreatePathToolbar::
 modeChangedSlot()
 {
   if (createRadio_->isChecked())
-    mode_->setEditMode(CQIllustratorMode::CREATE_MODE);
+    mode_->setEditMode(CQIllustratorMode::EditMode::CREATE);
   else
-    mode_->setEditMode(CQIllustratorMode::EDIT_MODE);
+    mode_->setEditMode(CQIllustratorMode::EditMode::EDIT);
 
   updateMode();
 }
@@ -1018,7 +1026,7 @@ CQIllustratorCreatePathToolbar::
 pathFreeSlot(bool state)
 {
   if (state) {
-    createMode_ = CREATE_FREE_MODE;
+    createMode_ = CreateMode::FREE;
 
     pathRectButton_->setChecked(false);
     path45Button_  ->setChecked(false);
@@ -1030,7 +1038,7 @@ CQIllustratorCreatePathToolbar::
 pathRectSlot(bool state)
 {
   if (state) {
-    createMode_ = CREATE_RECT_MODE;
+    createMode_ = CreateMode::RECT;
 
     pathFreeButton_->setChecked(false);
     path45Button_  ->setChecked(false);
@@ -1042,7 +1050,7 @@ CQIllustratorCreatePathToolbar::
 path45Slot(bool state)
 {
   if (state) {
-    createMode_ = CREATE_45_MODE;
+    createMode_ = CreateMode::ANGLE_45;
 
     pathRectButton_->setChecked(false);
     pathFreeButton_->setChecked(false);
@@ -1054,9 +1062,9 @@ CQIllustratorCreatePathToolbar::
 selChangedSlot()
 {
   if (pointRadio_->isChecked())
-    mode_->setSelMode(CQIllustratorCreatePathMode::POINT_SEL);
+    mode_->setSelMode(CQIllustratorCreatePathMode::SelMode::POINT);
   else
-    mode_->setSelMode(CQIllustratorCreatePathMode::LINE_SEL);
+    mode_->setSelMode(CQIllustratorCreatePathMode::SelMode::LINE);
 
   updateMode();
 }
@@ -1142,7 +1150,7 @@ void
 CQIllustratorCreatePathToolbar::
 setPathMode(CPathPartType pathMode, bool state)
 {
-  if (mode_->getEditMode() == CQIllustratorMode::CREATE_MODE) {
+  if (mode_->getEditMode() == CQIllustratorMode::EditMode::CREATE) {
     if (state)
       mode_->setPathMode(pathMode);
   }
@@ -1150,7 +1158,7 @@ setPathMode(CPathPartType pathMode, bool state)
     if (state) {
       CQIllustratorCreatePathMode::SelMode selMode = mode_->getSelMode();
 
-      if (selMode == CQIllustratorCreatePathMode::LINE_SEL) {
+      if (selMode == CQIllustratorCreatePathMode::SelMode::LINE) {
         CQIllustrator *illustrator = mode_->getIllustrator();
 
         CQIllustratorSelectedShapes *selection = illustrator->getSelection();
@@ -1182,7 +1190,7 @@ void
 CQIllustratorCreatePathToolbar::
 updateMode()
 {
-  if (mode_->getEditMode() == CQIllustratorMode::CREATE_MODE) {
+  if (mode_->getEditMode() == CQIllustratorMode::EditMode::CREATE) {
     CPathPartType pathMode = mode_->getPathMode();
 
     pathLineButton_  ->setChecked(pathMode == CPATH_PART_TYPE_LINE_TO);
@@ -1200,8 +1208,7 @@ void
 CQIllustratorCreatePathToolbar::
 setSelectedShape(const CQIllustratorShape *shape)
 {
-  const CPathShape *path =
-    dynamic_cast<const CPathShape *>(shape);
+  const CQIllustratorPathShape *path = dynamic_cast<const CQIllustratorPathShape *>(shape);
 
   if (! path) return;
 }
@@ -1211,8 +1218,7 @@ CQIllustratorCreatePathToolbar::
 setSelectedShapePoint(const CQIllustratorShape *shape,
                       const CQIllustratorShapeControlPoint *point)
 {
-  const CPathShape *path =
-    dynamic_cast<const CPathShape *>(shape);
+  const CQIllustratorPathShape *path = dynamic_cast<const CQIllustratorPathShape *>(shape);
 
   if (! path) return;
 
@@ -1230,13 +1236,13 @@ updateShape()
 {
   CQIllustrator *illustrator = mode_->getIllustrator();
 
-  CPathShape *shape =
-    CQIllustratorUtil::getCurrentShape<CPathShape>(illustrator);
+  CQIllustratorPathShape *shape =
+    CQIllustratorUtil::getCurrentShape<CQIllustratorPathShape>(illustrator);
 
-  CPathShape *path = 0;
+  CQIllustratorPathShape *path = 0;
 
   if (shape)
-    path = dynamic_cast<CPathShape *>(shape);
+    path = dynamic_cast<CQIllustratorPathShape *>(shape);
 
   if (path) {
     //illustrator->checkoutShape(shape);
@@ -1266,8 +1272,7 @@ void
 CQIllustratorCreatePathSizer::
 drawHandles(QPainter *painter, const CQIllustratorShape *shape)
 {
-  const CPathShape *path =
-    dynamic_cast<const CPathShape *>(shape);
+  const CQIllustratorPathShape *path = dynamic_cast<const CQIllustratorPathShape *>(shape);
 
   if (path) {
     CQIllustratorShape::ControlPointList controlPoints;
@@ -1279,8 +1284,8 @@ drawHandles(QPainter *painter, const CQIllustratorShape *shape)
     updateHandles(numControlPoints);
 
     for (uint i = 0; i < numControlPoints; ++i) {
-      CPathShapeControlPoint *controlPoint =
-        dynamic_cast<CPathShapeControlPoint *>(controlPoints[i]);
+      CQIllustratorPathShapeControlPoint *controlPoint =
+        dynamic_cast<CQIllustratorPathShapeControlPoint *>(controlPoints[i]);
 
       if (controlPoint->isMaster())
         controlPointHandles_[i]->setStyle(CQIllustratorHandle::CIRCLE_STYLE);

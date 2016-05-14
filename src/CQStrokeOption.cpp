@@ -23,8 +23,8 @@ class CQStrokeOptionSwab : public QWidget {
   void paintEvent(QPaintEvent *e);
 
  private:
-  CQStrokeOptionDialog *dialog_;
-  int                   tw_, th_, fw_;
+  CQStrokeOptionDialog *dialog_ { 0 };
+  int                   tw_ { 1 }, th_ { 1 }, fw_ { 1 };
 };
 
 //----------
@@ -259,7 +259,12 @@ void
 CQStrokeOptionDialog::
 shownSlot(int state)
 {
-  stroke_.setStroked(state);
+  bool shown = state;
+
+  if (shown == stroke_.isStroked())
+    return;
+
+  stroke_.setStroked(shown);
 
   tool_->update();
 
@@ -286,7 +291,7 @@ void
 CQStrokeOptionDialog::
 widthSlot(double new_width)
 {
-  if (new_width == stroke_.getWidth())
+  if (fabs(new_width - stroke_.getWidth()) < 1E-4)
     return;
 
   stroke_.setWidth(new_width);

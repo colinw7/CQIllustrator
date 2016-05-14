@@ -1,6 +1,11 @@
 #include <CQIllustratorPropertiesDlg.h>
 #include <CQIllustrator.h>
 #include <CQIllustratorShape.h>
+#include <CQIllustratorEllipseShape.h>
+#include <CQIllustratorNPolyShape.h>
+#include <CQIllustratorRectShape.h>
+#include <CQIllustratorStarShape.h>
+#include <CQIllustratorTextShape.h>
 #include <CQPropertyTree.h>
 #include <QVBoxLayout>
 
@@ -15,11 +20,8 @@ CQIllustratorPropertiesDlg(CQIllustrator *illustrator) :
 
   tree_ = new CQPropertyTree;
 
-#if 0
   connect(tree_, SIGNAL(valueChanged(QObject *, const QString &)),
           illustrator, SLOT(redraw()));
-#endif
-
   connect(tree_, SIGNAL(itemSelected(QObject *, const QString &)),
           this, SLOT(itemSelectedSlot(QObject *, const QString &)));
 
@@ -35,6 +37,10 @@ load()
   tree_->addProperty("", illustrator_, "background");
   tree_->addProperty("", illustrator_, "rect");
   tree_->addProperty("", illustrator_, "fullRect");
+  tree_->addProperty("", illustrator_, "flipY");
+  tree_->addProperty("", illustrator_, "snapEnabled");
+  tree_->addProperty("", illustrator_, "snapXPitch");
+  tree_->addProperty("", illustrator_, "snapYPitch");
 
   for (const auto &shape : illustrator_->getShapes()) {
     if (shape->getParent()) continue;
@@ -57,8 +63,42 @@ loadShape(const QString &parentName, CQIllustratorShape *shape)
   tree_->addProperty(objName, shape, "id");
   tree_->addProperty(objName, shape, "name");
   tree_->addProperty(objName, shape, "bbox");
+  tree_->addProperty(objName, shape, "flatBBox");
   tree_->addProperty(objName, shape, "fixed");
   tree_->addProperty(objName, shape, "visible");
+  tree_->addProperty(objName, shape, "clip");
+
+  CQIllustratorEllipseShape *ellipse = dynamic_cast<CQIllustratorEllipseShape *>(shape);
+  CQIllustratorNPolyShape   *npoly   = dynamic_cast<CQIllustratorNPolyShape *>(shape);
+  CQIllustratorRectShape    *rect    = dynamic_cast<CQIllustratorRectShape *>(shape);
+  CQIllustratorStarShape    *star    = dynamic_cast<CQIllustratorStarShape *>(shape);
+  CQIllustratorTextShape    *text    = dynamic_cast<CQIllustratorTextShape *>(shape);
+
+  if      (ellipse) {
+    tree_->addProperty(objName, ellipse, "angle1");
+    tree_->addProperty(objName, ellipse, "angle2");
+  }
+  else if (npoly) {
+    tree_->addProperty(objName, npoly, "numPoints");
+    tree_->addProperty(objName, npoly, "radius");
+    tree_->addProperty(objName, npoly, "angle");
+  }
+  else if (rect) {
+    tree_->addProperty(objName, rect, "radiusX");
+    tree_->addProperty(objName, rect, "radiusY");
+  }
+  else if (star) {
+    tree_->addProperty(objName, star, "numPoints");
+    tree_->addProperty(objName, star, "innerRadius");
+    tree_->addProperty(objName, star, "outerRadius");
+    tree_->addProperty(objName, star, "innerAngle");
+    tree_->addProperty(objName, star, "outerAngle");
+  }
+  else if (text) {
+    tree_->addProperty(objName, text, "text");
+    tree_->addProperty(objName, text, "ll"  );
+    tree_->addProperty(objName, text, "ur"  );
+  }
 
   for (const auto &child : shape->getChildren())
     loadShape(objName, child);

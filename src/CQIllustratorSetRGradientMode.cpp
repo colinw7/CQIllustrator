@@ -2,6 +2,7 @@
 #include <CQIllustrator.h>
 #include <CQIllustratorHandle.h>
 #include <CQIllustratorShapeDrawer.h>
+#include <CQIllustratorUtil.h>
 
 #include <QPainter>
 #include <QBoxLayout>
@@ -14,10 +15,8 @@
 
 #include <svg/rgradient_svg.h>
 
-#include <xpm/stop_point.xpm>
-#include <xpm/stop_point_active.xpm>
-
-#define IMAGE_DATA(I) I, sizeof(I)/sizeof(char *)
+#include <svg/stop_point_svg.h>
+#include <svg/stop_point_active_svg.h>
 
 CQIllustratorSetRGradientMode::
 CQIllustratorSetRGradientMode(CQIllustrator *illustrator) :
@@ -70,7 +69,7 @@ handleMouseRelease(const MouseEvent &e)
     }
     // dragging finished so commit
     else {
-      illustrator_->getSandbox()->commit(CQIllustratorData::CHANGE_FILL);
+      illustrator_->getSandbox()->commit(CQIllustratorData::ChangeType::FILL);
     }
   }
   // not dragging so do a select
@@ -298,9 +297,12 @@ CQIllustratorRGradSizer(CQIllustratorSetRGradientMode *mode) :
   focus_handle_  = new CQIllustratorControlPointHandle(illustrator);
   radius_handle_ = new CQIllustratorControlPointHandle(illustrator);
 
-  center_handle_->setImage(IMAGE_DATA(stop_point_data), IMAGE_DATA(stop_point_active_data));
-  focus_handle_ ->setImage(IMAGE_DATA(stop_point_data), IMAGE_DATA(stop_point_active_data));
-  radius_handle_->setImage(IMAGE_DATA(stop_point_data), IMAGE_DATA(stop_point_active_data));
+  center_handle_->setImage(CQPixmapCacheInst->getIcon("STOP_POINT"),
+                           CQPixmapCacheInst->getIcon("STOP_POINT_ACTIVE"));
+  focus_handle_ ->setImage(CQPixmapCacheInst->getIcon("STOP_POINT"),
+                           CQPixmapCacheInst->getIcon("STOP_POINT_ACTIVE"));
+  radius_handle_->setImage(CQPixmapCacheInst->getIcon("STOP_POINT"),
+                           CQPixmapCacheInst->getIcon("STOP_POINT_ACTIVE"));
 
   addHandle(center_handle_);
   addHandle(focus_handle_ );
@@ -313,7 +315,7 @@ drawHandles(QPainter *painter, const CQIllustratorShape *shape)
 {
   CQIllustratorShape::ControlPointList controlPoints;
 
-  shape->getControlPoints(controlPoints, CQIllustratorShape::CONTROL_RGRADIENT);
+  shape->getControlPoints(controlPoints, CQIllustratorShape::ControlType::RGRADIENT);
 
   if (controlPoints.size() == 3) {
     center_handle_->draw(shape, controlPoints[0], painter);

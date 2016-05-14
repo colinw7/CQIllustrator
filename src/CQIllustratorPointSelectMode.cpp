@@ -16,9 +16,7 @@
 #include <cursors/select.xbm>
 #include <cursors/selectmask.xbm>
 
-#include <xpm/selected_point.xpm>
-
-#define IMAGE_DATA(I) I, sizeof(I)/sizeof(char *)
+#include <svg/selected_point_svg.h>
 
 CQIllustratorPointSelectMode::
 CQIllustratorPointSelectMode(CQIllustrator *illustrator) :
@@ -71,7 +69,7 @@ handleMouseRelease(const MouseEvent &e)
     }
     // dragging finished so commit
     else {
-      illustrator_->getSandbox()->commit(CQIllustratorData::CHANGE_GEOMETRY);
+      illustrator_->getSandbox()->commit(CQIllustratorData::ChangeType::GEOMETRY);
     }
   }
   // not dragging so do a select
@@ -87,7 +85,7 @@ handleMouseRelease(const MouseEvent &e)
     else {
       CBBox2D bbox(p1, p2);
 
-      illustrator_->selectPointsIn(bbox, CQIllustratorShape::CONTROL_GEOMETRY,
+      illustrator_->selectPointsIn(bbox, CQIllustratorShape::ControlType::GEOMETRY,
                                    e.event->isControlKey(), e.event->isShiftKey());
     }
   }
@@ -249,6 +247,6 @@ updateHandles(uint numHandles)
   for (uint i = 0; i < numHandles; ++i) {
     CQIllustratorControlPointHandle *handle = new CQIllustratorControlPointHandle(illustrator);
 
-    handle->setImage(IMAGE_DATA(selected_point_data));
+    handle->setImage(CQPixmapCacheInst->getIcon("SELECTED_POINT"));
   }
 }

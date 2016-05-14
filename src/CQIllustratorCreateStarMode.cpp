@@ -1,7 +1,10 @@
 #include <CQIllustratorCreateStarMode.h>
+#include <CQIllustratorStarShape.h>
+#include <CQIllustratorNPolyShape.h>
 #include <CQIllustrator.h>
 #include <CQIllustratorHandle.h>
 #include <CQIllustratorShapeDrawer.h>
+#include <CQIllustratorUtil.h>
 
 #include <QPainter>
 #include <QHBoxLayout>
@@ -16,15 +19,13 @@
 #include <CQSwatch.h>
 
 #include <svg/star_poly_svg.h>
-#include <xpm/poly.xpm>
-#include <xpm/star.xpm>
-#include <xpm/center.xpm>
-#include <xpm/center_active.xpm>
+#include <svg/poly_svg.h>
+#include <svg/star_svg.h>
+#include <svg/center_svg.h>
+#include <svg/center_active_svg.h>
 
 #include <cursors/star.xbm>
 #include <cursors/starmask.xbm>
-
-#define IMAGE_DATA(I) I, sizeof(I)/sizeof(char *)
 
 CQIllustratorCreateStarMode::
 CQIllustratorCreateStarMode(CQIllustrator *illustrator) :
@@ -78,7 +79,7 @@ handleMouseRelease(const MouseEvent &e)
     }
     // dragging finished so commit
     else {
-      illustrator_->getSandbox()->commit(CQIllustratorData::CHANGE_GEOMETRY);
+      illustrator_->getSandbox()->commit(CQIllustratorData::ChangeType::GEOMETRY);
     }
   }
   // not dragging so do a select
@@ -100,7 +101,7 @@ handleMouseRelease(const MouseEvent &e)
       double a2 = CMathGen::RadToDeg(M_PI/2.0);
       double a1 = a2 - CMathGen::RadToDeg(da/2.0);
 
-      if (toolbar_->getCreateMode() == CQIllustratorCreateStarToolbar::CREATE_STAR_MODE) {
+      if (toolbar_->getCreateMode() == CQIllustratorCreateStarToolbar::CreateMode::STAR) {
         CQIllustratorStarShape *star =
           illustrator_->createStarShape((p1 + p2)/2, n, r/2.0, r, a1, a2);
 
@@ -194,7 +195,7 @@ drawOverlay(CQIllustratorShapeDrawer *drawer)
 
 CQIllustratorCreateStarToolbar::
 CQIllustratorCreateStarToolbar(CQIllustratorCreateStarMode *mode) :
- CQIllustratorToolbar(mode), mode_(mode), createMode_(CREATE_STAR_MODE)
+ CQIllustratorToolbar(mode), mode_(mode), createMode_(CreateMode::STAR)
 {
 }
 
@@ -213,8 +214,8 @@ addWidgets()
 
   //-----
 
-  starButton_ = new CQImageButton(QPixmap(star_data));
-  polyButton_ = new CQImageButton(QPixmap(poly_data));
+  starButton_ = new CQImageButton(CQPixmapCacheInst->getIcon("STAR"));
+  polyButton_ = new CQImageButton(CQPixmapCacheInst->getIcon("POLY"));
 
   connect(starButton_, SIGNAL(toggled(bool)), this, SLOT(starModeSlot(bool)));
   connect(polyButton_, SIGNAL(toggled(bool)), this, SLOT(polyModeSlot(bool)));
@@ -340,7 +341,7 @@ CQIllustratorCreateStarToolbar::
 starModeSlot(bool state)
 {
   if (state) {
-    createMode_ = CREATE_STAR_MODE;
+    createMode_ = CreateMode::STAR;
 
     polyButton_->setChecked(false);
   }
@@ -351,7 +352,7 @@ CQIllustratorCreateStarToolbar::
 polyModeSlot(bool state)
 {
   if (state) {
-    createMode_ = CREATE_POLY_MODE;
+    createMode_ = CreateMode::POLY;
 
     starButton_->setChecked(false);
   }
@@ -376,7 +377,7 @@ updateShape()
     double   a1 = angle1Edit_ ->value();
     double   a2 = angle2Edit_ ->value();
 
-    illustrator->checkoutShape(star, CQIllustratorData::CHANGE_GEOMETRY);
+    illustrator->checkoutShape(star, CQIllustratorData::ChangeType::GEOMETRY);
 
     star->setCenterPoint(c);
     star->setNum        (n);
@@ -385,7 +386,7 @@ updateShape()
     star->setInnerAngle (a1);
     star->setOuterAngle (a2);
 
-    illustrator->checkinShape(star, CQIllustratorData::CHANGE_GEOMETRY);
+    illustrator->checkinShape(star, CQIllustratorData::ChangeType::GEOMETRY);
   }
   else if (poly) {
     CPoint2D c = centerEdit_ ->getValue();
@@ -393,14 +394,14 @@ updateShape()
     double   r = radius1Edit_->getValue();
     double   a = angle1Edit_ ->value();
 
-    illustrator->checkoutShape(poly, CQIllustratorData::CHANGE_GEOMETRY);
+    illustrator->checkoutShape(poly, CQIllustratorData::ChangeType::GEOMETRY);
 
     poly->setCenterPoint(c);
     poly->setNum        (n);
     poly->setRadius     (r);
     poly->setAngle      (a);
 
-    illustrator->checkinShape(poly, CQIllustratorData::CHANGE_GEOMETRY);
+    illustrator->checkinShape(poly, CQIllustratorData::ChangeType::GEOMETRY);
   }
 
   illustrator->redraw();
@@ -418,7 +419,8 @@ CQIllustratorCreateStarSizer(CQIllustratorCreateStarMode *mode) :
   ir_handle_ = new CQIllustratorControlPointHandle(illustrator);
   or_handle_ = new CQIllustratorControlPointHandle(illustrator);
 
-  c_handle_->setImage(IMAGE_DATA(center_data), IMAGE_DATA(center_active_data));
+  c_handle_->setImage(CQPixmapCacheInst->getIcon("CENTER"),
+                      CQPixmapCacheInst->getIcon("CENTER_ACTIVE"));
 
   addHandle(c_handle_ );
   addHandle(ir_handle_);

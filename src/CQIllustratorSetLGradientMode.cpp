@@ -2,6 +2,7 @@
 #include <CQIllustrator.h>
 #include <CQIllustratorHandle.h>
 #include <CQIllustratorShapeDrawer.h>
+#include <CQIllustratorUtil.h>
 
 #include <QPainter>
 #include <QBoxLayout>
@@ -15,10 +16,8 @@
 
 #include <svg/lgradient_svg.h>
 
-#include <xpm/stop_point.xpm>
-#include <xpm/stop_point_active.xpm>
-
-#define IMAGE_DATA(I) I, sizeof(I)/sizeof(char *)
+#include <svg/stop_point_svg.h>
+#include <svg/stop_point_active_svg.h>
 
 CQIllustratorSetLGradientMode::
 CQIllustratorSetLGradientMode(CQIllustrator *illustrator) :
@@ -72,7 +71,7 @@ handleMouseRelease(const MouseEvent &e)
     }
     // dragging finished so commit
     else {
-      illustrator_->getSandbox()->commit(CQIllustratorData::CHANGE_FILL);
+      illustrator_->getSandbox()->commit(CQIllustratorData::ChangeType::FILL);
     }
   }
   // not dragging so do a select
@@ -82,7 +81,7 @@ handleMouseRelease(const MouseEvent &e)
       (void) illustrator_->selectAt(p2, e.event->isControlKey(), e.event->isShiftKey());
     }
     else {
-      if (editMode_ == CREATE_MODE) {
+      if (editMode_ == EditMode::CREATE) {
         // drag then create lgradient rectangle using specified bbox
         illustrator_->addLinearGradient(CQUtil::fromQPoint(press_wpos_),
                                         CQUtil::fromQPoint(e.window));
@@ -91,7 +90,7 @@ handleMouseRelease(const MouseEvent &e)
         // drag - select points in rectangle
         CBBox2D bbox(p1, p2);
 
-        illustrator_->selectPointsIn(bbox, CQIllustratorShape::CONTROL_LGRADIENT,
+        illustrator_->selectPointsIn(bbox, CQIllustratorShape::ControlType::LGRADIENT,
                                      e.event->isControlKey(), e.event->isShiftKey());
       }
     }
@@ -112,7 +111,7 @@ handleMouseDrag(const MouseEvent &e)
     sizer_->updatePoint(shape, e.window);
   }
   else {
-    if (editMode_ == CREATE_MODE) {
+    if (editMode_ == EditMode::CREATE) {
       //CPoint2D p1 = CQUtil::fromQPoint(press_wpos_);
       //CPoint2D p2 = CQUtil::fromQPoint(e.window);
 
@@ -145,7 +144,7 @@ drawOverlay(CQIllustratorShapeDrawer *drawer)
       painter->setPen(pen);
       painter->setBrush(Qt::NoBrush);
 
-      if (editMode_ == CREATE_MODE)
+      if (editMode_ == EditMode::CREATE)
         painter->drawLine(press_wpos_, curr_wpos_);
       else
         painter->drawRect(QRectF(press_wpos_, curr_wpos_));
@@ -258,9 +257,9 @@ CQIllustratorSetLGradientToolbar::
 modeChangedSlot()
 {
   if (createRadio_->isChecked())
-    mode_->setEditMode(CQIllustratorMode::CREATE_MODE);
+    mode_->setEditMode(CQIllustratorMode::EditMode::CREATE);
   else
-    mode_->setEditMode(CQIllustratorMode::EDIT_MODE);
+    mode_->setEditMode(CQIllustratorMode::EditMode::EDIT);
 }
 
 void
@@ -332,8 +331,10 @@ CQIllustratorLGradSizer(CQIllustratorSetLGradientMode *mode) :
   start_handle_ = new CQIllustratorControlPointHandle(illustrator);
   end_handle_   = new CQIllustratorControlPointHandle(illustrator);
 
-  start_handle_->setImage(IMAGE_DATA(stop_point_data), IMAGE_DATA(stop_point_active_data));
-  end_handle_  ->setImage(IMAGE_DATA(stop_point_data), IMAGE_DATA(stop_point_active_data));
+  start_handle_->setImage(CQPixmapCacheInst->getIcon("STOP_POINT"),
+                          CQPixmapCacheInst->getIcon("STOP_POINT_ACTIVE"));
+  end_handle_  ->setImage(CQPixmapCacheInst->getIcon("STOP_POINT"),
+                          CQPixmapCacheInst->getIcon("STOP_POINT_ACTIVE"));
 
   addHandle(start_handle_);
   addHandle(end_handle_  );
@@ -345,7 +346,7 @@ drawHandles(QPainter *painter, const CQIllustratorShape *shape)
 {
   CQIllustratorShape::ControlPointList controlPoints;
 
-  shape->getControlPoints(controlPoints, CQIllustratorShape::CONTROL_LGRADIENT);
+  shape->getControlPoints(controlPoints, CQIllustratorShape::ControlType::LGRADIENT);
 
   if (controlPoints.size() == 2) {
     start_handle_->draw(shape, controlPoints[0], painter);

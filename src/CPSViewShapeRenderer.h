@@ -36,7 +36,7 @@ class CPSViewShapeRenderer : public CPSViewRenderer {
   CQIllustrator            *illustrator_ { 0 };
   CQIllustratorShapeStroke  stroke_;
   CQIllustratorShapeFill    fill_;
-  CPathShape               *path_ { 0 };
+  CQIllustratorPathShape   *path_ { 0 };
 };
 
 #endif

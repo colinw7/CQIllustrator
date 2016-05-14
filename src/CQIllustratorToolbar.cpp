@@ -103,13 +103,13 @@ void
 CQIllustratorToolbar::
 createEditSlot()
 {
-  if (mode_->getEditMode() == CQIllustratorMode::CREATE_MODE) {
-    mode_->setEditMode(CQIllustratorMode::EDIT_MODE);
+  if (mode_->getEditMode() == CQIllustratorMode::EditMode::CREATE) {
+    mode_->setEditMode(CQIllustratorMode::EditMode::EDIT);
 
     createEditButton_->setIcon(CQPixmapCacheInst->getIcon("EDIT_CREATE"));
   }
   else {
-    mode_->setEditMode(CQIllustratorMode::CREATE_MODE);
+    mode_->setEditMode(CQIllustratorMode::EditMode::CREATE);
 
     createEditButton_->setIcon(CQPixmapCacheInst->getIcon("CREATE_EDIT"));
   }

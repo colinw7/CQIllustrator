@@ -1,8 +1,10 @@
 #include <CQIllustratorCreateEllipseMode.h>
+#include <CQIllustratorEllipseShape.h>
 #include <CQIllustrator.h>
 #include <CQIllustratorCmd.h>
 #include <CQIllustratorHandle.h>
 #include <CQIllustratorShapeDrawer.h>
+#include <CQIllustratorUtil.h>
 
 #include <QPainter>
 #include <QHBoxLayout>
@@ -82,7 +84,7 @@ handleMouseRelease(const MouseEvent &e)
     }
     // dragging finished so commit
     else {
-      illustrator_->getSandbox()->commit(CQIllustratorData::CHANGE_GEOMETRY);
+      illustrator_->getSandbox()->commit(CQIllustratorData::ChangeType::GEOMETRY);
     }
   }
   // not dragging so do a select
@@ -344,9 +346,9 @@ updateShape()
     double angle1 = angle1Edit_->value();
     double angle2 = angle2Edit_->value();
 
-    CEllipseConnectType connectType = connectEdit_->getType();
+    CQIllustratorEllipseShape::ConnectType connectType = connectEdit_->getType();
 
-    illustrator->checkoutShape(shape, CQIllustratorData::CHANGE_GEOMETRY);
+    illustrator->checkoutShape(shape, CQIllustratorData::ChangeType::GEOMETRY);
 
     CQIllustratorEllipseShape *ellipse = dynamic_cast<CQIllustratorEllipseShape *>(shape);
 
@@ -359,7 +361,7 @@ updateShape()
 
     ellipse->setConnectType(connectType);
 
-    illustrator->checkinShape(shape, CQIllustratorData::CHANGE_GEOMETRY);
+    illustrator->checkinShape(shape, CQIllustratorData::ChangeType::GEOMETRY);
   }
 
   illustrator->redraw();
@@ -459,8 +461,12 @@ CQEllipseShape2DConnectType::
 CQEllipseShape2DConnectType(QWidget *parent) :
  QComboBox(parent)
 {
-  const char *        names [] = { "Line", "Center" };
-  CEllipseConnectType values[] = { CELLIPSE_CONNECT_LINE, CELLIPSE_CONNECT_CENTER };
+  const char *names [] = { "Line", "Center" };
+
+  CQIllustratorEllipseShape::ConnectType values[] = {
+    CQIllustratorEllipseShape::ConnectType::LINE,
+    CQIllustratorEllipseShape::ConnectType::CENTER
+  };
 
   uint num_names = sizeof(names)/sizeof(names[0]);
 
@@ -479,7 +485,7 @@ CQEllipseShape2DConnectType(QWidget *parent) :
 
 void
 CQEllipseShape2DConnectType::
-setType(CEllipseConnectType value)
+setType(CQIllustratorEllipseShape::ConnectType value)
 {
   int num = count();
 

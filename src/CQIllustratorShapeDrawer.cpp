@@ -6,12 +6,10 @@
 #include <CQUtil.h>
 #include <QPainter>
 
-#include <xpm/control_point.xpm>
-#include <xpm/control_point_active.xpm>
-#include <xpm/curve_point.xpm>
-#include <xpm/curve_point_active.xpm>
-
-#define IMAGE_DATA(I) I, sizeof(I)/sizeof(char *)
+#include <svg/control_point_svg.h>
+#include <svg/control_point_active_svg.h>
+#include <svg/curve_point_svg.h>
+#include <svg/curve_point_active_svg.h>
 
 CQIllustratorShapeDrawer::
 CQIllustratorShapeDrawer(CQIllustrator *illustrator, QPainter *painter) :
@@ -19,20 +17,20 @@ CQIllustratorShapeDrawer(CQIllustrator *illustrator, QPainter *painter) :
 {
   path_ = new QPainterPath;
 
-  control_point_image_ =
-    CImageMgrInst->createImage(CImageXPMSrc(IMAGE_DATA(control_point_data)));
-  control_point_active_image_ =
-    CImageMgrInst->createImage(CImageXPMSrc(IMAGE_DATA(control_point_active_data)));
+  //control_point_image_ =
+  //  CImageMgrInst->createImage(CQPixmapCacheInst->getIcon("CONTROL_POINT"));
+  //control_point_active_image_ =
+  //  CImageMgrInst->createImage(CQPixmapCacheInst->getIcon("CONTROL_POINT_ACTIVE"));
 
-  curve_point_image_ =
-    CImageMgrInst->createImage(CImageXPMSrc(IMAGE_DATA(curve_point_data)));
-  curve_point_active_image_ =
-    CImageMgrInst->createImage(CImageXPMSrc(IMAGE_DATA(curve_point_active_data)));
+  // curve_point_image_ =
+  //   CImageMgrInst->createImage(CQPixmapCacheInst->getIcon("CURVE_POINT"));
+  // curve_point_active_image_ =
+  //   CImageMgrInst->createImage(CQPixmapCacheInst->getIcon("CURVE_POINT_ACTIVE"));
 
-  qi1_control_ = control_point_image_       .cast<CQImage>()->getQImage();
-  qi2_control_ = control_point_active_image_.cast<CQImage>()->getQImage();
-  qi1_curve_   = curve_point_image_         .cast<CQImage>()->getQImage();
-  qi2_curve_   = curve_point_active_image_  .cast<CQImage>()->getQImage();
+  //qi1_control_ = control_point_image_       .cast<CQImage>()->getQImage();
+  //qi2_control_ = control_point_active_image_.cast<CQImage>()->getQImage();
+  //qi1_curve_   = curve_point_image_         .cast<CQImage>()->getQImage();
+  //qi2_curve_   = curve_point_active_image_  .cast<CQImage>()->getQImage();
 }
 
 CQIllustratorShapeDrawer::
@@ -213,6 +211,8 @@ void
 CQIllustratorShapeDrawer::
 pathText(const CBBox2D &rect, const std::string &str, CHAlignType halign, CVAlignType valign)
 {
+#if 0
+  // calc pixel size of font
   double fs = qfont_.pointSizeF();
 
   int pixels_per_inch = painter_->device()->physicalDpiX();
@@ -232,6 +232,11 @@ pathText(const CBBox2D &rect, const std::string &str, CHAlignType halign, CVAlig
   QFont qfont = qfont_;
 
   qfont.setPixelSize(ifs);
+#else
+  QFont qfont = qfont_;
+#endif
+
+  //---
 
   std::vector<std::string> words;
 
@@ -239,8 +244,9 @@ pathText(const CBBox2D &rect, const std::string &str, CHAlignType halign, CVAlig
 
   uint num_words = words.size();
 
-  std::vector<double> widths, heights;
+  //---
 
+  // calc text height
   QPainterPath path1;
 
   path1.addText(QPoint(0, 0), qfont, "qQ");
@@ -248,6 +254,11 @@ pathText(const CBBox2D &rect, const std::string &str, CHAlignType halign, CVAlig
   QRectF qrect = path1.boundingRect();
 
   double hq = qrect.height();
+
+  //---
+
+  // calculate sizes of each path part and total width and height
+  std::vector<double> widths, heights;
 
   double w = 0;
   double h = 0;
@@ -275,9 +286,19 @@ pathText(const CBBox2D &rect, const std::string &str, CHAlignType halign, CVAlig
     heights.push_back(qrect.height());
   }
 
-  double x = rect.getXMin();
-  double y = rect.getYMin();
+  //---
 
+  // set start point
+  double x = rect.getXMin();
+
+  double y;
+
+  if (! illustrator_->getFlipY())
+    y = rect.getYMin();
+  else
+    y = rect.getYMax();
+
+  // adjust by align
   double dx = rect.getWidth () - w;
   double dy = rect.getHeight() - h;
 
@@ -291,26 +312,35 @@ pathText(const CBBox2D &rect, const std::string &str, CHAlignType halign, CVAlig
 
   QTransform transform1;
 
-  transform1.scale(1, -1);
+  if (! illustrator_->getFlipY()) {
+    transform1.scale(1, -1);
 
-  //painter_->setWorldTransform(transform1, true);
-  painter_->setTransform(transform1, true);
+    //painter_->setWorldTransform(transform1, true);
+    painter_->setTransform(transform1, true);
+  }
 
   for (uint i = 0; i < num_words; ++i) {
     QString qstr(words[num_words - i - 1].c_str());
 
     double dw1 = w  - widths [i];
-    //double dh1 = hq - heights[i];
+  //double dh1 = hq - heights[i];
 
     double dx1 = 0;
 
+    // adjust by align
     if      (halign == CHALIGN_TYPE_LEFT  ) { }
     else if (halign == CHALIGN_TYPE_CENTER) dx1 = dw1/2;
     else if (halign == CHALIGN_TYPE_RIGHT ) dx1 = dw1;
 
-    path_->addText(QPoint(x + dx1, -y), qfont, qstr);
+    if (! illustrator_->getFlipY())
+      path_->addText(QPoint(x + dx1, -y), qfont, qstr);
+    else
+      path_->addText(QPoint(x + dx1, y), qfont, qstr);
 
-    y += hq;
+    if (! illustrator_->getFlipY())
+      y += hq;
+    else
+      y -= hq;
   }
 }
 
