@@ -5,3 +5,5 @@
  + Add SVG no color support
  + Update to latest CSVG code interface
  + Add property dialog for shape objects
+#### 5/12/2016
+ + Replace all xpm with svg
