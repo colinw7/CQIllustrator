@@ -57,12 +57,13 @@
 #include <CSVGTSpan.h>
 #include <CSVGUse.h>
 #include <CSVGUtil.h>
+#include <CQSVGRenderer.h>
 
 #include <CLinearGradient.h>
 #include <CRadialGradient.h>
 
-#include <CQStrokeOption.h>
-#include <CQFillOption.h>
+#include <CQStrokeOptionTool.h>
+#include <CQFillOptionTool.h>
 //#include <CQFontOption.h>
 #include <CQObjectOption.h>
 #include <CQLayerOption.h>
@@ -2263,6 +2264,10 @@ loadSVG(const QString &filename)
 
   CSVG svg;
 
+  CQSVGRenderer renderer;
+
+  svg.setRenderer(&renderer);
+
   svg.setAutoName(true);
 
   if (! svg.read(filename.toStdString()))
@@ -2432,11 +2437,17 @@ saveCmd(const QString &filename)
 
 CQIllustratorShape *
 CQIllustrator::
-addSVGObject(CSVGObject *, CSVGObject *object)
+addSVGObject(CSVGObject *, CSVGObject *object, bool force)
 {
-  if (! object->isHierDrawable()) return 0;
+  if (! force) {
+    if (! object->isHierDrawable())
+      return 0;
 
-  if (! object->isDrawable()) return 0;
+    if (! object->isDrawable())
+      return 0;
+  }
+
+  //---
 
   CMatrix2D m = object->getTransform().getMatrix();
 
@@ -2509,6 +2520,17 @@ addSVGObject(CSVGObject *, CSVGObject *object)
           case CSVGPathPartType::HLINE_TO: {
             CSVGPathHLineTo const *pp = dynamic_cast<CSVGPathHLineTo const *>(part);
 
+            CPoint2D pp1 = CPoint2D(pp->getX(), lp.y);
+
+            pathShape->addLineTo(pp1);
+
+            lp = pp1;
+
+            break;
+          }
+          case CSVGPathPartType::RHLINE_TO: {
+            CSVGPathRHLineTo const *pp = dynamic_cast<CSVGPathRHLineTo const *>(part);
+
             CPoint2D pp1 = lp + CPoint2D(pp->getDistance(), 0);
 
             pathShape->addLineTo(pp1);
@@ -2519,6 +2541,17 @@ addSVGObject(CSVGObject *, CSVGObject *object)
           }
           case CSVGPathPartType::VLINE_TO: {
             CSVGPathVLineTo const *pp = dynamic_cast<CSVGPathVLineTo const *>(part);
+
+            CPoint2D pp1 = lp + CPoint2D(lp.x, pp->getY());
+
+            pathShape->addLineTo(pp1);
+
+            lp = pp1;
+
+            break;
+          }
+          case CSVGPathPartType::RVLINE_TO: {
+            CSVGPathRVLineTo const *pp = dynamic_cast<CSVGPathRVLineTo const *>(part);
 
             CPoint2D pp1 = lp + CPoint2D(0, pp->getDistance());
 
@@ -2585,50 +2618,64 @@ addSVGObject(CSVGObject *, CSVGObject *object)
           case CSVGPathPartType::BEZIER2_TO: {
             CSVGPathBezier2To const *pp = dynamic_cast<CSVGPathBezier2To const *>(part);
 
-            CPoint2D pp1 = pp->getPoint1();
-            CPoint2D pp2 = pp->getPoint2();
+            pathShape->addCurveTo(pp->getPoint1(), pp->getPoint2());
 
-            pathShape->addCurveTo(pp1, pp2);
-
-            lp = pp2;
+            lp = pp->getPoint2();
 
             break;
+          }
+          case CSVGPathPartType::MBEZIER2_TO: {
+           //CSVGPathMBezier2To const *pp = dynamic_cast<CSVGPathMBezier2To const *>(part);
+
+           std::cerr << "MBEZIER2_TO not handled" << std::endl;
+
+           break;
           }
           case CSVGPathPartType::RBEZIER2_TO: {
             CSVGPathRBezier2To const *pp = dynamic_cast<CSVGPathRBezier2To const *>(part);
 
-            CPoint2D pp1 = lp + pp->getPoint1();
-            CPoint2D pp2 = lp + pp->getPoint2();
+            pathShape->addCurveTo(lp + pp->getPoint1(), lp + pp->getPoint2());
 
-            pathShape->addCurveTo(pp1, pp2);
+            lp = lp + pp->getPoint2();
 
-            lp = pp2;
+            break;
+          }
+          case CSVGPathPartType::MRBEZIER2_TO: {
+            //CSVGPathMRBezier2To const *pp = dynamic_cast<CSVGPathMRBezier2To const *>(part);
+
+            std::cerr << "MRBEZIER2_TO not handled" << std::endl;
 
             break;
           }
           case CSVGPathPartType::BEZIER3_TO: {
             CSVGPathBezier3To const *pp = dynamic_cast<CSVGPathBezier3To const *>(part);
 
-            CPoint2D pp1 = pp->getPoint1();
-            CPoint2D pp2 = pp->getPoint2();
-            CPoint2D pp3 = pp->getPoint3();
+            pathShape->addCurveTo(pp->getPoint1(), pp->getPoint2(), pp->getPoint3());
 
-            pathShape->addCurveTo(pp1, pp2, pp3);
+            lp = pp->getPoint3();
 
-            lp = pp3;
+            break;
+          }
+          case CSVGPathPartType::MBEZIER3_TO: {
+            //CSVGPathMBezier3To const *pp = dynamic_cast<CSVGPathMBezier3To const *>(part);
+
+            std::cerr << "MBEZIER3_TO not handled" << std::endl;
 
             break;
           }
           case CSVGPathPartType::RBEZIER3_TO: {
             CSVGPathRBezier3To const *pp = dynamic_cast<CSVGPathRBezier3To const *>(part);
 
-            CPoint2D pp1 = lp + pp->getPoint1();
-            CPoint2D pp2 = lp + pp->getPoint2();
-            CPoint2D pp3 = lp + pp->getPoint3();
+            pathShape->addCurveTo(lp + pp->getPoint1(), lp + pp->getPoint2(), lp + pp->getPoint3());
 
-            pathShape->addCurveTo(pp1, pp2, pp3);
+            lp = lp + pp->getPoint3();
 
-            lp = pp3;
+            break;
+          }
+          case CSVGPathPartType::MRBEZIER3_TO: {
+            //CSVGPathMRBezier3To const *pp = dynamic_cast<CSVGPathMRBezier3To const *>(part);
+
+            std::cerr << "MRBEZIER3_TO not handled" << std::endl;
 
             break;
           }
@@ -2681,20 +2728,39 @@ addSVGObject(CSVGObject *, CSVGObject *object)
 
       const CBBox2D &bbox = rect->getBBox();
 
-      double rx = fabs(rect->getRX());
-      double ry = fabs(rect->getRY());
+      //---
+
+      // option corner radius (1 or 2 values)
+      double rx = 0, ry = 0;
+
+      if (rect->hasRX() && rect->hasRY()) {
+        rx = fabs(rect->getRX());
+        ry = fabs(rect->getRY());
+      }
+      else if (rect->hasRX()) {
+        rx = fabs(rect->getRX());
+        ry = rx;
+      }
+      else if (rect->hasRY()) {
+        ry = fabs(rect->getRY());
+        rx = ry;
+      }
+
+      //---
 
       CPoint2D p1 = bbox.getUL();
       CPoint2D p2 = bbox.getLR();
 
       CQIllustratorRectShape *rectShape = createRectShape(p1, p2);
 
+      shape = rectShape;
+
+      //---
+
       if (rx > 1E-6 && ry >= 1E-6) {
         rectShape->setRadiusX(rx);
         rectShape->setRadiusY(ry);
       }
-
-      shape = rectShape;
 
       setShapeSVGStrokeAndFill(rectShape, object);
 
@@ -2828,21 +2894,46 @@ addSVGObject(CSVGObject *, CSVGObject *object)
 
       image->getBBox(bbox);
 
-      CPoint2D p1 = bbox.getUL();
-      CPoint2D p2 = bbox.getLR();
+      CSVGObject *childObject = image->getObject();
 
-      CQIllustratorRectShape *rectShape = createRectShape(p1, p2);
+      if (childObject) {
+        CQIllustratorGroupShape *groupShape = createGroupShape();
 
-      shape = rectShape;
+        shape = groupShape;
 
-      setShapeSVGStrokeAndFill(rectShape, object);
+        setShapeSVGStrokeAndFill(groupShape, object);
 
-      CImagePtr img = image->getImage();
+        CQIllustratorShape *childShape = addSVGObject(object, childObject);
 
-      if (img.isValid()) {
-        CQIllustratorShapeFill &fill = shape->getFill();
+        if (childShape) {
+          groupShape->addChild(childShape);
 
-        fill.setImage(img);
+          setSVGShapeName(childShape, childObject);
+
+          addShape(childShape);
+
+          childShape->setParent(groupShape);
+        }
+      }
+      else {
+        CPoint2D p1 = bbox.getUL();
+        CPoint2D p2 = bbox.getLR();
+
+        CQIllustratorRectShape *rectShape = createRectShape(p1, p2);
+
+        shape = rectShape;
+
+        setShapeSVGStrokeAndFill(rectShape, object);
+
+        CImagePtr img = image->getImage();
+
+        if (img.isValid()) {
+          CQIllustratorShapeFill &fill = shape->getFill();
+
+          fill.setImage(img);
+
+          fill.setImageScale(CQIllustratorShapeFill::ImageScale::FIT);
+        }
       }
 
       break;
@@ -2865,7 +2956,7 @@ addSVGObject(CSVGObject *, CSVGObject *object)
 
       childObject->setParent(use);
 
-      CQIllustratorShape *childShape = addSVGObject(object, childObject);
+      CQIllustratorShape *childShape = addSVGObject(object, childObject, /*force*/true);
 
       if (childShape) {
         groupShape->addChild(childShape);
@@ -2882,6 +2973,29 @@ addSVGObject(CSVGObject *, CSVGObject *object)
       break;
     }
     case CSVGObjTypeId::GROUP: {
+      CQIllustratorGroupShape *groupShape = createGroupShape();
+
+      shape = groupShape;
+
+      setShapeSVGStrokeAndFill(groupShape, object);
+
+      for (const auto &childObject : object->children()) {
+        CQIllustratorShape *childShape = addSVGObject(object, childObject);
+
+        if (! childShape) continue;
+
+        groupShape->addChild(childShape);
+
+        setSVGShapeName(childShape, childObject);
+
+        addShape(childShape);
+
+        childShape->setParent(groupShape);
+      }
+
+      break;
+    }
+    case CSVGObjTypeId::SYMBOL: {
       CQIllustratorGroupShape *groupShape = createGroupShape();
 
       shape = groupShape;
@@ -4256,8 +4370,11 @@ setShapeSVGStrokeAndFill(CQIllustratorShape *shape, CSVGObject *object)
     if      (lg) {
       CLinearGradient *lgradient = new CLinearGradient;
 
-      for (const auto &stop : lg->stops())
-        lgradient->addStop(stop->getOffset(), stop->getAlphaColor());
+      for (const auto &stop : lg->stops()) {
+        double o = stop->getOffset().ratioValue(1);
+
+        lgradient->addStop(o, stop->getAlphaColor());
+      }
 
       CMatrix2D m1;
 
@@ -4266,8 +4383,8 @@ setShapeSVGStrokeAndFill(CQIllustratorShape *shape, CSVGObject *object)
       else
         m1.setIdentity();
 
-      CPoint2D p1(lg->getX1(), lg->getY1());
-      CPoint2D p2(lg->getX2(), lg->getY2());
+      CPoint2D p1(lg->getX1().pxValue(1), lg->getY1().pxValue(1));
+      CPoint2D p2(lg->getX2().pxValue(1), lg->getY2().pxValue(1));
 
       p1 = m1*p1;
       p2 = m1*p2;
@@ -4294,8 +4411,11 @@ setShapeSVGStrokeAndFill(CQIllustratorShape *shape, CSVGObject *object)
 
       CSVGRadialGradient::StopList::const_iterator ps1, ps2;
 
-      for (const auto &stop : rg->stops())
-        rgradient->addStop(stop->getOffset(), stop->getAlphaColor());
+      for (const auto &stop : rg->stops()) {
+        double o = stop->getOffset().ratioValue(1);
+
+        rgradient->addStop(o, stop->getAlphaColor());
+      }
 
       CMatrix2D m1;
 
@@ -4304,9 +4424,10 @@ setShapeSVGStrokeAndFill(CQIllustratorShape *shape, CSVGObject *object)
       else
         m1.setIdentity();
 
-      CPoint2D  c(rg->getCenterX(), rg->getCenterY());
-      CPoint2D  f(rg->getFocusX (), rg->getFocusY ());
-      CVector2D r(rg->getRadius (), rg->getRadius ());
+      CPoint2D c(rg->getCenterX().pxValue(1), rg->getCenterY().pxValue(1));
+      CPoint2D f(rg->getFocusX(), rg->getFocusY());
+
+      CVector2D r(rg->getRadius().pxValue(1), rg->getRadius().pxValue(1));
 
       c = m1*c;
       f = m1*f;

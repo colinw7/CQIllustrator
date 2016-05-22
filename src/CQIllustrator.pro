@@ -71,6 +71,8 @@ CQIllustratorUndo.cpp \
 CQIllustratorUndoDock.cpp \
 CQIllustratorZoomMode.cpp \
 \
+CQSVGRenderer.cpp \
+\
 CArcToBezier.cpp \
 CAxis2D.cpp \
 CBezierToLine.cpp \
@@ -183,6 +185,8 @@ CQIllustratorUndoDock.h \
 CQIllustratorUndo.h \
 CQIllustratorUtil.h \
 CQIllustratorZoomMode.h \
+\
+CQSVGRenderer.h \
 \
 CAxis2D.h \
 CBooleanOp.h \

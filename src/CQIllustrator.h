@@ -331,7 +331,7 @@ class CQIllustrator : public CQMainWindow {
   void saveSVG(const QString &filename);
   void saveCmd(const QString &filename);
 
-  CQIllustratorShape *addSVGObject(CSVGObject *parent, CSVGObject *object);
+  CQIllustratorShape *addSVGObject(CSVGObject *parent, CSVGObject *object, bool force=false);
 
   void addShape(CQIllustratorShape *shape);
 
