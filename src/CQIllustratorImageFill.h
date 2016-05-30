@@ -13,23 +13,23 @@ class CQIllustratorImageFill {
   };
 
  public:
-  CQIllustratorImageFill() { }
+  CQIllustratorImageFill();
 
-  CQIllustratorImageFill(const CQIllustratorImageFill &image) :
-   image_(image.image_), scale_(image.scale_), halign_(image.halign_), valign_(image.valign_) {
-  }
+  CQIllustratorImageFill(const CQIllustratorImageFill &image);
+
+ ~CQIllustratorImageFill();
 
   CImagePtr getImage() const { return image_; }
-  void setImage(CImagePtr image) { image_ = image; }
+  void setImage(CImagePtr image);
 
   Scale getScale() const { return scale_; }
-  void setScale(Scale scale) { scale_ = scale; }
+  void setScale(Scale scale);
 
   CHAlignType getHAlign() const { return halign_; }
-  void setHAlign(CHAlignType halign) { halign_ = halign; }
+  void setHAlign(CHAlignType halign);
 
   CVAlignType getVAlign() const { return valign_; }
-  void setVAlign(CVAlignType valign) { valign_ = valign; }
+  void setVAlign(CVAlignType valign);
 
  private:
   CImagePtr   image_;

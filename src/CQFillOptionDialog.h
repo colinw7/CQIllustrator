@@ -23,6 +23,8 @@ class CQFillOptionDialog : public CQOptionToolDialog {
  public:
   CQFillOptionDialog(CQFillOptionTool *tool);
 
+ ~CQFillOptionDialog();
+
   void setFill(const CQIllustratorShapeFill &fill);
 
   const CQIllustratorShapeFill &getFill() const { return fill_; }

@@ -29,6 +29,7 @@ CQIllustratorData.cpp \
 CQIllustratorEllipseShape.cpp \
 CQIllustratorGroupShape.cpp \
 CQIllustratorHandle.cpp \
+CQIllustratorImageFill.cpp \
 CQIllustratorInfo.cpp \
 CQIllustratorLayer.cpp \
 CQIllustratorMode.cpp \
@@ -88,8 +89,10 @@ CMathGeom2D.cpp \
 CPathShape.cpp \
 CQAccelerate.cpp \
 CQAngleSpinBox.cpp \
-CQFillOption.cpp \
-CQFontOption.cpp \
+CQFillOptionDialog.cpp \
+CQFillOptionTool.cpp \
+CQFontOptionDialog.cpp \
+CQFontOptionTool.cpp \
 CQGradientStopList.cpp \
 CQImageButton.cpp \
 CQImagePreview.cpp \
@@ -104,7 +107,8 @@ CQPointEdit.cpp \
 CQPropertiesOption.cpp \
 CQRadioButtons.cpp \
 CQScrollArea.cpp \
-CQStrokeOption.cpp \
+CQStrokeOptionDialog.cpp \
+CQStrokeOptionTool.cpp \
 CQSwatch.cpp \
 CQTableWidget.cpp \
 CQWinWidget.cpp \
@@ -204,8 +208,10 @@ CPathShape.h \
 CQAccelerate.h \
 CQAngleSpinBox.h \
 CQDockWidget.h \
-CQFillOption.h \
-CQFontOption.h \
+CQFillOptionDialog.h \
+CQFillOptionTool.h \
+CQFontOptionDialog.h \
+CQFontOptionTool.h \
 CQGradientStopList.h \
 CQImageButton.h \
 CQImagePreview.h \
@@ -220,7 +226,8 @@ CQPointEdit.h \
 CQPropertiesOption.h \
 CQRadioButtons.h \
 CQScrollArea.h \
-CQStrokeOption.h \
+CQStrokeOptionDialog.h \
+CQStrokeOptionTool.h \
 CQSwatch.h \
 CQTableWidget.h \
 CQToolBar.h \

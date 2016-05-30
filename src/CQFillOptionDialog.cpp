@@ -28,6 +28,11 @@ CQFillOptionDialog(CQFillOptionTool *tool) :
   initWidgets();
 }
 
+CQFillOptionDialog::
+~CQFillOptionDialog()
+{
+}
+
 void
 CQFillOptionDialog::
 setFill(const CQIllustratorShapeFill &fill)

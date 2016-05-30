@@ -57,6 +57,7 @@
 #include <CSVGTSpan.h>
 #include <CSVGUse.h>
 #include <CSVGUtil.h>
+#include <CSVGBuffer.h>
 #include <CQSVGRenderer.h>
 
 #include <CLinearGradient.h>
@@ -2531,7 +2532,7 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
           case CSVGPathPartType::RHLINE_TO: {
             CSVGPathRHLineTo const *pp = dynamic_cast<CSVGPathRHLineTo const *>(part);
 
-            CPoint2D pp1 = lp + CPoint2D(pp->getDistance(), 0);
+            CPoint2D pp1 = lp + CPoint2D(pp->getDX(), 0);
 
             pathShape->addLineTo(pp1);
 
@@ -2553,7 +2554,7 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
           case CSVGPathPartType::RVLINE_TO: {
             CSVGPathRVLineTo const *pp = dynamic_cast<CSVGPathRVLineTo const *>(part);
 
-            CPoint2D pp1 = lp + CPoint2D(0, pp->getDistance());
+            CPoint2D pp1 = lp + CPoint2D(0, pp->getDY());
 
             pathShape->addLineTo(pp1);
 
@@ -2925,7 +2926,7 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
 
         setShapeSVGStrokeAndFill(rectShape, object);
 
-        CImagePtr img = image->getImage();
+        CImagePtr img = image->getImageBuffer()->getRenderer()->getImage();
 
         if (img.isValid()) {
           CQIllustratorShapeFill &fill = shape->getFill();
