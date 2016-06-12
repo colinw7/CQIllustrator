@@ -5,8 +5,7 @@
 #include <cassert>
 
 CCSS::
-CCSS() :
- styleData_()
+CCSS()
 {
 }
 
@@ -14,19 +13,31 @@ bool
 CCSS::
 processFile(const std::string &filename)
 {
-  if (! CFile::exists(filename) || ! CFile::isRegular(filename))
+  if (! CFile::exists(filename) || ! CFile::isRegular(filename)) {
+    if (isDebug())
+      std::cerr << "Invalid file '" << filename << "'" << std::endl;
     return false;
+  }
 
   CFile file(filename);
+
+  std::string str;
 
   std::string line;
 
   while (file.readLine(line)) {
     line = CStrUtil::stripSpaces(line);
 
-    if (! line.empty())
-      processLine(line);
+    if (line.empty())
+      continue;
+
+    if (! str.empty())
+      str += "\n";
+
+    str += line;
   }
+
+  processLine(str);
 
   return true;
 }
@@ -42,10 +53,8 @@ void
 CCSS::
 getIds(std::vector<std::string> &ids) const
 {
-  StyleDataMap::const_iterator p1, p2;
-
-  for (p1 = styleData_.begin(), p2 = styleData_.end(); p1 != p2; ++p1) {
-    const std::string &id = (*p1).first;
+  for (const auto &d : styleData_) {
+    const std::string &id = d.first;
 
     ids.push_back(id);
   }
@@ -57,48 +66,41 @@ parse(const std::string &str)
 {
   CStrParse parse(str);
 
-  std::string id;
-
-  while (! parse.eof() && ! parse.isSpace() && ! parse.isChar('{')) {
-    char c;
-
-    parse.readChar(&c);
-
-    id += c;
-  }
-
-  if (id.empty()) return false;
-
-  //------
-
-  StyleData &styleData = getStyleData(id);
-
-  parse.skipSpace();
-
-  if (parse.isChar('{')) {
-    parse.skipChar();
-
+  while (! parse.eof()) {
     parse.skipSpace();
 
-    std::string str1;
+    if (parse.isString("/*")) {
+      skipComment(parse);
 
-    while (! parse.eof() && ! parse.isChar('}')) {
-      char c;
-
-      parse.readChar(&c);
-
-      str1 += c;
+      parse.skipSpace();
     }
 
-    if (! parse.isChar('}'))
+    // get id
+    std::string id;
+
+    if (! readId(parse, id)) {
+      if (isDebug())
+        std::cerr << "Empty id : '" << parse.stateStr() << "'" << std::endl;
       return false;
+    }
 
-    parse.skipChar();
+    //------
 
-    parse.skipSpace();
+    // get values
+    StyleData &styleData = getStyleData(id);
 
-    if (! parseAttr(str1, styleData))
-      return false;
+    if (parse.isChar('{')) {
+      std::string str1;
+
+      // still parse text with missing end brace, just exit loop
+      bool rc = readBracedString(parse, str1);
+
+      if (! parseAttr(str1, styleData))
+        return false;
+
+      if (! rc)
+        break;
+    }
   }
 
   return true;
@@ -145,8 +147,11 @@ parseAttr(const std::string &str, StyleData &styleData)
       }
     }
 
-    if (name.empty())
+    if (name.empty()) {
+      if (isDebug())
+        std::cerr << "Empty name : '" << parse.stateStr() << "'" << std::endl;
       return false;
+    }
 
     styleData.addOption(name, value);
   }
@@ -154,11 +159,84 @@ parseAttr(const std::string &str, StyleData &styleData)
   return true;
 }
 
+bool
+CCSS::
+readId(CStrParse &parse, std::string &id) const
+{
+  id = "";
+
+  parse.skipSpace();
+
+  while (! parse.eof() && ! parse.isSpace() && ! parse.isChar('{')) {
+    char c;
+
+    parse.readChar(&c);
+
+    id += c;
+  }
+
+  parse.skipSpace();
+
+  return ! id.empty();
+}
+
+bool
+CCSS::
+readBracedString(CStrParse &parse, std::string &str) const
+{
+  str = "";
+
+  parse.skipChar();
+
+  parse.skipSpace();
+
+  while (! parse.eof() && ! parse.isChar('}')) {
+    char c;
+
+    parse.readChar(&c);
+
+    str += c;
+  }
+
+  if (! parse.isChar('}')) {
+    if (isDebug())
+      std::cerr << "Missing close brace : '" << parse.stateStr() << "'" << std::endl;
+    return false;
+  }
+
+  parse.skipChar();
+
+  parse.skipSpace();
+
+  return true;
+}
+
+bool
+CCSS::
+skipComment(CStrParse &parse) const
+{
+  parse.skipChars(2);
+
+  while (! parse.eof()) {
+    if (parse.isString("*/")) {
+      parse.skipChars(2);
+      return true;
+    }
+
+    parse.skipChar();
+  }
+
+  if (isDebug())
+    std::cerr << "Unterminated commend : '" << parse.stateStr() << "'" << std::endl;
+
+  return false;
+}
+
 CCSS::StyleData &
 CCSS::
 getStyleData(const std::string &id)
 {
-  StyleDataMap::iterator p = styleData_.find(id);
+  auto p = styleData_.find(id);
 
   if (p == styleData_.end())
     p = styleData_.insert(p, StyleDataMap::value_type(id, StyleData(id)));
@@ -172,7 +250,7 @@ const CCSS::StyleData &
 CCSS::
 getStyleData(const std::string &id) const
 {
-  StyleDataMap::const_iterator p = styleData_.find(id);
+  auto p = styleData_.find(id);
 
   assert(p != styleData_.end());
 
@@ -185,10 +263,8 @@ void
 CCSS::
 print(std::ostream &os) const
 {
-  StyleDataMap::const_iterator p1, p2;
-
-  for (p1 = styleData_.begin(), p2 = styleData_.end(); p1 != p2; ++p1) {
-    const StyleData &styleData = (*p1).second;
+  for (const auto &d : styleData_) {
+    const StyleData &styleData = d.second;
 
     styleData.print(os);
 
@@ -204,13 +280,8 @@ print(std::ostream &os) const
 {
   os << "<style class=\"" << id_ << "\"";
 
-  OptionList::const_iterator p1, p2;
-
-  for (p1 = options_.begin(), p2 = options_.end(); p1 != p2; ++p1) {
-    const Option &option = *p1;
-
-    os << " " << option.getName() << "=\"" << option.getValue() << "\"";
-  }
+  for (const auto &o : options_)
+    os << " " << o.getName() << "=\"" << o.getValue() << "\"";
 
   os << "/>";
 }

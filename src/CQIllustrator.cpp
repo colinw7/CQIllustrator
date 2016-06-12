@@ -2280,7 +2280,7 @@ loadSVG(const QString &filename)
   CPoint2D c(0,0);
 #endif
 
-  CSVGBlock *block = svg.getBlock();
+  CSVGBlock *block = svg.getRoot();
 
   for (const auto &object : block->children()) {
     CQIllustratorShape *shape = addSVGObject(0, object);
@@ -2771,7 +2771,7 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
       CSVGCircle *circle = dynamic_cast<CSVGCircle *>(object);
 
       const CPoint2D &c = circle->getCenter();
-      double          r = circle->getRadius();
+      double          r = circle->getRadius().pxValue(1);
 
       CBBox2D bbox(CPoint2D(c.x - r, c.y - r), CPoint2D(c.x + r, c.y + r));
 
@@ -4349,16 +4349,16 @@ setShapeSVGStrokeAndFill(CQIllustratorShape *shape, CSVGObject *object)
   const CSVGStroke &objStroke = object->getStroke();
   const CSVGFill   &objFill   = object->getFill();
 
-  stroke.setStroked (! object->getFlatStrokeNoColor());
-  stroke.setColor   (object->getFlatStrokeColor());
+  stroke.setStroked (! object->getFlatStrokeColor().isNone());
+  stroke.setColor   (object->colorToRGBA(object->getFlatStrokeColor()));
   stroke.setOpacity (opacity*object->getFlatStrokeOpacity());
   stroke.setWidth   (object->getFlatStrokeWidth());
-  stroke.setLineDash(object->getFlatStrokeLineDash());
+  stroke.setLineDash(object->getFlatStrokeLineDash().getLineDash());
   stroke.setLineCap (objStroke.getLineCap());
   stroke.setLineJoin(objStroke.getLineJoin());
 
-  fill.setFilled  (! object->getFlatFillNoColor());
-  fill.setColor   (object->getFlatFillColor());
+  fill.setFilled  (! object->getFlatFillColor().isNone());
+  fill.setColor   (object->colorToRGBA(object->getFlatFillColor()));
   fill.setOpacity (opacity*object->getFlatFillOpacity());
   fill.setFillRule(objFill.getRule());
 
@@ -4374,7 +4374,9 @@ setShapeSVGStrokeAndFill(CQIllustratorShape *shape, CSVGObject *object)
       for (const auto &stop : lg->stops()) {
         double o = stop->getOffset().ratioValue(1);
 
-        lgradient->addStop(o, stop->getAlphaColor());
+        CRGBA rgba = object->colorToRGBA(stop->getColor());
+
+        lgradient->addStop(o, rgba);
       }
 
       CMatrix2D m1;
@@ -4415,7 +4417,9 @@ setShapeSVGStrokeAndFill(CQIllustratorShape *shape, CSVGObject *object)
       for (const auto &stop : rg->stops()) {
         double o = stop->getOffset().ratioValue(1);
 
-        rgradient->addStop(o, stop->getAlphaColor());
+        CRGBA rgba = object->colorToRGBA(stop->getColor());
+
+        rgradient->addStop(o, rgba);
       }
 
       CMatrix2D m1;

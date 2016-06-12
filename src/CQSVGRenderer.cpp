@@ -43,6 +43,42 @@ namespace {
 
     return image;
   }
+
+  QImage alphaImage(const QImage &image, int gray=0) {
+    QImage image1 = createImage(image.width(), image.height());
+
+    for (int y = 0; y < image.height(); ++y) {
+      for (int x = 0; x < image.width(); ++x) {
+        QRgb rgb = image.pixel(x, y);
+
+        int a = qAlpha(rgb);
+
+        image1.setPixel(x, y, qRgba(gray, gray, gray, a));
+      }
+    }
+
+    return image1;
+  }
+
+  QImage opacityImage(const QImage &image, double opacity) {
+    QImage image1 = createImage(image.width(), image.height());
+
+    for (int y = 0; y < image.height(); ++y) {
+      for (int x = 0; x < image.width(); ++x) {
+        QRgb rgb = image.pixel(x, y);
+
+        int r = qRed  (rgb);
+        int g = qGreen(rgb);
+        int b = qBlue (rgb);
+        int a = qAlpha(rgb)*opacity;
+
+        if (a > 0)
+          image1.setPixel(x, y, qRgba(r, g, b, a));
+      }
+    }
+
+    return image1;
+  }
 }
 
 //------
@@ -438,8 +474,10 @@ pathClip(CSVGRenderer *renderer)
   CQSVGRenderer *qrenderer = dynamic_cast<CQSVGRenderer *>(renderer);
 
   if (qrenderer) {
-    if (qrenderer->savePath_)
-      painter_->setClipPath(*qrenderer->savePath_);
+    if (! qrenderer->savePath_)
+      qrenderer->savePath_ = new QPainterPath;
+
+    painter_->setClipPath(*qrenderer->savePath_);
   }
   else
     painter_->setClipPath(*path_);
@@ -453,8 +491,10 @@ pathEoclip(CSVGRenderer *renderer)
   CQSVGRenderer *qrenderer = dynamic_cast<CQSVGRenderer *>(renderer);
 
   if (qrenderer) {
-    if (qrenderer->savePath_)
-      painter_->setClipPath(*qrenderer->savePath_);
+    if (! qrenderer->savePath_)
+      qrenderer->savePath_ = new QPainterPath;
+
+    painter_->setClipPath(*qrenderer->savePath_);
   }
   else
     painter_->setClipPath(*path_);
@@ -546,7 +586,7 @@ setLineDash(const CLineDash &dash)
   if (num > 0) {
     pen_.setStyle(Qt::CustomDashLine);
 
-    pen_.setDashOffset(dash.getOffset());
+    pen_.setDashOffset(dash.getOffset()/pen_.widthF());
 
     QVector<qreal> dashes;
 
@@ -850,6 +890,9 @@ combine(int ix, int iy, CSVGRenderer *r)
 
   QImage image2 = qr->getQImage();
 
+  if (qr->opacity() < 1)
+    image2 = opacityImage(image2, qr->opacity());
+
   if (w > iwidth1 || h > iheight1) {
     QImage image1 = getQImage();
     QImage image3 = createImage(w, h);
@@ -876,33 +919,51 @@ combineImage(QImage &image1, int x, int y, QImage &image2)
   int h = std::min(image1.height(), image2.height());
 
   for (int y1 = 0; y1 < h; ++y1) {
+    int y2 = y1 + y;
+
+    if (y2 < 0) continue;
+
     for (int x1 = 0; x1 < w; ++x1) {
+      int x2 = x1 + x;
+
+      if (x2 < 0) continue;
+
       CRGBA rgba1 = getPixel(image2, x1, y1);
 
       if (! rgba1.getAlphaI())
         continue;
 
-      CRGBA rgba2 = getPixel(image1, x1 + x, y1 + y);
+      CRGBA rgba2 = getPixel(image1, x2, y2);
 
-      CRGBA rgba = rgba2.combined(rgba1);
+      if (! rgba2.getAlphaI())
+        setPixel(image1, x2, y2, rgba1);
+      else {
+        CRGBA rgba = rgba2.combined(rgba1);
 
-      setPixel(image1, x1 + x, y1 + y, rgba);
+        setPixel(image1, x2, y2, rgba);
+      }
     }
   }
 }
 
 void
 CQSVGRenderer::
-addResizedImage(CSVGRenderer *src, int x, int y, int w, int h)
+addResizedImage(CSVGRenderer *src, double x, double y, double w, double h)
 {
   CQSVGRenderer *qsrc = dynamic_cast<CQSVGRenderer *>(src);
   assert(qsrc);
 
+  CPoint2D p;
+
+  lengthToPixel(CPoint2D(w, h), p);
+
   QImage qimage2 =
-    qsrc->qimage_.scaled(QSize(w, h), Qt::IgnoreAspectRatio, Qt::FastTransformation);
+    qsrc->qimage_.scaled(QSize(p.x, p.y), Qt::IgnoreAspectRatio, Qt::FastTransformation);
+
+  windowToPixel(CPoint2D(x, y), p);
 
   // TODO: handle out of bounds
-  combineImage(qimage_, x, y, qimage2);
+  combineImage(qimage_, p.x, p.y, qimage2);
 }
 
 void
@@ -956,33 +1017,26 @@ setOffsetImage(CSVGRenderer *src, int dx, int dy)
 
 void
 CQSVGRenderer::
-gaussianBlur(CSVGRenderer *dst, CBBox2D &bbox, double stdDev)
+gaussianBlur(CSVGRenderer *dst, CBBox2D &bbox, double stdDevX, double stdDevY)
 {
   CQSVGRenderer *qdst = dynamic_cast<CQSVGRenderer *>(dst);
   assert(qdst);
 
-#if 0
-  CImagePtr src_image = getImage();
-  CImagePtr dst_image = src_image->dup();
+  QImage src_image = qimage_;
 
-  if (bbox.isSet())
-    src_image->setWindow(bbox.getXMin(), bbox.getYMin(), bbox.getXMax(), bbox.getYMax());
+  if (isAlpha())
+    src_image = alphaImage(src_image, 0);
 
-  src_image->gaussianBlur(dst_image, stdDev, stdDev);
-
-  qdst->setImage(dst_image);
-#else
-  CQImageGaussianBlur blur(qimage_);
+  CQImageGaussianBlur blur(src_image);
 
   if (bbox.isSet())
     blur.setWindow(bbox.getXMin(), bbox.getYMin(), bbox.getXMax(), bbox.getYMax());
 
-  QImage oimage;
+  QImage dst_image;
 
-  blur.blur(oimage, stdDev, stdDev);
+  blur.blur(dst_image, stdDevX, stdDevY);
 
-  qdst->setQImage(oimage);
-#endif
+  qdst->setQImage(dst_image);
 }
 
 void

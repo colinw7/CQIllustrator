@@ -119,7 +119,7 @@ class CQSVGRenderer : public CSVGRenderer {
 
   void combine(int x, int y, CSVGRenderer *r) override;
 
-  void addResizedImage(CSVGRenderer *src, int x, int y, int w, int h) override;
+  void addResizedImage(CSVGRenderer *src, double x, double y, double w, double h) override;
 
   void addClippedImage(CSVGRenderer *src, int x, int y,
                        int px1, int py1, int px2, int py2) override;
@@ -128,7 +128,7 @@ class CQSVGRenderer : public CSVGRenderer {
 
   void setOffsetImage(CSVGRenderer *src, int dx, int dy) override;
 
-  void gaussianBlur(CSVGRenderer *dst, CBBox2D &bbox, double stdDev) override;
+  void gaussianBlur(CSVGRenderer *dst, CBBox2D &bbox, double stdDevX, double stdDevY) override;
 
   //---
 
