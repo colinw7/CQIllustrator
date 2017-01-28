@@ -77,7 +77,6 @@ CQSVGRenderer.cpp \
 CArcToBezier.cpp \
 CAxis2D.cpp \
 CBezierToLine.cpp \
-CCSS.cpp \
 CDelaunay.cpp \
 CEncode64.cpp \
 CGenPoly.cpp \
@@ -194,7 +193,6 @@ CQSVGRenderer.h \
 \
 CAxis2D.h \
 CBooleanOp.h \
-CCSS.h \
 CDelaunay.h \
 CEncode64.h \
 CGenPoly.h \
@@ -230,7 +228,6 @@ CQStrokeOptionDialog.h \
 CQStrokeOptionTool.h \
 CQSwatch.h \
 CQTableWidget.h \
-CQToolBar.h \
 CQuadTree.h \
 CQWinWidget.h \
 CStack.h \
@@ -244,11 +241,13 @@ LIB_DIR     = ../lib
 INCLUDEPATH += \
 ../include \
 ../../CSVG/include \
+../../CCSS/include \
 ../../CQPropertyTree/include \
 ../../CQUtil/include \
 ../../CImageLib/include \
 ../../CConfig/include \
 ../../CArgs/include \
+../../CFileUtil/include \
 ../../CFile/include \
 ../../CFont/include \
 ../../CRegExp/include \
