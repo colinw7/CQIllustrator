@@ -36,7 +36,7 @@ DISTNAME      = CQIllustrator1.0.0
 DISTDIR = /home/colinw/git/CQIllustrator/obj/CQIllustrator1.0.0
 LINK          = g++
 LFLAGS        = -m64
-LIBS          = $(SUBLIBS) -L/usr/X11R6/lib64 -L../lib -L../../CSVG/lib -L../../CQPropertyTree/lib -L../../CQUtil/lib -L../../CXML/lib -L../../CImageLib/lib -L../../CArgs/lib -L../../CConfig/lib -L../../CFont/lib -L../../CRegExp/lib -L../../CFile/lib -L../../CMath/lib -L../../CStrUtil/lib -L../../CRGBName/lib -L../../CUndo/lib -L../../CUtil/lib -L../../COS/lib -lCSVG -lCXML -lCQPropertyTree -lCQUtil -lCImageLib -lCFont -lCArgs -lCConfig -lCUndo -lCFile -lCRGBName -lCUtil -lCOS -lCRegExp -lCStrUtil -ljpeg -lpng -ltre -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
+LIBS          = $(SUBLIBS) -L/usr/X11R6/lib64 -L../lib -L../../CSVG/lib -L../../CQPropertyTree/lib -L../../CQUtil/lib -L../../CJavaScript/lib -L../../CCSS/lib -L../../CJson/lib -L../../CXML/lib -L../../CImageLib/lib -L../../CArgs/lib -L../../CConfig/lib -L../../CFont/lib -L../../CRegExp/lib -L../../CFile/lib -L../../CFileUtil/lib -L../../CMath/lib -L../../CStrUtil/lib -L../../CRGBName/lib -L../../CUndo/lib -L../../CUtil/lib -L../../COS/lib -lCSVG -lCJavaScript -lCCSS -lCJson -lCXML -lCQPropertyTree -lCQUtil -lCImageLib -lCFont -lCArgs -lCConfig -lCUndo -lCFile -lCFileUtil -lCMath -lCRGBName -lCUtil -lCOS -lCRegExp -lCStrUtil -ljpeg -lpng -ltre -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -106,18 +106,8 @@ SOURCES       = CQIllustratorAlignMode.cpp \
 		CQIllustratorUndoDock.cpp \
 		CQIllustratorZoomMode.cpp \
 		CQSVGRenderer.cpp \
-		CArcToBezier.cpp \
-		CAxis2D.cpp \
-		CBezierToLine.cpp \
-		CDelaunay.cpp \
-		CEncode64.cpp \
-		CGenPoly.cpp \
-		CGiftWrap.cpp \
-		CHull3D.cpp \
-		CKuhnMunkres.cpp \
-		CLog.cpp \
-		CMathGeom2D.cpp \
-		CPathShape.cpp \
+		CQSVGFontObj.cpp \
+		CQSVGImageData.cpp \
 		CQAccelerate.cpp \
 		CQAngleSpinBox.cpp \
 		CQFillOptionDialog.cpp \
@@ -143,7 +133,14 @@ SOURCES       = CQIllustratorAlignMode.cpp \
 		CQSwatch.cpp \
 		CQTableWidget.cpp \
 		CQWinWidget.cpp \
-		CTriangulate2D.cpp .moc/moc_CQIllustratorAlignMode.cpp \
+		CAxis2D.cpp \
+		CDelaunay.cpp \
+		CEncode64.cpp \
+		CGenPoly.cpp \
+		CHull3D.cpp \
+		CKuhnMunkres.cpp \
+		CLog.cpp \
+		CPathShape.cpp .moc/moc_CQIllustratorAlignMode.cpp \
 		.moc/moc_CQIllustratorCanvas.cpp \
 		.moc/moc_CQIllustratorCreateEllipseMode.cpp \
 		.moc/moc_CQIllustratorCreatePathMode.cpp \
@@ -264,18 +261,8 @@ OBJECTS       = ../obj/CQIllustratorAlignMode.o \
 		../obj/CQIllustratorUndoDock.o \
 		../obj/CQIllustratorZoomMode.o \
 		../obj/CQSVGRenderer.o \
-		../obj/CArcToBezier.o \
-		../obj/CAxis2D.o \
-		../obj/CBezierToLine.o \
-		../obj/CDelaunay.o \
-		../obj/CEncode64.o \
-		../obj/CGenPoly.o \
-		../obj/CGiftWrap.o \
-		../obj/CHull3D.o \
-		../obj/CKuhnMunkres.o \
-		../obj/CLog.o \
-		../obj/CMathGeom2D.o \
-		../obj/CPathShape.o \
+		../obj/CQSVGFontObj.o \
+		../obj/CQSVGImageData.o \
 		../obj/CQAccelerate.o \
 		../obj/CQAngleSpinBox.o \
 		../obj/CQFillOptionDialog.o \
@@ -301,7 +288,14 @@ OBJECTS       = ../obj/CQIllustratorAlignMode.o \
 		../obj/CQSwatch.o \
 		../obj/CQTableWidget.o \
 		../obj/CQWinWidget.o \
-		../obj/CTriangulate2D.o \
+		../obj/CAxis2D.o \
+		../obj/CDelaunay.o \
+		../obj/CEncode64.o \
+		../obj/CGenPoly.o \
+		../obj/CHull3D.o \
+		../obj/CKuhnMunkres.o \
+		../obj/CLog.o \
+		../obj/CPathShape.o \
 		../obj/moc_CQIllustratorAlignMode.o \
 		../obj/moc_CQIllustratorCanvas.o \
 		../obj/moc_CQIllustratorCreateEllipseMode.o \
@@ -503,18 +497,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		CQIllustratorUtil.h \
 		CQIllustratorZoomMode.h \
 		CQSVGRenderer.h \
-		CAxis2D.h \
-		CBooleanOp.h \
-		CDelaunay.h \
-		CEncode64.h \
-		CGenPoly.h \
-		CHull3D.h \
-		CKuhnMunkres.h \
-		CListLink.h \
-		CLog.h \
-		CMathGeom2D.h \
-		CPathPartType.h \
-		CPathShape.h \
+		CQSVGFontObj.h \
+		CQSVGImageData.h \
 		CQAccelerate.h \
 		CQAngleSpinBox.h \
 		CQDockWidget.h \
@@ -542,9 +526,17 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		CQTableWidget.h \
 		CQuadTree.h \
 		CQWinWidget.h \
-		CStack.h \
-		CStateIterator.h \
-		CTriangulate2D.h CQIllustratorAlignMode.cpp \
+		CAxis2D.h \
+		CBooleanOp.h \
+		CDelaunay.h \
+		CEncode64.h \
+		CGenPoly.h \
+		CHull3D.h \
+		CKuhnMunkres.h \
+		CLog.h \
+		CPathPartType.h \
+		CPathShape.h \
+		CStack.h CQIllustratorAlignMode.cpp \
 		CQIllustratorCanvas.cpp \
 		CQIllustratorCmd.cpp \
 		CQIllustrator.cpp \
@@ -602,18 +594,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		CQIllustratorUndoDock.cpp \
 		CQIllustratorZoomMode.cpp \
 		CQSVGRenderer.cpp \
-		CArcToBezier.cpp \
-		CAxis2D.cpp \
-		CBezierToLine.cpp \
-		CDelaunay.cpp \
-		CEncode64.cpp \
-		CGenPoly.cpp \
-		CGiftWrap.cpp \
-		CHull3D.cpp \
-		CKuhnMunkres.cpp \
-		CLog.cpp \
-		CMathGeom2D.cpp \
-		CPathShape.cpp \
+		CQSVGFontObj.cpp \
+		CQSVGImageData.cpp \
 		CQAccelerate.cpp \
 		CQAngleSpinBox.cpp \
 		CQFillOptionDialog.cpp \
@@ -639,7 +621,14 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		CQSwatch.cpp \
 		CQTableWidget.cpp \
 		CQWinWidget.cpp \
-		CTriangulate2D.cpp
+		CAxis2D.cpp \
+		CDelaunay.cpp \
+		CEncode64.cpp \
+		CGenPoly.cpp \
+		CHull3D.cpp \
+		CKuhnMunkres.cpp \
+		CLog.cpp \
+		CPathShape.cpp
 QMAKE_TARGET  = CQIllustrator
 DESTDIR       = ../bin/#avoid trailing-slash linebreak
 TARGET        = ../bin/CQIllustrator
@@ -820,8 +809,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents CQIllustratorAlignMode.h CQIllustratorCanvas.h CQIllustratorCmd.h CQIllustratorCreateEllipseMode.h CQIllustratorCreatePathMode.h CQIllustratorCreatePolygonMode.h CQIllustratorCreateRectMode.h CQIllustratorCreateStarMode.h CQIllustratorCreateTextMode.h CQIllustratorCreateTextToolbar.h CQIllustratorData.h CQIllustratorEllipseGeometry.h CQIllustratorEllipseShape.h CQIllustratorGrid.h CQIllustratorGroupGeometry.h CQIllustratorGroupShape.h CQIllustrator.h CQIllustratorHandle.h CQIllustratorImageFill.h CQIllustratorInfo.h CQIllustratorInfoTip.h CQIllustratorLayer.h CQIllustratorMode.h CQIllustratorNPolyGeometry.h CQIllustratorNPolyShape.h CQIllustratorOffsetPathMode.h CQIllustratorPanMode.h CQIllustratorPathGeometry.h CQIllustratorPathShapeControlLine.h CQIllustratorPathShapeControlPoint.h CQIllustratorPathShape.h CQIllustratorPointSelectMode.h CQIllustratorPolygonGeometry.h CQIllustratorPolygonShape.h CQIllustratorPreference.h CQIllustratorPropertiesDlg.h CQIllustratorQuadTree.h CQIllustratorRectGeometry.h CQIllustratorRectShape.h CQIllustratorSandbox.h CQIllustratorSaveData.h CQIllustratorSelection.h CQIllustratorSelectMode.h CQIllustratorSetAnchorObjectMode.h CQIllustratorSetAnchorPositionMode.h CQIllustratorSetImageMode.h CQIllustratorSetLGradientMode.h CQIllustratorSetRGradientMode.h CQIllustratorShapeControlLine.h CQIllustratorShapeControlPoint.h CQIllustratorShapeDrawer.h CQIllustratorShapeFill.h CQIllustratorShapeFilter.h CQIllustratorShapeGaussianFilter.h CQIllustratorShapeGeometry.h CQIllustratorShape.h CQIllustratorShapeLGradientControlPoint.h CQIllustratorShapeNearestPoint2D.h CQIllustratorShapeRGradientControlPoint.h CQIllustratorShapeStroke.h CQIllustratorSizer.h CQIllustratorSliceMode.h CQIllustratorSnapDock.h CQIllustratorSnap.h CQIllustratorStarGeometry.h CQIllustratorStarShape.h CQIllustratorTextGeometry.h CQIllustratorTextShape.h CQIllustratorToolbar.h CQIllustratorTransformMode.h CQIllustratorUndoDock.h CQIllustratorUndo.h CQIllustratorUtil.h CQIllustratorZoomMode.h CQSVGRenderer.h CAxis2D.h CBooleanOp.h CDelaunay.h CEncode64.h CGenPoly.h CHull3D.h CKuhnMunkres.h CListLink.h CLog.h CMathGeom2D.h CPathPartType.h CPathShape.h CQAccelerate.h CQAngleSpinBox.h CQDockWidget.h CQFillOptionDialog.h CQFillOptionTool.h CQFontOptionDialog.h CQFontOptionTool.h CQGradientStopList.h CQImageButton.h CQImagePreview.h CQLayerOption.h CQLineCap.h CQLineDash.h CQLineJoin.h CQMatrix2D.h CQObjectOption.h CQOptionToolSet.h CQPointEdit.h CQPropertiesOption.h CQRadioButtons.h CQScrollArea.h CQStrokeOptionDialog.h CQStrokeOptionTool.h CQSwatch.h CQTableWidget.h CQuadTree.h CQWinWidget.h CStack.h CStateIterator.h CTriangulate2D.h $(DISTDIR)/
-	$(COPY_FILE) --parents CQIllustratorAlignMode.cpp CQIllustratorCanvas.cpp CQIllustratorCmd.cpp CQIllustrator.cpp CQIllustratorCreateEllipseMode.cpp CQIllustratorCreatePathMode.cpp CQIllustratorCreatePolygonMode.cpp CQIllustratorCreateRectMode.cpp CQIllustratorCreateStarMode.cpp CQIllustratorCreateTextMode.cpp CQIllustratorCreateTextToolbar.cpp CQIllustratorData.cpp CQIllustratorEllipseShape.cpp CQIllustratorGroupShape.cpp CQIllustratorHandle.cpp CQIllustratorImageFill.cpp CQIllustratorInfo.cpp CQIllustratorLayer.cpp CQIllustratorMode.cpp CQIllustratorNPolyShape.cpp CQIllustratorOffsetPathMode.cpp CQIllustratorPanMode.cpp CQIllustratorPathShapeControlLine.cpp CQIllustratorPathShapeControlPoint.cpp CQIllustratorPathShape.cpp CQIllustratorPointSelectMode.cpp CQIllustratorPolygonShape.cpp CQIllustratorPreference.cpp CQIllustratorPropertiesDlg.cpp CQIllustratorRectShape.cpp CQIllustratorSandbox.cpp CQIllustratorSelection.cpp CQIllustratorSelectMode.cpp CQIllustratorSetAnchorObjectMode.cpp CQIllustratorSetAnchorPositionMode.cpp CQIllustratorSetImageMode.cpp CQIllustratorSetLGradientMode.cpp CQIllustratorSetRGradientMode.cpp CQIllustratorShapeControlLine.cpp CQIllustratorShapeControlPoint.cpp CQIllustratorShape.cpp CQIllustratorShapeDrawer.cpp CQIllustratorShapeFill.cpp CQIllustratorShapeFilter.cpp CQIllustratorShapeLGradientControlPoint.cpp CQIllustratorShapeRGradientControlPoint.cpp CQIllustratorShapeStroke.cpp CQIllustratorSizer.cpp CQIllustratorSliceMode.cpp CQIllustratorSnapDock.cpp CQIllustratorStarShape.cpp CQIllustratorTextShape.cpp CQIllustratorToolbar.cpp CQIllustratorTransformMode.cpp CQIllustratorUndo.cpp CQIllustratorUndoDock.cpp CQIllustratorZoomMode.cpp CQSVGRenderer.cpp CArcToBezier.cpp CAxis2D.cpp CBezierToLine.cpp CDelaunay.cpp CEncode64.cpp CGenPoly.cpp CGiftWrap.cpp CHull3D.cpp CKuhnMunkres.cpp CLog.cpp CMathGeom2D.cpp CPathShape.cpp CQAccelerate.cpp CQAngleSpinBox.cpp CQFillOptionDialog.cpp CQFillOptionTool.cpp CQFontOptionDialog.cpp CQFontOptionTool.cpp CQGradientStopList.cpp CQImageButton.cpp CQImagePreview.cpp CQLayerOption.cpp CQLineCap.cpp CQLineDash.cpp CQLineJoin.cpp CQMatrix2D.cpp CQObjectOption.cpp CQOptionToolSet.cpp CQPointEdit.cpp CQPropertiesOption.cpp CQRadioButtons.cpp CQScrollArea.cpp CQStrokeOptionDialog.cpp CQStrokeOptionTool.cpp CQSwatch.cpp CQTableWidget.cpp CQWinWidget.cpp CTriangulate2D.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents CQIllustratorAlignMode.h CQIllustratorCanvas.h CQIllustratorCmd.h CQIllustratorCreateEllipseMode.h CQIllustratorCreatePathMode.h CQIllustratorCreatePolygonMode.h CQIllustratorCreateRectMode.h CQIllustratorCreateStarMode.h CQIllustratorCreateTextMode.h CQIllustratorCreateTextToolbar.h CQIllustratorData.h CQIllustratorEllipseGeometry.h CQIllustratorEllipseShape.h CQIllustratorGrid.h CQIllustratorGroupGeometry.h CQIllustratorGroupShape.h CQIllustrator.h CQIllustratorHandle.h CQIllustratorImageFill.h CQIllustratorInfo.h CQIllustratorInfoTip.h CQIllustratorLayer.h CQIllustratorMode.h CQIllustratorNPolyGeometry.h CQIllustratorNPolyShape.h CQIllustratorOffsetPathMode.h CQIllustratorPanMode.h CQIllustratorPathGeometry.h CQIllustratorPathShapeControlLine.h CQIllustratorPathShapeControlPoint.h CQIllustratorPathShape.h CQIllustratorPointSelectMode.h CQIllustratorPolygonGeometry.h CQIllustratorPolygonShape.h CQIllustratorPreference.h CQIllustratorPropertiesDlg.h CQIllustratorQuadTree.h CQIllustratorRectGeometry.h CQIllustratorRectShape.h CQIllustratorSandbox.h CQIllustratorSaveData.h CQIllustratorSelection.h CQIllustratorSelectMode.h CQIllustratorSetAnchorObjectMode.h CQIllustratorSetAnchorPositionMode.h CQIllustratorSetImageMode.h CQIllustratorSetLGradientMode.h CQIllustratorSetRGradientMode.h CQIllustratorShapeControlLine.h CQIllustratorShapeControlPoint.h CQIllustratorShapeDrawer.h CQIllustratorShapeFill.h CQIllustratorShapeFilter.h CQIllustratorShapeGaussianFilter.h CQIllustratorShapeGeometry.h CQIllustratorShape.h CQIllustratorShapeLGradientControlPoint.h CQIllustratorShapeNearestPoint2D.h CQIllustratorShapeRGradientControlPoint.h CQIllustratorShapeStroke.h CQIllustratorSizer.h CQIllustratorSliceMode.h CQIllustratorSnapDock.h CQIllustratorSnap.h CQIllustratorStarGeometry.h CQIllustratorStarShape.h CQIllustratorTextGeometry.h CQIllustratorTextShape.h CQIllustratorToolbar.h CQIllustratorTransformMode.h CQIllustratorUndoDock.h CQIllustratorUndo.h CQIllustratorUtil.h CQIllustratorZoomMode.h CQSVGRenderer.h CQSVGFontObj.h CQSVGImageData.h CQAccelerate.h CQAngleSpinBox.h CQDockWidget.h CQFillOptionDialog.h CQFillOptionTool.h CQFontOptionDialog.h CQFontOptionTool.h CQGradientStopList.h CQImageButton.h CQImagePreview.h CQLayerOption.h CQLineCap.h CQLineDash.h CQLineJoin.h CQMatrix2D.h CQObjectOption.h CQOptionToolSet.h CQPointEdit.h CQPropertiesOption.h CQRadioButtons.h CQScrollArea.h CQStrokeOptionDialog.h CQStrokeOptionTool.h CQSwatch.h CQTableWidget.h CQuadTree.h CQWinWidget.h CAxis2D.h CBooleanOp.h CDelaunay.h CEncode64.h CGenPoly.h CHull3D.h CKuhnMunkres.h CLog.h CPathPartType.h CPathShape.h CStack.h $(DISTDIR)/
+	$(COPY_FILE) --parents CQIllustratorAlignMode.cpp CQIllustratorCanvas.cpp CQIllustratorCmd.cpp CQIllustrator.cpp CQIllustratorCreateEllipseMode.cpp CQIllustratorCreatePathMode.cpp CQIllustratorCreatePolygonMode.cpp CQIllustratorCreateRectMode.cpp CQIllustratorCreateStarMode.cpp CQIllustratorCreateTextMode.cpp CQIllustratorCreateTextToolbar.cpp CQIllustratorData.cpp CQIllustratorEllipseShape.cpp CQIllustratorGroupShape.cpp CQIllustratorHandle.cpp CQIllustratorImageFill.cpp CQIllustratorInfo.cpp CQIllustratorLayer.cpp CQIllustratorMode.cpp CQIllustratorNPolyShape.cpp CQIllustratorOffsetPathMode.cpp CQIllustratorPanMode.cpp CQIllustratorPathShapeControlLine.cpp CQIllustratorPathShapeControlPoint.cpp CQIllustratorPathShape.cpp CQIllustratorPointSelectMode.cpp CQIllustratorPolygonShape.cpp CQIllustratorPreference.cpp CQIllustratorPropertiesDlg.cpp CQIllustratorRectShape.cpp CQIllustratorSandbox.cpp CQIllustratorSelection.cpp CQIllustratorSelectMode.cpp CQIllustratorSetAnchorObjectMode.cpp CQIllustratorSetAnchorPositionMode.cpp CQIllustratorSetImageMode.cpp CQIllustratorSetLGradientMode.cpp CQIllustratorSetRGradientMode.cpp CQIllustratorShapeControlLine.cpp CQIllustratorShapeControlPoint.cpp CQIllustratorShape.cpp CQIllustratorShapeDrawer.cpp CQIllustratorShapeFill.cpp CQIllustratorShapeFilter.cpp CQIllustratorShapeLGradientControlPoint.cpp CQIllustratorShapeRGradientControlPoint.cpp CQIllustratorShapeStroke.cpp CQIllustratorSizer.cpp CQIllustratorSliceMode.cpp CQIllustratorSnapDock.cpp CQIllustratorStarShape.cpp CQIllustratorTextShape.cpp CQIllustratorToolbar.cpp CQIllustratorTransformMode.cpp CQIllustratorUndo.cpp CQIllustratorUndoDock.cpp CQIllustratorZoomMode.cpp CQSVGRenderer.cpp CQSVGFontObj.cpp CQSVGImageData.cpp CQAccelerate.cpp CQAngleSpinBox.cpp CQFillOptionDialog.cpp CQFillOptionTool.cpp CQFontOptionDialog.cpp CQFontOptionTool.cpp CQGradientStopList.cpp CQImageButton.cpp CQImagePreview.cpp CQLayerOption.cpp CQLineCap.cpp CQLineDash.cpp CQLineJoin.cpp CQMatrix2D.cpp CQObjectOption.cpp CQOptionToolSet.cpp CQPointEdit.cpp CQPropertiesOption.cpp CQRadioButtons.cpp CQScrollArea.cpp CQStrokeOptionDialog.cpp CQStrokeOptionTool.cpp CQSwatch.cpp CQTableWidget.cpp CQWinWidget.cpp CAxis2D.cpp CDelaunay.cpp CEncode64.cpp CGenPoly.cpp CHull3D.cpp CKuhnMunkres.cpp CLog.cpp CPathShape.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -852,7 +841,6 @@ compiler_moc_header_clean:
 		../../CQUtil/include/CQMainWindow.h \
 		../../CUtil/include/CAutoPtr.h \
 		../../CMath/include/CPoint2D.h \
-		../../CMath/include/CIPoint2D.h \
 		../../CImageLib/include/CImageLib.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -868,6 +856,7 @@ compiler_moc_header_clean:
 		../../CUtil/include/CHSI.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
+		../../CMath/include/CIPoint2D.h \
 		../../CRGBName/include/CRGBName.h \
 		../../CUtil/include/CColorComponent.h \
 		../../CImageLib/include/CImageState.h \
@@ -899,13 +888,13 @@ compiler_moc_header_clean:
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -940,13 +929,13 @@ compiler_moc_header_clean:
 		CQIllustratorAlignMode.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/colinw/git/CQIllustrator/src -I/home/colinw/git/CQIllustrator/include -I/home/colinw/git/CSVG/include -I/home/colinw/git/CCSS/include -I/home/colinw/git/CQPropertyTree/include -I/home/colinw/git/CQUtil/include -I/home/colinw/git/CImageLib/include -I/home/colinw/git/CConfig/include -I/home/colinw/git/CArgs/include -I/home/colinw/git/CFileUtil/include -I/home/colinw/git/CFile/include -I/home/colinw/git/CFont/include -I/home/colinw/git/CRegExp/include -I/home/colinw/git/CStrUtil/include -I/home/colinw/git/COS/include -I/home/colinw/git/CMath/include -I/home/colinw/git/CRGBName/include -I/home/colinw/git/CUndo/include -I/home/colinw/git/CUtil/include -I/home/colinw/git/CQIllustrator/src -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include CQIllustratorAlignMode.h -o .moc/moc_CQIllustratorAlignMode.cpp
 
-.moc/moc_CQIllustratorCanvas.cpp: ../../CMath/include/CDisplayRange2D.h \
+.moc/moc_CQIllustratorCanvas.cpp: CDisplayRange2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
+		../../CMath/include/CIPoint2D.h \
 		../../CMath/include/CMatrix2D.h \
 		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CPoint2D.h \
-		../../CMath/include/CIPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
@@ -976,13 +965,13 @@ compiler_moc_header_clean:
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -1058,13 +1047,13 @@ compiler_moc_header_clean:
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -1139,13 +1128,13 @@ compiler_moc_header_clean:
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -1220,13 +1209,13 @@ compiler_moc_header_clean:
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -1301,13 +1290,13 @@ compiler_moc_header_clean:
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -1382,13 +1371,13 @@ compiler_moc_header_clean:
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -1449,8 +1438,8 @@ compiler_moc_header_clean:
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
-		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CIPoint2D.h \
+		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
@@ -1462,8 +1451,8 @@ compiler_moc_header_clean:
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
-		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CIPoint2D.h \
+		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
@@ -1476,21 +1465,21 @@ compiler_moc_header_clean:
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
-		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CIPoint2D.h \
+		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -1553,21 +1542,21 @@ compiler_moc_header_clean:
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
-		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CIPoint2D.h \
+		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -1628,7 +1617,6 @@ compiler_moc_header_clean:
 .moc/moc_CQIllustrator.cpp: ../../CQUtil/include/CQMainWindow.h \
 		../../CUtil/include/CAutoPtr.h \
 		../../CMath/include/CPoint2D.h \
-		../../CMath/include/CIPoint2D.h \
 		../../CImageLib/include/CImageLib.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -1644,6 +1632,7 @@ compiler_moc_header_clean:
 		../../CUtil/include/CHSI.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
+		../../CMath/include/CIPoint2D.h \
 		../../CRGBName/include/CRGBName.h \
 		../../CUtil/include/CColorComponent.h \
 		../../CImageLib/include/CImageState.h \
@@ -1675,13 +1664,13 @@ compiler_moc_header_clean:
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -1723,8 +1712,8 @@ compiler_moc_header_clean:
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
-		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CIPoint2D.h \
+		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
@@ -1750,13 +1739,13 @@ compiler_moc_header_clean:
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -1816,21 +1805,21 @@ compiler_moc_header_clean:
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
-		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CIPoint2D.h \
+		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -1907,13 +1896,13 @@ compiler_moc_header_clean:
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -1988,13 +1977,13 @@ compiler_moc_header_clean:
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -2055,21 +2044,21 @@ compiler_moc_header_clean:
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
-		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CIPoint2D.h \
+		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -2146,13 +2135,13 @@ compiler_moc_header_clean:
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -2213,21 +2202,21 @@ compiler_moc_header_clean:
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
-		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CIPoint2D.h \
+		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -2296,21 +2285,21 @@ compiler_moc_header_clean:
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
-		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CIPoint2D.h \
+		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -2373,21 +2362,21 @@ compiler_moc_header_clean:
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
-		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CIPoint2D.h \
+		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -2465,13 +2454,13 @@ compiler_moc_header_clean:
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -2548,13 +2537,13 @@ compiler_moc_header_clean:
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -2640,13 +2629,13 @@ compiler_moc_header_clean:
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -2732,13 +2721,13 @@ compiler_moc_header_clean:
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -2808,21 +2797,21 @@ compiler_moc_header_clean:
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
-		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CIPoint2D.h \
+		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -2899,13 +2888,13 @@ compiler_moc_header_clean:
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -2969,21 +2958,21 @@ compiler_moc_header_clean:
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
-		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CIPoint2D.h \
+		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -3046,21 +3035,21 @@ compiler_moc_header_clean:
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
-		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CIPoint2D.h \
+		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -3125,7 +3114,6 @@ compiler_moc_header_clean:
 		../../CQUtil/include/CQMainWindow.h \
 		../../CUtil/include/CAutoPtr.h \
 		../../CMath/include/CPoint2D.h \
-		../../CMath/include/CIPoint2D.h \
 		../../CImageLib/include/CImageLib.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -3141,6 +3129,7 @@ compiler_moc_header_clean:
 		../../CUtil/include/CHSI.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
+		../../CMath/include/CIPoint2D.h \
 		../../CRGBName/include/CRGBName.h \
 		../../CUtil/include/CColorComponent.h \
 		../../CImageLib/include/CImageState.h \
@@ -3172,13 +3161,13 @@ compiler_moc_header_clean:
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -3218,12 +3207,12 @@ compiler_moc_header_clean:
 
 .moc/moc_CQIllustratorUndo.cpp: ../../CUndo/include/CUndo.h \
 		../../CMath/include/CPoint2D.h \
-		../../CMath/include/CIPoint2D.h \
 		CQIllustratorData.h \
 		CStack.h \
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
+		../../CMath/include/CIPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
@@ -3233,13 +3222,13 @@ compiler_moc_header_clean:
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -3313,13 +3302,13 @@ compiler_moc_header_clean:
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -3399,10 +3388,10 @@ compiler_moc_header_clean:
 		../../CUtil/include/CHSI.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
+		../../CMath/include/CIPoint2D.h \
 		../../CRGBName/include/CRGBName.h \
 		../../CUtil/include/CColorComponent.h \
 		../../CMath/include/CPoint2D.h \
-		../../CMath/include/CIPoint2D.h \
 		CQFillOptionDialog.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/colinw/git/CQIllustrator/src -I/home/colinw/git/CQIllustrator/include -I/home/colinw/git/CSVG/include -I/home/colinw/git/CCSS/include -I/home/colinw/git/CQPropertyTree/include -I/home/colinw/git/CQUtil/include -I/home/colinw/git/CImageLib/include -I/home/colinw/git/CConfig/include -I/home/colinw/git/CArgs/include -I/home/colinw/git/CFileUtil/include -I/home/colinw/git/CFile/include -I/home/colinw/git/CFont/include -I/home/colinw/git/CRegExp/include -I/home/colinw/git/CStrUtil/include -I/home/colinw/git/COS/include -I/home/colinw/git/CMath/include -I/home/colinw/git/CRGBName/include -I/home/colinw/git/CUndo/include -I/home/colinw/git/CUtil/include -I/home/colinw/git/CQIllustrator/src -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include CQFillOptionDialog.h -o .moc/moc_CQFillOptionDialog.cpp
 
@@ -3413,21 +3402,21 @@ compiler_moc_header_clean:
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
-		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CIPoint2D.h \
+		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -3507,6 +3496,7 @@ compiler_moc_header_clean:
 		../../CUtil/include/CHSI.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
+		../../CMath/include/CIPoint2D.h \
 		../../CRGBName/include/CRGBName.h \
 		../../CUtil/include/CColorComponent.h \
 		CQGradientStopList.h
@@ -3527,6 +3517,7 @@ compiler_moc_header_clean:
 		../../CUtil/include/CHSI.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
+		../../CMath/include/CIPoint2D.h \
 		../../CRGBName/include/CRGBName.h \
 		../../CUtil/include/CColorComponent.h \
 		../../CImageLib/include/CImageState.h \
@@ -3534,7 +3525,6 @@ compiler_moc_header_clean:
 		../../CUtil/include/CRGBACombineDef.h \
 		../../CMath/include/CISize2D.h \
 		../../CMath/include/CIBBox2D.h \
-		../../CMath/include/CIPoint2D.h \
 		../../CMath/include/CIVector2D.h \
 		../../CUtil/include/COptVal.h \
 		../../CImageLib/include/CImagePtr.h \
@@ -3561,6 +3551,7 @@ compiler_moc_header_clean:
 		../../CUtil/include/CHSI.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
+		../../CMath/include/CIPoint2D.h \
 		../../CRGBName/include/CRGBName.h \
 		../../CUtil/include/CColorComponent.h \
 		../../CImageLib/include/CImageState.h \
@@ -3568,7 +3559,6 @@ compiler_moc_header_clean:
 		../../CUtil/include/CRGBACombineDef.h \
 		../../CMath/include/CISize2D.h \
 		../../CMath/include/CIBBox2D.h \
-		../../CMath/include/CIPoint2D.h \
 		../../CMath/include/CIVector2D.h \
 		../../CUtil/include/COptVal.h \
 		../../CImageLib/include/CImagePtr.h \
@@ -3601,9 +3591,9 @@ compiler_moc_header_clean:
 .moc/moc_CQMatrix2D.cpp: ../../CMath/include/CMatrix2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
+		../../CMath/include/CIPoint2D.h \
 		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CPoint2D.h \
-		../../CMath/include/CIPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
@@ -3620,7 +3610,6 @@ compiler_moc_header_clean:
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/colinw/git/CQIllustrator/src -I/home/colinw/git/CQIllustrator/include -I/home/colinw/git/CSVG/include -I/home/colinw/git/CCSS/include -I/home/colinw/git/CQPropertyTree/include -I/home/colinw/git/CQUtil/include -I/home/colinw/git/CImageLib/include -I/home/colinw/git/CConfig/include -I/home/colinw/git/CArgs/include -I/home/colinw/git/CFileUtil/include -I/home/colinw/git/CFile/include -I/home/colinw/git/CFont/include -I/home/colinw/git/CRegExp/include -I/home/colinw/git/CStrUtil/include -I/home/colinw/git/COS/include -I/home/colinw/git/CMath/include -I/home/colinw/git/CRGBName/include -I/home/colinw/git/CUndo/include -I/home/colinw/git/CUtil/include -I/home/colinw/git/CQIllustrator/src -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include CQOptionToolSet.h -o .moc/moc_CQOptionToolSet.cpp
 
 .moc/moc_CQPointEdit.cpp: ../../CMath/include/CPoint2D.h \
-		../../CMath/include/CIPoint2D.h \
 		CQPointEdit.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/colinw/git/CQIllustrator/src -I/home/colinw/git/CQIllustrator/include -I/home/colinw/git/CSVG/include -I/home/colinw/git/CCSS/include -I/home/colinw/git/CQPropertyTree/include -I/home/colinw/git/CQUtil/include -I/home/colinw/git/CImageLib/include -I/home/colinw/git/CConfig/include -I/home/colinw/git/CArgs/include -I/home/colinw/git/CFileUtil/include -I/home/colinw/git/CFile/include -I/home/colinw/git/CFont/include -I/home/colinw/git/CRegExp/include -I/home/colinw/git/CStrUtil/include -I/home/colinw/git/COS/include -I/home/colinw/git/CMath/include -I/home/colinw/git/CRGBName/include -I/home/colinw/git/CUndo/include -I/home/colinw/git/CUtil/include -I/home/colinw/git/CQIllustrator/src -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include CQPointEdit.h -o .moc/moc_CQPointEdit.cpp
 
@@ -3628,26 +3617,26 @@ compiler_moc_header_clean:
 		CQWinWidget.h \
 		CQPointEdit.h \
 		../../CMath/include/CPoint2D.h \
-		../../CMath/include/CIPoint2D.h \
 		CQTableWidget.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
+		../../CMath/include/CIPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -3720,21 +3709,21 @@ compiler_moc_header_clean:
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
-		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CIPoint2D.h \
+		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -3799,21 +3788,21 @@ compiler_moc_header_clean:
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
-		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CIPoint2D.h \
+		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -3894,7 +3883,6 @@ compiler_clean: compiler_moc_header_clean
 		../../CQUtil/include/CQMainWindow.h \
 		../../CUtil/include/CAutoPtr.h \
 		../../CMath/include/CPoint2D.h \
-		../../CMath/include/CIPoint2D.h \
 		../../CImageLib/include/CImageLib.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -3910,6 +3898,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CHSI.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
+		../../CMath/include/CIPoint2D.h \
 		../../CRGBName/include/CRGBName.h \
 		../../CUtil/include/CColorComponent.h \
 		../../CImageLib/include/CImageState.h \
@@ -3941,13 +3930,13 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -4009,13 +3998,13 @@ compiler_clean: compiler_moc_header_clean
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CQIllustratorAlignMode.o CQIllustratorAlignMode.cpp
 
 ../obj/CQIllustratorCanvas.o: CQIllustratorCanvas.cpp CQIllustratorCanvas.h \
-		../../CMath/include/CDisplayRange2D.h \
+		CDisplayRange2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
+		../../CMath/include/CIPoint2D.h \
 		../../CMath/include/CMatrix2D.h \
 		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CPoint2D.h \
-		../../CMath/include/CIPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
@@ -4066,13 +4055,13 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CUtil/include/CLineDash.h \
@@ -4112,7 +4101,6 @@ compiler_clean: compiler_moc_header_clean
 		../../CQUtil/include/CQMainWindow.h \
 		../../CUtil/include/CAutoPtr.h \
 		../../CMath/include/CPoint2D.h \
-		../../CMath/include/CIPoint2D.h \
 		../../CImageLib/include/CImageLib.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -4128,6 +4116,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CHSI.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
+		../../CMath/include/CIPoint2D.h \
 		../../CRGBName/include/CRGBName.h \
 		../../CUtil/include/CColorComponent.h \
 		../../CImageLib/include/CImageState.h \
@@ -4159,13 +4148,13 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -4202,7 +4191,6 @@ compiler_clean: compiler_moc_header_clean
 		../../CQUtil/include/CQMainWindow.h \
 		../../CUtil/include/CAutoPtr.h \
 		../../CMath/include/CPoint2D.h \
-		../../CMath/include/CIPoint2D.h \
 		../../CImageLib/include/CImageLib.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -4218,6 +4206,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CHSI.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
+		../../CMath/include/CIPoint2D.h \
 		../../CRGBName/include/CRGBName.h \
 		../../CUtil/include/CColorComponent.h \
 		../../CImageLib/include/CImageState.h \
@@ -4249,13 +4238,13 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -4296,7 +4285,7 @@ compiler_clean: compiler_moc_header_clean
 		CQIllustratorTextShape.h \
 		CQIllustratorShapeControlLine.h \
 		CQIllustratorCanvas.h \
-		../../CMath/include/CDisplayRange2D.h \
+		CDisplayRange2D.h \
 		CQIllustratorAlignMode.h \
 		CQIllustratorToolbar.h \
 		CQIllustratorTransformMode.h \
@@ -4393,16 +4382,15 @@ compiler_clean: compiler_moc_header_clean
 		../../CSVG/include/CSVG.h \
 		../../CSVG/include/CSVGBlock.h \
 		../../CSVG/include/CSVGBlockData.h \
-		../../CSVG/include/CSVGCSSData.h \
-		../../CSVG/include/CSVGStyleData.h \
 		../../CSVG/include/CSVGOrient.h \
 		../../CCSS/include/CCSS.h \
+		../../CCSS/include/CCSSTagData.h \
 		CGenPoly.h \
 		../../CFileUtil/include/CFileUtil.h \
 		CAxis2D.h \
 		CQAccelerate.h \
-		CTriangulate2D.h \
-		CListLink.h \
+		../../CMath/include/CTriangulate2D.h \
+		../../CUtil/include/CListLink.h \
 		../../CMath/include/CGiftWrap.h \
 		CDelaunay.h \
 		CHull3D.h \
@@ -4446,13 +4434,13 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -4557,13 +4545,13 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -4681,13 +4669,13 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -4798,13 +4786,13 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -4908,13 +4896,13 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -5024,13 +5012,13 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -5117,8 +5105,8 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
-		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CIPoint2D.h \
+		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
@@ -5135,13 +5123,13 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -5229,8 +5217,8 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
-		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CIPoint2D.h \
+		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
@@ -5240,13 +5228,13 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -5306,21 +5294,21 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
-		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CIPoint2D.h \
+		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -5386,21 +5374,21 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
-		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CIPoint2D.h \
+		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -5511,13 +5499,13 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -5564,13 +5552,13 @@ compiler_clean: compiler_moc_header_clean
 
 ../obj/CQIllustratorInfo.o: CQIllustratorInfo.cpp CQIllustratorInfo.h \
 		CQIllustratorCanvas.h \
-		../../CMath/include/CDisplayRange2D.h \
+		CDisplayRange2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
+		../../CMath/include/CIPoint2D.h \
 		../../CMath/include/CMatrix2D.h \
 		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CPoint2D.h \
-		../../CMath/include/CIPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
@@ -5583,13 +5571,13 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CUtil/include/CRGBA.h \
@@ -5655,8 +5643,8 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
-		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CIPoint2D.h \
+		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
@@ -5683,13 +5671,13 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -5772,21 +5760,21 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
-		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CIPoint2D.h \
+		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -5866,13 +5854,13 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -5974,13 +5962,13 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -6054,14 +6042,14 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CLine2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CPoint2D.h \
-		../../CMath/include/CIPoint2D.h \
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
+		../../CMath/include/CIPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
@@ -6072,7 +6060,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -6131,26 +6119,26 @@ compiler_clean: compiler_moc_header_clean
 ../obj/CQIllustratorPathShapeControlPoint.o: CQIllustratorPathShapeControlPoint.cpp CQIllustratorPathShapeControlPoint.h \
 		CQIllustratorShapeControlPoint.h \
 		../../CMath/include/CPoint2D.h \
-		../../CMath/include/CIPoint2D.h \
 		CQIllustratorPathShape.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
+		../../CMath/include/CIPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -6212,21 +6200,21 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
-		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CIPoint2D.h \
+		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -6309,13 +6297,13 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -6400,21 +6388,21 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
-		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CIPoint2D.h \
+		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -6479,7 +6467,6 @@ compiler_clean: compiler_moc_header_clean
 		../../CQUtil/include/CQMainWindow.h \
 		../../CUtil/include/CAutoPtr.h \
 		../../CMath/include/CPoint2D.h \
-		../../CMath/include/CIPoint2D.h \
 		../../CImageLib/include/CImageLib.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -6495,6 +6482,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CHSI.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
+		../../CMath/include/CIPoint2D.h \
 		../../CRGBName/include/CRGBName.h \
 		../../CUtil/include/CColorComponent.h \
 		../../CImageLib/include/CImageState.h \
@@ -6526,13 +6514,13 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -6571,7 +6559,6 @@ compiler_clean: compiler_moc_header_clean
 		../../CQUtil/include/CQMainWindow.h \
 		../../CUtil/include/CAutoPtr.h \
 		../../CMath/include/CPoint2D.h \
-		../../CMath/include/CIPoint2D.h \
 		../../CImageLib/include/CImageLib.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -6587,6 +6574,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CHSI.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
+		../../CMath/include/CIPoint2D.h \
 		../../CRGBName/include/CRGBName.h \
 		../../CUtil/include/CColorComponent.h \
 		../../CImageLib/include/CImageState.h \
@@ -6618,13 +6606,13 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -6669,21 +6657,21 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
-		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CIPoint2D.h \
+		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -6745,10 +6733,10 @@ compiler_clean: compiler_moc_header_clean
 
 ../obj/CQIllustratorSandbox.o: CQIllustratorSandbox.cpp CQIllustratorSandbox.h \
 		../../CMath/include/CPoint2D.h \
-		../../CMath/include/CIPoint2D.h \
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
+		../../CMath/include/CIPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
@@ -6761,13 +6749,13 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -6841,21 +6829,21 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
-		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CIPoint2D.h \
+		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -6947,13 +6935,13 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -7054,13 +7042,13 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -7155,13 +7143,13 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -7252,13 +7240,13 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -7364,13 +7352,13 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -7470,13 +7458,13 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -7560,14 +7548,14 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CLine2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CPoint2D.h \
-		../../CMath/include/CIPoint2D.h \
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
+		../../CMath/include/CIPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
@@ -7576,8 +7564,7 @@ compiler_clean: compiler_moc_header_clean
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CQIllustratorShapeControlLine.o CQIllustratorShapeControlLine.cpp
 
 ../obj/CQIllustratorShapeControlPoint.o: CQIllustratorShapeControlPoint.cpp CQIllustratorShapeControlPoint.h \
-		../../CMath/include/CPoint2D.h \
-		../../CMath/include/CIPoint2D.h
+		../../CMath/include/CPoint2D.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CQIllustratorShapeControlPoint.o CQIllustratorShapeControlPoint.cpp
 
 ../obj/CQIllustratorShape.o: CQIllustratorShape.cpp CQIllustratorShape.h \
@@ -7585,21 +7572,21 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
-		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CIPoint2D.h \
+		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -7679,8 +7666,8 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
-		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CIPoint2D.h \
+		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
@@ -7720,7 +7707,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CImageLib/include/CImageFile.h \
 		../../CUtil/include/CFillType.h \
 		CQIllustratorCanvas.h \
-		../../CMath/include/CDisplayRange2D.h \
+		CDisplayRange2D.h \
 		CQIllustrator.h \
 		../../CQUtil/include/CQMainWindow.h \
 		../../CUtil/include/CAutoPtr.h \
@@ -7737,13 +7724,13 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CUtil/include/CLineDash.h \
@@ -7796,10 +7783,10 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CHSI.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
+		../../CMath/include/CIPoint2D.h \
 		../../CRGBName/include/CRGBName.h \
 		../../CUtil/include/CColorComponent.h \
 		../../CMath/include/CPoint2D.h \
-		../../CMath/include/CIPoint2D.h \
 		CQIllustratorShapeDrawer.h \
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CVector2D.h \
@@ -7835,7 +7822,6 @@ compiler_clean: compiler_moc_header_clean
 ../obj/CQIllustratorShapeLGradientControlPoint.o: CQIllustratorShapeLGradientControlPoint.cpp CQIllustratorShapeLGradientControlPoint.h \
 		CQIllustratorShapeControlPoint.h \
 		../../CMath/include/CPoint2D.h \
-		../../CMath/include/CIPoint2D.h \
 		CQIllustratorShapeFill.h \
 		CQIllustratorImageFill.h \
 		../../CImageLib/include/CImagePtr.h \
@@ -7854,6 +7840,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CHSI.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
+		../../CMath/include/CIPoint2D.h \
 		../../CRGBName/include/CRGBName.h \
 		../../CUtil/include/CColorComponent.h \
 		CQIllustratorShape.h \
@@ -7865,13 +7852,13 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -7912,25 +7899,25 @@ compiler_clean: compiler_moc_header_clean
 ../obj/CQIllustratorShapeRGradientControlPoint.o: CQIllustratorShapeRGradientControlPoint.cpp CQIllustratorShapeRGradientControlPoint.h \
 		CQIllustratorShapeControlPoint.h \
 		../../CMath/include/CPoint2D.h \
-		../../CMath/include/CIPoint2D.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
+		../../CMath/include/CIPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -8002,12 +7989,12 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CHSI.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
+		../../CMath/include/CIPoint2D.h \
 		../../CRGBName/include/CRGBName.h \
 		../../CUtil/include/CColorComponent.h \
 		CQIllustratorShapeDrawer.h \
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CPoint2D.h \
-		../../CMath/include/CIPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
@@ -8042,8 +8029,8 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
-		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CIPoint2D.h \
+		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
@@ -8090,13 +8077,13 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -8169,13 +8156,13 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -8259,7 +8246,6 @@ compiler_clean: compiler_moc_header_clean
 		../../CQUtil/include/CQMainWindow.h \
 		../../CUtil/include/CAutoPtr.h \
 		../../CMath/include/CPoint2D.h \
-		../../CMath/include/CIPoint2D.h \
 		../../CImageLib/include/CImageLib.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -8275,6 +8261,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CHSI.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
+		../../CMath/include/CIPoint2D.h \
 		../../CRGBName/include/CRGBName.h \
 		../../CUtil/include/CColorComponent.h \
 		../../CImageLib/include/CImageState.h \
@@ -8306,13 +8293,13 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -8351,21 +8338,21 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
-		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CIPoint2D.h \
+		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -8431,21 +8418,21 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
-		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CIPoint2D.h \
+		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -8528,7 +8515,6 @@ compiler_clean: compiler_moc_header_clean
 		../../CQUtil/include/CQMainWindow.h \
 		../../CUtil/include/CAutoPtr.h \
 		../../CMath/include/CPoint2D.h \
-		../../CMath/include/CIPoint2D.h \
 		../../CImageLib/include/CImageLib.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -8544,6 +8530,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CHSI.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
+		../../CMath/include/CIPoint2D.h \
 		../../CRGBName/include/CRGBName.h \
 		../../CUtil/include/CColorComponent.h \
 		../../CImageLib/include/CImageState.h \
@@ -8575,13 +8562,13 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -8622,7 +8609,6 @@ compiler_clean: compiler_moc_header_clean
 		../../CQUtil/include/CQMainWindow.h \
 		../../CUtil/include/CAutoPtr.h \
 		../../CMath/include/CPoint2D.h \
-		../../CMath/include/CIPoint2D.h \
 		../../CImageLib/include/CImageLib.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -8638,6 +8624,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CHSI.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
+		../../CMath/include/CIPoint2D.h \
 		../../CRGBName/include/CRGBName.h \
 		../../CUtil/include/CColorComponent.h \
 		../../CImageLib/include/CImageState.h \
@@ -8669,13 +8656,13 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -8723,12 +8710,12 @@ compiler_clean: compiler_moc_header_clean
 ../obj/CQIllustratorUndo.o: CQIllustratorUndo.cpp CQIllustratorUndo.h \
 		../../CUndo/include/CUndo.h \
 		../../CMath/include/CPoint2D.h \
-		../../CMath/include/CIPoint2D.h \
 		CQIllustratorData.h \
 		CStack.h \
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
+		../../CMath/include/CIPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
@@ -8738,13 +8725,13 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -8816,7 +8803,6 @@ compiler_clean: compiler_moc_header_clean
 		../../CQUtil/include/CQMainWindow.h \
 		../../CUtil/include/CAutoPtr.h \
 		../../CMath/include/CPoint2D.h \
-		../../CMath/include/CIPoint2D.h \
 		../../CImageLib/include/CImageLib.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -8832,6 +8818,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CHSI.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
+		../../CMath/include/CIPoint2D.h \
 		../../CRGBName/include/CRGBName.h \
 		../../CUtil/include/CColorComponent.h \
 		../../CImageLib/include/CImageState.h \
@@ -8863,13 +8850,13 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -8924,13 +8911,13 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -9020,9 +9007,9 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CMatrix2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
+		../../CMath/include/CIPoint2D.h \
 		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CPoint2D.h \
-		../../CMath/include/CIPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
@@ -9065,9 +9052,12 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CLineJoinType.h \
 		../../CUtil/include/CFillType.h \
 		../../CUtil/include/CDisplayTransform2D.h \
-		../../CMath/include/CDisplayRange2D.h \
-		../../CQUtil/include/CQImageGaussianBlur.h \
-		../../CMath/include/CGaussianBlur.h \
+		CDisplayRange2D.h \
+		CQSVGImageData.h \
+		../../CSVG/include/CSVGImageData.h \
+		CQSVGFontObj.h \
+		../../CSVG/include/CSVGFontObj.h \
+		../../CSVG/include/CSVGFontDef.h \
 		../../CQUtil/include/CQUtil.h \
 		../../CUtil/include/CEvent.h \
 		../../CUtil/include/CKeyType.h \
@@ -9076,10 +9066,9 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CBrushStyle.h \
 		../../CUtil/include/CAutoPtr.h \
 		../../CUtil/include/CPen.h \
-		../../CQUtil/include/CQImage.h \
 		../../CMath/include/CLinearGradient.h \
 		../../CMath/include/CRadialGradient.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CMath/include/CLine2D.h \
 		../../CMath/include/CShape2D.h \
@@ -9087,135 +9076,76 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/C2Bezier2D.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CQSVGRenderer.o CQSVGRenderer.cpp
 
-../obj/CArcToBezier.o: CArcToBezier.cpp CArcToBezier.h \
-		../../CMath/include/C3Bezier2D.h \
-		../../CMath/include/CPoint2D.h \
-		../../CMath/include/CIPoint2D.h \
-		../../CMath/include/C2Bezier2D.h \
-		../../CMath/include/CBBox2D.h \
-		../../CMath/include/CMathGen.h \
-		../../COS/include/NaN.h \
-		../../CMath/include/CVector2D.h \
-		../../CMath/include/CSize2D.h \
-		../../CMath/include/CISize2D.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CArcToBezier.o CArcToBezier.cpp
-
-../obj/CAxis2D.o: CAxis2D.cpp CAxis2D.h \
-		../../CMath/include/CMathGen.h \
-		../../COS/include/NaN.h \
-		../../CStrUtil/include/CStrUtil.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CAxis2D.o CAxis2D.cpp
-
-../obj/CBezierToLine.o: CBezierToLine.cpp CBezierToLine.h \
-		../../CMath/include/C3Bezier2D.h \
-		../../CMath/include/CPoint2D.h \
-		../../CMath/include/CIPoint2D.h \
-		../../CMath/include/C2Bezier2D.h \
-		../../CMath/include/CBBox2D.h \
-		../../CMath/include/CMathGen.h \
-		../../COS/include/NaN.h \
-		../../CMath/include/CVector2D.h \
-		../../CMath/include/CSize2D.h \
-		../../CMath/include/CISize2D.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CBezierToLine.o CBezierToLine.cpp
-
-../obj/CDelaunay.o: CDelaunay.cpp CDelaunay.h \
-		CHull3D.h \
-		CListLink.h \
-		CStateIterator.h \
-		../../CUtil/include/CGeneric.h \
-		../../CUtil/include/CTypeTraits.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CDelaunay.o CDelaunay.cpp
-
-../obj/CEncode64.o: CEncode64.cpp CEncode64.h \
+../obj/CQSVGFontObj.o: CQSVGFontObj.cpp CQSVGFontObj.h \
+		../../CSVG/include/CSVGFontObj.h \
+		../../CFont/include/CFont.h \
+		../../CUtil/include/CRefPtr.h \
+		../../CFont/include/CFontStyle.h \
+		../../CUtil/include/CFlags.h \
+		../../CImageLib/include/CImageLib.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
-		../../CFile/include/CFileType.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CEncode64.o CEncode64.cpp
-
-../obj/CGenPoly.o: CGenPoly.cpp CGenPoly.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CGenPoly.o CGenPoly.cpp
-
-../obj/CGiftWrap.o: CGiftWrap.cpp ../../CMath/include/CGiftWrap.h \
-		../../CMath/include/CPoint2D.h \
-		../../CMath/include/CIPoint2D.h \
-		CMathGeom2D.h \
-		../../CMath/include/CBBox2D.h \
+		../../CFile/include/CFileType.h \
+		../../CUtil/include/CAlignType.h \
+		../../CUtil/include/CRGBA.h \
+		../../CUtil/include/CRGB.h \
+		../../CUtil/include/CHSV.h \
+		../../CUtil/include/CRGBUtil.h \
+		../../CUtil/include/CCMYK.h \
+		../../CUtil/include/CHSL.h \
+		../../CUtil/include/CHSB.h \
+		../../CUtil/include/CHSI.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
-		../../CMath/include/CVector2D.h \
-		../../CMath/include/CSize2D.h \
-		../../CMath/include/CISize2D.h \
-		../../CMath/include/CPolygonOrientation.h \
-		../../CUtil/include/CLineJoinType.h \
-		../../CMath/include/CLine2D.h \
-		../../CMath/include/CShape2D.h \
-		../../CMath/include/C3Bezier2D.h \
-		../../CMath/include/C2Bezier2D.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CGiftWrap.o CGiftWrap.cpp
-
-../obj/CHull3D.o: CHull3D.cpp CHull3D.h \
-		CListLink.h \
-		CStateIterator.h \
-		../../CUtil/include/CGeneric.h \
-		../../CUtil/include/CTypeTraits.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CHull3D.o CHull3D.cpp
-
-../obj/CKuhnMunkres.o: CKuhnMunkres.cpp CKuhnMunkres.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CKuhnMunkres.o CKuhnMunkres.cpp
-
-../obj/CLog.o: CLog.cpp CLog.h \
-		../../CStrUtil/include/CConv.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CLog.o CLog.cpp
-
-../obj/CMathGeom2D.o: CMathGeom2D.cpp CMathGeom2D.h \
-		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CIPoint2D.h \
-		../../CMath/include/CBBox2D.h \
+		../../CRGBName/include/CRGBName.h \
+		../../CUtil/include/CColorComponent.h \
+		../../CImageLib/include/CImageState.h \
+		../../CImageLib/include/CImage.h \
+		../../CUtil/include/CRGBACombineDef.h \
+		../../CMath/include/CISize2D.h \
+		../../CMath/include/CIBBox2D.h \
+		../../CMath/include/CIVector2D.h \
+		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImagePtr.h \
+		../../CImageLib/include/CImageMgr.h \
+		../../CStrUtil/include/CStrUtil.h \
+		../../CImageLib/include/CImageAnim.h \
+		../../CImageLib/include/CImageFile.h \
+		../../CSVG/include/CSVGFontDef.h \
+		../../CUtil/include/CScreenUnits.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CQSVGFontObj.o CQSVGFontObj.cpp
+
+../obj/CQSVGImageData.o: CQSVGImageData.cpp CQSVGImageData.h \
+		../../CSVG/include/CSVGImageData.h \
+		../../CSVG/include/CSVGTypes.h \
+		../../CUtil/include/COptVal.h \
+		../../CUtil/include/CScreenUnits.h \
+		../../CImageLib/include/CImage.h \
+		../../CUtil/include/CRGBA.h \
+		../../CUtil/include/CRGB.h \
+		../../CUtil/include/CHSV.h \
+		../../CUtil/include/CRGBUtil.h \
+		../../CUtil/include/CCMYK.h \
+		../../CUtil/include/CHSL.h \
+		../../CUtil/include/CHSB.h \
+		../../CUtil/include/CHSI.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
-		../../CMath/include/CVector2D.h \
-		../../CMath/include/CSize2D.h \
-		../../CMath/include/CISize2D.h \
-		../../CMath/include/CPolygonOrientation.h \
-		../../CUtil/include/CLineJoinType.h \
-		../../CMath/include/CLine2D.h \
-		../../CMath/include/CShape2D.h \
-		../../CMath/include/C3Bezier2D.h \
-		../../CMath/include/C2Bezier2D.h \
-		CArcToBezier.h \
-		CBezierToLine.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CMathGeom2D.o CMathGeom2D.cpp
-
-../obj/CPathShape.o: CPathShape.cpp CPathShape.h \
-		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CIPoint2D.h \
-		../../CMath/include/CPolygon2D.h \
-		../../CMath/include/CShape2D.h \
-		../../CMath/include/CBBox2D.h \
-		../../CMath/include/CMathGen.h \
-		../../COS/include/NaN.h \
-		../../CMath/include/CVector2D.h \
-		../../CMath/include/CSize2D.h \
+		../../CRGBName/include/CRGBName.h \
+		../../CUtil/include/CColorComponent.h \
+		../../CUtil/include/CRGBACombineDef.h \
+		../../CUtil/include/CAlignType.h \
 		../../CMath/include/CISize2D.h \
-		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
-		../../CMath/include/CPolygonOrientation.h \
-		../../CUtil/include/CLineJoinType.h \
-		../../CMath/include/C3Bezier2D.h \
-		../../CMath/include/C2Bezier2D.h \
-		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
-		../../CUtil/include/CGeneric.h \
-		../../CUtil/include/CTypeTraits.h \
-		../../CMath/include/CMatrix2D.h \
-		../../CMath/include/CMathMacros.h \
-		../../CMath/include/CMatrixType.h \
-		../../CUtil/include/CThrow.h \
-		CPathPartType.h \
-		CBooleanOp.h \
-		../../CStrUtil/include/CStrUtil.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CPathShape.o CPathShape.cpp
+		../../CMath/include/CIBBox2D.h \
+		../../CMath/include/CIVector2D.h \
+		../../CFile/include/CFileType.h \
+		../../CImageLib/include/CImagePtr.h \
+		../../CUtil/include/CRefPtr.h \
+		../../CMath/include/CTurbulenceUtil.h \
+		../../CMath/include/CGaussianBlur.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CQSVGImageData.o CQSVGImageData.cpp
 
 ../obj/CQAccelerate.o: CQAccelerate.cpp CQAccelerate.h \
 		CKuhnMunkres.h
@@ -9246,10 +9176,10 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CHSI.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
+		../../CMath/include/CIPoint2D.h \
 		../../CRGBName/include/CRGBName.h \
 		../../CUtil/include/CColorComponent.h \
 		../../CMath/include/CPoint2D.h \
-		../../CMath/include/CIPoint2D.h \
 		CQFillOptionTool.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
@@ -9260,13 +9190,13 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -9342,21 +9272,21 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
-		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CIPoint2D.h \
+		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -9524,11 +9454,11 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CHSI.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
+		../../CMath/include/CIPoint2D.h \
 		../../CRGBName/include/CRGBName.h \
 		../../CUtil/include/CColorComponent.h \
 		../../CQUtil/include/CQUtil.h \
 		../../CUtil/include/CEvent.h \
-		../../CMath/include/CIPoint2D.h \
 		../../CUtil/include/CKeyType.h \
 		../../CUtil/include/CLineDash.h \
 		../../CUtil/include/CILineDash.h \
@@ -9589,6 +9519,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CHSI.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
+		../../CMath/include/CIPoint2D.h \
 		../../CRGBName/include/CRGBName.h \
 		../../CUtil/include/CColorComponent.h \
 		../../CImageLib/include/CImageState.h \
@@ -9596,7 +9527,6 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CRGBACombineDef.h \
 		../../CMath/include/CISize2D.h \
 		../../CMath/include/CIBBox2D.h \
-		../../CMath/include/CIPoint2D.h \
 		../../CMath/include/CIVector2D.h \
 		../../CUtil/include/COptVal.h \
 		../../CImageLib/include/CImagePtr.h \
@@ -9624,6 +9554,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CHSI.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
+		../../CMath/include/CIPoint2D.h \
 		../../CRGBName/include/CRGBName.h \
 		../../CUtil/include/CColorComponent.h \
 		../../CImageLib/include/CImageState.h \
@@ -9631,7 +9562,6 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CRGBACombineDef.h \
 		../../CMath/include/CISize2D.h \
 		../../CMath/include/CIBBox2D.h \
-		../../CMath/include/CIPoint2D.h \
 		../../CMath/include/CIVector2D.h \
 		../../CUtil/include/COptVal.h \
 		../../CImageLib/include/CImagePtr.h \
@@ -9676,7 +9606,6 @@ compiler_clean: compiler_moc_header_clean
 		../../CQUtil/include/CQMainWindow.h \
 		../../CUtil/include/CAutoPtr.h \
 		../../CMath/include/CPoint2D.h \
-		../../CMath/include/CIPoint2D.h \
 		../../CImageLib/include/CImageLib.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -9692,6 +9621,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CHSI.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
+		../../CMath/include/CIPoint2D.h \
 		../../CRGBName/include/CRGBName.h \
 		../../CUtil/include/CColorComponent.h \
 		../../CImageLib/include/CImageState.h \
@@ -9723,13 +9653,13 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -9957,9 +9887,9 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CMatrix2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
+		../../CMath/include/CIPoint2D.h \
 		../../CMath/include/CMathMacros.h \
 		../../CMath/include/CPoint2D.h \
-		../../CMath/include/CIPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CMatrixType.h \
 		../../CUtil/include/CThrow.h \
@@ -9975,7 +9905,6 @@ compiler_clean: compiler_moc_header_clean
 		../../CQUtil/include/CQMainWindow.h \
 		../../CUtil/include/CAutoPtr.h \
 		../../CMath/include/CPoint2D.h \
-		../../CMath/include/CIPoint2D.h \
 		../../CImageLib/include/CImageLib.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -9991,6 +9920,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CHSI.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
+		../../CMath/include/CIPoint2D.h \
 		../../CRGBName/include/CRGBName.h \
 		../../CUtil/include/CColorComponent.h \
 		../../CImageLib/include/CImageState.h \
@@ -10022,13 +9952,13 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -10069,7 +9999,6 @@ compiler_clean: compiler_moc_header_clean
 
 ../obj/CQPointEdit.o: CQPointEdit.cpp CQPointEdit.h \
 		../../CMath/include/CPoint2D.h \
-		../../CMath/include/CIPoint2D.h \
 		../../CStrUtil/include/CStrUtil.h \
 		../../CStrUtil/include/CStrParse.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CQPointEdit.o CQPointEdit.cpp
@@ -10079,26 +10008,26 @@ compiler_clean: compiler_moc_header_clean
 		CQWinWidget.h \
 		CQPointEdit.h \
 		../../CMath/include/CPoint2D.h \
-		../../CMath/include/CIPoint2D.h \
 		CQTableWidget.h \
 		CQIllustratorShape.h \
 		../../CUtil/include/CAutoPtrVector.h \
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
+		../../CMath/include/CIPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -10191,21 +10120,21 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
-		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CIPoint2D.h \
+		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -10294,21 +10223,21 @@ compiler_clean: compiler_moc_header_clean
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
-		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CIPoint2D.h \
+		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
 		../../CMath/include/CPolygon2D.h \
 		../../CMath/include/CShape2D.h \
 		../../CMath/include/CLine2D.h \
-		CMathGeom2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
 		../../CMath/include/CTriangle2D.h \
-		CStateIterator.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
 		../../CUtil/include/CTypeTraits.h \
 		../../CMath/include/CMatrix2D.h \
@@ -10395,28 +10324,73 @@ compiler_clean: compiler_moc_header_clean
 		cursors/selectmask.xbm
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CQWinWidget.o CQWinWidget.cpp
 
-../obj/CTriangulate2D.o: CTriangulate2D.cpp CTriangulate2D.h \
-		../../CMath/include/CPoint2D.h \
+../obj/CAxis2D.o: CAxis2D.cpp CAxis2D.h \
+		../../CMath/include/CMathGen.h \
+		../../COS/include/NaN.h \
 		../../CMath/include/CIPoint2D.h \
-		../../CMath/include/CTriangle2D.h \
-		CMathGeom2D.h \
+		../../CStrUtil/include/CStrUtil.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CAxis2D.o CAxis2D.cpp
+
+../obj/CDelaunay.o: CDelaunay.cpp CDelaunay.h \
+		CHull3D.h \
+		../../CUtil/include/CListLink.h \
+		../../CUtil/include/CStateIterator.h \
+		../../CUtil/include/CGeneric.h \
+		../../CUtil/include/CTypeTraits.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CDelaunay.o CDelaunay.cpp
+
+../obj/CEncode64.o: CEncode64.cpp CEncode64.h \
+		../../CFile/include/CFile.h \
+		../../CFile/include/CFileBase.h \
+		../../CFile/include/CFileType.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CEncode64.o CEncode64.cpp
+
+../obj/CGenPoly.o: CGenPoly.cpp CGenPoly.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CGenPoly.o CGenPoly.cpp
+
+../obj/CHull3D.o: CHull3D.cpp CHull3D.h \
+		../../CUtil/include/CListLink.h \
+		../../CUtil/include/CStateIterator.h \
+		../../CUtil/include/CGeneric.h \
+		../../CUtil/include/CTypeTraits.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CHull3D.o CHull3D.cpp
+
+../obj/CKuhnMunkres.o: CKuhnMunkres.cpp CKuhnMunkres.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CKuhnMunkres.o CKuhnMunkres.cpp
+
+../obj/CLog.o: CLog.cpp CLog.h \
+		../../CStrUtil/include/CConv.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CLog.o CLog.cpp
+
+../obj/CPathShape.o: CPathShape.cpp CPathShape.h \
+		../../CMath/include/CPoint2D.h \
+		../../CMath/include/CPolygon2D.h \
+		../../CMath/include/CShape2D.h \
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CMathGen.h \
 		../../COS/include/NaN.h \
+		../../CMath/include/CIPoint2D.h \
 		../../CMath/include/CVector2D.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CISize2D.h \
+		../../CMath/include/CLine2D.h \
+		../../CMath/include/CMathGeom2D.h \
 		../../CMath/include/CPolygonOrientation.h \
 		../../CUtil/include/CLineJoinType.h \
-		../../CMath/include/CLine2D.h \
-		../../CMath/include/CShape2D.h \
 		../../CMath/include/C3Bezier2D.h \
 		../../CMath/include/C2Bezier2D.h \
-		CListLink.h \
-		CStateIterator.h \
+		../../CMath/include/CTriangle2D.h \
+		../../CUtil/include/CStateIterator.h \
 		../../CUtil/include/CGeneric.h \
-		../../CUtil/include/CTypeTraits.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CTriangulate2D.o CTriangulate2D.cpp
+		../../CUtil/include/CTypeTraits.h \
+		../../CMath/include/CMatrix2D.h \
+		../../CMath/include/CMathMacros.h \
+		../../CMath/include/CMatrixType.h \
+		../../CUtil/include/CThrow.h \
+		CPathPartType.h \
+		CBooleanOp.h \
+		../../CStrUtil/include/CStrUtil.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CPathShape.o CPathShape.cpp
 
 ../obj/moc_CQIllustratorAlignMode.o: .moc/moc_CQIllustratorAlignMode.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/moc_CQIllustratorAlignMode.o .moc/moc_CQIllustratorAlignMode.cpp

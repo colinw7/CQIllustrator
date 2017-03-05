@@ -2,6 +2,7 @@
 #define CQIllustratorHandle_H
 
 #include <CPoint2D.h>
+#include <CIPoint2D.h>
 #include <CISize2D.h>
 #include <QPointF>
 #include <QIcon>

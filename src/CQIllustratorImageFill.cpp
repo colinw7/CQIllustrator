@@ -18,7 +18,7 @@ CQIllustratorImageFill::
 
 void
 CQIllustratorImageFill::
-setImage(CImagePtr image)
+setImage(const CImagePtr &image)
 {
   image_ = image;
 }

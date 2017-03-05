@@ -2352,7 +2352,7 @@ saveSVG(const QString &filename)
 
   CFile file(filename.toStdString());
 
-  if (! file.open(CFileBase::WRITE))
+  if (! file.open(CFileBase::Mode::WRITE))
     return;
 
   CQIllustratorSaveData saveData;
@@ -2404,7 +2404,7 @@ saveCmd(const QString &filename)
 {
   CFile file(filename.toStdString());
 
-  if (! file.open(CFileBase::WRITE))
+  if (! file.open(CFileBase::Mode::WRITE))
     return;
 
   CQIllustratorSaveData saveData;
@@ -2771,7 +2771,7 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
       CSVGCircle *circle = dynamic_cast<CSVGCircle *>(object);
 
       const CPoint2D &c = circle->getCenter();
-      double          r = circle->getRadius().pxValue(1);
+      double          r = circle->getRadius().pxValue(CScreenUnits(1));
 
       CBBox2D bbox(CPoint2D(c.x - r, c.y - r), CPoint2D(c.x + r, c.y + r));
 
@@ -2790,8 +2790,8 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
       CSVGEllipse *ellipse = dynamic_cast<CSVGEllipse *>(object);
 
       const CPoint2D &c  = ellipse->getCenter();
-      double          rx = ellipse->getRadiusX();
-      double          ry = ellipse->getRadiusY();
+      double          rx = ellipse->getRadiusX().pxValue(CScreenUnits(1));
+      double          ry = ellipse->getRadiusY().pxValue(CScreenUnits(1));
 
       CBBox2D bbox(CPoint2D(c.x - rx, c.y - ry), CPoint2D(c.x + rx, c.y + ry));
 
@@ -2861,7 +2861,8 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
 
       CQIllustratorTextShape *textShape = createTextShape(bbox.getLL(), bbox.getUR(), str);
 
-      textShape->setFont(object->getFont());
+      // TODO:
+      //textShape->setFont(object->getFont());
 
       shape = textShape;
 
@@ -2926,7 +2927,7 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
 
         setShapeSVGStrokeAndFill(rectShape, object);
 
-        CImagePtr img = image->getImageBuffer()->getRenderer()->getImage();
+        CImagePtr img = image->getImageBuffer()->getImage()->image();
 
         if (img.isValid()) {
           CQIllustratorShapeFill &fill = shape->getFill();
@@ -4349,20 +4350,20 @@ setShapeSVGStrokeAndFill(CQIllustratorShape *shape, CSVGObject *object)
   const CSVGStroke &objStroke = object->getStroke();
   const CSVGFill   &objFill   = object->getFill();
 
-  stroke.setStroked (! object->getFlatStrokeColor().isNone());
-  stroke.setColor   (object->colorToRGBA(object->getFlatStrokeColor()));
-  stroke.setOpacity (opacity*object->getFlatStrokeOpacity());
-  stroke.setWidth   (object->getFlatStrokeWidth());
-  stroke.setLineDash(object->getFlatStrokeLineDash().getLineDash());
+  stroke.setStroked (! object->getFlatStrokeColor().isValid());
+  stroke.setColor   (object->colorToRGBA(object->getFlatStrokeColor().getValue(CRGBA(0,0,0))));
+  stroke.setOpacity (opacity*object->getFlatStrokeOpacity().getValue(1));
+  stroke.setWidth   (object->getFlatStrokeWidth().getValue(0));
+  stroke.setLineDash(object->getFlatStrokeLineDash().getValue(CSVGStrokeDash()).getLineDash());
   stroke.setLineCap (objStroke.getLineCap());
   stroke.setLineJoin(objStroke.getLineJoin());
 
-  fill.setFilled  (! object->getFlatFillColor().isNone());
-  fill.setColor   (object->colorToRGBA(object->getFlatFillColor()));
-  fill.setOpacity (opacity*object->getFlatFillOpacity());
+  fill.setFilled  (! object->getFlatFillColor().isValid());
+  fill.setColor   (object->colorToRGBA(object->getFlatFillColor().getValue(CRGBA(0,0,0))));
+  fill.setOpacity (opacity*object->getFlatFillOpacity().getValue(1));
   fill.setFillRule(objFill.getRule());
 
-  CSVGObject *fill_object = object->getFillObject();
+  CSVGObject *fill_object = object->getFillFillObject();
 
   if (fill_object) {
     CSVGLinearGradient *lg = dynamic_cast<CSVGLinearGradient *>(fill_object);
@@ -4372,7 +4373,7 @@ setShapeSVGStrokeAndFill(CQIllustratorShape *shape, CSVGObject *object)
       CLinearGradient *lgradient = new CLinearGradient;
 
       for (const auto &stop : lg->stops()) {
-        double o = stop->getOffset().ratioValue(1);
+        double o = stop->getOffset().ratioValue(CScreenUnits(1));
 
         CRGBA rgba = object->colorToRGBA(stop->getColor());
 
@@ -4386,8 +4387,8 @@ setShapeSVGStrokeAndFill(CQIllustratorShape *shape, CSVGObject *object)
       else
         m1.setIdentity();
 
-      CPoint2D p1(lg->getX1().pxValue(1), lg->getY1().pxValue(1));
-      CPoint2D p2(lg->getX2().pxValue(1), lg->getY2().pxValue(1));
+      CPoint2D p1(lg->getX1().pxValue(CScreenUnits(1)), lg->getY1().pxValue(CScreenUnits(1)));
+      CPoint2D p2(lg->getX2().pxValue(CScreenUnits(1)), lg->getY2().pxValue(CScreenUnits(1)));
 
       p1 = m1*p1;
       p2 = m1*p2;
@@ -4415,7 +4416,7 @@ setShapeSVGStrokeAndFill(CQIllustratorShape *shape, CSVGObject *object)
       CSVGRadialGradient::StopList::const_iterator ps1, ps2;
 
       for (const auto &stop : rg->stops()) {
-        double o = stop->getOffset().ratioValue(1);
+        double o = stop->getOffset().ratioValue(CScreenUnits(1));
 
         CRGBA rgba = object->colorToRGBA(stop->getColor());
 
@@ -4429,10 +4430,12 @@ setShapeSVGStrokeAndFill(CQIllustratorShape *shape, CSVGObject *object)
       else
         m1.setIdentity();
 
-      CPoint2D c(rg->getCenterX().pxValue(1), rg->getCenterY().pxValue(1));
+      CPoint2D c(rg->getCenterX().pxValue(CScreenUnits(1)),
+                 rg->getCenterY().pxValue(CScreenUnits(1)));
       CPoint2D f(rg->getFocusX(), rg->getFocusY());
 
-      CVector2D r(rg->getRadius().pxValue(1), rg->getRadius().pxValue(1));
+      CVector2D r(rg->getRadius().pxValue(CScreenUnits(1)),
+                  rg->getRadius().pxValue(CScreenUnits(1)));
 
       c = m1*c;
       f = m1*f;

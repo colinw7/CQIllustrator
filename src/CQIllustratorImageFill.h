@@ -19,8 +19,8 @@ class CQIllustratorImageFill {
 
  ~CQIllustratorImageFill();
 
-  CImagePtr getImage() const { return image_; }
-  void setImage(CImagePtr image);
+  const CImagePtr &getImage() const { return image_; }
+  void setImage(const CImagePtr &image);
 
   Scale getScale() const { return scale_; }
   void setScale(Scale scale);
