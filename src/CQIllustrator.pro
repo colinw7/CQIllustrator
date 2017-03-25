@@ -83,7 +83,6 @@ CQFillOptionTool.cpp \
 CQFontOptionDialog.cpp \
 CQFontOptionTool.cpp \
 CQGradientStopList.cpp \
-CQImageButton.cpp \
 CQImagePreview.cpp \
 CQLayerOption.cpp \
 CQLineCap.cpp \
@@ -199,7 +198,6 @@ CQFillOptionTool.h \
 CQFontOptionDialog.h \
 CQFontOptionTool.h \
 CQGradientStopList.h \
-CQImageButton.h \
 CQImagePreview.h \
 CQLayerOption.h \
 CQLineCap.h \
