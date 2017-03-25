@@ -77,7 +77,6 @@ CQSVGFontObj.cpp \
 CQSVGImageData.cpp \
 \
 CQAccelerate.cpp \
-CQAngleSpinBox.cpp \
 CQFillOptionDialog.cpp \
 CQFillOptionTool.cpp \
 CQFontOptionDialog.cpp \
@@ -93,7 +92,6 @@ CQObjectOption.cpp \
 CQOptionToolSet.cpp \
 CQPointEdit.cpp \
 CQPropertiesOption.cpp \
-CQRadioButtons.cpp \
 CQScrollArea.cpp \
 CQStrokeOptionDialog.cpp \
 CQStrokeOptionTool.cpp \
@@ -191,7 +189,6 @@ CQSVGFontObj.h \
 CQSVGImageData.h \
 \
 CQAccelerate.h \
-CQAngleSpinBox.h \
 CQDockWidget.h \
 CQFillOptionDialog.h \
 CQFillOptionTool.h \
@@ -208,7 +205,6 @@ CQObjectOption.h \
 CQOptionToolSet.h \
 CQPointEdit.h \
 CQPropertiesOption.h \
-CQRadioButtons.h \
 CQScrollArea.h \
 CQStrokeOptionDialog.h \
 CQStrokeOptionTool.h \

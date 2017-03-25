@@ -109,7 +109,6 @@ SOURCES       = CQIllustratorAlignMode.cpp \
 		CQSVGFontObj.cpp \
 		CQSVGImageData.cpp \
 		CQAccelerate.cpp \
-		CQAngleSpinBox.cpp \
 		CQFillOptionDialog.cpp \
 		CQFillOptionTool.cpp \
 		CQFontOptionDialog.cpp \
@@ -125,7 +124,6 @@ SOURCES       = CQIllustratorAlignMode.cpp \
 		CQOptionToolSet.cpp \
 		CQPointEdit.cpp \
 		CQPropertiesOption.cpp \
-		CQRadioButtons.cpp \
 		CQScrollArea.cpp \
 		CQStrokeOptionDialog.cpp \
 		CQStrokeOptionTool.cpp \
@@ -179,7 +177,6 @@ SOURCES       = CQIllustratorAlignMode.cpp \
 		.moc/moc_CQIllustratorUndoDock.cpp \
 		.moc/moc_CQIllustratorUndo.cpp \
 		.moc/moc_CQIllustratorZoomMode.cpp \
-		.moc/moc_CQAngleSpinBox.cpp \
 		.moc/moc_CQFillOptionDialog.cpp \
 		.moc/moc_CQFillOptionTool.cpp \
 		.moc/moc_CQFontOptionDialog.cpp \
@@ -195,7 +192,6 @@ SOURCES       = CQIllustratorAlignMode.cpp \
 		.moc/moc_CQOptionToolSet.cpp \
 		.moc/moc_CQPointEdit.cpp \
 		.moc/moc_CQPropertiesOption.cpp \
-		.moc/moc_CQRadioButtons.cpp \
 		.moc/moc_CQScrollArea.cpp \
 		.moc/moc_CQStrokeOptionDialog.cpp \
 		.moc/moc_CQStrokeOptionTool.cpp \
@@ -262,7 +258,6 @@ OBJECTS       = ../obj/CQIllustratorAlignMode.o \
 		../obj/CQSVGFontObj.o \
 		../obj/CQSVGImageData.o \
 		../obj/CQAccelerate.o \
-		../obj/CQAngleSpinBox.o \
 		../obj/CQFillOptionDialog.o \
 		../obj/CQFillOptionTool.o \
 		../obj/CQFontOptionDialog.o \
@@ -278,7 +273,6 @@ OBJECTS       = ../obj/CQIllustratorAlignMode.o \
 		../obj/CQOptionToolSet.o \
 		../obj/CQPointEdit.o \
 		../obj/CQPropertiesOption.o \
-		../obj/CQRadioButtons.o \
 		../obj/CQScrollArea.o \
 		../obj/CQStrokeOptionDialog.o \
 		../obj/CQStrokeOptionTool.o \
@@ -333,7 +327,6 @@ OBJECTS       = ../obj/CQIllustratorAlignMode.o \
 		../obj/moc_CQIllustratorUndoDock.o \
 		../obj/moc_CQIllustratorUndo.o \
 		../obj/moc_CQIllustratorZoomMode.o \
-		../obj/moc_CQAngleSpinBox.o \
 		../obj/moc_CQFillOptionDialog.o \
 		../obj/moc_CQFillOptionTool.o \
 		../obj/moc_CQFontOptionDialog.o \
@@ -349,7 +342,6 @@ OBJECTS       = ../obj/CQIllustratorAlignMode.o \
 		../obj/moc_CQOptionToolSet.o \
 		../obj/moc_CQPointEdit.o \
 		../obj/moc_CQPropertiesOption.o \
-		../obj/moc_CQRadioButtons.o \
 		../obj/moc_CQScrollArea.o \
 		../obj/moc_CQStrokeOptionDialog.o \
 		../obj/moc_CQStrokeOptionTool.o \
@@ -496,7 +488,6 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		CQSVGFontObj.h \
 		CQSVGImageData.h \
 		CQAccelerate.h \
-		CQAngleSpinBox.h \
 		CQDockWidget.h \
 		CQFillOptionDialog.h \
 		CQFillOptionTool.h \
@@ -513,7 +504,6 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		CQOptionToolSet.h \
 		CQPointEdit.h \
 		CQPropertiesOption.h \
-		CQRadioButtons.h \
 		CQScrollArea.h \
 		CQStrokeOptionDialog.h \
 		CQStrokeOptionTool.h \
@@ -592,7 +582,6 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		CQSVGFontObj.cpp \
 		CQSVGImageData.cpp \
 		CQAccelerate.cpp \
-		CQAngleSpinBox.cpp \
 		CQFillOptionDialog.cpp \
 		CQFillOptionTool.cpp \
 		CQFontOptionDialog.cpp \
@@ -608,7 +597,6 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		CQOptionToolSet.cpp \
 		CQPointEdit.cpp \
 		CQPropertiesOption.cpp \
-		CQRadioButtons.cpp \
 		CQScrollArea.cpp \
 		CQStrokeOptionDialog.cpp \
 		CQStrokeOptionTool.cpp \
@@ -803,8 +791,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents CQIllustratorAlignMode.h CQIllustratorCanvas.h CQIllustratorCmd.h CQIllustratorCreateEllipseMode.h CQIllustratorCreatePathMode.h CQIllustratorCreatePolygonMode.h CQIllustratorCreateRectMode.h CQIllustratorCreateStarMode.h CQIllustratorCreateTextMode.h CQIllustratorCreateTextToolbar.h CQIllustratorData.h CQIllustratorEllipseGeometry.h CQIllustratorEllipseShape.h CQIllustratorGrid.h CQIllustratorGroupGeometry.h CQIllustratorGroupShape.h CQIllustrator.h CQIllustratorHandle.h CQIllustratorImageFill.h CQIllustratorInfo.h CQIllustratorInfoTip.h CQIllustratorLayer.h CQIllustratorMode.h CQIllustratorNPolyGeometry.h CQIllustratorNPolyShape.h CQIllustratorOffsetPathMode.h CQIllustratorPanMode.h CQIllustratorPathGeometry.h CQIllustratorPathShapeControlLine.h CQIllustratorPathShapeControlPoint.h CQIllustratorPathShape.h CQIllustratorPointSelectMode.h CQIllustratorPolygonGeometry.h CQIllustratorPolygonShape.h CQIllustratorPreference.h CQIllustratorPropertiesDlg.h CQIllustratorQuadTree.h CQIllustratorRectGeometry.h CQIllustratorRectShape.h CQIllustratorSandbox.h CQIllustratorSaveData.h CQIllustratorSelection.h CQIllustratorSelectMode.h CQIllustratorSetAnchorObjectMode.h CQIllustratorSetAnchorPositionMode.h CQIllustratorSetImageMode.h CQIllustratorSetLGradientMode.h CQIllustratorSetRGradientMode.h CQIllustratorShapeControlLine.h CQIllustratorShapeControlPoint.h CQIllustratorShapeDrawer.h CQIllustratorShapeFill.h CQIllustratorShapeFilter.h CQIllustratorShapeGaussianFilter.h CQIllustratorShapeGeometry.h CQIllustratorShape.h CQIllustratorShapeLGradientControlPoint.h CQIllustratorShapeNearestPoint2D.h CQIllustratorShapeRGradientControlPoint.h CQIllustratorShapeStroke.h CQIllustratorSizer.h CQIllustratorSliceMode.h CQIllustratorSnapDock.h CQIllustratorSnap.h CQIllustratorStarGeometry.h CQIllustratorStarShape.h CQIllustratorTextGeometry.h CQIllustratorTextShape.h CQIllustratorToolbar.h CQIllustratorTransformMode.h CQIllustratorUndoDock.h CQIllustratorUndo.h CQIllustratorUtil.h CQIllustratorZoomMode.h CQSVGRenderer.h CQSVGFontObj.h CQSVGImageData.h CQAccelerate.h CQAngleSpinBox.h CQDockWidget.h CQFillOptionDialog.h CQFillOptionTool.h CQFontOptionDialog.h CQFontOptionTool.h CQGradientStopList.h CQImagePreview.h CQLayerOption.h CQLineCap.h CQLineDash.h CQLineJoin.h CQMatrix2D.h CQObjectOption.h CQOptionToolSet.h CQPointEdit.h CQPropertiesOption.h CQRadioButtons.h CQScrollArea.h CQStrokeOptionDialog.h CQStrokeOptionTool.h CQSwatch.h CQTableWidget.h CQuadTree.h CQWinWidget.h CAxis2D.h CBooleanOp.h CDelaunay.h CEncode64.h CGenPoly.h CHull3D.h CKuhnMunkres.h CLog.h CPathPartType.h CPathShape.h CStack.h $(DISTDIR)/
-	$(COPY_FILE) --parents CQIllustratorAlignMode.cpp CQIllustratorCanvas.cpp CQIllustratorCmd.cpp CQIllustrator.cpp CQIllustratorCreateEllipseMode.cpp CQIllustratorCreatePathMode.cpp CQIllustratorCreatePolygonMode.cpp CQIllustratorCreateRectMode.cpp CQIllustratorCreateStarMode.cpp CQIllustratorCreateTextMode.cpp CQIllustratorCreateTextToolbar.cpp CQIllustratorData.cpp CQIllustratorEllipseShape.cpp CQIllustratorGroupShape.cpp CQIllustratorHandle.cpp CQIllustratorImageFill.cpp CQIllustratorInfo.cpp CQIllustratorLayer.cpp CQIllustratorMode.cpp CQIllustratorNPolyShape.cpp CQIllustratorOffsetPathMode.cpp CQIllustratorPanMode.cpp CQIllustratorPathShapeControlLine.cpp CQIllustratorPathShapeControlPoint.cpp CQIllustratorPathShape.cpp CQIllustratorPointSelectMode.cpp CQIllustratorPolygonShape.cpp CQIllustratorPreference.cpp CQIllustratorPropertiesDlg.cpp CQIllustratorRectShape.cpp CQIllustratorSandbox.cpp CQIllustratorSelection.cpp CQIllustratorSelectMode.cpp CQIllustratorSetAnchorObjectMode.cpp CQIllustratorSetAnchorPositionMode.cpp CQIllustratorSetImageMode.cpp CQIllustratorSetLGradientMode.cpp CQIllustratorSetRGradientMode.cpp CQIllustratorShapeControlLine.cpp CQIllustratorShapeControlPoint.cpp CQIllustratorShape.cpp CQIllustratorShapeDrawer.cpp CQIllustratorShapeFill.cpp CQIllustratorShapeFilter.cpp CQIllustratorShapeLGradientControlPoint.cpp CQIllustratorShapeRGradientControlPoint.cpp CQIllustratorShapeStroke.cpp CQIllustratorSizer.cpp CQIllustratorSliceMode.cpp CQIllustratorSnapDock.cpp CQIllustratorStarShape.cpp CQIllustratorTextShape.cpp CQIllustratorToolbar.cpp CQIllustratorTransformMode.cpp CQIllustratorUndo.cpp CQIllustratorUndoDock.cpp CQIllustratorZoomMode.cpp CQSVGRenderer.cpp CQSVGFontObj.cpp CQSVGImageData.cpp CQAccelerate.cpp CQAngleSpinBox.cpp CQFillOptionDialog.cpp CQFillOptionTool.cpp CQFontOptionDialog.cpp CQFontOptionTool.cpp CQGradientStopList.cpp CQImagePreview.cpp CQLayerOption.cpp CQLineCap.cpp CQLineDash.cpp CQLineJoin.cpp CQMatrix2D.cpp CQObjectOption.cpp CQOptionToolSet.cpp CQPointEdit.cpp CQPropertiesOption.cpp CQRadioButtons.cpp CQScrollArea.cpp CQStrokeOptionDialog.cpp CQStrokeOptionTool.cpp CQSwatch.cpp CQTableWidget.cpp CQWinWidget.cpp CAxis2D.cpp CDelaunay.cpp CEncode64.cpp CGenPoly.cpp CHull3D.cpp CKuhnMunkres.cpp CLog.cpp CPathShape.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents CQIllustratorAlignMode.h CQIllustratorCanvas.h CQIllustratorCmd.h CQIllustratorCreateEllipseMode.h CQIllustratorCreatePathMode.h CQIllustratorCreatePolygonMode.h CQIllustratorCreateRectMode.h CQIllustratorCreateStarMode.h CQIllustratorCreateTextMode.h CQIllustratorCreateTextToolbar.h CQIllustratorData.h CQIllustratorEllipseGeometry.h CQIllustratorEllipseShape.h CQIllustratorGrid.h CQIllustratorGroupGeometry.h CQIllustratorGroupShape.h CQIllustrator.h CQIllustratorHandle.h CQIllustratorImageFill.h CQIllustratorInfo.h CQIllustratorInfoTip.h CQIllustratorLayer.h CQIllustratorMode.h CQIllustratorNPolyGeometry.h CQIllustratorNPolyShape.h CQIllustratorOffsetPathMode.h CQIllustratorPanMode.h CQIllustratorPathGeometry.h CQIllustratorPathShapeControlLine.h CQIllustratorPathShapeControlPoint.h CQIllustratorPathShape.h CQIllustratorPointSelectMode.h CQIllustratorPolygonGeometry.h CQIllustratorPolygonShape.h CQIllustratorPreference.h CQIllustratorPropertiesDlg.h CQIllustratorQuadTree.h CQIllustratorRectGeometry.h CQIllustratorRectShape.h CQIllustratorSandbox.h CQIllustratorSaveData.h CQIllustratorSelection.h CQIllustratorSelectMode.h CQIllustratorSetAnchorObjectMode.h CQIllustratorSetAnchorPositionMode.h CQIllustratorSetImageMode.h CQIllustratorSetLGradientMode.h CQIllustratorSetRGradientMode.h CQIllustratorShapeControlLine.h CQIllustratorShapeControlPoint.h CQIllustratorShapeDrawer.h CQIllustratorShapeFill.h CQIllustratorShapeFilter.h CQIllustratorShapeGaussianFilter.h CQIllustratorShapeGeometry.h CQIllustratorShape.h CQIllustratorShapeLGradientControlPoint.h CQIllustratorShapeNearestPoint2D.h CQIllustratorShapeRGradientControlPoint.h CQIllustratorShapeStroke.h CQIllustratorSizer.h CQIllustratorSliceMode.h CQIllustratorSnapDock.h CQIllustratorSnap.h CQIllustratorStarGeometry.h CQIllustratorStarShape.h CQIllustratorTextGeometry.h CQIllustratorTextShape.h CQIllustratorToolbar.h CQIllustratorTransformMode.h CQIllustratorUndoDock.h CQIllustratorUndo.h CQIllustratorUtil.h CQIllustratorZoomMode.h CQSVGRenderer.h CQSVGFontObj.h CQSVGImageData.h CQAccelerate.h CQDockWidget.h CQFillOptionDialog.h CQFillOptionTool.h CQFontOptionDialog.h CQFontOptionTool.h CQGradientStopList.h CQImagePreview.h CQLayerOption.h CQLineCap.h CQLineDash.h CQLineJoin.h CQMatrix2D.h CQObjectOption.h CQOptionToolSet.h CQPointEdit.h CQPropertiesOption.h CQScrollArea.h CQStrokeOptionDialog.h CQStrokeOptionTool.h CQSwatch.h CQTableWidget.h CQuadTree.h CQWinWidget.h CAxis2D.h CBooleanOp.h CDelaunay.h CEncode64.h CGenPoly.h CHull3D.h CKuhnMunkres.h CLog.h CPathPartType.h CPathShape.h CStack.h $(DISTDIR)/
+	$(COPY_FILE) --parents CQIllustratorAlignMode.cpp CQIllustratorCanvas.cpp CQIllustratorCmd.cpp CQIllustrator.cpp CQIllustratorCreateEllipseMode.cpp CQIllustratorCreatePathMode.cpp CQIllustratorCreatePolygonMode.cpp CQIllustratorCreateRectMode.cpp CQIllustratorCreateStarMode.cpp CQIllustratorCreateTextMode.cpp CQIllustratorCreateTextToolbar.cpp CQIllustratorData.cpp CQIllustratorEllipseShape.cpp CQIllustratorGroupShape.cpp CQIllustratorHandle.cpp CQIllustratorImageFill.cpp CQIllustratorInfo.cpp CQIllustratorLayer.cpp CQIllustratorMode.cpp CQIllustratorNPolyShape.cpp CQIllustratorOffsetPathMode.cpp CQIllustratorPanMode.cpp CQIllustratorPathShapeControlLine.cpp CQIllustratorPathShapeControlPoint.cpp CQIllustratorPathShape.cpp CQIllustratorPointSelectMode.cpp CQIllustratorPolygonShape.cpp CQIllustratorPreference.cpp CQIllustratorPropertiesDlg.cpp CQIllustratorRectShape.cpp CQIllustratorSandbox.cpp CQIllustratorSelection.cpp CQIllustratorSelectMode.cpp CQIllustratorSetAnchorObjectMode.cpp CQIllustratorSetAnchorPositionMode.cpp CQIllustratorSetImageMode.cpp CQIllustratorSetLGradientMode.cpp CQIllustratorSetRGradientMode.cpp CQIllustratorShapeControlLine.cpp CQIllustratorShapeControlPoint.cpp CQIllustratorShape.cpp CQIllustratorShapeDrawer.cpp CQIllustratorShapeFill.cpp CQIllustratorShapeFilter.cpp CQIllustratorShapeLGradientControlPoint.cpp CQIllustratorShapeRGradientControlPoint.cpp CQIllustratorShapeStroke.cpp CQIllustratorSizer.cpp CQIllustratorSliceMode.cpp CQIllustratorSnapDock.cpp CQIllustratorStarShape.cpp CQIllustratorTextShape.cpp CQIllustratorToolbar.cpp CQIllustratorTransformMode.cpp CQIllustratorUndo.cpp CQIllustratorUndoDock.cpp CQIllustratorZoomMode.cpp CQSVGRenderer.cpp CQSVGFontObj.cpp CQSVGImageData.cpp CQAccelerate.cpp CQFillOptionDialog.cpp CQFillOptionTool.cpp CQFontOptionDialog.cpp CQFontOptionTool.cpp CQGradientStopList.cpp CQImagePreview.cpp CQLayerOption.cpp CQLineCap.cpp CQLineDash.cpp CQLineJoin.cpp CQMatrix2D.cpp CQObjectOption.cpp CQOptionToolSet.cpp CQPointEdit.cpp CQPropertiesOption.cpp CQScrollArea.cpp CQStrokeOptionDialog.cpp CQStrokeOptionTool.cpp CQSwatch.cpp CQTableWidget.cpp CQWinWidget.cpp CAxis2D.cpp CDelaunay.cpp CEncode64.cpp CGenPoly.cpp CHull3D.cpp CKuhnMunkres.cpp CLog.cpp CPathShape.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -827,10 +815,10 @@ check: first
 
 compiler_rcc_make_all:
 compiler_rcc_clean:
-compiler_moc_header_make_all: .moc/moc_CQIllustratorAlignMode.cpp .moc/moc_CQIllustratorCanvas.cpp .moc/moc_CQIllustratorCreateEllipseMode.cpp .moc/moc_CQIllustratorCreatePathMode.cpp .moc/moc_CQIllustratorCreatePolygonMode.cpp .moc/moc_CQIllustratorCreateRectMode.cpp .moc/moc_CQIllustratorCreateStarMode.cpp .moc/moc_CQIllustratorCreateTextMode.cpp .moc/moc_CQIllustratorCreateTextToolbar.cpp .moc/moc_CQIllustratorData.cpp .moc/moc_CQIllustratorEllipseShape.cpp .moc/moc_CQIllustratorGroupShape.cpp .moc/moc_CQIllustrator.cpp .moc/moc_CQIllustratorInfo.cpp .moc/moc_CQIllustratorLayer.cpp .moc/moc_CQIllustratorMode.cpp .moc/moc_CQIllustratorNPolyShape.cpp .moc/moc_CQIllustratorOffsetPathMode.cpp .moc/moc_CQIllustratorPanMode.cpp .moc/moc_CQIllustratorPathShape.cpp .moc/moc_CQIllustratorPointSelectMode.cpp .moc/moc_CQIllustratorPolygonShape.cpp .moc/moc_CQIllustratorPreference.cpp .moc/moc_CQIllustratorPropertiesDlg.cpp .moc/moc_CQIllustratorRectShape.cpp .moc/moc_CQIllustratorSelection.cpp .moc/moc_CQIllustratorSelectMode.cpp .moc/moc_CQIllustratorSetImageMode.cpp .moc/moc_CQIllustratorSetLGradientMode.cpp .moc/moc_CQIllustratorSetRGradientMode.cpp .moc/moc_CQIllustratorShape.cpp .moc/moc_CQIllustratorSliceMode.cpp .moc/moc_CQIllustratorSnapDock.cpp .moc/moc_CQIllustratorStarShape.cpp .moc/moc_CQIllustratorTextShape.cpp .moc/moc_CQIllustratorToolbar.cpp .moc/moc_CQIllustratorTransformMode.cpp .moc/moc_CQIllustratorUndoDock.cpp .moc/moc_CQIllustratorUndo.cpp .moc/moc_CQIllustratorZoomMode.cpp .moc/moc_CQAngleSpinBox.cpp .moc/moc_CQFillOptionDialog.cpp .moc/moc_CQFillOptionTool.cpp .moc/moc_CQFontOptionDialog.cpp .moc/moc_CQFontOptionTool.cpp .moc/moc_CQGradientStopList.cpp .moc/moc_CQImagePreview.cpp .moc/moc_CQLayerOption.cpp .moc/moc_CQLineCap.cpp .moc/moc_CQLineDash.cpp .moc/moc_CQLineJoin.cpp .moc/moc_CQMatrix2D.cpp .moc/moc_CQObjectOption.cpp .moc/moc_CQOptionToolSet.cpp .moc/moc_CQPointEdit.cpp .moc/moc_CQPropertiesOption.cpp .moc/moc_CQRadioButtons.cpp .moc/moc_CQScrollArea.cpp .moc/moc_CQStrokeOptionDialog.cpp .moc/moc_CQStrokeOptionTool.cpp .moc/moc_CQTableWidget.cpp .moc/moc_CQWinWidget.cpp
+compiler_moc_header_make_all: .moc/moc_CQIllustratorAlignMode.cpp .moc/moc_CQIllustratorCanvas.cpp .moc/moc_CQIllustratorCreateEllipseMode.cpp .moc/moc_CQIllustratorCreatePathMode.cpp .moc/moc_CQIllustratorCreatePolygonMode.cpp .moc/moc_CQIllustratorCreateRectMode.cpp .moc/moc_CQIllustratorCreateStarMode.cpp .moc/moc_CQIllustratorCreateTextMode.cpp .moc/moc_CQIllustratorCreateTextToolbar.cpp .moc/moc_CQIllustratorData.cpp .moc/moc_CQIllustratorEllipseShape.cpp .moc/moc_CQIllustratorGroupShape.cpp .moc/moc_CQIllustrator.cpp .moc/moc_CQIllustratorInfo.cpp .moc/moc_CQIllustratorLayer.cpp .moc/moc_CQIllustratorMode.cpp .moc/moc_CQIllustratorNPolyShape.cpp .moc/moc_CQIllustratorOffsetPathMode.cpp .moc/moc_CQIllustratorPanMode.cpp .moc/moc_CQIllustratorPathShape.cpp .moc/moc_CQIllustratorPointSelectMode.cpp .moc/moc_CQIllustratorPolygonShape.cpp .moc/moc_CQIllustratorPreference.cpp .moc/moc_CQIllustratorPropertiesDlg.cpp .moc/moc_CQIllustratorRectShape.cpp .moc/moc_CQIllustratorSelection.cpp .moc/moc_CQIllustratorSelectMode.cpp .moc/moc_CQIllustratorSetImageMode.cpp .moc/moc_CQIllustratorSetLGradientMode.cpp .moc/moc_CQIllustratorSetRGradientMode.cpp .moc/moc_CQIllustratorShape.cpp .moc/moc_CQIllustratorSliceMode.cpp .moc/moc_CQIllustratorSnapDock.cpp .moc/moc_CQIllustratorStarShape.cpp .moc/moc_CQIllustratorTextShape.cpp .moc/moc_CQIllustratorToolbar.cpp .moc/moc_CQIllustratorTransformMode.cpp .moc/moc_CQIllustratorUndoDock.cpp .moc/moc_CQIllustratorUndo.cpp .moc/moc_CQIllustratorZoomMode.cpp .moc/moc_CQFillOptionDialog.cpp .moc/moc_CQFillOptionTool.cpp .moc/moc_CQFontOptionDialog.cpp .moc/moc_CQFontOptionTool.cpp .moc/moc_CQGradientStopList.cpp .moc/moc_CQImagePreview.cpp .moc/moc_CQLayerOption.cpp .moc/moc_CQLineCap.cpp .moc/moc_CQLineDash.cpp .moc/moc_CQLineJoin.cpp .moc/moc_CQMatrix2D.cpp .moc/moc_CQObjectOption.cpp .moc/moc_CQOptionToolSet.cpp .moc/moc_CQPointEdit.cpp .moc/moc_CQPropertiesOption.cpp .moc/moc_CQScrollArea.cpp .moc/moc_CQStrokeOptionDialog.cpp .moc/moc_CQStrokeOptionTool.cpp .moc/moc_CQTableWidget.cpp .moc/moc_CQWinWidget.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) .moc/moc_CQIllustratorAlignMode.cpp .moc/moc_CQIllustratorCanvas.cpp .moc/moc_CQIllustratorCreateEllipseMode.cpp .moc/moc_CQIllustratorCreatePathMode.cpp .moc/moc_CQIllustratorCreatePolygonMode.cpp .moc/moc_CQIllustratorCreateRectMode.cpp .moc/moc_CQIllustratorCreateStarMode.cpp .moc/moc_CQIllustratorCreateTextMode.cpp .moc/moc_CQIllustratorCreateTextToolbar.cpp .moc/moc_CQIllustratorData.cpp .moc/moc_CQIllustratorEllipseShape.cpp .moc/moc_CQIllustratorGroupShape.cpp .moc/moc_CQIllustrator.cpp .moc/moc_CQIllustratorInfo.cpp .moc/moc_CQIllustratorLayer.cpp .moc/moc_CQIllustratorMode.cpp .moc/moc_CQIllustratorNPolyShape.cpp .moc/moc_CQIllustratorOffsetPathMode.cpp .moc/moc_CQIllustratorPanMode.cpp .moc/moc_CQIllustratorPathShape.cpp .moc/moc_CQIllustratorPointSelectMode.cpp .moc/moc_CQIllustratorPolygonShape.cpp .moc/moc_CQIllustratorPreference.cpp .moc/moc_CQIllustratorPropertiesDlg.cpp .moc/moc_CQIllustratorRectShape.cpp .moc/moc_CQIllustratorSelection.cpp .moc/moc_CQIllustratorSelectMode.cpp .moc/moc_CQIllustratorSetImageMode.cpp .moc/moc_CQIllustratorSetLGradientMode.cpp .moc/moc_CQIllustratorSetRGradientMode.cpp .moc/moc_CQIllustratorShape.cpp .moc/moc_CQIllustratorSliceMode.cpp .moc/moc_CQIllustratorSnapDock.cpp .moc/moc_CQIllustratorStarShape.cpp .moc/moc_CQIllustratorTextShape.cpp .moc/moc_CQIllustratorToolbar.cpp .moc/moc_CQIllustratorTransformMode.cpp .moc/moc_CQIllustratorUndoDock.cpp .moc/moc_CQIllustratorUndo.cpp .moc/moc_CQIllustratorZoomMode.cpp .moc/moc_CQAngleSpinBox.cpp .moc/moc_CQFillOptionDialog.cpp .moc/moc_CQFillOptionTool.cpp .moc/moc_CQFontOptionDialog.cpp .moc/moc_CQFontOptionTool.cpp .moc/moc_CQGradientStopList.cpp .moc/moc_CQImagePreview.cpp .moc/moc_CQLayerOption.cpp .moc/moc_CQLineCap.cpp .moc/moc_CQLineDash.cpp .moc/moc_CQLineJoin.cpp .moc/moc_CQMatrix2D.cpp .moc/moc_CQObjectOption.cpp .moc/moc_CQOptionToolSet.cpp .moc/moc_CQPointEdit.cpp .moc/moc_CQPropertiesOption.cpp .moc/moc_CQRadioButtons.cpp .moc/moc_CQScrollArea.cpp .moc/moc_CQStrokeOptionDialog.cpp
-	-$(DEL_FILE) .moc/moc_CQStrokeOptionTool.cpp .moc/moc_CQTableWidget.cpp .moc/moc_CQWinWidget.cpp
+	-$(DEL_FILE) .moc/moc_CQIllustratorAlignMode.cpp .moc/moc_CQIllustratorCanvas.cpp .moc/moc_CQIllustratorCreateEllipseMode.cpp .moc/moc_CQIllustratorCreatePathMode.cpp .moc/moc_CQIllustratorCreatePolygonMode.cpp .moc/moc_CQIllustratorCreateRectMode.cpp .moc/moc_CQIllustratorCreateStarMode.cpp .moc/moc_CQIllustratorCreateTextMode.cpp .moc/moc_CQIllustratorCreateTextToolbar.cpp .moc/moc_CQIllustratorData.cpp .moc/moc_CQIllustratorEllipseShape.cpp .moc/moc_CQIllustratorGroupShape.cpp .moc/moc_CQIllustrator.cpp .moc/moc_CQIllustratorInfo.cpp .moc/moc_CQIllustratorLayer.cpp .moc/moc_CQIllustratorMode.cpp .moc/moc_CQIllustratorNPolyShape.cpp .moc/moc_CQIllustratorOffsetPathMode.cpp .moc/moc_CQIllustratorPanMode.cpp .moc/moc_CQIllustratorPathShape.cpp .moc/moc_CQIllustratorPointSelectMode.cpp .moc/moc_CQIllustratorPolygonShape.cpp .moc/moc_CQIllustratorPreference.cpp .moc/moc_CQIllustratorPropertiesDlg.cpp .moc/moc_CQIllustratorRectShape.cpp .moc/moc_CQIllustratorSelection.cpp .moc/moc_CQIllustratorSelectMode.cpp .moc/moc_CQIllustratorSetImageMode.cpp .moc/moc_CQIllustratorSetLGradientMode.cpp .moc/moc_CQIllustratorSetRGradientMode.cpp .moc/moc_CQIllustratorShape.cpp .moc/moc_CQIllustratorSliceMode.cpp .moc/moc_CQIllustratorSnapDock.cpp .moc/moc_CQIllustratorStarShape.cpp .moc/moc_CQIllustratorTextShape.cpp .moc/moc_CQIllustratorToolbar.cpp .moc/moc_CQIllustratorTransformMode.cpp .moc/moc_CQIllustratorUndoDock.cpp .moc/moc_CQIllustratorUndo.cpp .moc/moc_CQIllustratorZoomMode.cpp .moc/moc_CQFillOptionDialog.cpp .moc/moc_CQFillOptionTool.cpp .moc/moc_CQFontOptionDialog.cpp .moc/moc_CQFontOptionTool.cpp .moc/moc_CQGradientStopList.cpp .moc/moc_CQImagePreview.cpp .moc/moc_CQLayerOption.cpp .moc/moc_CQLineCap.cpp .moc/moc_CQLineDash.cpp .moc/moc_CQLineJoin.cpp .moc/moc_CQMatrix2D.cpp .moc/moc_CQObjectOption.cpp .moc/moc_CQOptionToolSet.cpp .moc/moc_CQPointEdit.cpp .moc/moc_CQPropertiesOption.cpp .moc/moc_CQScrollArea.cpp .moc/moc_CQStrokeOptionDialog.cpp .moc/moc_CQStrokeOptionTool.cpp .moc/moc_CQTableWidget.cpp
+	-$(DEL_FILE) .moc/moc_CQWinWidget.cpp
 .moc/moc_CQIllustratorAlignMode.cpp: CQIllustrator.h \
 		../../CQUtil/include/CQMainWindow.h \
 		../../CUtil/include/CAutoPtr.h \
@@ -3358,10 +3346,6 @@ compiler_moc_header_clean:
 		CQIllustratorZoomMode.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/colinw/git/CQIllustrator/src -I/home/colinw/git/CQIllustrator/include -I/home/colinw/git/CSVG/include -I/home/colinw/git/CCSS/include -I/home/colinw/git/CQPropertyTree/include -I/home/colinw/git/CQUtil/include -I/home/colinw/git/CImageLib/include -I/home/colinw/git/CConfig/include -I/home/colinw/git/CArgs/include -I/home/colinw/git/CFileUtil/include -I/home/colinw/git/CFile/include -I/home/colinw/git/CFont/include -I/home/colinw/git/CRegExp/include -I/home/colinw/git/CStrUtil/include -I/home/colinw/git/COS/include -I/home/colinw/git/CMath/include -I/home/colinw/git/CRGBName/include -I/home/colinw/git/CUndo/include -I/home/colinw/git/CUtil/include -I/home/colinw/git/CQIllustrator/src -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include CQIllustratorZoomMode.h -o .moc/moc_CQIllustratorZoomMode.cpp
 
-.moc/moc_CQAngleSpinBox.cpp: ../../CMath/include/CAngle.h \
-		CQAngleSpinBox.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/colinw/git/CQIllustrator/src -I/home/colinw/git/CQIllustrator/include -I/home/colinw/git/CSVG/include -I/home/colinw/git/CCSS/include -I/home/colinw/git/CQPropertyTree/include -I/home/colinw/git/CQUtil/include -I/home/colinw/git/CImageLib/include -I/home/colinw/git/CConfig/include -I/home/colinw/git/CArgs/include -I/home/colinw/git/CFileUtil/include -I/home/colinw/git/CFile/include -I/home/colinw/git/CFont/include -I/home/colinw/git/CRegExp/include -I/home/colinw/git/CStrUtil/include -I/home/colinw/git/COS/include -I/home/colinw/git/CMath/include -I/home/colinw/git/CRGBName/include -I/home/colinw/git/CUndo/include -I/home/colinw/git/CUtil/include -I/home/colinw/git/CQIllustrator/src -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include CQAngleSpinBox.h -o .moc/moc_CQAngleSpinBox.cpp
-
 .moc/moc_CQFillOptionDialog.cpp: CQOptionToolSet.h \
 		CQWinWidget.h \
 		CQIllustratorShapeFill.h \
@@ -3653,9 +3637,6 @@ compiler_moc_header_clean:
 		CBooleanOp.h \
 		CQPropertiesOption.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/colinw/git/CQIllustrator/src -I/home/colinw/git/CQIllustrator/include -I/home/colinw/git/CSVG/include -I/home/colinw/git/CCSS/include -I/home/colinw/git/CQPropertyTree/include -I/home/colinw/git/CQUtil/include -I/home/colinw/git/CImageLib/include -I/home/colinw/git/CConfig/include -I/home/colinw/git/CArgs/include -I/home/colinw/git/CFileUtil/include -I/home/colinw/git/CFile/include -I/home/colinw/git/CFont/include -I/home/colinw/git/CRegExp/include -I/home/colinw/git/CStrUtil/include -I/home/colinw/git/COS/include -I/home/colinw/git/CMath/include -I/home/colinw/git/CRGBName/include -I/home/colinw/git/CUndo/include -I/home/colinw/git/CUtil/include -I/home/colinw/git/CQIllustrator/src -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include CQPropertiesOption.h -o .moc/moc_CQPropertiesOption.cpp
-
-.moc/moc_CQRadioButtons.cpp: CQRadioButtons.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/colinw/git/CQIllustrator/src -I/home/colinw/git/CQIllustrator/include -I/home/colinw/git/CSVG/include -I/home/colinw/git/CCSS/include -I/home/colinw/git/CQPropertyTree/include -I/home/colinw/git/CQUtil/include -I/home/colinw/git/CImageLib/include -I/home/colinw/git/CConfig/include -I/home/colinw/git/CArgs/include -I/home/colinw/git/CFileUtil/include -I/home/colinw/git/CFile/include -I/home/colinw/git/CFont/include -I/home/colinw/git/CRegExp/include -I/home/colinw/git/CStrUtil/include -I/home/colinw/git/COS/include -I/home/colinw/git/CMath/include -I/home/colinw/git/CRGBName/include -I/home/colinw/git/CUndo/include -I/home/colinw/git/CUtil/include -I/home/colinw/git/CQIllustrator/src -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include CQRadioButtons.h -o .moc/moc_CQRadioButtons.cpp
 
 .moc/moc_CQScrollArea.cpp: CQScrollArea.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/colinw/git/CQIllustrator/src -I/home/colinw/git/CQIllustrator/include -I/home/colinw/git/CSVG/include -I/home/colinw/git/CCSS/include -I/home/colinw/git/CQPropertyTree/include -I/home/colinw/git/CQUtil/include -I/home/colinw/git/CImageLib/include -I/home/colinw/git/CConfig/include -I/home/colinw/git/CArgs/include -I/home/colinw/git/CFileUtil/include -I/home/colinw/git/CFile/include -I/home/colinw/git/CFont/include -I/home/colinw/git/CRegExp/include -I/home/colinw/git/CStrUtil/include -I/home/colinw/git/COS/include -I/home/colinw/git/CMath/include -I/home/colinw/git/CRGBName/include -I/home/colinw/git/CUndo/include -I/home/colinw/git/CUtil/include -I/home/colinw/git/CQIllustrator/src -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include CQScrollArea.h -o .moc/moc_CQScrollArea.cpp
@@ -4477,7 +4458,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CPen.h \
 		CQPointEdit.h \
 		../../CQUtil/include/CQRealEdit.h \
-		CQAngleSpinBox.h \
+		../../CQUtil/include/CQAngleSpinBox.h \
 		CQSwatch.h \
 		svg/ellipse_svg.h \
 		../../CQUtil/include/CQPixmapCache.h \
@@ -4940,7 +4921,7 @@ compiler_clean: compiler_moc_header_clean
 		CQPointEdit.h \
 		../../CQUtil/include/CQIntegerEdit.h \
 		../../CQUtil/include/CQRealEdit.h \
-		CQAngleSpinBox.h \
+		../../CQUtil/include/CQAngleSpinBox.h \
 		CQSwatch.h \
 		svg/star_poly_svg.h \
 		../../CQUtil/include/CQPixmapCache.h \
@@ -6972,7 +6953,7 @@ compiler_clean: compiler_moc_header_clean
 		../../CUtil/include/CBrushStyle.h \
 		../../CUtil/include/CPen.h \
 		CQSwatch.h \
-		CQRadioButtons.h \
+		../../CQUtil/include/CQRadioButtons.h \
 		../../CQUtil/include/CQImageButton.h \
 		svg/select_svg.h \
 		../../CQUtil/include/CQPixmapCache.h \
@@ -8655,7 +8636,7 @@ compiler_clean: compiler_moc_header_clean
 		CQIllustratorSnap.h \
 		CQIllustratorToolbar.h \
 		../../CQUtil/include/CQRealEdit.h \
-		CQAngleSpinBox.h \
+		../../CQUtil/include/CQAngleSpinBox.h \
 		../../CMath/include/CAngle.h \
 		../../CQUtil/include/CQUtil.h \
 		../../CUtil/include/CBrush.h \
@@ -9110,10 +9091,6 @@ compiler_clean: compiler_moc_header_clean
 ../obj/CQAccelerate.o: CQAccelerate.cpp CQAccelerate.h \
 		CKuhnMunkres.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CQAccelerate.o CQAccelerate.cpp
-
-../obj/CQAngleSpinBox.o: CQAngleSpinBox.cpp CQAngleSpinBox.h \
-		../../CMath/include/CAngle.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CQAngleSpinBox.o CQAngleSpinBox.cpp
 
 ../obj/CQFillOptionDialog.o: CQFillOptionDialog.cpp CQFillOptionDialog.h \
 		CQOptionToolSet.h \
@@ -10025,12 +10002,9 @@ compiler_clean: compiler_moc_header_clean
 		CQIllustratorShapeFilter.h \
 		CQMatrix2D.h \
 		../../CQUtil/include/CQRealEdit.h \
-		CQAngleSpinBox.h \
+		../../CQUtil/include/CQAngleSpinBox.h \
 		../../CMath/include/CAngle.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CQPropertiesOption.o CQPropertiesOption.cpp
-
-../obj/CQRadioButtons.o: CQRadioButtons.cpp CQRadioButtons.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CQRadioButtons.o CQRadioButtons.cpp
 
 ../obj/CQScrollArea.o: CQScrollArea.cpp CQScrollArea.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CQScrollArea.o CQScrollArea.cpp
@@ -10437,9 +10411,6 @@ compiler_clean: compiler_moc_header_clean
 ../obj/moc_CQIllustratorZoomMode.o: .moc/moc_CQIllustratorZoomMode.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/moc_CQIllustratorZoomMode.o .moc/moc_CQIllustratorZoomMode.cpp
 
-../obj/moc_CQAngleSpinBox.o: .moc/moc_CQAngleSpinBox.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/moc_CQAngleSpinBox.o .moc/moc_CQAngleSpinBox.cpp
-
 ../obj/moc_CQFillOptionDialog.o: .moc/moc_CQFillOptionDialog.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/moc_CQFillOptionDialog.o .moc/moc_CQFillOptionDialog.cpp
 
@@ -10484,9 +10455,6 @@ compiler_clean: compiler_moc_header_clean
 
 ../obj/moc_CQPropertiesOption.o: .moc/moc_CQPropertiesOption.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/moc_CQPropertiesOption.o .moc/moc_CQPropertiesOption.cpp
-
-../obj/moc_CQRadioButtons.o: .moc/moc_CQRadioButtons.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/moc_CQRadioButtons.o .moc/moc_CQRadioButtons.cpp
 
 ../obj/moc_CQScrollArea.o: .moc/moc_CQScrollArea.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/moc_CQScrollArea.o .moc/moc_CQScrollArea.cpp
