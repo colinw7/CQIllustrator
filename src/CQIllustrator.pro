@@ -97,7 +97,6 @@ CQStrokeOptionDialog.cpp \
 CQStrokeOptionTool.cpp \
 CQSwatch.cpp \
 CQTableWidget.cpp \
-CQWinWidget.cpp \
 \
 CAxis2D.cpp \
 CDelaunay.cpp \
@@ -211,7 +210,6 @@ CQStrokeOptionTool.h \
 CQSwatch.h \
 CQTableWidget.h \
 CQuadTree.h \
-CQWinWidget.h \
 \
 CAxis2D.h \
 CBooleanOp.h \
