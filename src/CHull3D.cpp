@@ -6,7 +6,7 @@ uint CHull3D::Vertex::count_ = 0;
 
 CHull3D::
 CHull3D() :
- vertices_(NULL), edges_(NULL), faces_(NULL), vvertices_(NULL), vedges_(NULL),
+ vertices_(0), edges_(0), faces_(0), vvertices_(0), vedges_(0),
  useLower_(false), debug_(false), check_(false)
 {
 }
@@ -50,32 +50,58 @@ addVertex(double x, double y)
 
 void
 CHull3D::
+clearVertices()
+{
+  if (! vertices_) return;
+
+  PVertex v = vertices_;
+
+  for (;;) {
+    PVertex v1 = v->next;
+
+    if (v1 == vertices_)
+      break;
+
+    delete v;
+
+    v = v1;
+  }
+
+  vertices_ = 0;
+
+  Vertex::resetCount();
+}
+
+void
+CHull3D::
 reset()
 {
-  PVertex v = vertices_; do { v->reset(); v = v->next; } while (v != vertices_);
+  if (vertices_) {
+    PVertex v = vertices_; do { v->reset(); v = v->next; } while (v != vertices_);
+  }
 
   if (edges_) {
     PEdge e = edges_; do { PEdge e1 = e->next; delete e; e = e1; } while (e != edges_);
 
-    edges_ = NULL;
+    edges_ = 0;
   }
 
   if (faces_) {
     PFace f = faces_; do { PFace f1 = f->next; delete f; f = f1; } while (f != faces_);
 
-    faces_ = NULL;
+    faces_ = 0;
   }
 
   if (vvertices_) {
     PVertex v = vvertices_; do { PVertex v1 = v->next; delete v; v = v1; } while (v != vvertices_);
 
-    vvertices_ = NULL;
+    vvertices_ = 0;
   }
 
   if (vedges_) {
     PEdge e = vedges_; do { PEdge e1 = e->next; delete e; e = e1; } while (e != vedges_);
 
-    vedges_ = NULL;
+    vedges_ = 0;
   }
 }
 
@@ -92,6 +118,8 @@ bool
 CHull3D::
 doubleTriangle()
 {
+  if (! vertices_) return false;
+
   // Find 3 non-collinear points.
   PVertex v0 = vertices_;
   PVertex v1 = v0->next;
@@ -116,7 +144,7 @@ doubleTriangle()
   v2->setProcessed(true);
 
   // Create the two "twin" faces.
-  PFace f0 = makeFace(v0, v1, v2, NULL);
+  PFace f0 = makeFace(v0, v1, v2, 0);
   PFace f1 = makeFace(v2, v1, v0, f0);
 
   /* Link adjacent face fields. */
@@ -163,6 +191,8 @@ void
 CHull3D::
 constructHull()
 {
+  if (! vertices_) return;
+
   PVertex v0 = vertices_;
 
   do {
@@ -286,12 +316,17 @@ addOne(PVertex p)
   do {
     PEdge e1 = e->next;
 
-    if      (e->leftFace()->isVisible() && e->rightFace()->isVisible())
-      /* e interior: mark for deletion. */
-      e->setRemoved(true);
-    else if (e->leftFace()->isVisible() || e->rightFace()->isVisible())
-      /* e border: make a new face. */
-      e->setConeFace(makeConeFace(e, p));
+    PFace lf = e->leftFace ();
+    PFace rf = e->rightFace();
+
+    if (lf && rf) {
+      if      (lf->isVisible() && rf->isVisible())
+        /* e interior: mark for deletion. */
+        e->setRemoved(true);
+      else if (lf->isVisible() || rf->isVisible())
+        /* e border: make a new face. */
+        e->setConeFace(makeConeFace(e, p));
+    }
 
     e = e1;
   } while (e != edges_);
@@ -365,17 +400,20 @@ makeCcw(PFace f, PEdge e, PVertex p)
 {
   PFace fv; /* The visible face adjacent to e */
 
-  if (e->leftFace()->isVisible())
-    fv = e->leftFace();
+  PFace lf = e->leftFace ();
+  PFace rf = e->rightFace();
+
+  if (lf && lf->isVisible())
+    fv = lf;
   else
-    fv = e->rightFace();
+    fv = rf;
 
   /* Set vertex(0) and vertex(1) of f to have the same orientation
      as do the corresponding vertices of fv. */
   int i = 0;
 
-  for ( ; fv->vertex(i) != e->start(); ++i)
-    ;
+  while (fv->vertex(i) != e->start())
+    ++i;
 
   /* Orient f the same as fv. */
   int i1 = (i + 1) % 3;
@@ -412,7 +450,7 @@ dumpPS(const char *filename)
 {
   FILE *fp = fopen(filename, "w");
 
-  if (fp == NULL) {
+  if (fp == 0) {
     std::cerr << "Invalid filename " << filename << std::endl;
     return;
   }
@@ -435,88 +473,94 @@ dumpPS(const char *filename)
   /* The +72 shifts the figure one inch from the lower left corner */
 
   // Vertices.
-  PVertex v = vertices_;
+  if (vertices_) {
+    PVertex v = vertices_;
 
-  do {
-    if (v->isProcessed()) numV++;
+    do {
+      if (v->isProcessed()) numV++;
 
-    v = v->next;
-  } while (v != vertices_);
+      v = v->next;
+    } while (v != vertices_);
 
-  fprintf(fp, "\n%%%% Vertices:\tV = %u\n", numV);
-  fprintf(fp, "%%%% index:\tx\ty\tz\n");
+    fprintf(fp, "\n%%%% Vertices:\tV = %u\n", numV);
+    fprintf(fp, "%%%% index:\tx\ty\tz\n");
 
-  do {
-    fprintf(fp, "%%%% %5d:\t%g\t%g\t%g\n", v->num(), v->x(), v->y(), v->z());
-    fprintf(fp, "newpath\n");
-    fprintf(fp, "%g\t%g 2 0 360 arc\n", v->x(), v->y());
-    fprintf(fp, "closepath stroke\n\n");
+    do {
+      fprintf(fp, "%%%% %5d:\t%g\t%g\t%g\n", v->num(), v->x(), v->y(), v->z());
+      fprintf(fp, "newpath\n");
+      fprintf(fp, "%g\t%g 2 0 360 arc\n", v->x(), v->y());
+      fprintf(fp, "closepath stroke\n\n");
 
-    v = v->next;
-  } while (v != vertices_);
+      v = v->next;
+    } while (v != vertices_);
+  }
 
   // Faces. (visible faces only)
-  PFace f = faces_;
+  if (faces_) {
+    PFace f = faces_;
 
-  do {
-    ++numF;
+    do {
+      ++numF;
 
-    f  = f ->next;
-  } while (f != faces_);
+      f  = f ->next;
+    } while (f != faces_);
 
-  fprintf(fp, "\n%%%% Faces:\tF = %u\n", numF);
-  fprintf(fp, "%%%% Visible faces only: \n");
+    fprintf(fp, "\n%%%% Faces:\tF = %u\n", numF);
+    fprintf(fp, "%%%% Visible faces only: \n");
 
-  do {
-    bool show = true;
+    do {
+      bool show = true;
 
-    if (useLower_) {
-      /* Print face only if it is lower */
-      show = f->isLower();
-    }
-    else {
-      /* print face only if it is visible: if normal vector >= 0 */
-      int nz = f->normalZDirection();
+      if (useLower_) {
+        /* Print face only if it is lower */
+        show = f->isLower();
+      }
+      else {
+        /* print face only if it is visible: if normal vector >= 0 */
+        double nz = f->normalZDirection();
 
-      show = (nz >= 0);
-    }
+        show = (nz >= 1E-6);
+      }
 
-    if (show) {
-      fprintf(fp, "%%%% nums: %u %u %u\n",
+      if (show) {
+        fprintf(fp, "%%%% nums: %u %u %u\n",
+                f->vertex(0)->num(), f->vertex(1)->num(), f->vertex(2)->num());
+
+        fprintf(fp, "newpath\n");
+        fprintf(fp, "%g\t%g\tmoveto\n", f->vertex(0)->x(), f->vertex(0)->y());
+        fprintf(fp, "%g\t%g\tlineto\n", f->vertex(1)->x(), f->vertex(1)->y());
+        fprintf(fp, "%g\t%g\tlineto\n", f->vertex(2)->x(), f->vertex(2)->y());
+        fprintf(fp, "closepath stroke\n\n");
+      }
+
+      f = f->next;
+    } while (f != faces_);
+
+    /* prints a list of all faces */
+    fprintf(fp, "%%%% List of all faces: \n");
+    fprintf(fp, "%%%%\tv0\tv1\tv2\t(vertex indices)\n");
+
+    do {
+      fprintf(fp, "%%%%\t%u\t%u\t%u\n",
               f->vertex(0)->num(), f->vertex(1)->num(), f->vertex(2)->num());
 
-      fprintf(fp, "newpath\n");
-      fprintf(fp, "%g\t%g\tmoveto\n", f->vertex(0)->x(), f->vertex(0)->y());
-      fprintf(fp, "%g\t%g\tlineto\n", f->vertex(1)->x(), f->vertex(1)->y());
-      fprintf(fp, "%g\t%g\tlineto\n", f->vertex(2)->x(), f->vertex(2)->y());
-      fprintf(fp, "closepath stroke\n\n");
-    }
-
-    f = f->next;
-  } while (f != faces_);
-
-  /* prints a list of all faces */
-  fprintf(fp, "%%%% List of all faces: \n");
-  fprintf(fp, "%%%%\tv0\tv1\tv2\t(vertex indices)\n");
-
-  do {
-    fprintf(fp, "%%%%\t%u\t%u\t%u\n",
-            f->vertex(0)->num(), f->vertex(1)->num(), f->vertex(2)->num());
-
-    f = f->next;
-  } while (f != faces_);
+      f = f->next;
+    } while (f != faces_);
+  }
 
   // Edges.
-  PEdge e = edges_;
+  if (edges_) {
+    PEdge e = edges_;
 
-  do {
-    numE++;
+    do {
+      numE++;
 
-    e = e->next;
-  } while (e != edges_);
+      e = e->next;
+    } while (e != edges_);
 
-  fprintf(fp, "\n%%%% Edges:\tE = %u\n", numE);
-  /* Edges not printed out (but easily added). */
+    fprintf(fp, "\n%%%% Edges:\tE = %u\n", numE);
+    /* Edges not printed out (but easily added). */
+  }
 
   fprintf(fp, "\nshowpage\n\n");
   fprintf(fp, "%%EOF\n");
@@ -531,6 +575,8 @@ CHull3D::
 getRange(double *xmin, double *ymin, double *zmin, double *xmax, double *ymax, double *zmax)
 {
   /*-- find X min & max --*/
+  if (! vertices_) return;
+
   PVertex v = vertices_;
 
   *xmin = v->x(), *xmax = *xmin;
@@ -571,9 +617,9 @@ volumeSign(PFace f, PVertex p)
   double vol = ax*(by*cz - bz*cy) + ay*(bz*cx - bx*cz) + az*(bx*cy - by*cx);
 
   /* The volume should be an integer. */
-  if      (vol >  0.5) return  1;
-  else if (vol < -0.5) return -1;
-  else                 return  0;
+  if      (vol >  1E-6) return  1;
+  else if (vol < -1E-6) return -1;
+  else                  return  0;
 }
 
 /*--------------------------------------------------------------------
@@ -679,12 +725,14 @@ cleanEdges()
 
   do {
     if (e->coneFace()) {
-      if (e->leftFace()->isVisible())
+      PFace lf = e->leftFace();
+
+      if (lf && lf->isVisible())
         e->setLeftFace(e->coneFace());
       else
         e->setRightFace(e->coneFace());
 
-      e->setConeFace(NULL);
+      e->setConeFace(0);
     }
 
     e = e->next;
@@ -762,6 +810,8 @@ void
 CHull3D::
 cleanVertices(PVertex *pvnext)
 {
+  if (! edges_) return;
+
   // Mark all vertices incident to some undeleted edge as on the hull.
   PEdge e = edges_;
 
@@ -786,33 +836,37 @@ cleanVertices(PVertex *pvnext)
     delete v;
   }
 
-  v = vertices_->next;
+  if (vertices_) {
+    v = vertices_->next;
 
-  do {
-    if (v->isProcessed() && ! v->onHull()) {
-      PVertex t = v;
+    do {
+      if (v->isProcessed() && ! v->onHull()) {
+        PVertex t = v;
 
-      v = v->next;
+        v = v->next;
 
-      if (t == *pvnext) *pvnext = t->next;
+        if (t == *pvnext) *pvnext = t->next;
 
-      t->removeFrom(&vertices_);
+        t->removeFrom(&vertices_);
 
-      delete t;
-    }
-    else
-      v = v->next;
-  } while (v != vertices_);
+        delete t;
+      }
+      else
+        v = v->next;
+    } while (v != vertices_);
+  }
 
   // Reset flags
-  v = vertices_;
+  if (vertices_) {
+    v = vertices_;
 
-  do {
-    v->setDuplicateEdge(NULL);
-    v->setOnHull       (false);
+    do {
+      v->setDuplicateEdge(0);
+      v->setOnHull       (false);
 
-    v = v->next;
-  } while (v != vertices_);
+      v = v->next;
+    } while (v != vertices_);
+  }
 }
 
 void
@@ -840,7 +894,7 @@ collinear(PVertex a, PVertex b, PVertex c)
 
   crossProduct(x1, y1, z1, x2, y2, z2, &x3, &y3, &z3);
 
-  return (x3 == 0 && y3 == 0 && z3 == 0);
+  return (fabs(x3) < 1E-6 && fabs(y3) < 1E-6 && fabs(z3) < 1E-6);
 
 #if 0
   return (c->z() - a->z()) * (b->y() - a->y()) -
@@ -857,6 +911,9 @@ void
 CHull3D::
 checks()
 {
+  if (! vertices_)
+    return;
+
   consistency();
 
   convexity();
@@ -915,16 +972,20 @@ consistency()
 
   do {
     /* find index of endpoint[0] in adjacent face[0] */
-    int i;
+    PFace lf = e->leftFace();
 
-    for (i = 0; e->leftFace()->vertex(i) != e->start(); ++i)
-      ;
+    int i = 0;
+
+    while (lf && lf->vertex(i) != e->start())
+      ++i;
 
     /* find index of endpoint[0] in adjacent face[1] */
-    int j;
+    PFace rf = e->rightFace();
 
-    for (j = 0; e->rightFace()->vertex(j) != e->start(); ++j)
-      ;
+    int j = 0;
+
+    while (rf && rf->vertex(j) != e->start())
+      ++j;
 
     /* check if the endpoints occur in opposite order */
     int i1 = (i  + 1) % 3;
@@ -932,8 +993,8 @@ consistency()
     int j1 = (j  + 1) % 3;
     int j2 = (j1 + 1) % 3;
 
-    if (! (e->leftFace()->vertex(i1) == e->rightFace()->vertex(j2) ||
-           e->leftFace()->vertex(i2) == e->rightFace()->vertex(j1)))
+    if (! (lf->vertex(i1) == rf->vertex(j2) ||
+           lf->vertex(i2) == rf->vertex(j1)))
       break;
 
     e = e->next;
@@ -954,6 +1015,8 @@ void
 CHull3D::
 convexity()
 {
+  if (! faces_) return;
+
   PFace f = faces_;
 
   do {
@@ -1018,7 +1081,7 @@ void
 CHull3D::
 printOut(PVertex v)
 {
-  fprintf(stderr, "\nHead vertex %u = %6p :\n", v->num(), v);
+  fprintf(stderr, "\nHead vertex %u = %6p :\n", v->num(), (void *) v);
 
   printVertices();
   printEdges();
@@ -1036,11 +1099,11 @@ printVertices()
 
   if (vertices_) {
     do {
-      fprintf(stderr,"  addr %6p\t", vertices_);
+      fprintf(stderr,"  addr %6p\t", (void *) vertices_);
       fprintf(stderr,"  num %4d", vertices_->num());
       fprintf(stderr,"   (%6g,%6g,%6g)",vertices_->x(), vertices_->y(), vertices_->z());
       fprintf(stderr,"   active:%3d", vertices_->onHull());
-      fprintf(stderr,"   dup:%5p", vertices_->duplicateEdge());
+      fprintf(stderr,"   dup:%5p", (void *) vertices_->duplicateEdge());
       fprintf(stderr,"   mark:%2d\n", vertices_->isProcessed());
 
       vertices_ = vertices_->next;
@@ -1053,17 +1116,19 @@ void
 CHull3D::
 printEdges()
 {
+  if (! edges_) return;
+
   PEdge temp = edges_;
 
   fprintf(stderr, "Edge List\n");
 
   if (edges_) {
     do {
-      fprintf(stderr, "  addr: %6p\t", edges_);
+      fprintf(stderr, "  addr: %6p\t", (void *) edges_);
       fprintf(stderr, "adj: ");
 
       for (int i = 0; i < 2; ++i)
-        fprintf(stderr, "%6p", edges_->face(i));
+        fprintf(stderr, "%6p", (void *) edges_->face(i));
 
       fprintf(stderr, "  endpts:");
 
@@ -1082,17 +1147,19 @@ void
 CHull3D::
 printFaces()
 {
+  if (! faces_) return;
+
   PFace temp = faces_;
 
   fprintf(stderr, "Face List\n");
 
   if (faces_) {
     do {
-      fprintf(stderr, "  addr: %10p ", faces_);
+      fprintf(stderr, "  addr: %10p ", (void *) faces_);
       fprintf(stderr, "  edges:");
 
       for (int i = 0; i < 3; ++i)
-        fprintf(stderr, "%10p ", faces_->edge(i));
+        fprintf(stderr, "%10p ", (void *) faces_->edge(i));
 
       fprintf(stderr, "  vert:");
 
@@ -1129,7 +1196,7 @@ checkEndpts()
           error = true;
 
           fprintf(stderr,"CheckEndpts: Error!\n");
-          fprintf(stderr,"  addr: %8p;", faces_);
+          fprintf(stderr,"  addr: %8p;", (void *) faces_);
           fprintf(stderr,"  edges:");
           fprintf(stderr,"(%3d,%3d)", e->start()->num(), e->end()->num());
           fprintf(stderr,"\n");

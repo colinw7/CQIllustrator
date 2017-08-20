@@ -6,6 +6,8 @@
 #include <cstdlib>
 #include <cstdio>
 #include <climits>
+#include <cmath>
+#include <cassert>
 #include <iostream>
 
 class CHull3D {
@@ -13,20 +15,19 @@ class CHull3D {
   /* Define vertex indices. */
   enum { IX = 0, IY = 1, IZ = 2 };
 
-  /* Range of safe coord values. */
-  enum { SAFE = INT_MAX };
-
  public:
   /* Define structures for vertices, edges and faces */
-  struct Face;
-  struct Edge;
-  class  Vertex;
+  class Face;
+  class Edge;
+  class Vertex;
 
   class Vertex : public CListLink<Vertex> {
    private:
     typedef CListLink<Vertex> ListLink;
 
    public:
+    static void resetCount() { count_ = 0; }
+
     Vertex(double x, double y, double z) {
       v_[0] = x;
       v_[1] = y;
@@ -85,7 +86,10 @@ class CHull3D {
 
    private:
     void checkSafe() const {
-      if ((abs(x() > SAFE)) || (abs(y() > SAFE)) || (abs(z() > SAFE))) {
+      /* Range of safe coord values. */
+      static int SAFE = INT_MAX;
+
+      if ((fabs(x()) > SAFE) || (fabs(y()) > SAFE) || (fabs(z()) > SAFE)) {
         printf("Coordinate of vertex below might be too large: run with -c flag\n");
         print();
       }
@@ -110,24 +114,22 @@ class CHull3D {
     typedef CListLink<Edge> ListLink;
 
    public:
-    Edge() {
-      endpts_[0] = NULL;
-      endpts_[1] = NULL;
+    Edge() :
+     newface_(0), removed_(false) {
+      setStart(0);
+      setEnd  (0);
 
-      adjface_[0] = adjface_[1] = NULL;
-
-      newface_ = NULL;
-      removed_ = false;
+      setLeftFace (0);
+      setRightFace(0);
     }
 
-    Edge(Vertex *s, Vertex *e) {
-      endpts_[0] = s;
-      endpts_[1] = e;
+    Edge(Vertex *s, Vertex *e) :
+     newface_(0), removed_(false) {
+      setStart(s);
+      setEnd  (e);
 
-      adjface_[0] = adjface_[1] = NULL;
-
-      newface_ = NULL;
-      removed_ = false;
+      setLeftFace (0);
+      setRightFace(0);
     }
 
     Vertex *start() const { return endpts_[0]; }
@@ -136,9 +138,17 @@ class CHull3D {
     void setStart(Vertex *v) { endpts_[0] = v; }
     void setEnd  (Vertex *v) { endpts_[1] = v; }
 
-    Vertex *endPoint(uint i) const { return endpts_[i]; }
+    Vertex *endPoint(uint i) const {
+      Vertex *v = 0;
+      switch (i) {
+        case 0 : v = start(); break;
+        case 1 : v = end  (); break;
+        default: assert(false); break;
+      }
+      return v;
+    }
 
-    void setVertices(Vertex *start, Vertex *end) { endpts_[0] = start; endpts_[1] = end; }
+    void setVertices(Vertex *start, Vertex *end) { setStart(start); setEnd(end); }
 
     Face *leftFace () const { return adjface_[0]; }
     Face *rightFace() const { return adjface_[1]; }
@@ -146,10 +156,25 @@ class CHull3D {
     void setLeftFace (Face *f) { adjface_[0] = f; }
     void setRightFace(Face *f) { adjface_[1] = f; }
 
-    Face *face(uint i) const { return adjface_[i]; }
-    void setFace(uint i, Face *f) { adjface_[i] = f; }
+    Face *face(uint i) const {
+      Face *f = 0;
+      switch (i) {
+        case 0 : f = leftFace (); break;
+        case 1 : f = rightFace(); break;
+        default: assert(false); break;
+      }
+      return f;
+    }
 
-    Face *otherFace(const Face *f) { return (adjface_[0] != f ? adjface_[0] : adjface_[1]); }
+    void setFace(uint i, Face *f) {
+      switch (i) {
+        case 0 : setLeftFace (f); break;
+        case 1 : setRightFace(f); break;
+        default: assert(false); break;
+      }
+    }
+
+    Face *otherFace(const Face *f) { return (f == leftFace() ? rightFace() : leftFace()); }
 
     Face *coneFace() const { return newface_; }
     void setConeFace(Face *f) { newface_ = f; }
@@ -161,7 +186,7 @@ class CHull3D {
     iterator endIterator  () { return ListLink::end  (); }
 
     void print(std::ostream &os=std::cout) const {
-      os << "(" << *endpts_[0] << ", " << *endpts_[1] << ")";
+      os << "(" << *start() << ", " << *end() << ")";
     }
 
     friend std::ostream &operator<<(std::ostream &os, const Edge &e) {
@@ -188,8 +213,8 @@ class CHull3D {
    public:
     Face() {
       for (uint i = 0; i < 3; ++i) {
-        edge_  [i] = NULL;
-        vertex_[i] = NULL;
+        edge_  [i] = 0;
+        vertex_[i] = 0;
       }
 
       visible_ = false;
@@ -197,7 +222,7 @@ class CHull3D {
 
       color_ = -1;
 
-      vv_ = NULL;
+      vv_ = 0;
     }
 
     Edge *edge(uint i) const { return edge_[i]; }
@@ -219,7 +244,7 @@ class CHull3D {
 
     PVertex getVoronoi() const { return vv_; }
 
-    int normalZDirection() {
+    double normalZDirection() {
       double a[3], b[3];
 
       subVec(vertex_[1]->v(), vertex_[0]->v(), a);
@@ -284,6 +309,8 @@ class CHull3D {
 
   void addVertex(double x, double y, double z);
   void addVertex(double x, double y);
+
+  void clearVertices();
 
   bool calc();
 
