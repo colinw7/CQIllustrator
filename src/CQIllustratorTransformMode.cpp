@@ -21,6 +21,7 @@
 #include <CQUtil.h>
 #include <CQMenu.h>
 #include <CQDockWidget.h>
+#include <CMathRound.h>
 
 #include <svg/transform_svg.h>
 
@@ -281,8 +282,8 @@ apply()
     else
       ll = d;
 
-    if (snap_x) ll.x = CMathGen::Round(ll.x);
-    if (snap_y) ll.y = CMathGen::Round(ll.y);
+    if (snap_x) ll.x = CMathRound::Round(ll.x);
+    if (snap_y) ll.y = CMathRound::Round(ll.y);
 
     shape->moveTo(ll);
   }

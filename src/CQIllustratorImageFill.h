@@ -1,7 +1,7 @@
 #ifndef CQIllustratorImageFill_H
 #define CQIllustratorImageFill_H
 
-#include <CImagePtr.h>
+#include <CImageLib.h>
 #include <CAlignType.h>
 
 class CQIllustratorImageFill {

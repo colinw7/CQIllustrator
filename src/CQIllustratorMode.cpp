@@ -5,6 +5,7 @@
 #include <CQIllustratorShapeControlLine.h>
 #include <CQIllustratorShapeDrawer.h>
 #include <CQUtil.h>
+#include <CMathRound.h>
 
 #include <QBitmap>
 #include <QPainter>
@@ -334,8 +335,8 @@ moveCurrent(const CPoint2D &d)
 
     CPoint2D ll = bbox.getLL() + d;
 
-    if (snap_x) ll.x = CMathGen::Round(ll.x);
-    if (snap_y) ll.y = CMathGen::Round(ll.y);
+    if (snap_x) ll.x = CMathRound::Round(ll.x);
+    if (snap_y) ll.y = CMathRound::Round(ll.y);
 
     shape->moveTo(ll);
   }
@@ -379,8 +380,8 @@ moveCurrentPoint(const CPoint2D &d)
 
       p += d;
 
-      if (snap_x) p.x = CMathGen::Round(p.x);
-      if (snap_y) p.y = CMathGen::Round(p.y);
+      if (snap_x) p.x = CMathRound::Round(p.x);
+      if (snap_y) p.y = CMathRound::Round(p.y);
 
       point->setPoint(sshape1.getShape(), p);
     }
@@ -418,10 +419,10 @@ resizeCurrent(const CBBox2D &d)
     CPoint2D ll = bbox.getLL() + d.getLL();
     CPoint2D ur = bbox.getUR() + d.getUR();
 
-    if (snap_x1) ll.x = CMathGen::Round(ll.x);
-    if (snap_y1) ll.y = CMathGen::Round(ll.y);
-    if (snap_x2) ur.x = CMathGen::Round(ur.x);
-    if (snap_y2) ur.y = CMathGen::Round(ur.y);
+    if (snap_x1) ll.x = CMathRound::Round(ll.x);
+    if (snap_y1) ll.y = CMathRound::Round(ll.y);
+    if (snap_x2) ur.x = CMathRound::Round(ur.x);
+    if (snap_y2) ur.y = CMathRound::Round(ur.y);
 
     shape->setBBox(CBBox2D(ll, ur));
   }
@@ -785,8 +786,8 @@ handleKeyPress(const KeyEvent &e)
 
         p += d;
 
-        if (snap_x) p.x = CMathGen::Round(p.x);
-        if (snap_y) p.y = CMathGen::Round(p.y);
+        if (snap_x) p.x = CMathRound::Round(p.x);
+        if (snap_y) p.y = CMathRound::Round(p.y);
 
         point->setPoint(sshape1.getShape(), p);
       }
@@ -821,8 +822,8 @@ handleKeyPress(const KeyEvent &e)
         p1 += d;
         p2 += d;
 
-        if (snap_x) { p1.x = CMathGen::Round(p1.x); p2.x = CMathGen::Round(p2.x); }
-        if (snap_y) { p1.y = CMathGen::Round(p1.y); p2.y = CMathGen::Round(p2.y); }
+        if (snap_x) { p1.x = CMathRound::Round(p1.x); p2.x = CMathRound::Round(p2.x); }
+        if (snap_y) { p1.y = CMathRound::Round(p1.y); p2.y = CMathRound::Round(p2.y); }
 
         line->setLine(sshape1.getShape(), CLine2D(p1, p2));
       }

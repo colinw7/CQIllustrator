@@ -5365,8 +5365,8 @@ CQIllustratorSnap::
 snapPoint(const CPoint2D &point) const
 {
   if (enabled_) {
-    double x = xpitch_*CMathGen::Round(point.x/xpitch_);
-    double y = ypitch_*CMathGen::Round(point.y/ypitch_);
+    double x = xpitch_*CMathRound::Round(point.x/xpitch_);
+    double y = ypitch_*CMathRound::Round(point.y/ypitch_);
 
     return CPoint2D(x, y);
   }
