@@ -1,5 +1,5 @@
-#ifndef CQUAD_TREE_H
-#define CQUAD_TREE_H
+#ifndef CQuadTree_H
+#define CQuadTree_H
 
 #include <list>
 #include <cassert>

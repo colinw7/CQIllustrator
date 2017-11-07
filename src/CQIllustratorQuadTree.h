@@ -1,5 +1,5 @@
-#ifndef CQUAD_TREE_H
-#define CQUAD_TREE_H
+#ifndef CQIllustratorQuadTree_H
+#define CQIllustratorQuadTree_H
 
 #include <list>
 #include <cassert>
