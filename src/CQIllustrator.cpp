@@ -89,6 +89,7 @@
 #include <CTriangulate2D.h>
 #include <CGiftWrap.h>
 #include <CDelaunay.h>
+#include <CMathMacros.h>
 
 #include <COSFile.h>
 

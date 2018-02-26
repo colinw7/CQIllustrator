@@ -75,7 +75,7 @@ class CQIllustratorShapeDrawer {
   CBBox2D        bbox_;
   QPainterPath  *path_ { 0 };
   QFont          qfont_;
-  CMatrix2D      m_ { CMATRIX_TYPE_IDENTITY };
+  CMatrix2D      m_ { CMatrix2D::Type::IDENTITY };
   MatrixStack    matrices_;
 
   //CImagePtr control_point_image_;

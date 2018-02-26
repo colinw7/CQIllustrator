@@ -253,7 +253,7 @@ update(const CQIllustratorShape *shape)
     sizeEdit_ ->setText("");
     textEdit_ ->setText("");
 
-    transformPanel_->getMatrix()->setValue(CMatrix2D(CMATRIX_TYPE_IDENTITY));
+    transformPanel_->getMatrix()->setValue(CMatrix2D(CMatrix2D::Type::IDENTITY));
 
     filterEdit_->setText("");
   }
@@ -336,7 +336,7 @@ resetMatrixSlot()
 
   if (! shape) return;
 
-  shape->setMatrix(CMatrix2D(CMATRIX_TYPE_IDENTITY));
+  shape->setMatrix(CMatrix2D(CMatrix2D::Type::IDENTITY));
 
   tool_->emitValueChanged();
 }

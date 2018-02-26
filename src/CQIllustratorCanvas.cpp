@@ -145,7 +145,7 @@ void
 CQIllustratorCanvas::
 showMenu(const QPoint &p)
 {
-  if (popupMenu_ == 0) {
+  if (! popupMenu_) {
     popupMenu_ = new QMenu(this);
 
     QAction *applyAction  = new QAction("Apply" , 0);
