@@ -282,7 +282,7 @@ exists(const CQIllustratorShapeControlLine *line) const
 
   for (uint i = 0; i < num; ++i)
     if (line->getId() == lines_[i]->getId())
-      return true;;
+      return true;
 
   return false;
 }
@@ -359,7 +359,7 @@ exists(const CQIllustratorShapeControlPoint *point) const
 
   for (uint i = 0; i < num; ++i)
     if (point->getId() == points_[i]->getId())
-      return true;;
+      return true;
 
   return false;
 }
