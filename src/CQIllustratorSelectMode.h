@@ -1,10 +1,10 @@
 #ifndef CQIllustratorSelectMode_H
 #define CQIllustratorSelectMode_H
 
-#include <CAutoPtr.h>
 #include <CQIllustratorMode.h>
 #include <CQIllustratorToolbar.h>
 #include <CQIllustratorSizer.h>
+#include <CAutoPtr.h>
 
 class CQImageButton;
 class CQIllustratorSelectMode;

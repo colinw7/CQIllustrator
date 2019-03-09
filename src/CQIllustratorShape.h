@@ -1,7 +1,6 @@
 #ifndef CQIllustratorShape_H
 #define CQIllustratorShape_H
 
-#include <CAutoPtrVector.h>
 #include <CBBox2D.h>
 #include <CPoint2D.h>
 #include <CPolygon2D.h>
@@ -15,6 +14,7 @@
 #include <CFont.h>
 #include <CImageLib.h>
 #include <CGenGradient.h>
+#include <CAutoPtrVector.h>
 #include <QRectF>
 
 class CQIllustratorShape;

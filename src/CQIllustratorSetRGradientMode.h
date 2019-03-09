@@ -1,11 +1,10 @@
 #ifndef CQIllustratorSetRGradientMode_H
 #define CQIllustratorSetRGradientMode_H
 
-#include <CAutoPtr.h>
-
 #include <CQIllustratorMode.h>
 #include <CQIllustratorToolbar.h>
 #include <CQIllustrator.h>
+#include <CAutoPtr.h>
 
 class CQRealEdit;
 class CQIllustrator;

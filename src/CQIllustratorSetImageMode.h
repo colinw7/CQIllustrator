@@ -1,11 +1,10 @@
 #ifndef CQIllustratorSetImageMode_H
 #define CQIllustratorSetImageMode_H
 
-#include <CAutoPtr.h>
-
 #include <CQIllustratorMode.h>
 #include <CQIllustratorToolbar.h>
 #include <CQIllustrator.h>
+#include <CAutoPtr.h>
 
 class QComboBox;
 class CQImageButton;
@@ -66,6 +65,8 @@ class CQIllustratorSetImageToolbar : public CQIllustratorToolbar {
   CQImageButton                      *balignButton_;
 };
 
+//---
+
 class CQIllustratorSetImageMode : public CQIllustratorMode {
   Q_OBJECT
 
@@ -90,8 +91,8 @@ class CQIllustratorSetImageMode : public CQIllustratorMode {
   QCursor getCursor() const;
 
  private:
-  CQIllustratorSetImageToolbar      *toolbar_;
-  CAutoPtr<CQIllustratorImageSizer>  sizer_;
+  CQIllustratorSetImageToolbar*     toolbar_;
+  CAutoPtr<CQIllustratorImageSizer> sizer_;
 };
 
 #endif

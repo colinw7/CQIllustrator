@@ -2,13 +2,12 @@
 #define CQILLUSTRATOR_H
 
 #include <CQMainWindow.h>
-#include <CAutoPtr.h>
 #include <CPoint2D.h>
 #include <CImageLib.h>
 #include <CEvent.h>
 #include <CBooleanOp.h>
-
 #include <CStack.h>
+#include <CAutoPtr.h>
 
 class CQIllustrator;
 class CQIllustratorEllipseShape;
