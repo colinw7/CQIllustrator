@@ -484,7 +484,7 @@ align(CQIllustrator::AlignSide side, bool commit)
       x2 = bbbox.getXMax();
 
       y1 = abbox.getYMid();
-      y2 = y2;
+      y2 = y1;
     }
     else if (side == CQIllustrator::ALIGN_VERTICAL) {
       y1 = bbbox.getYMin();

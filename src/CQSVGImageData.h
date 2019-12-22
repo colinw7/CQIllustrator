@@ -46,7 +46,7 @@ class CQSVGImageData : public CSVGImageData {
 
   void copyAlpha(CSVGImageData *dst, int x, int y) override;
 
-  void scaleAlpha(double alpha);
+  void scaleAlpha(double alpha) override;
 
   void reshape(int w, int h) override;
 
@@ -68,17 +68,17 @@ class CQSVGImageData : public CSVGImageData {
 
   void luminanceToAlpha() override;
 
-  void linearFunc(CColorComponent component, double slope, double intercept) override;
+  void linearFunc(CRGBAComponent component, double slope, double intercept) override;
 
-  void gammaFunc(CColorComponent component, double amplitude,
+  void gammaFunc(CRGBAComponent component, double amplitude,
                  double exponent, double offset) override;
 
-  void tableFunc(CColorComponent component, const std::vector<double> &table) override;
+  void tableFunc(CRGBAComponent component, const std::vector<double> &table) override;
 
-  void discreteFunc(CColorComponent component, const std::vector<double> &table) override;
+  void discreteFunc(CRGBAComponent component, const std::vector<double> &table) override;
 
-  CSVGImageData *displacementMap(CSVGImageData *in, CColorComponent xcolor,
-                                 CColorComponent ycolor, double scale) override;
+  CSVGImageData *displacementMap(CSVGImageData *in, CRGBAComponent xcolor,
+                                 CRGBAComponent ycolor, double scale) override;
 
   void gaussianBlur(CSVGImageData *in, double stdDevX, double stdDevY) override;
 

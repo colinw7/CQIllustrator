@@ -6,6 +6,7 @@
 #include <CQImageButton.h>
 #include <CQRealEdit.h>
 #include <CQSwatch.h>
+#include <CQFontUtil.h>
 #include <CQUtil.h>
 #include <QHBoxLayout>
 #include <QFontComboBox>
@@ -167,7 +168,7 @@ setSelectedShape(const CQIllustratorShape *shape)
   const CQIllustratorTextShape *text = dynamic_cast<const CQIllustratorTextShape *>(shape);
 
   if (text) {
-    qfont_  = CQUtil::toQFont(text->getFont());
+    qfont_  = CQFontUtil::toQFont(text->getFont());
     halign_ = text->getHAlign();
     valign_ = text->getVAlign();
 
@@ -212,7 +213,7 @@ updateShape()
 
     text->setText(str.toStdString());
 
-    text->setFont(CQUtil::fromQFont(qfont_));
+    text->setFont(CQFontUtil::fromQFont(qfont_));
 
     text->setHAlign(halign_);
     text->setVAlign(valign_);

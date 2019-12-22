@@ -1,34 +1,70 @@
 #ifndef CQLINE_DASH_H
 #define CQLINE_DASH_H
 
-#include <QLineEdit>
+#include <QFrame>
+#include <QAction>
 #include <CLineDash.h>
+#include <map>
 
 class QMenu;
+class QLineEdit;
+class QToolButton;
+class CQIconCombo;
+class CQLineDashAction;
 
-class CQLineDash : public QLineEdit {
+class CQLineDash : public QFrame {
   Q_OBJECT
+
+  Q_PROPERTY(bool editable READ editable WRITE setEditable)
 
  public:
   CQLineDash(QWidget *parent=0);
 
-  void setLineDash(const CLineDash &dash);
+  bool editable() const { return editable_; }
+  void setEditable(bool b);
 
-  CLineDash getLineDash() const;
+  void setLineDash(const CLineDash &dash);
+  const CLineDash &getLineDash() const { return dash_; }
+
+  void addDashOption(const std::string &id, const CLineDash &dash);
+
+  static QIcon dashIcon(const CLineDash &dash);
 
  private:
-  void contextMenuEvent(QContextMenuEvent *);
+  void updateState();
 
  private slots:
   void dashChangedSlot();
   void menuItemActivated(QAction *);
+  void comboItemChanged();
 
  signals:
   void valueChanged(const CLineDash &dash);
 
  private:
-  CLineDash  dash_;
-  QMenu     *menu_;
+  typedef std::map<std::string, CQLineDashAction *> Actions;
+
+  bool         editable_;
+  CLineDash    dash_;
+  QLineEdit   *edit_;
+  QToolButton *button_;
+  QMenu       *menu_;
+  CQIconCombo *combo_;
+  Actions      actions_;
+};
+
+class CQLineDashAction : public QAction {
+ public:
+  CQLineDashAction(CQLineDash *parent, const std::string &id,
+                   const CLineDash &dash, const QIcon &icon);
+
+ private:
+  void init();
+
+ private:
+  CQLineDash  *parent_;
+  std::string  id_;
+  CLineDash    dash_;
 };
 
 #endif

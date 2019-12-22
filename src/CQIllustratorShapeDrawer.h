@@ -101,7 +101,7 @@ class CQIllustratorFilterShapeDrawer : public CQIllustratorShapeDrawer {
   QImage &getImage();
 
  private:
-  CQIllustrator            *illustrator_ { 0 };
+//CQIllustrator            *illustrator_ { nullptr };
   const CQIllustratorShape *shape_ { 0 };
   QImage                    qimage_;
   CBBox2D                   bbox_;

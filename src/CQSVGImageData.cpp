@@ -1,6 +1,8 @@
 #include <CQSVGImageData.h>
 #include <CTurbulenceUtil.h>
 #include <CGaussianBlur.h>
+#include <CRGBUtil.h>
+#include <CMathRound.h>
 #include <QColor>
 
 CQSVGImageData::
@@ -332,14 +334,14 @@ reshapeBilinear(CSVGImageData *new_image) const
   for (int y = 0; y < height2; ++y, yy += iy) {
     double xx = 0.0;
 
-    int y1 = CMathGen::RoundDown(yy);
-    int y2 = CMathGen::RoundUp  (yy);
+    int y1 = CMathRound::RoundDown(yy);
+    int y2 = CMathRound::RoundUp  (yy);
 
     if (y2 >= height1) y2 = height1 - 1;
 
     for (int x = 0; x < width2; ++x, xx += ix) {
-      int x1 = CMathGen::RoundDown(xx);
-      int x2 = CMathGen::RoundUp  (xx);
+      int x1 = CMathRound::RoundDown(xx);
+      int x2 = CMathRound::RoundUp  (xx);
 
       if (x2 >= width1) x2 = width1 - 1;
 
@@ -357,14 +359,14 @@ getBilinearPixel(double xx, double yy) const
   int width1  = getWidth ();
   int height1 = getHeight();
 
-  int x1 = CMathGen::RoundDown(xx);
-  int x2 = CMathGen::RoundUp  (xx);
+  int x1 = CMathRound::RoundDown(xx);
+  int x2 = CMathRound::RoundUp  (xx);
 
   if (x1 <  0     ) x1 = 0;
   if (x2 >= width1) x2 = width1 - 1;
 
-  int y1 = CMathGen::RoundDown(yy);
-  int y2 = CMathGen::RoundUp  (yy);
+  int y1 = CMathRound::RoundDown(yy);
+  int y2 = CMathRound::RoundUp  (yy);
 
   if (y1 <  0      ) y2 = 0;
   if (y2 >= height1) y2 = height1 - 1;
@@ -445,15 +447,15 @@ reshapeAverage(CSVGImageData *new_image) const
   double y2 = dy;
 
   for (int y = 0; y < height2; ++y, y1 = y2, y2 += dy) {
-    yy1 = std::min(std::max(CMathGen::Round(y1), 0), height1 - 1);
-    yy2 = std::min(std::max(CMathGen::Round(y2), 0), height1 - 1);
+    yy1 = std::min(std::max(CMathRound::Round(y1), 0), height1 - 1);
+    yy2 = std::min(std::max(CMathRound::Round(y2), 0), height1 - 1);
 
     double x1 = 0.0;
     double x2 = dx;
 
     for (int x = 0; x < width2; ++x, x1 = x2, x2 += dx) {
-      xx1 = std::min(std::max(CMathGen::Round(x1), 0), width1 - 1);
-      xx2 = std::min(std::max(CMathGen::Round(x2), 0), width1 - 1);
+      xx1 = std::min(std::max(CMathRound::Round(x1), 0), width1 - 1);
+      xx2 = std::min(std::max(CMathRound::Round(x2), 0), width1 - 1);
 
       CRGBA rgba;
 
@@ -862,7 +864,7 @@ luminanceToAlpha()
 
 void
 CQSVGImageData::
-linearFunc(CColorComponent component, double scale, double offset)
+linearFunc(CRGBAComponent component, double scale, double offset)
 {
   int x1, y1, x2, y2;
 
@@ -885,7 +887,7 @@ linearFunc(CColorComponent component, double scale, double offset)
 
 void
 CQSVGImageData::
-gammaFunc(CColorComponent component, double amplitude, double exponent, double offset)
+gammaFunc(CRGBAComponent component, double amplitude, double exponent, double offset)
 {
   int x1, y1, x2, y2;
 
@@ -908,7 +910,7 @@ gammaFunc(CColorComponent component, double amplitude, double exponent, double o
 
 void
 CQSVGImageData::
-tableFunc(CColorComponent component, const std::vector<double> &values)
+tableFunc(CRGBAComponent component, const std::vector<double> &values)
 {
   int num_ranges = values.size() - 1;
 
@@ -955,7 +957,7 @@ tableFunc(CColorComponent component, const std::vector<double> &values)
 
 void
 CQSVGImageData::
-discreteFunc(CColorComponent component, const std::vector<double> &values)
+discreteFunc(CRGBAComponent component, const std::vector<double> &values)
 {
   uint num_ranges = values.size();
 
@@ -999,7 +1001,7 @@ discreteFunc(CColorComponent component, const std::vector<double> &values)
 
 CSVGImageData *
 CQSVGImageData::
-displacementMap(CSVGImageData *in, CColorComponent xcolor, CColorComponent ycolor, double scale)
+displacementMap(CSVGImageData *in, CRGBAComponent xcolor, CRGBAComponent ycolor, double scale)
 {
   CQSVGImageData *dispImage = dynamic_cast<CQSVGImageData *>(in);
   assert(dispImage);

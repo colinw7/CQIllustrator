@@ -13,7 +13,7 @@ class CQIllustratorGrid {
  private:
   bool     enabled_ { false };
   CPoint2D origin_ { 0, 0 };
-  double   dx_ { 10 }, dy_ { 10 };
+//double   dx_ { 10 }, dy_ { 10 };
 };
 
 #endif

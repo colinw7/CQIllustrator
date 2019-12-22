@@ -14,8 +14,8 @@ class CQMatrix2D : public QWidget {
   CMatrix2D      m_;
 
  public:
-  CQMatrix2D(QWidget *parent, const CMatrix2D &m=CMatrix2D(CMATRIX_TYPE_IDENTITY));
-  CQMatrix2D(const CMatrix2D &m=CMatrix2D(CMATRIX_TYPE_IDENTITY));
+  CQMatrix2D(QWidget *parent, const CMatrix2D &m=CMatrix2D(CMatrix2D::Type::IDENTITY));
+  CQMatrix2D(const CMatrix2D &m=CMatrix2D(CMatrix2D::Type::IDENTITY));
 
   QSize minimumSizeHint() const;
   QSize sizeHint() const;

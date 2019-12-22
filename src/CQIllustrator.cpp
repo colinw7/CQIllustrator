@@ -4302,7 +4302,7 @@ void
 CQIllustrator::
 fontSlot(const QFont &font)
 {
-  CFontPtr cfont = CQUtil::fromQFont(font);
+  CFontPtr cfont = CQFontUtil::fromQFont(font);
 
   CQIllustratorSelectedShapes::iterator ps1, ps2;
 
@@ -4413,8 +4413,6 @@ setShapeSVGStrokeAndFill(CQIllustratorShape *shape, CSVGObject *object)
     }
     else if (rg) {
       CRadialGradient *rgradient = new CRadialGradient;
-
-      CSVGRadialGradient::StopList::const_iterator ps1, ps2;
 
       for (const auto &stop : rg->stops()) {
         double o = stop->getOffset().ratioValue(CScreenUnits(1));
@@ -4863,7 +4861,7 @@ void
 CQIllustrator::
 setStroke(QPainter *painter, CQIllustratorShape *shape, const CQIllustratorShapeStroke &stroke)
 {
-  setStroke(painter, shape, stroke);
+  setStroke(painter, (const CQIllustratorShape *) shape, stroke);
 }
 
 void
@@ -4931,7 +4929,7 @@ CQIllustrator::
 setFill(QPainter *painter, CQIllustratorShape *shape,
         const CQIllustratorShapeFill &fill, const CBBox2D &bbox)
 {
-  setFill(painter, shape, fill, bbox);
+  setFill(painter, (const CQIllustratorShape *) shape, fill, bbox);
 }
 
 void

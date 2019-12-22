@@ -6,7 +6,7 @@ DEPENDPATH += .
 
 QT += widgets
 
-QMAKE_CXXFLAGS += -std=c++14
+QMAKE_CXXFLAGS += -std=c++14 -DCQUTIL_IMAGE -DCQUTIL_FONT
 
 MOC_DIR = .moc
 

@@ -3,6 +3,7 @@
 #include <CQIllustrator.h>
 
 #include <CQImage.h>
+#include <CQFontUtil.h>
 #include <CQUtil.h>
 #include <QPainter>
 
@@ -73,7 +74,7 @@ void
 CQIllustratorShapeDrawer::
 setFont(CFontPtr font)
 {
-  qfont_ = CQUtil::toQFont(font);
+  qfont_ = CQFontUtil::toQFont(font);
 
   painter_->setFont(qfont_);
 }

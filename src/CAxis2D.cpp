@@ -1,5 +1,6 @@
 #include <CAxis2D.h>
 #include <CMathGen.h>
+#include <CMathRound.h>
 #include <CStrUtil.h>
 
 #include <cstring>
@@ -118,7 +119,7 @@ calc()
 
   /* Calculate nearest Power of Ten to Length */
 
-  int power = CMathGen::RoundDown(log10(length));
+  int power = CMathRound::RoundDown(log10(length));
 
   //------
 
@@ -175,7 +176,7 @@ calc()
 
   /* Set the Gap Positions */
 
-  num_ticks1_ = CMathGen::RoundDown((end1_ - start1_)/increment + 0.5);
+  num_ticks1_ = CMathRound::RoundDown((end1_ - start1_)/increment + 0.5);
   num_ticks2_ = num_gap_ticks;
 
   return true;
@@ -188,8 +189,8 @@ testAxisGaps(double start, double end, double test_increment, uint test_num_gap_
 {
   /* Calculate New Start and End implied by the Test Increment */
 
-  double new_start = CMathGen::RoundDown(start/test_increment)*test_increment;
-  double new_end   = CMathGen::RoundUp  (end  /test_increment)*test_increment;
+  double new_start = CMathRound::RoundDown(start/test_increment)*test_increment;
+  double new_end   = CMathRound::RoundUp  (end  /test_increment)*test_increment;
 
   while (new_start > start)
     new_start -= test_increment;
@@ -197,7 +198,7 @@ testAxisGaps(double start, double end, double test_increment, uint test_num_gap_
   while (new_end < end)
     new_end += test_increment;
 
-  uint test_num_gaps = CMathGen::RoundUp((new_end - new_start)/test_increment);
+  uint test_num_gaps = CMathRound::RoundUp((new_end - new_start)/test_increment);
 
   //------
 

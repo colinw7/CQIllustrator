@@ -78,6 +78,9 @@ class CQIllustratorControlPointHandle : public CQIllustratorHandle {
   void updatePoint(CQIllustratorShape *shape, const CPoint2D &point);
 
  private:
+  using CQIllustratorHandle::draw;
+
+ private:
   CQIllustratorShapeControlPoint *point_;
 };
 

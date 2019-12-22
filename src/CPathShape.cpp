@@ -126,24 +126,21 @@ processPath(CPathShapeProcess *process)
     CPathPartType type = part->getType();
 
     if      (type == CPATH_PART_TYPE_MOVE_TO) {
-      CPathShapeMoveTo *moveToPart =
-        dynamic_cast<CPathShapeMoveTo *>(part);
+      CPathShapeMoveTo *moveToPart = dynamic_cast<CPathShapeMoveTo *>(part);
 
       const CPoint2D &p = moveToPart->getPoint();
 
       process->moveTo(p);
     }
     else if (type == CPATH_PART_TYPE_LINE_TO) {
-      CPathShapeLineTo *lineToPart =
-        dynamic_cast<CPathShapeLineTo *>(part);
+      CPathShapeLineTo *lineToPart = dynamic_cast<CPathShapeLineTo *>(part);
 
       const CPoint2D &p = lineToPart->getPoint();
 
       process->lineTo(p);
     }
     else if (type == CPATH_PART_TYPE_CURVE2_TO) {
-      CPathShapeCurve2To *curveToPart =
-        dynamic_cast<CPathShapeCurve2To *>(part);
+      CPathShapeCurve2To *curveToPart = dynamic_cast<CPathShapeCurve2To *>(part);
 
       const CPoint2D &p1 = curveToPart->getPoint1();
       const CPoint2D &p2 = curveToPart->getPoint2();
@@ -151,8 +148,7 @@ processPath(CPathShapeProcess *process)
       process->curve2To(p1, p2);
     }
     else if (type == CPATH_PART_TYPE_CURVE3_TO) {
-      CPathShapeCurve3To *curveToPart =
-        dynamic_cast<CPathShapeCurve3To *>(part);
+      CPathShapeCurve3To *curveToPart = dynamic_cast<CPathShapeCurve3To *>(part);
 
       const CPoint2D &p1 = curveToPart->getPoint1();
       const CPoint2D &p2 = curveToPart->getPoint2();
@@ -161,8 +157,7 @@ processPath(CPathShapeProcess *process)
       process->curve3To(p1, p2, p3);
     }
     else if (type == CPATH_PART_TYPE_ARC) {
-      CPathShapeArc *arcToPart =
-        dynamic_cast<CPathShapeArc *>(part);
+      CPathShapeArc *arcToPart = dynamic_cast<CPathShapeArc *>(part);
 
       const CPoint2D &c      = arcToPart->getCenter();
       double          xr     = arcToPart->getRadiusX();
@@ -302,7 +297,7 @@ class CPathShapeStroke : public CPathShapeProcess {
 
     if (x21 == 0.0 && y21 == 0.0) return;
 
-    double g = atan2(x21, y21);
+    double g = CMathGen::atan2(y21, x21);
 
     double dx = w*cos(g);
     double dy = w*sin(g);
@@ -338,8 +333,8 @@ class CPathShapeStroke : public CPathShapeProcess {
         }
         else {
           parts_.addPart(new CPathShapeLineTo(pi));
-          //parts_.addPart(new CPathShapeLineTo(*p2));
-          //parts_.addPart(new CPathShapeLineTo(*p3));
+        //parts_.addPart(new CPathShapeLineTo(*p2));
+        //parts_.addPart(new CPathShapeLineTo(*p3));
         }
 
         p1 = p3;
@@ -392,18 +387,18 @@ class CPathShapeStroke : public CPathShapeProcess {
       p2 = p4;
 
       for (uint i = 1; i < num_inner; ++i) {
-        const CPoint2D *p3 = &inner_[i].start();
-        const CPoint2D *p4 = &inner_[i].end  ();
+        const CPoint2D *ip3 = &inner_[i].start();
+        const CPoint2D *ip4 = &inner_[i].end  ();
 
-        CPoint2D pi;
-        double   mu1, mu2;
+        CPoint2D ipi;
+        double   imu1, imu2;
 
-        CMathGeom2D::IntersectLine(*p1, *p2, *p3, *p4, &pi, &mu1, &mu2);
+        CMathGeom2D::IntersectLine(*p1, *p2, *ip3, *ip4, &ipi, &imu1, &imu2);
 
-        parts_.addPart(new CPathShapeLineTo(pi));
+        parts_.addPart(new CPathShapeLineTo(ipi));
 
-        p1 = p3;
-        p2 = p4;
+        p1 = ip3;
+        p2 = ip4;
       }
 
       parts_.addPart(new CPathShapeClose());
@@ -411,35 +406,35 @@ class CPathShapeStroke : public CPathShapeProcess {
 
       // outer
       {
-      const CPoint2D *p1 = &outer_[0].start();
-      const CPoint2D *p2 = &outer_[0].end  ();
+      const CPoint2D *op1 = &outer_[0].start();
+      const CPoint2D *op2 = &outer_[0].end  ();
 
-      const CPoint2D *p3 = &outer_[num_outer - 1].start();
-      const CPoint2D *p4 = &outer_[num_outer - 1].end  ();
+      const CPoint2D *op3 = &outer_[num_outer - 1].start();
+      const CPoint2D *op4 = &outer_[num_outer - 1].end  ();
 
-      CPoint2D pi;
-      double   mu1, mu2;
+      CPoint2D opi;
+      double   omu1, omu2;
 
-      CMathGeom2D::IntersectLine(*p1, *p2, *p3, *p4, &pi, &mu1, &mu2);
+      CMathGeom2D::IntersectLine(*op1, *op2, *op3, *op4, &opi, &omu1, &omu2);
 
-      parts_.addPart(new CPathShapeMoveTo(pi));
+      parts_.addPart(new CPathShapeMoveTo(opi));
 
-      p1 = p3;
-      p2 = p4;
+      op1 = op3;
+      op2 = op4;
 
       for (uint i = 1; i < num_outer; ++i) {
-        const CPoint2D *p3 = &outer_[num_outer - i - 1].start();
-        const CPoint2D *p4 = &outer_[num_outer - i - 1].end  ();
+        const CPoint2D *op31 = &outer_[num_outer - i - 1].start();
+        const CPoint2D *op41 = &outer_[num_outer - i - 1].end  ();
 
-        CPoint2D pi;
-        double   mu1, mu2;
+        CPoint2D opi1;
+        double   omu11, omu21;
 
-        CMathGeom2D::IntersectLine(*p1, *p2, *p3, *p4, &pi, &mu1, &mu2);
+        CMathGeom2D::IntersectLine(*op1, *op2, *op31, *op41, &opi1, &omu11, &omu21);
 
-        parts_.addPart(new CPathShapeLineTo(pi));
+        parts_.addPart(new CPathShapeLineTo(opi1));
 
-        p1 = p3;
-        p2 = p4;
+        op1 = op31;
+        op2 = op41;
       }
 
       parts_.addPart(new CPathShapeClose());
@@ -914,14 +909,12 @@ setCurveInside(CPathShapePartList &cparts, const CPolygon2D &polygon)
 
   // set curve1 inside
   for (uint i1 = 0; i1 < num_cparts; ++i1) {
-    const CCurveShapePart *cpart =
-      dynamic_cast<const CCurveShapePart *>(cparts[i1]);
+    const CCurveShapePart *cpart = dynamic_cast<const CCurveShapePart *>(cparts[i1]);
 
     CPathPartType type1 = cpart->getType();
 
     if      (type1 == CPATH_PART_TYPE_LINE_TO) {
-      const CCurveShapeLine *curveLine =
-        dynamic_cast<const CCurveShapeLine *>(cpart);
+      const CCurveShapeLine *curveLine = dynamic_cast<const CCurveShapeLine *>(cpart);
 
       const CLine2D &cline = curveLine->getLine();
 
@@ -932,8 +925,7 @@ setCurveInside(CPathShapePartList &cparts, const CPolygon2D &polygon)
       curveLine->inside_[1] = polygon.inside(p2);
     }
     else if (type1 == CPATH_PART_TYPE_CURVE3_TO) {
-      const CCurveShapeBezier *curveBezier =
-        dynamic_cast<const CCurveShapeBezier *>(cpart);
+      const CCurveShapeBezier *curveBezier = dynamic_cast<const CCurveShapeBezier *>(cpart);
 
       const C3Bezier2D &cbezier = curveBezier->getBezier();
 
@@ -960,16 +952,14 @@ intersectCurves(CPathShapePartList &cparts1, CPathShapePartList &cparts2)
   uint num_cparts2 = cparts2.size();
 
   for (uint i1 = 0; i1 < num_cparts1; ++i1) {
-    const CCurveShapePart *cpart1 =
-      dynamic_cast<const CCurveShapePart *>(cparts1[i1]);
+    const CCurveShapePart *cpart1 = dynamic_cast<const CCurveShapePart *>(cparts1[i1]);
 
     cpart1->ppoints_.clear();
     cpart1->visited_ = false;
   }
 
   for (uint i2 = 0; i2 < num_cparts2; ++i2) {
-    const CCurveShapePart *cpart2 =
-      dynamic_cast<const CCurveShapePart *>(cparts2[i2]);
+    const CCurveShapePart *cpart2 = dynamic_cast<const CCurveShapePart *>(cparts2[i2]);
 
     cpart2->ppoints_.clear();
     cpart2->visited_ = false;
@@ -977,22 +967,19 @@ intersectCurves(CPathShapePartList &cparts1, CPathShapePartList &cparts2)
 
   // intersect curve1 with curve2
   for (uint i1 = 0; i1 < num_cparts1; ++i1) {
-    const CCurveShapePart *cpart1 =
-      dynamic_cast<const CCurveShapePart *>(cparts1[i1]);
+    const CCurveShapePart *cpart1 = dynamic_cast<const CCurveShapePart *>(cparts1[i1]);
 
     CPathPartType type1 = cpart1->getType();
 
     if      (type1 == CPATH_PART_TYPE_LINE_TO) {
-      const CCurveShapeLine *curveLine =
-        dynamic_cast<const CCurveShapeLine *>(cpart1);
+      const CCurveShapeLine *curveLine = dynamic_cast<const CCurveShapeLine *>(cpart1);
 
       const CLine2D &cline = curveLine->getLine();
 
       num_itersects += intersect(cpart1, i1, cparts2, cline);
     }
     else if (type1 == CPATH_PART_TYPE_CURVE3_TO) {
-      const CCurveShapeBezier *curveBezier =
-        dynamic_cast<const CCurveShapeBezier *>(cpart1);
+      const CCurveShapeBezier *curveBezier = dynamic_cast<const CCurveShapeBezier *>(cpart1);
 
       const C3Bezier2D &cbezier = curveBezier->getBezier();
 
@@ -1014,8 +1001,7 @@ expandParts(CPathShapePartList &cparts, CPathShapePartList &cparts1)
   bool expand = false;
 
   for (uint i = 0; i < num_cparts; ++i) {
-    const CCurveShapePart *cpart =
-      dynamic_cast<const CCurveShapePart *>(cparts[i]);
+    const CCurveShapePart *cpart = dynamic_cast<const CCurveShapePart *>(cparts[i]);
 
     uint num_ppoints = cpart->ppoints_.size();
 
@@ -1028,16 +1014,14 @@ expandParts(CPathShapePartList &cparts, CPathShapePartList &cparts1)
   if (! expand) return false;
 
   for (uint i = 0; i < num_cparts; ++i) {
-    const CCurveShapePart *cpart =
-      dynamic_cast<const CCurveShapePart *>(cparts[i]);
+    const CCurveShapePart *cpart = dynamic_cast<const CCurveShapePart *>(cparts[i]);
 
     uint num_ppoints = cpart->ppoints_.size();
 
     CPathPartType type = cpart->getType();
 
     if      (type == CPATH_PART_TYPE_LINE_TO) {
-      const CCurveShapeLine *curveLine =
-        dynamic_cast<const CCurveShapeLine *>(cpart);
+      const CCurveShapeLine *curveLine = dynamic_cast<const CCurveShapeLine *>(cpart);
 
       CLine2D cline = curveLine->getLine();
 
@@ -1077,8 +1061,7 @@ expandParts(CPathShapePartList &cparts, CPathShapePartList &cparts1)
       }
     }
     else if (type == CPATH_PART_TYPE_CURVE3_TO) {
-      const CCurveShapeBezier *curveBezier =
-        dynamic_cast<const CCurveShapeBezier *>(cpart);
+      const CCurveShapeBezier *curveBezier = dynamic_cast<const CCurveShapeBezier *>(cpart);
 
       C3Bezier2D cbezier = curveBezier->getBezier();
 
@@ -1152,8 +1135,7 @@ intersectCombineOr(CPathShapePartList &cparts1, CPathShapePartList &cparts2,
 
   // for 'boolean or' find first part with start on outside
   while (ii[i] < num_cparts[i]) {
-    const CCurveShapePart *cpart =
-      dynamic_cast<const CCurveShapePart *>((*cparts[i])[ii[i]]);
+    const CCurveShapePart *cpart = dynamic_cast<const CCurveShapePart *>((*cparts[i])[ii[i]]);
 
     if (cpart->isStartOutside()) break;
 
@@ -1167,14 +1149,12 @@ intersectCombineOr(CPathShapePartList &cparts1, CPathShapePartList &cparts2,
 
   // add start point (move to)
 
-  const CCurveShapePart *cpart =
-    dynamic_cast<const CCurveShapePart *>((*cparts[i])[ii[i]]);
+  const CCurveShapePart *cpart = dynamic_cast<const CCurveShapePart *>((*cparts[i])[ii[i]]);
 
   CPathPartType type = cpart->getType();
 
   if      (type == CPATH_PART_TYPE_LINE_TO) {
-    const CCurveShapeLine *curveLine =
-      dynamic_cast<const CCurveShapeLine *>(cpart);
+    const CCurveShapeLine *curveLine = dynamic_cast<const CCurveShapeLine *>(cpart);
 
     const CLine2D &cline = curveLine->getLine();
 
@@ -1185,8 +1165,7 @@ intersectCombineOr(CPathShapePartList &cparts1, CPathShapePartList &cparts2,
     iparts.addPart(new CPathShapeMoveTo(p1));
   }
   else if (type == CPATH_PART_TYPE_CURVE3_TO) {
-    const CCurveShapeBezier *curveBezier =
-      dynamic_cast<const CCurveShapeBezier *>(cpart);
+    const CCurveShapeBezier *curveBezier = dynamic_cast<const CCurveShapeBezier *>(cpart);
 
     const C3Bezier2D &cbezier = curveBezier->getBezier();
 
@@ -1204,52 +1183,48 @@ intersectCombineOr(CPathShapePartList &cparts1, CPathShapePartList &cparts2,
 
     //------
 
-    const CCurveShapePart *cpart =
-      dynamic_cast<const CCurveShapePart *>((*cparts[i])[ii[i]]);
+    const CCurveShapePart *cpart1 = dynamic_cast<const CCurveShapePart *>((*cparts[i])[ii[i]]);
 
-    if (cpart->visited_) break;
+    if (cpart1->visited_) break;
 
-    cpart->visited_ = true;
+    cpart1->visited_ = true;
 
-    uint num_ppoints = cpart->ppoints_.size();
+    uint num_ppoints = cpart1->ppoints_.size();
 
-    CPathPartType type = cpart->getType();
+    CPathPartType type1 = cpart1->getType();
 
-    if      (type == CPATH_PART_TYPE_LINE_TO) {
-      const CCurveShapeLine *curveLine =
-        dynamic_cast<const CCurveShapeLine *>(cpart);
+    if      (type1 == CPATH_PART_TYPE_LINE_TO) {
+      const CCurveShapeLine *curveLine = dynamic_cast<const CCurveShapeLine *>(cpart1);
 
       if (num_ppoints != 0) {
-        const CCurveShapePart::PartIPoint &ppoint = cpart->ppoints_[0];
+        const CCurveShapePart::PartIPoint &ppoint = cpart1->ppoints_[0];
 
         // add intersection point and switch curve (if not totally inside)
-        CCurveShapePart *cpart1 =
-          dynamic_cast<CCurveShapePart *>((*cparts[1 - i])[ppoint.part]);
+        CCurveShapePart *cpart2 = dynamic_cast<CCurveShapePart *>((*cparts[1 - i])[ppoint.part]);
 
-        if (cpart1->isStartOutside() || cpart1->isEndOutside()) {
+        if (cpart2->isStartOutside() || cpart2->isEndOutside()) {
           const CPoint2D &ipoint = ppoint.ibpoint.p;
 
           std::cerr << i << ") Add Line To Intersect " << ipoint << std::endl;
 
           iparts.addPart(new CPathShapeLineTo(ipoint));
 
-          if (cpart1->visited_) break;
+          if (cpart2->visited_) break;
 
-          cpart1->visited_ = true;
+          cpart2->visited_ = true;
 
           i     = 1 - i;
           ii[i] = ppoint.part;
 
           intersectStatus(cparts1, cparts2, i, ii, dir);
 
-          if (dir[i] > 0) { if (cpart1->isOutsideInside()) dir[i] = -dir[i]; }
-          else            { if (cpart1->isInsideOutside()) dir[i] = -dir[i]; }
+          if (dir[i] > 0) { if (cpart2->isOutsideInside()) dir[i] = -dir[i]; }
+          else            { if (cpart2->isInsideOutside()) dir[i] = -dir[i]; }
 
-          CPathPartType type1 = cpart1->getType();
+          CPathPartType type1 = cpart2->getType();
 
           if      (type1 == CPATH_PART_TYPE_LINE_TO) {
-            const CCurveShapeLine *curveLine1 =
-              dynamic_cast<const CCurveShapeLine *>(cpart1);
+            const CCurveShapeLine *curveLine1 = dynamic_cast<const CCurveShapeLine *>(cpart2);
 
             const CLine2D &cline1 = curveLine1->getLine();
 
@@ -1269,8 +1244,7 @@ intersectCombineOr(CPathShapePartList &cparts1, CPathShapePartList &cparts2,
             }
           }
           else if (type1 == CPATH_PART_TYPE_CURVE3_TO) {
-            const CCurveShapeBezier *curveBezier1 =
-              dynamic_cast<const CCurveShapeBezier *>(cpart1);
+            const CCurveShapeBezier *curveBezier1 = dynamic_cast<const CCurveShapeBezier *>(cpart2);
 
             const C3Bezier2D &cbezier1 = curveBezier1->getBezier();
 
@@ -1329,7 +1303,7 @@ intersectCombineOr(CPathShapePartList &cparts1, CPathShapePartList &cparts2,
         const CLine2D &cline = curveLine->getLine();
 
         if (dir[i] > 0) {
-          if (cpart->isEndOutside()) {
+          if (cpart1->isEndOutside()) {
             const CPoint2D &p2 = cline.end();
 
             std::cerr << i << ") Add Line End To " << p2 << std::endl;
@@ -1338,7 +1312,7 @@ intersectCombineOr(CPathShapePartList &cparts1, CPathShapePartList &cparts2,
           }
         }
         else {
-          if (cpart->isStartOutside()) {
+          if (cpart1->isStartOutside()) {
             const CPoint2D &p1 = cline.start();
 
             std::cerr << i << ") Add Line Start To " << p1 << std::endl;
@@ -1353,15 +1327,14 @@ intersectCombineOr(CPathShapePartList &cparts1, CPathShapePartList &cparts2,
       if      (ii[i] <  0            ) ii[i] = num_cparts[i] - 1;
       else if (ii[i] >= num_cparts[i]) ii[i] = 0;
     }
-    else if (type == CPATH_PART_TYPE_CURVE3_TO) {
-      const CCurveShapeBezier *curveBezier =
-        dynamic_cast<const CCurveShapeBezier *>(cpart);
+    else if (type1 == CPATH_PART_TYPE_CURVE3_TO) {
+      const CCurveShapeBezier *curveBezier = dynamic_cast<const CCurveShapeBezier *>(cpart1);
 
       const C3Bezier2D &cbezier = curveBezier->getBezier();
 
       if (num_ppoints != 0) {
         // add intersection point
-        const CCurveShapePart::PartIPoint &ppoint = cpart->ppoints_[0];
+        const CCurveShapePart::PartIPoint &ppoint = cpart1->ppoints_[0];
 
         double it = ppoint.ibpoint.t1;
 
@@ -1398,21 +1371,19 @@ intersectCombineOr(CPathShapePartList &cparts1, CPathShapePartList &cparts2,
 
         intersectStatus(cparts1, cparts2, i, ii, dir);
 
-        CCurveShapePart *cpart1 =
-          dynamic_cast<CCurveShapePart *>((*cparts[i])[ii[i]]);
+        CCurveShapePart *cpart2 = dynamic_cast<CCurveShapePart *>((*cparts[i])[ii[i]]);
 
-        if (cpart1->visited_) break;
+        if (cpart2->visited_) break;
 
-        cpart1->visited_ = true;
+        cpart2->visited_ = true;
 
-        if (dir[i] > 0) { if (cpart1->isOutsideInside()) dir[i] = -dir[i]; }
-        else            { if (cpart1->isInsideOutside()) dir[i] = -dir[i]; }
+        if (dir[i] > 0) { if (cpart2->isOutsideInside()) dir[i] = -dir[i]; }
+        else            { if (cpart2->isInsideOutside()) dir[i] = -dir[i]; }
 
-        CPathPartType type1 = cpart1->getType();
+        CPathPartType type1 = cpart2->getType();
 
         if      (type1 == CPATH_PART_TYPE_LINE_TO) {
-          const CCurveShapeLine *curveLine1 =
-            dynamic_cast<const CCurveShapeLine *>(cpart1);
+          const CCurveShapeLine *curveLine1 = dynamic_cast<const CCurveShapeLine *>(cpart2);
 
           const CLine2D &cline1 = curveLine1->getLine();
 
@@ -1432,8 +1403,7 @@ intersectCombineOr(CPathShapePartList &cparts1, CPathShapePartList &cparts2,
           }
         }
         else if (type1 == CPATH_PART_TYPE_CURVE3_TO) {
-          const CCurveShapeBezier *curveBezier1 =
-            dynamic_cast<const CCurveShapeBezier *>(cpart1);
+          const CCurveShapeBezier *curveBezier1 = dynamic_cast<const CCurveShapeBezier *>(cpart2);
 
           const C3Bezier2D &cbezier1 = curveBezier1->getBezier();
 
@@ -1473,7 +1443,7 @@ intersectCombineOr(CPathShapePartList &cparts1, CPathShapePartList &cparts2,
         const CPoint2D &p3 = cbezier.getControlPoint2();
         const CPoint2D &p4 = cbezier.getLastPoint    ();
 
-        if (cpart->isEndOutside()) {
+        if (cpart1->isEndOutside()) {
           std::cerr << i << ") Add Curve To " << p2 << " " << p3 << " " << p4 << std::endl;
 
           iparts.addPart(new CPathShapeCurve3To(p2, p3, p4));
@@ -1524,8 +1494,7 @@ intersectCombineAnd(CPathShapePartList &cparts1, CPathShapePartList &cparts2,
 
   // for 'boolean and' find first part with start on inside
   while (ii[i] < num_cparts[i]) {
-    const CCurveShapePart *cpart =
-      dynamic_cast<const CCurveShapePart *>((*cparts[i])[ii[i]]);
+    const CCurveShapePart *cpart = dynamic_cast<const CCurveShapePart *>((*cparts[i])[ii[i]]);
 
     if (cpart->isStartInside()) break;
 
@@ -1536,8 +1505,7 @@ intersectCombineAnd(CPathShapePartList &cparts1, CPathShapePartList &cparts2,
     i = 1 - i;
 
     while (ii[i] < num_cparts[i]) {
-      const CCurveShapePart *cpart =
-        dynamic_cast<const CCurveShapePart *>((*cparts[i])[ii[i]]);
+      const CCurveShapePart *cpart = dynamic_cast<const CCurveShapePart *>((*cparts[i])[ii[i]]);
 
       if (cpart->isStartInside()) break;
 
@@ -1552,14 +1520,12 @@ intersectCombineAnd(CPathShapePartList &cparts1, CPathShapePartList &cparts2,
 
   // add start point (move to)
 
-  const CCurveShapePart *cpart =
-    dynamic_cast<const CCurveShapePart *>((*cparts[i])[ii[i]]);
+  const CCurveShapePart *cpart = dynamic_cast<const CCurveShapePart *>((*cparts[i])[ii[i]]);
 
   CPathPartType type = cpart->getType();
 
   if      (type == CPATH_PART_TYPE_LINE_TO) {
-    const CCurveShapeLine *curveLine =
-      dynamic_cast<const CCurveShapeLine *>(cpart);
+    const CCurveShapeLine *curveLine = dynamic_cast<const CCurveShapeLine *>(cpart);
 
     const CLine2D &cline = curveLine->getLine();
 
@@ -1570,8 +1536,7 @@ intersectCombineAnd(CPathShapePartList &cparts1, CPathShapePartList &cparts2,
     iparts.addPart(new CPathShapeMoveTo(p1));
   }
   else if (type == CPATH_PART_TYPE_CURVE3_TO) {
-    const CCurveShapeBezier *curveBezier =
-      dynamic_cast<const CCurveShapeBezier *>(cpart);
+    const CCurveShapeBezier *curveBezier = dynamic_cast<const CCurveShapeBezier *>(cpart);
 
     const C3Bezier2D &cbezier = curveBezier->getBezier();
 
@@ -1589,8 +1554,7 @@ intersectCombineAnd(CPathShapePartList &cparts1, CPathShapePartList &cparts2,
 
     //------
 
-    const CCurveShapePart *cpart =
-      dynamic_cast<const CCurveShapePart *>((*cparts[i])[ii[i]]);
+    const CCurveShapePart *cpart = dynamic_cast<const CCurveShapePart *>((*cparts[i])[ii[i]]);
 
     if (cpart->visited_) break;
 
@@ -1601,8 +1565,7 @@ intersectCombineAnd(CPathShapePartList &cparts1, CPathShapePartList &cparts2,
     CPathPartType type = cpart->getType();
 
     if      (type == CPATH_PART_TYPE_LINE_TO) {
-      const CCurveShapeLine *curveLine =
-        dynamic_cast<const CCurveShapeLine *>(cpart);
+      const CCurveShapeLine *curveLine = dynamic_cast<const CCurveShapeLine *>(cpart);
 
       if (num_ppoints != 0) {
         // add intersection point
@@ -1620,21 +1583,19 @@ intersectCombineAnd(CPathShapePartList &cparts1, CPathShapePartList &cparts2,
 
         intersectStatus(cparts1, cparts2, i, ii, dir);
 
-        CCurveShapePart *cpart1 =
-          dynamic_cast<CCurveShapePart *>((*cparts[i])[ii[i]]);
+        CCurveShapePart *cpart2 = dynamic_cast<CCurveShapePart *>((*cparts[i])[ii[i]]);
 
-        if (cpart1->visited_) break;
+        if (cpart2->visited_) break;
 
-        cpart1->visited_ = true;
+        cpart2->visited_ = true;
 
-        if (dir[i] > 0) { if (cpart1->isEndOutside()) dir[i] = -dir[i]; }
-        else            { if (cpart1->isEndInside ()) dir[i] = -dir[i]; }
+        if (dir[i] > 0) { if (cpart2->isEndOutside()) dir[i] = -dir[i]; }
+        else            { if (cpart2->isEndInside ()) dir[i] = -dir[i]; }
 
-        CPathPartType type1 = cpart1->getType();
+        CPathPartType type1 = cpart2->getType();
 
         if      (type1 == CPATH_PART_TYPE_LINE_TO) {
-          const CCurveShapeLine *curveLine1 =
-            dynamic_cast<const CCurveShapeLine *>(cpart1);
+          const CCurveShapeLine *curveLine1 = dynamic_cast<const CCurveShapeLine *>(cpart2);
 
           const CLine2D &cline1 = curveLine1->getLine();
 
@@ -1654,8 +1615,7 @@ intersectCombineAnd(CPathShapePartList &cparts1, CPathShapePartList &cparts2,
           }
         }
         else if (type1 == CPATH_PART_TYPE_CURVE3_TO) {
-          const CCurveShapeBezier *curveBezier1 =
-            dynamic_cast<const CCurveShapeBezier *>(cpart1);
+          const CCurveShapeBezier *curveBezier1 = dynamic_cast<const CCurveShapeBezier *>(cpart2);
 
           const C3Bezier2D &cbezier1 = curveBezier1->getBezier();
 
@@ -1719,8 +1679,7 @@ intersectCombineAnd(CPathShapePartList &cparts1, CPathShapePartList &cparts2,
       else if (ii[i] >= num_cparts[i]) ii[i] = 0;
     }
     else if (type == CPATH_PART_TYPE_CURVE3_TO) {
-      const CCurveShapeBezier *curveBezier =
-        dynamic_cast<const CCurveShapeBezier *>(cpart);
+      const CCurveShapeBezier *curveBezier = dynamic_cast<const CCurveShapeBezier *>(cpart);
 
       const C3Bezier2D &cbezier = curveBezier->getBezier();
 
@@ -1730,16 +1689,16 @@ intersectCombineAnd(CPathShapePartList &cparts1, CPathShapePartList &cparts2,
 
         double it = ppoint.ibpoint.t1;
 
-        C3Bezier2D sbezier1, sbezier2;
+        C3Bezier2D isbezier1, isbezier2;
 
         std::cerr << "Split Curve @ " << it << " " << cbezier.calc(it) << std::endl;
 
-        cbezier.split(it, sbezier1, sbezier2);
+        cbezier.split(it, isbezier1, isbezier2);
 
         if (dir[i] > 0) {
-          const CPoint2D &p2 = sbezier1.getControlPoint1();
-          const CPoint2D &p3 = sbezier1.getControlPoint2();
-          const CPoint2D &p4 = sbezier1.getLastPoint    ();
+          const CPoint2D &p2 = isbezier1.getControlPoint1();
+          const CPoint2D &p3 = isbezier1.getControlPoint2();
+          const CPoint2D &p4 = isbezier1.getLastPoint    ();
 
           std::cerr << i << ") Add Curve1 To Intersect " <<
                        p2 << " " << p3 << " " << p4 << std::endl;
@@ -1747,9 +1706,9 @@ intersectCombineAnd(CPathShapePartList &cparts1, CPathShapePartList &cparts2,
           iparts.addPart(new CPathShapeCurve3To(p2, p3, p4));
         }
         else {
-          const CPoint2D &p1 = sbezier2.getFirstPoint   ();
-          const CPoint2D &p2 = sbezier2.getControlPoint1();
-          const CPoint2D &p3 = sbezier2.getControlPoint2();
+          const CPoint2D &p1 = isbezier2.getFirstPoint   ();
+          const CPoint2D &p2 = isbezier2.getControlPoint1();
+          const CPoint2D &p3 = isbezier2.getControlPoint2();
 
           std::cerr << i << ") Add Curve2 To Intersect " <<
                        p3 << " " << p2 << " " << p1 << std::endl;
@@ -1763,25 +1722,23 @@ intersectCombineAnd(CPathShapePartList &cparts1, CPathShapePartList &cparts2,
 
         intersectStatus(cparts1, cparts2, i, ii, dir);
 
-        CCurveShapePart *cpart1 =
-          dynamic_cast<CCurveShapePart *>((*cparts[i])[ii[i]]);
+        CCurveShapePart *cpart2 = dynamic_cast<CCurveShapePart *>((*cparts[i])[ii[i]]);
 
-        if (cpart1->visited_) break;
+        if (cpart2->visited_) break;
 
-        cpart1->visited_ = true;
+        cpart2->visited_ = true;
 
-        if (dir[i] > 0) { if (cpart1->isEndOutside  ()) dir[i] = -dir[i]; }
-        else            { if (cpart1->isStartOutside()) dir[i] = -dir[i]; }
+        if (dir[i] > 0) { if (cpart2->isEndOutside  ()) dir[i] = -dir[i]; }
+        else            { if (cpart2->isStartOutside()) dir[i] = -dir[i]; }
 
-        CPathPartType type1 = cpart1->getType();
+        CPathPartType type1 = cpart2->getType();
 
         if      (type1 == CPATH_PART_TYPE_LINE_TO) {
-          const CCurveShapeLine *curveLine1 =
-            dynamic_cast<const CCurveShapeLine *>(cpart1);
+          const CCurveShapeLine *curveLine1 = dynamic_cast<const CCurveShapeLine *>(cpart2);
 
           const CLine2D &cline1 = curveLine1->getLine();
 
-          if (cpart1->isEndInside()) {
+          if (cpart2->isEndInside()) {
             const CPoint2D &p2 = cline1.end();
 
             std::cerr << i << ") Add Line End To " << p2 << std::endl;
@@ -1797,23 +1754,22 @@ intersectCombineAnd(CPathShapePartList &cparts1, CPathShapePartList &cparts2,
           }
         }
         else if (type1 == CPATH_PART_TYPE_CURVE3_TO) {
-          const CCurveShapeBezier *curveBezier1 =
-            dynamic_cast<const CCurveShapeBezier *>(cpart1);
+          const CCurveShapeBezier *curveBezier1 = dynamic_cast<const CCurveShapeBezier *>(cpart2);
 
           const C3Bezier2D &cbezier1 = curveBezier1->getBezier();
 
           double it = ppoint.ibpoint.t2;
 
-          C3Bezier2D sbezier1, sbezier2;
+          C3Bezier2D isbezier1, isbezier2;
 
           std::cerr << "Split Curve @ " << it << " " << cbezier1.calc(it) << std::endl;
 
-          cbezier1.split(it, sbezier1, sbezier2);
+          cbezier1.split(it, isbezier1, isbezier2);
 
-          if (cpart1->isEndInside()) {
-            const CPoint2D &p2 = sbezier2.getControlPoint1();
-            const CPoint2D &p3 = sbezier2.getControlPoint2();
-            const CPoint2D &p4 = sbezier2.getLastPoint    ();
+          if (cpart2->isEndInside()) {
+            const CPoint2D &p2 = isbezier2.getControlPoint1();
+            const CPoint2D &p3 = isbezier2.getControlPoint2();
+            const CPoint2D &p4 = isbezier2.getLastPoint    ();
 
             std::cerr << i << ") Add Curve2 To Intersect " <<
                          p2 << " " << p3 << " " << p4 << std::endl;
@@ -1821,9 +1777,9 @@ intersectCombineAnd(CPathShapePartList &cparts1, CPathShapePartList &cparts2,
             iparts.addPart(new CPathShapeCurve3To(p2, p3, p4));
           }
           else {
-            const CPoint2D &p1 = sbezier1.getFirstPoint   ();
-            const CPoint2D &p2 = sbezier1.getControlPoint1();
-            const CPoint2D &p3 = sbezier1.getControlPoint2();
+            const CPoint2D &p1 = isbezier1.getFirstPoint   ();
+            const CPoint2D &p2 = isbezier1.getControlPoint1();
+            const CPoint2D &p3 = isbezier1.getControlPoint2();
 
             std::cerr << i << ") Add Curve1 To Intersect " <<
                          p3 << " " << p2 << " " << p1 << std::endl;
@@ -1941,8 +1897,7 @@ intersectCombineXor(CPathShapePartList &cparts1, CPathShapePartList &cparts2,
         CPathPartType type = cpart->getType();
 
         if      (type == CPATH_PART_TYPE_LINE_TO) {
-          const CCurveShapeLine *curveLine =
-            dynamic_cast<const CCurveShapeLine *>(cpart);
+          const CCurveShapeLine *curveLine = dynamic_cast<const CCurveShapeLine *>(cpart);
 
           const CLine2D &cline = curveLine->getLine();
 
@@ -1953,8 +1908,7 @@ intersectCombineXor(CPathShapePartList &cparts1, CPathShapePartList &cparts2,
           iparts.addPart(new CPathShapeLineTo(p2));
         }
         else if (type == CPATH_PART_TYPE_CURVE3_TO) {
-          const CCurveShapeBezier *curveBezier =
-            dynamic_cast<const CCurveShapeBezier *>(cpart);
+          const CCurveShapeBezier *curveBezier = dynamic_cast<const CCurveShapeBezier *>(cpart);
 
           const C3Bezier2D &cbezier = curveBezier->getBezier();
 
@@ -1962,15 +1916,15 @@ intersectCombineXor(CPathShapePartList &cparts1, CPathShapePartList &cparts2,
           if (first) {
             double it = ppoint.ibpoint.t1;
 
-            C3Bezier2D sbezier1, sbezier2;
+            C3Bezier2D isbezier1, isbezier2;
 
             std::cerr << "Split Curve @ " << it << " " << cbezier.calc(it) << std::endl;
 
-            cbezier.split(it, sbezier1, sbezier2);
+            cbezier.split(it, isbezier1, isbezier2);
 
-            const CPoint2D &p2 = sbezier2.getControlPoint1();
-            const CPoint2D &p3 = sbezier2.getControlPoint2();
-            const CPoint2D &p4 = sbezier2.getLastPoint    ();
+            const CPoint2D &p2 = isbezier2.getControlPoint1();
+            const CPoint2D &p3 = isbezier2.getControlPoint2();
+            const CPoint2D &p4 = isbezier2.getLastPoint    ();
 
             std::cerr << i << ") Add Curve To " << p2 << " " << p3 << " " << p4 << std::endl;
 
@@ -2014,8 +1968,7 @@ intersectCombineXor(CPathShapePartList &cparts1, CPathShapePartList &cparts2,
         iparts.addPart(new CPathShapeLineTo(ipoint));
       }
       else if (type == CPATH_PART_TYPE_CURVE3_TO) {
-        const CCurveShapeBezier *curveBezier =
-          dynamic_cast<const CCurveShapeBezier *>(cpart);
+        const CCurveShapeBezier *curveBezier = dynamic_cast<const CCurveShapeBezier *>(cpart);
 
         const C3Bezier2D &cbezier = curveBezier->getBezier();
 
@@ -2053,8 +2006,7 @@ intersectCombineXor(CPathShapePartList &cparts1, CPathShapePartList &cparts2,
           CPathPartType type = cpart->getType();
 
           if      (type == CPATH_PART_TYPE_LINE_TO) {
-            const CCurveShapeLine *curveLine =
-              dynamic_cast<const CCurveShapeLine *>(cpart);
+            const CCurveShapeLine *curveLine = dynamic_cast<const CCurveShapeLine *>(cpart);
 
             const CLine2D &cline = curveLine->getLine();
 
@@ -2065,8 +2017,7 @@ intersectCombineXor(CPathShapePartList &cparts1, CPathShapePartList &cparts2,
             iparts.addPart(new CPathShapeLineTo(p2));
           }
           else if (type == CPATH_PART_TYPE_CURVE3_TO) {
-            const CCurveShapeBezier *curveBezier =
-              dynamic_cast<const CCurveShapeBezier *>(cpart);
+            const CCurveShapeBezier *curveBezier = dynamic_cast<const CCurveShapeBezier *>(cpart);
 
             const C3Bezier2D &cbezier = curveBezier->getBezier();
 
@@ -2115,8 +2066,7 @@ intersectCombineXor(CPathShapePartList &cparts1, CPathShapePartList &cparts2,
         cpart->visited_ = true;
 
         if (cpart->getType() == CPATH_PART_TYPE_CURVE3_TO) {
-          const CCurveShapeBezier *curveBezier =
-            dynamic_cast<const CCurveShapeBezier *>(cpart);
+          const CCurveShapeBezier *curveBezier = dynamic_cast<const CCurveShapeBezier *>(cpart);
 
           const C3Bezier2D &cbezier = curveBezier->getBezier();
 
@@ -2147,8 +2097,7 @@ intersectCombineXor(CPathShapePartList &cparts1, CPathShapePartList &cparts2,
           CPathPartType type = cpart->getType();
 
           if      (type == CPATH_PART_TYPE_LINE_TO) {
-            const CCurveShapeLine *curveLine =
-              dynamic_cast<const CCurveShapeLine *>(cpart);
+            const CCurveShapeLine *curveLine = dynamic_cast<const CCurveShapeLine *>(cpart);
 
             const CLine2D &cline = curveLine->getLine();
 
@@ -2159,8 +2108,7 @@ intersectCombineXor(CPathShapePartList &cparts1, CPathShapePartList &cparts2,
             iparts.addPart(new CPathShapeLineTo(p1));
           }
           else if (type == CPATH_PART_TYPE_CURVE3_TO) {
-            const CCurveShapeBezier *curveBezier =
-              dynamic_cast<const CCurveShapeBezier *>(cpart);
+            const CCurveShapeBezier *curveBezier = dynamic_cast<const CCurveShapeBezier *>(cpart);
 
             const C3Bezier2D &cbezier = curveBezier->getBezier();
 
@@ -2209,8 +2157,7 @@ intersectCombineXor(CPathShapePartList &cparts1, CPathShapePartList &cparts2,
         cpart->visited_ = true;
 
         if (cpart->getType() == CPATH_PART_TYPE_CURVE3_TO) {
-          const CCurveShapeBezier *curveBezier =
-            dynamic_cast<const CCurveShapeBezier *>(cpart);
+          const CCurveShapeBezier *curveBezier = dynamic_cast<const CCurveShapeBezier *>(cpart);
 
           const C3Bezier2D &cbezier = curveBezier->getBezier();
 
@@ -2265,8 +2212,7 @@ combineOr(CPathShapePartList &cparts1, CPathShapePartList &cparts2, CPathShapePa
   if (num_cparts1 == 0 || num_cparts2 == 0) return false;
 
   // find which curve is outside
-  const CCurveShapePart *cpart =
-    dynamic_cast<const CCurveShapePart *>(cparts1[0]);
+  const CCurveShapePart *cpart = dynamic_cast<const CCurveShapePart *>(cparts1[0]);
 
   CPathShapePartList *cparts;
   uint                            num_cparts;
@@ -2279,14 +2225,12 @@ combineOr(CPathShapePartList &cparts1, CPathShapePartList &cparts2, CPathShapePa
   }
 
   for (uint i = 0; i < num_cparts; ++i) {
-    const CCurveShapePart *cpart =
-      dynamic_cast<const CCurveShapePart *>((*cparts)[i]);
+    const CCurveShapePart *cpart = dynamic_cast<const CCurveShapePart *>((*cparts)[i]);
 
     CPathPartType type = cpart->getType();
 
     if      (type == CPATH_PART_TYPE_LINE_TO) {
-      const CCurveShapeLine *curveLine =
-        dynamic_cast<const CCurveShapeLine *>(cpart);
+      const CCurveShapeLine *curveLine = dynamic_cast<const CCurveShapeLine *>(cpart);
 
       const CLine2D &cline = curveLine->getLine();
 
@@ -2301,8 +2245,7 @@ combineOr(CPathShapePartList &cparts1, CPathShapePartList &cparts2, CPathShapePa
       iparts.addPart(new CPathShapeLineTo(p2));
     }
     else if (type == CPATH_PART_TYPE_CURVE3_TO) {
-      const CCurveShapeBezier *curveBezier =
-        dynamic_cast<const CCurveShapeBezier *>(cpart);
+      const CCurveShapeBezier *curveBezier = dynamic_cast<const CCurveShapeBezier *>(cpart);
 
       const C3Bezier2D &cbezier = curveBezier->getBezier();
 
@@ -2337,11 +2280,10 @@ combineAnd(CPathShapePartList &cparts1, CPathShapePartList &cparts2, CPathShapeP
   if (num_cparts1 == 0 || num_cparts2 == 0) return false;
 
   // find which curve is inside
-  const CCurveShapePart *cpart =
-    dynamic_cast<const CCurveShapePart *>(cparts1[0]);
+  const CCurveShapePart *cpart = dynamic_cast<const CCurveShapePart *>(cparts1[0]);
 
   CPathShapePartList *cparts;
-  uint                            num_cparts;
+  uint                num_cparts;
 
   if (cpart->isStartInside()) {
     cparts = &cparts1; num_cparts = num_cparts1;
@@ -2351,14 +2293,12 @@ combineAnd(CPathShapePartList &cparts1, CPathShapePartList &cparts2, CPathShapeP
   }
 
   for (uint i = 0; i < num_cparts; ++i) {
-    const CCurveShapePart *cpart =
-      dynamic_cast<const CCurveShapePart *>((*cparts)[i]);
+    const CCurveShapePart *cpart = dynamic_cast<const CCurveShapePart *>((*cparts)[i]);
 
     CPathPartType type = cpart->getType();
 
     if      (type == CPATH_PART_TYPE_LINE_TO) {
-      const CCurveShapeLine *curveLine =
-        dynamic_cast<const CCurveShapeLine *>(cpart);
+      const CCurveShapeLine *curveLine = dynamic_cast<const CCurveShapeLine *>(cpart);
 
       const CLine2D &cline = curveLine->getLine();
 
@@ -2373,8 +2313,7 @@ combineAnd(CPathShapePartList &cparts1, CPathShapePartList &cparts2, CPathShapeP
       iparts.addPart(new CPathShapeLineTo(p2));
     }
     else if (type == CPATH_PART_TYPE_CURVE3_TO) {
-      const CCurveShapeBezier *curveBezier =
-        dynamic_cast<const CCurveShapeBezier *>(cpart);
+      const CCurveShapeBezier *curveBezier = dynamic_cast<const CCurveShapeBezier *>(cpart);
 
       const C3Bezier2D &cbezier = curveBezier->getBezier();
 
@@ -2414,14 +2353,12 @@ combineXor(CPathShapePartList &cparts1, CPathShapePartList &cparts2, CPathShapeP
 
   for (uint j = 0; j < 2; ++j) {
     for (uint i = 0; i < num_cparts[j]; ++i) {
-      const CCurveShapePart *cpart =
-        dynamic_cast<const CCurveShapePart *>((*cparts[j])[i]);
+      const CCurveShapePart *cpart = dynamic_cast<const CCurveShapePart *>((*cparts[j])[i]);
 
       CPathPartType type = cpart->getType();
 
       if      (type == CPATH_PART_TYPE_LINE_TO) {
-        const CCurveShapeLine *curveLine =
-          dynamic_cast<const CCurveShapeLine *>(cpart);
+        const CCurveShapeLine *curveLine = dynamic_cast<const CCurveShapeLine *>(cpart);
 
         const CLine2D &cline = curveLine->getLine();
 
@@ -2436,8 +2373,7 @@ combineXor(CPathShapePartList &cparts1, CPathShapePartList &cparts2, CPathShapeP
         iparts.addPart(new CPathShapeLineTo(p2));
       }
       else if (type == CPATH_PART_TYPE_CURVE3_TO) {
-        const CCurveShapeBezier *curveBezier =
-          dynamic_cast<const CCurveShapeBezier *>(cpart);
+        const CCurveShapeBezier *curveBezier = dynamic_cast<const CCurveShapeBezier *>(cpart);
 
         const C3Bezier2D &cbezier = curveBezier->getBezier();
 
@@ -2495,8 +2431,7 @@ intersectStatus(CPathShapePartList &cparts1, CPathShapePartList &cparts2,
   std::cerr << "Curve 0: ";
 
   for (uint i1 = 0; i1 < num_cparts1; ++i1) {
-    const CCurveShapePart *cpart1 =
-      dynamic_cast<const CCurveShapePart *>(cparts1[i1]);
+    const CCurveShapePart *cpart1 = dynamic_cast<const CCurveShapePart *>(cparts1[i1]);
 
     std::cerr << (cpart1->visited_ ? CStrUtil::toString(i1) : "_");
   }
@@ -2508,8 +2443,7 @@ intersectStatus(CPathShapePartList &cparts1, CPathShapePartList &cparts2,
   std::cerr << "Curve 1: ";
 
   for (uint i2 = 0; i2 < num_cparts2; ++i2) {
-    const CCurveShapePart *cpart2 =
-      dynamic_cast<const CCurveShapePart *>(cparts2[i2]);
+    const CCurveShapePart *cpart2 = dynamic_cast<const CCurveShapePart *>(cparts2[i2]);
 
     std::cerr << (cpart2->visited_ ? CStrUtil::toString(i2) : "_");
   }
@@ -2529,14 +2463,12 @@ intersect(const CCurveShapePart *cpart1, uint i1,
   if (num_cparts2 == 0) return 0;
 
   for (uint i2 = 0; i2 < num_cparts2; ++i2) {
-    const CCurveShapePart *cpart2 =
-      dynamic_cast<const CCurveShapePart *>(cparts2[i2]);
+    const CCurveShapePart *cpart2 = dynamic_cast<const CCurveShapePart *>(cparts2[i2]);
 
     CPathPartType type2 = cpart2->getType();
 
     if      (type2 == CPATH_PART_TYPE_LINE_TO) {
-      const CCurveShapeLine *curveLine =
-        dynamic_cast<const CCurveShapeLine *>(cpart2);
+      const CCurveShapeLine *curveLine = dynamic_cast<const CCurveShapeLine *>(cpart2);
 
       const CLine2D &cline = curveLine->getLine();
 
@@ -2677,8 +2609,7 @@ intersect(const CCurveShapePart *cpart1, uint i1,
       }
     }
     else if (type2 == CPATH_PART_TYPE_CURVE3_TO) {
-      const CCurveShapeBezier *curveBezier =
-        dynamic_cast<const CCurveShapeBezier *>(cpart2);
+      const CCurveShapeBezier *curveBezier = dynamic_cast<const CCurveShapeBezier *>(cpart2);
 
       const C3Bezier2D &cbezier = curveBezier->getBezier();
 
@@ -2737,14 +2668,12 @@ intersect(const CCurveShapePart *cpart1, uint i1, const CPathShapePartList &cpar
   if (num_cparts2 == 0) return 0;
 
   for (uint i2 = 0; i2 < num_cparts2; ++i2) {
-    const CCurveShapePart *cpart2 =
-      dynamic_cast<const CCurveShapePart *>(cparts2[i2]);
+    const CCurveShapePart *cpart2 = dynamic_cast<const CCurveShapePart *>(cparts2[i2]);
 
     CPathPartType type2 = cpart2->getType();
 
     if      (type2 == CPATH_PART_TYPE_LINE_TO) {
-      const CCurveShapeLine *curveLine =
-        dynamic_cast<const CCurveShapeLine *>(cpart2);
+      const CCurveShapeLine *curveLine = dynamic_cast<const CCurveShapeLine *>(cpart2);
 
       const CLine2D &cline = curveLine->getLine();
 
@@ -2785,8 +2714,7 @@ intersect(const CCurveShapePart *cpart1, uint i1, const CPathShapePartList &cpar
       }
     }
     else if (type2 == CPATH_PART_TYPE_CURVE3_TO) {
-      const CCurveShapeBezier *curveBezier =
-        dynamic_cast<const CCurveShapeBezier *>(cpart2);
+      const CCurveShapeBezier *curveBezier = dynamic_cast<const CCurveShapeBezier *>(cpart2);
 
       const C3Bezier2D &cbezier = curveBezier->getBezier();
 
@@ -2871,8 +2799,7 @@ removeArcs(CPathShapePartList &parts) const
       parts.addPart(part->dup());
     }
     else if (type == CPATH_PART_TYPE_ARC) {
-      const CPathShapeArc *arcToPart =
-        dynamic_cast<const CPathShapeArc *>(part);
+      const CPathShapeArc *arcToPart = dynamic_cast<const CPathShapeArc *>(part);
 
       CPoint2D c      = arcToPart->getCenter();
       double   xr     = arcToPart->getRadiusX();
@@ -2922,8 +2849,7 @@ flatten(const CMatrix2D &m, std::vector<CPolygon2D> &polygons) const
     CPathPartType type = part->getType();
 
     if      (type == CPATH_PART_TYPE_MOVE_TO) {
-      const CPathShapeMoveTo *moveToPart =
-        dynamic_cast<const CPathShapeMoveTo *>(part);
+      const CPathShapeMoveTo *moveToPart = dynamic_cast<const CPathShapeMoveTo *>(part);
 
       p0 = m*moveToPart->getPoint();
 
@@ -2932,8 +2858,7 @@ flatten(const CMatrix2D &m, std::vector<CPolygon2D> &polygons) const
       p1 = p0;
     }
     else if (type == CPATH_PART_TYPE_LINE_TO) {
-      const CPathShapeLineTo *lineToPart =
-        dynamic_cast<const CPathShapeLineTo *>(part);
+      const CPathShapeLineTo *lineToPart = dynamic_cast<const CPathShapeLineTo *>(part);
 
       CPoint2D p2 = m*lineToPart->getPoint();
 
@@ -2942,8 +2867,7 @@ flatten(const CMatrix2D &m, std::vector<CPolygon2D> &polygons) const
       p1 = p2;
     }
     else if (type == CPATH_PART_TYPE_CURVE2_TO) {
-      const CPathShapeCurve2To *curveToPart =
-        dynamic_cast<const CPathShapeCurve2To *>(part);
+      const CPathShapeCurve2To *curveToPart = dynamic_cast<const CPathShapeCurve2To *>(part);
 
       CPoint2D p2 = m*curveToPart->getPoint1();
       CPoint2D p3 = m*curveToPart->getPoint2();
@@ -2962,8 +2886,7 @@ flatten(const CMatrix2D &m, std::vector<CPolygon2D> &polygons) const
       p1 = p3;
     }
     else if (type == CPATH_PART_TYPE_CURVE3_TO) {
-      const CPathShapeCurve3To *curveToPart =
-        dynamic_cast<const CPathShapeCurve3To *>(part);
+      const CPathShapeCurve3To *curveToPart = dynamic_cast<const CPathShapeCurve3To *>(part);
 
       CPoint2D p2 = m*curveToPart->getPoint1();
       CPoint2D p3 = m*curveToPart->getPoint2();
@@ -2983,8 +2906,7 @@ flatten(const CMatrix2D &m, std::vector<CPolygon2D> &polygons) const
       p1 = p4;
     }
     else if (type == CPATH_PART_TYPE_ARC) {
-      const CPathShapeArc *arcToPart =
-        dynamic_cast<const CPathShapeArc *>(part);
+      const CPathShapeArc *arcToPart = dynamic_cast<const CPathShapeArc *>(part);
 
       CPoint2D c      = m*arcToPart->getCenter();
       double   xr     = arcToPart->getRadiusX();
@@ -3044,8 +2966,7 @@ flattenCurve(std::vector<CPoint2D> &points) const
     CPathPartType type = part->getType();
 
     if      (type == CPATH_PART_TYPE_LINE_TO) {
-      const CCurveShapeLine *curveLine =
-        dynamic_cast<const CCurveShapeLine *>(part);
+      const CCurveShapeLine *curveLine = dynamic_cast<const CCurveShapeLine *>(part);
 
       const CLine2D &line = curveLine->getLine();
 
@@ -3055,8 +2976,7 @@ flattenCurve(std::vector<CPoint2D> &points) const
       points.push_back(line.end());
     }
     else if (type == CPATH_PART_TYPE_CURVE3_TO) {
-      const CCurveShapeBezier *curveBezier =
-        dynamic_cast<const CCurveShapeBezier *>(part);
+      const CCurveShapeBezier *curveBezier = dynamic_cast<const CCurveShapeBezier *>(part);
 
       const C3Bezier2D &bezier = curveBezier->getBezier();
 
@@ -3088,15 +3008,13 @@ toCurves(const CMatrix2D &m, CPathShapePartListArray &partsList) const
     CPathPartType type = part->getType();
 
     if      (type == CPATH_PART_TYPE_MOVE_TO) {
-      const CPathShapeMoveTo *moveToPart =
-        dynamic_cast<const CPathShapeMoveTo *>(part);
+      const CPathShapeMoveTo *moveToPart = dynamic_cast<const CPathShapeMoveTo *>(part);
 
       p0 = m*moveToPart->getPoint();
       p1 = p0;
     }
     else if (type == CPATH_PART_TYPE_LINE_TO) {
-      const CPathShapeLineTo *lineToPart =
-        dynamic_cast<const CPathShapeLineTo *>(part);
+      const CPathShapeLineTo *lineToPart = dynamic_cast<const CPathShapeLineTo *>(part);
 
       CPoint2D p2 = m*lineToPart->getPoint();
 
@@ -3109,8 +3027,7 @@ toCurves(const CMatrix2D &m, CPathShapePartListArray &partsList) const
       p1 = p2;
     }
     else if (type == CPATH_PART_TYPE_CURVE2_TO) {
-      const CPathShapeCurve2To *curveToPart =
-        dynamic_cast<const CPathShapeCurve2To *>(part);
+      const CPathShapeCurve2To *curveToPart = dynamic_cast<const CPathShapeCurve2To *>(part);
 
       CPoint2D p2 = m*curveToPart->getPoint1();
       CPoint2D p3 = m*curveToPart->getPoint2();
@@ -3124,8 +3041,7 @@ toCurves(const CMatrix2D &m, CPathShapePartListArray &partsList) const
       p1 = p3;
     }
     else if (type == CPATH_PART_TYPE_CURVE3_TO) {
-      const CPathShapeCurve3To *curveToPart =
-        dynamic_cast<const CPathShapeCurve3To *>(part);
+      const CPathShapeCurve3To *curveToPart = dynamic_cast<const CPathShapeCurve3To *>(part);
 
       CPoint2D p2 = m*curveToPart->getPoint1();
       CPoint2D p3 = m*curveToPart->getPoint2();
@@ -3140,8 +3056,7 @@ toCurves(const CMatrix2D &m, CPathShapePartListArray &partsList) const
       p1 = p4;
     }
     else if (type == CPATH_PART_TYPE_ARC) {
-      const CPathShapeArc *arcToPart =
-        dynamic_cast<const CPathShapeArc *>(part);
+      const CPathShapeArc *arcToPart = dynamic_cast<const CPathShapeArc *>(part);
 
       const CPoint2D &c      = arcToPart->getCenter();
       double          xr     = arcToPart->getRadiusX();
@@ -3211,8 +3126,7 @@ fromCurve(CPathShapePartList &parts) const
     CPathPartType type = part->getType();
 
     if      (type == CPATH_PART_TYPE_LINE_TO) {
-      const CCurveShapeLine *curveLine =
-        dynamic_cast<const CCurveShapeLine *>(part);
+      const CCurveShapeLine *curveLine = dynamic_cast<const CCurveShapeLine *>(part);
 
       const CLine2D &line = curveLine->getLine();
 
@@ -3225,8 +3139,7 @@ fromCurve(CPathShapePartList &parts) const
       parts.addPart(new CPathShapeLineTo(p2));
     }
     else if (type == CPATH_PART_TYPE_CURVE3_TO) {
-      const CCurveShapeBezier *curveBezier =
-        dynamic_cast<const CCurveShapeBezier *>(part);
+      const CCurveShapeBezier *curveBezier = dynamic_cast<const CCurveShapeBezier *>(part);
 
       const C3Bezier2D &bezier = curveBezier->getBezier();
 
@@ -3323,35 +3236,30 @@ combine(const CPathShapePartList &parts1, const CMatrix2D &m1,
     parts.addPart(part1);
 
     if      (type == CPATH_PART_TYPE_MOVE_TO) {
-      CPathShapeMoveTo *moveToPart =
-        dynamic_cast<CPathShapeMoveTo *>(part1);
+      CPathShapeMoveTo *moveToPart = dynamic_cast<CPathShapeMoveTo *>(part1);
 
       moveToPart->setPoint(m1*moveToPart->getPoint());
     }
     else if (type == CPATH_PART_TYPE_LINE_TO) {
-      CPathShapeLineTo *lineToPart =
-        dynamic_cast<CPathShapeLineTo *>(part1);
+      CPathShapeLineTo *lineToPart = dynamic_cast<CPathShapeLineTo *>(part1);
 
       lineToPart->setPoint(m1*lineToPart->getPoint());
     }
     else if (type == CPATH_PART_TYPE_CURVE2_TO) {
-      CPathShapeCurve2To *curveToPart =
-        dynamic_cast<CPathShapeCurve2To *>(part1);
+      CPathShapeCurve2To *curveToPart = dynamic_cast<CPathShapeCurve2To *>(part1);
 
       curveToPart->setPoint1(m1*curveToPart->getPoint1());
       curveToPart->setPoint2(m1*curveToPart->getPoint2());
     }
     else if (type == CPATH_PART_TYPE_CURVE3_TO) {
-      CPathShapeCurve3To *curveToPart =
-        dynamic_cast<CPathShapeCurve3To *>(part1);
+      CPathShapeCurve3To *curveToPart = dynamic_cast<CPathShapeCurve3To *>(part1);
 
       curveToPart->setPoint1(m1*curveToPart->getPoint1());
       curveToPart->setPoint2(m1*curveToPart->getPoint2());
       curveToPart->setPoint3(m1*curveToPart->getPoint3());
     }
     else if (type == CPATH_PART_TYPE_ARC) {
-      CPathShapeArc *arcToPart =
-        dynamic_cast<CPathShapeArc *>(part1);
+      CPathShapeArc *arcToPart = dynamic_cast<CPathShapeArc *>(part1);
 
       arcToPart->setCenter(m1*arcToPart->getCenter());
     }
@@ -3373,35 +3281,30 @@ combine(const CPathShapePartList &parts1, const CMatrix2D &m1,
     parts.addPart(part2);
 
     if      (type == CPATH_PART_TYPE_MOVE_TO) {
-      CPathShapeMoveTo *moveToPart =
-        dynamic_cast<CPathShapeMoveTo *>(part2);
+      CPathShapeMoveTo *moveToPart = dynamic_cast<CPathShapeMoveTo *>(part2);
 
       moveToPart->setPoint(m2*moveToPart->getPoint());
     }
     else if (type == CPATH_PART_TYPE_LINE_TO) {
-      CPathShapeLineTo *lineToPart =
-        dynamic_cast<CPathShapeLineTo *>(part2);
+      CPathShapeLineTo *lineToPart = dynamic_cast<CPathShapeLineTo *>(part2);
 
       lineToPart->setPoint(m2*lineToPart->getPoint());
     }
     else if (type == CPATH_PART_TYPE_CURVE2_TO) {
-      CPathShapeCurve2To *curveToPart =
-        dynamic_cast<CPathShapeCurve2To *>(part2);
+      CPathShapeCurve2To *curveToPart = dynamic_cast<CPathShapeCurve2To *>(part2);
 
       curveToPart->setPoint1(m2*curveToPart->getPoint1());
       curveToPart->setPoint2(m2*curveToPart->getPoint2());
     }
     else if (type == CPATH_PART_TYPE_CURVE3_TO) {
-      CPathShapeCurve3To *curveToPart =
-        dynamic_cast<CPathShapeCurve3To *>(part2);
+      CPathShapeCurve3To *curveToPart = dynamic_cast<CPathShapeCurve3To *>(part2);
 
       curveToPart->setPoint1(m2*curveToPart->getPoint1());
       curveToPart->setPoint2(m2*curveToPart->getPoint2());
       curveToPart->setPoint3(m2*curveToPart->getPoint3());
     }
     else if (type == CPATH_PART_TYPE_ARC) {
-      CPathShapeArc *arcToPart =
-        dynamic_cast<CPathShapeArc *>(part2);
+      CPathShapeArc *arcToPart = dynamic_cast<CPathShapeArc *>(part2);
 
       arcToPart->setCenter(m2*arcToPart->getCenter());
     }

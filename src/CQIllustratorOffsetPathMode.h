@@ -79,6 +79,9 @@ class CQIllustratorOffsetPathMode : public CQIllustratorMode {
   void setWidth(double w);
 
  private:
+  using CQIllustratorMode::setSelectedShape;
+
+ private:
   CQIllustratorOffsetPathToolbar *toolbar_;
   CQIllustratorOffsetPathSizer   *sizer_;
   double                          w_;

@@ -809,7 +809,28 @@ void
 CQSVGRenderer::
 setAlign(CHAlignType halign, CVAlignType valign)
 {
-  range_.setAlign(halign, valign);
+  CDisplayRange2D::HAlign rhalign { CDisplayRange2D::HAlign::NONE };
+  CDisplayRange2D::VAlign rvalign { CDisplayRange2D::VAlign::NONE };
+
+  switch (halign) {
+    case CHALIGN_TYPE_LEFT   : rhalign = CDisplayRange2D::HAlign::LEFT   ; break;
+    case CHALIGN_TYPE_CENTER : rhalign = CDisplayRange2D::HAlign::CENTER ; break;
+    case CHALIGN_TYPE_RIGHT  : rhalign = CDisplayRange2D::HAlign::RIGHT  ; break;
+    case CHALIGN_TYPE_JUSTIFY: rhalign = CDisplayRange2D::HAlign::JUSTIFY; break;
+    case CHALIGN_TYPE_INSIDE : rhalign = CDisplayRange2D::HAlign::INSIDE ; break;
+    case CHALIGN_TYPE_OUTSIDE: rhalign = CDisplayRange2D::HAlign::OUTSIDE; break;
+    default: break;
+  }
+
+  switch (valign) {
+    case CVALIGN_TYPE_TOP     : rvalign = CDisplayRange2D::VAlign::TOP     ; break;
+    case CVALIGN_TYPE_CENTER  : rvalign = CDisplayRange2D::VAlign::CENTER  ; break;
+    case CVALIGN_TYPE_BOTTOM  : rvalign = CDisplayRange2D::VAlign::BOTTOM  ; break;
+    case CVALIGN_TYPE_BASELINE: rvalign = CDisplayRange2D::VAlign::BASELINE; break;
+    default: break;
+  }
+
+  range_.setAlign(rhalign, rvalign);
 }
 
 void

@@ -22,7 +22,7 @@ class CQSVGRenderer : public CSVGRenderer {
   QPainter *painter() const { return painter_; }
 
   const CRGBA &background() const { return background_; }
-  void setBackground(const CRGBA &v) { background_ = v; }
+  void setBackground(const CRGBA &v) override { background_ = v; }
 
   bool isDrawing() const { return drawing_; }
   void setDrawing(bool b) { drawing_ = b; }
@@ -30,7 +30,7 @@ class CQSVGRenderer : public CSVGRenderer {
   void setSize(int width, int height) override;
   void getSize(int *width, int *height) const override;
 
-  void setPixelRange(int width, int height);
+  void setPixelRange(int width, int height) override;
 
   void setDataRange(double xmin, double ymin, double xmax, double ymax) override;
   void getDataRange(double *xmin, double *ymin, double *xmax, double *ymax) const override;
@@ -148,27 +148,27 @@ class CQSVGRenderer : public CSVGRenderer {
 
  private:
   CQSVGImageData* imageData_;
-  QPainter*       painter_ { 0 };
-  QPainterPath*   path_ { 0 };
-  bool            pathEmpty_ { true };
-  QPainterPath*   savePath_ { 0 };
+  QPainter*       painter_    { nullptr };
+  QPainterPath*   path_       { nullptr };
+  bool            pathEmpty_  { true };
+  QPainterPath*   savePath_   { nullptr };
   QPen            pen_;
   QFont           qfont_;
   CMatrix2D       viewMatrix_;
-  bool            antiAlias_ { true };
+  bool            antiAlias_  { true };
   CDisplayRange2D range_;
   QTransform      transform_;
   QTransform      itransform_;
   CRGBA           background_ { 1, 1, 1 };
-  bool            drawing_ { false };
+  bool            drawing_    { false };
 
   // fill
   QBrush          fillBrush_;
-  CFillType       fillType_ { FILL_TYPE_EVEN_ODD };
+  CFillType       fillType_   { FILL_TYPE_EVEN_ODD };
 
   // stroke
   QBrush          strokeBrush_;
-  bool            strokeFilled_ { false };
+  bool            strokeFilled_   { false };
   CFillType       strokeFillType_ { FILL_TYPE_EVEN_ODD };
 };
 

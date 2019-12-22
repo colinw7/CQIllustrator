@@ -9,6 +9,7 @@
 #include <QFontComboBox>
 
 #include <CQMenu.h>
+#include <CQFontUtil.h>
 #include <CQUtil.h>
 #include <CQRealEdit.h>
 #include <CQImageButton.h>
@@ -108,7 +109,7 @@ handleMouseRelease(const MouseEvent &e)
       text->setStroke(stroke);
       text->setFill  (fill);
 
-      text->setFont(CQUtil::fromQFont(toolbar_->getFont()));
+      text->setFont(CQFontUtil::fromQFont(toolbar_->getFont()));
 
       illustrator_->addShape(text);
 

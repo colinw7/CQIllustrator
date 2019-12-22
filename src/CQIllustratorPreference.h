@@ -33,8 +33,8 @@ class CQIllustratorPreference {
 
  private:
   std::string                  name;
-  CQIllustratorPreferenceType  type;
-  CQIllustratorPreferenceValue value;
+//CQIllustratorPreferenceType  type;
+//CQIllustratorPreferenceValue value;
 };
 
 class CQIllustratorPreferenceDock : public QWidget {
