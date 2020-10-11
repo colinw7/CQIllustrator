@@ -85,7 +85,6 @@ CQGradientStopList.cpp \
 CQImagePreview.cpp \
 CQLayerOption.cpp \
 CQLineCap.cpp \
-CQLineDash.cpp \
 CQLineJoin.cpp \
 CQMatrix2D.cpp \
 CQObjectOption.cpp \
@@ -96,13 +95,10 @@ CQScrollArea.cpp \
 CQStrokeOptionDialog.cpp \
 CQStrokeOptionTool.cpp \
 CQSwatch.cpp \
-CQTableWidget.cpp \
 \
 CAxis2D.cpp \
-CDelaunay.cpp \
 CEncode64.cpp \
 CGenPoly.cpp \
-CHull3D.cpp \
 CKuhnMunkres.cpp \
 CLog.cpp \
 CPathShape.cpp \
@@ -197,7 +193,6 @@ CQGradientStopList.h \
 CQImagePreview.h \
 CQLayerOption.h \
 CQLineCap.h \
-CQLineDash.h \
 CQLineJoin.h \
 CQMatrix2D.h \
 CQObjectOption.h \
@@ -208,15 +203,12 @@ CQScrollArea.h \
 CQStrokeOptionDialog.h \
 CQStrokeOptionTool.h \
 CQSwatch.h \
-CQTableWidget.h \
 CQuadTree.h \
 \
 CAxis2D.h \
 CBooleanOp.h \
-CDelaunay.h \
 CEncode64.h \
 CGenPoly.h \
-CHull3D.h \
 CKuhnMunkres.h \
 CLog.h \
 CPathPartType.h \

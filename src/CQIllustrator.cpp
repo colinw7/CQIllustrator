@@ -2342,6 +2342,8 @@ loadPS(const QString &filename)
   fileName_ = filename;
 
   updateTitle();
+#else
+  assert(filename.length());
 #endif
 }
 
