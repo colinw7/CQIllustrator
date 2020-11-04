@@ -97,7 +97,6 @@ CQStrokeOptionTool.cpp \
 CQSwatch.cpp \
 \
 CAxis2D.cpp \
-CEncode64.cpp \
 CGenPoly.cpp \
 CKuhnMunkres.cpp \
 CLog.cpp \
@@ -207,7 +206,6 @@ CQuadTree.h \
 \
 CAxis2D.h \
 CBooleanOp.h \
-CEncode64.h \
 CGenPoly.h \
 CKuhnMunkres.h \
 CLog.h \
