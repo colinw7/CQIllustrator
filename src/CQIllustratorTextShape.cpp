@@ -3,6 +3,7 @@
 #include <CQIllustratorShapeDrawer.h>
 #include <CQIllustrator.h>
 #include <CQUtil.h>
+#include <cassert>
 
 CQIllustratorTextShape::
 CQIllustratorTextShape(const CPoint2D &p1, const CPoint2D &p2, const std::string &str,
