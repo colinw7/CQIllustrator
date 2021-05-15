@@ -1,25 +1,19 @@
 #include <CQLineCap.h>
 #include <CQUtil.h>
+#include <CQPixmapCache.h>
 #include <QAction>
 
-#include <pixmaps/cap_square.xpm>
-#include <pixmaps/cap_butt.xpm>
-#include <pixmaps/cap_round.xpm>
+#include <svg/cap_square_svg.h>
+#include <svg/cap_butt_svg.h>
+#include <svg/cap_round_svg.h>
 
 CQLineCap::
 CQLineCap(QWidget *parent) :
  QComboBox(parent)
 {
-  CImagePtr cap_image1 = CImage::create(cap_butt_data  , sizeof(cap_butt_data  )/sizeof(char *),
-                                        CFILE_TYPE_IMAGE_XPM);
-  CImagePtr cap_image2 = CImage::create(cap_round_data , sizeof(cap_round_data )/sizeof(char *),
-                                        CFILE_TYPE_IMAGE_XPM);
-  CImagePtr cap_image3 = CImage::create(cap_square_data, sizeof(cap_square_data)/sizeof(char *),
-                                        CFILE_TYPE_IMAGE_XPM);
-
-  addItem(CQUtil::imageToIcon(cap_image1), "Butt"  );
-  addItem(CQUtil::imageToIcon(cap_image2), "Round" );
-  addItem(CQUtil::imageToIcon(cap_image3), "Square");
+  addItem(CQPixmapCacheInst->getIcon("CAP_BUTT"  ), "Butt"  );
+  addItem(CQPixmapCacheInst->getIcon("CAP_ROUND" ), "Round" );
+  addItem(CQPixmapCacheInst->getIcon("CAP_SQUARE"), "Square");
 
   setToolTip("Line Cap");
 

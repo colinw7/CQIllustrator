@@ -11,6 +11,8 @@ class QPaintEvent;
 class CQImagePreviewCanvas;
 class CQScrollArea;
 
+//---
+
 class CQImagePreview : public QWidget {
   Q_OBJECT
 
@@ -29,9 +31,9 @@ class CQImagePreview : public QWidget {
 
   void sendCancelSignal();
 
-  void scrollUp(bool page=false);
-  void scrollDown(bool page=false);
-  void scrollLeft(bool page=false);
+  void scrollUp   (bool page=false);
+  void scrollDown (bool page=false);
+  void scrollLeft (bool page=false);
   void scrollRight(bool page=false);
 
  signals:
@@ -41,9 +43,11 @@ class CQImagePreview : public QWidget {
   void canvasUpdateSlot();
 
  private:
-  CQImagePreviewCanvas *canvas_;
-  CQScrollArea         *sarea_;
+  CQImagePreviewCanvas* canvas_ { nullptr };
+  CQScrollArea*         sarea_  { nullptr };
 };
+
+//---
 
 class CQImagePreviewCanvas : public QWidget {
   Q_OBJECT
@@ -57,32 +61,32 @@ class CQImagePreviewCanvas : public QWidget {
 
   void setImage(CImagePtr image);
 
-  double getZoomFactor() const { return zoom_factor_; }
+  double getZoomFactor() const { return zoomFactor_; }
 
   void setZoomFactor(double factor);
 
-  void setFillScreen(bool fill_screen) { fill_screen_ = fill_screen; }
-  void setKeepAspect(bool keep_aspect) { keep_aspect_ = keep_aspect; }
+  void setFillScreen(bool fillScreen) { fillScreen_ = fillScreen; }
+  void setKeepAspect(bool keepAspect) { keepAspect_ = keepAspect; }
 
-  bool getFillScreen() const { return fill_screen_; }
-  bool getKeepAspect() const { return keep_aspect_; }
+  bool getFillScreen() const { return fillScreen_; }
+  bool getKeepAspect() const { return keepAspect_; }
 
   void setBackground(const CRGBA &rgba);
 
   void zoomIncrease();
   void zoomDecrease();
 
-  void resizeEvent(QResizeEvent *e);
-  void paintEvent(QPaintEvent *e);
+  void resizeEvent(QResizeEvent *e) override;
+  void paintEvent(QPaintEvent *e) override;
 
-  void keyPressEvent(QKeyEvent *e);
+  void keyPressEvent(QKeyEvent *e) override;
 
  private:
-  CQImagePreview *view_;
+  CQImagePreview* view_       { nullptr };
   CImagePtr       image_;
-  double          zoom_factor_;
-  bool            fill_screen_;
-  bool            keep_aspect_;
+  double          zoomFactor_ { 1.0 };
+  bool            fillScreen_ { false };
+  bool            keepAspect_ { true };
   CRGBA           bg_;
 };
 

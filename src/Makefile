@@ -16,7 +16,7 @@ CC            = gcc
 CXX           = g++
 DEFINES       = -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-CXXFLAGS      = -pipe -std=c++14 -DCQUTIL_IMAGE -DCQUTIL_FONT -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
+CXXFLAGS      = -pipe -std=c++14 -DCQUTIL_PEN -DCQUTIL_BRUSH -DCQUTIL_FONT -DCQUTIL_IMAGE -DCBRUSH_IMAGE -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 INCPATH       = -I. -I../include -I../../CSVG/include -I../../CCSS/include -I../../CQPropertyTree/include -I../../CQUtil/include -I../../CImageLib/include -I../../CConfig/include -I../../CArgs/include -I../../CFileUtil/include -I../../CFile/include -I../../CFont/include -I../../CRegExp/include -I../../CStrUtil/include -I../../COS/include -I../../CMath/include -I../../CRGBName/include -I../../CUndo/include -I../../CUtil/include -I. -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -I.moc -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++
 QMAKE         = /usr/lib/qt5/bin/qmake
 DEL_FILE      = rm -f
@@ -859,7 +859,7 @@ compiler_moc_predefs_make_all: .moc/moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) .moc/moc_predefs.h
 .moc/moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
-	g++ -pipe -std=c++14 -DCQUTIL_IMAGE -DCQUTIL_FONT -g -Wall -W -dM -E -o .moc/moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
+	g++ -pipe -std=c++14 -DCQUTIL_PEN -DCQUTIL_BRUSH -DCQUTIL_FONT -DCQUTIL_IMAGE -DCBRUSH_IMAGE -g -Wall -W -dM -E -o .moc/moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 
 compiler_moc_header_make_all: .moc/moc_CQIllustratorAlignMode.cpp .moc/moc_CQIllustratorCanvas.cpp .moc/moc_CQIllustratorCreateEllipseMode.cpp .moc/moc_CQIllustratorCreatePathMode.cpp .moc/moc_CQIllustratorCreatePolygonMode.cpp .moc/moc_CQIllustratorCreateRectMode.cpp .moc/moc_CQIllustratorCreateStarMode.cpp .moc/moc_CQIllustratorCreateTextMode.cpp .moc/moc_CQIllustratorCreateTextToolbar.cpp .moc/moc_CQIllustratorData.cpp .moc/moc_CQIllustratorEllipseShape.cpp .moc/moc_CQIllustratorGroupShape.cpp .moc/moc_CQIllustrator.cpp .moc/moc_CQIllustratorInfo.cpp .moc/moc_CQIllustratorLayer.cpp .moc/moc_CQIllustratorMode.cpp .moc/moc_CQIllustratorNPolyShape.cpp .moc/moc_CQIllustratorOffsetPathMode.cpp .moc/moc_CQIllustratorPanMode.cpp .moc/moc_CQIllustratorPathShape.cpp .moc/moc_CQIllustratorPointSelectMode.cpp .moc/moc_CQIllustratorPolygonShape.cpp .moc/moc_CQIllustratorPreference.cpp .moc/moc_CQIllustratorPropertiesDlg.cpp .moc/moc_CQIllustratorRectShape.cpp .moc/moc_CQIllustratorSelection.cpp .moc/moc_CQIllustratorSelectMode.cpp .moc/moc_CQIllustratorSetImageMode.cpp .moc/moc_CQIllustratorSetLGradientMode.cpp .moc/moc_CQIllustratorSetRGradientMode.cpp .moc/moc_CQIllustratorShape.cpp .moc/moc_CQIllustratorSliceMode.cpp .moc/moc_CQIllustratorSnapDock.cpp .moc/moc_CQIllustratorStarShape.cpp .moc/moc_CQIllustratorTextShape.cpp .moc/moc_CQIllustratorToolbar.cpp .moc/moc_CQIllustratorTransformMode.cpp .moc/moc_CQIllustratorUndoDock.cpp .moc/moc_CQIllustratorUndo.cpp .moc/moc_CQIllustratorZoomMode.cpp .moc/moc_CQFillOptionDialog.cpp .moc/moc_CQFillOptionTool.cpp .moc/moc_CQFontOptionDialog.cpp .moc/moc_CQFontOptionTool.cpp .moc/moc_CQGradientStopList.cpp .moc/moc_CQImagePreview.cpp .moc/moc_CQLayerOption.cpp .moc/moc_CQLineCap.cpp .moc/moc_CQLineJoin.cpp .moc/moc_CQMatrix2D.cpp .moc/moc_CQObjectOption.cpp .moc/moc_CQOptionToolSet.cpp .moc/moc_CQPointEdit.cpp .moc/moc_CQPropertiesOption.cpp .moc/moc_CQScrollArea.cpp .moc/moc_CQStrokeOptionDialog.cpp .moc/moc_CQStrokeOptionTool.cpp
 compiler_moc_header_clean:
@@ -3771,9 +3771,6 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		CQPointEdit.h \
 		../../CQUtil/include/CQUtil.h \
 		../../CMath/include/CAngle.h \
-		../../CUtil/include/CBrush.h \
-		../../CUtil/include/CBrushStyle.h \
-		../../CUtil/include/CPen.h \
 		../../CQUtil/include/CQUtilMeta.h \
 		../../CQUtil/include/CQMenu.h \
 		CQDockWidget.h \
@@ -3883,9 +3880,6 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		CQIllustratorSnap.h \
 		../../CQUtil/include/CQUtil.h \
 		../../CMath/include/CAngle.h \
-		../../CUtil/include/CBrush.h \
-		../../CUtil/include/CBrushStyle.h \
-		../../CUtil/include/CPen.h \
 		../../CQUtil/include/CQUtilMeta.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CQIllustratorCanvas.o CQIllustratorCanvas.cpp
 
@@ -4150,14 +4144,12 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		CPSViewShapeRenderer.h \
 		../../CQUtil/include/CQApp.h \
 		../../CQUtil/include/CQStyle.h \
+		../../CQUtil/include/CQStyleMgr.h \
 		../../CQUtil/include/CQMenu.h \
 		../../CQUtil/include/CQImage.h \
 		../../CQUtil/include/CQToolBar.h \
 		CQDockWidget.h \
 		../../CQUtil/include/CQUtil.h \
-		../../CUtil/include/CBrush.h \
-		../../CUtil/include/CBrushStyle.h \
-		../../CUtil/include/CPen.h \
 		../../CQUtil/include/CQUtilMeta.h \
 		../../CSVG/include/CSVG.h \
 		../../CSVG/include/CSVGBlock.h \
@@ -4285,9 +4277,6 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CQUtil/include/CQMenu.h \
 		../../CQUtil/include/CQUtil.h \
 		../../CMath/include/CAngle.h \
-		../../CUtil/include/CBrush.h \
-		../../CUtil/include/CBrushStyle.h \
-		../../CUtil/include/CPen.h \
 		../../CQUtil/include/CQUtilMeta.h \
 		CQPointEdit.h \
 		../../CQUtil/include/CQRealEdit.h \
@@ -4389,9 +4378,6 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CQUtil/include/CQMenu.h \
 		../../CQUtil/include/CQUtil.h \
 		../../CMath/include/CAngle.h \
-		../../CUtil/include/CBrush.h \
-		../../CUtil/include/CBrushStyle.h \
-		../../CUtil/include/CPen.h \
 		../../CQUtil/include/CQUtilMeta.h \
 		CQPointEdit.h \
 		../../CQUtil/include/CQImageButton.h \
@@ -4504,9 +4490,6 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CQUtil/include/CQMenu.h \
 		../../CQUtil/include/CQUtil.h \
 		../../CMath/include/CAngle.h \
-		../../CUtil/include/CBrush.h \
-		../../CUtil/include/CBrushStyle.h \
-		../../CUtil/include/CPen.h \
 		../../CQUtil/include/CQUtilMeta.h \
 		CQPointEdit.h \
 		../../CQUtil/include/CQImageButton.h \
@@ -4616,9 +4599,6 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CQUtil/include/CQMenu.h \
 		../../CQUtil/include/CQUtil.h \
 		../../CMath/include/CAngle.h \
-		../../CUtil/include/CBrush.h \
-		../../CUtil/include/CBrushStyle.h \
-		../../CUtil/include/CPen.h \
 		../../CQUtil/include/CQUtilMeta.h \
 		CQPointEdit.h \
 		../../CQUtil/include/CQRealEdit.h \
@@ -4718,9 +4698,6 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CQUtil/include/CQMenu.h \
 		../../CQUtil/include/CQUtil.h \
 		../../CMath/include/CAngle.h \
-		../../CUtil/include/CBrush.h \
-		../../CUtil/include/CBrushStyle.h \
-		../../CUtil/include/CPen.h \
 		../../CQUtil/include/CQUtilMeta.h \
 		../../CQUtil/include/CQImageButton.h \
 		CQPointEdit.h \
@@ -4827,9 +4804,6 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CQUtil/include/CQFontUtil.h \
 		../../CQUtil/include/CQUtil.h \
 		../../CMath/include/CAngle.h \
-		../../CUtil/include/CBrush.h \
-		../../CUtil/include/CBrushStyle.h \
-		../../CUtil/include/CPen.h \
 		../../CQUtil/include/CQUtilMeta.h \
 		../../CQUtil/include/CQRealEdit.h \
 		../../CQUtil/include/CQImageButton.h \
@@ -4932,9 +4906,6 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CQUtil/include/CQFontUtil.h \
 		../../CQUtil/include/CQUtil.h \
 		../../CMath/include/CAngle.h \
-		../../CUtil/include/CBrush.h \
-		../../CUtil/include/CBrushStyle.h \
-		../../CUtil/include/CPen.h \
 		../../CQUtil/include/CQUtilMeta.h \
 		svg/bold_svg.h \
 		svg/italic_svg.h \
@@ -5241,9 +5212,6 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CQUtil/include/CQImage.h \
 		../../CQUtil/include/CQUtil.h \
 		../../CMath/include/CAngle.h \
-		../../CUtil/include/CBrush.h \
-		../../CUtil/include/CBrushStyle.h \
-		../../CUtil/include/CPen.h \
 		../../CQUtil/include/CQUtilMeta.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CQIllustratorHandle.o CQIllustratorHandle.cpp
 
@@ -5347,9 +5315,6 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CUtil/include/CEvent.h \
 		../../CUtil/include/CKeyType.h \
 		../../CMath/include/CAngle.h \
-		../../CUtil/include/CBrush.h \
-		../../CUtil/include/CBrushStyle.h \
-		../../CUtil/include/CPen.h \
 		../../CQUtil/include/CQUtilMeta.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CQIllustratorInfo.o CQIllustratorInfo.cpp
 
@@ -5454,9 +5419,6 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		CQIllustratorShapeControlLine.h \
 		../../CQUtil/include/CQUtil.h \
 		../../CMath/include/CAngle.h \
-		../../CUtil/include/CBrush.h \
-		../../CUtil/include/CBrushStyle.h \
-		../../CUtil/include/CPen.h \
 		../../CQUtil/include/CQUtilMeta.h \
 		../../CMath/include/CMathRound.h \
 		svg/selected_point_svg.h \
@@ -5625,9 +5587,6 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CQUtil/include/CQMenu.h \
 		../../CQUtil/include/CQUtil.h \
 		../../CMath/include/CAngle.h \
-		../../CUtil/include/CBrush.h \
-		../../CUtil/include/CBrushStyle.h \
-		../../CUtil/include/CPen.h \
 		../../CQUtil/include/CQUtilMeta.h \
 		CQPointEdit.h \
 		../../CQUtil/include/CQRealEdit.h \
@@ -6027,9 +5986,6 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CQUtil/include/CQMenu.h \
 		../../CQUtil/include/CQUtil.h \
 		../../CMath/include/CAngle.h \
-		../../CUtil/include/CBrush.h \
-		../../CUtil/include/CBrushStyle.h \
-		../../CUtil/include/CPen.h \
 		../../CQUtil/include/CQUtilMeta.h \
 		CQSwatch.h \
 		svg/point_select_svg.h \
@@ -6609,9 +6565,6 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CQUtil/include/CQMenu.h \
 		../../CQUtil/include/CQUtil.h \
 		../../CMath/include/CAngle.h \
-		../../CUtil/include/CBrush.h \
-		../../CUtil/include/CBrushStyle.h \
-		../../CUtil/include/CPen.h \
 		../../CQUtil/include/CQUtilMeta.h \
 		CQSwatch.h \
 		../../CQUtil/include/CQRadioButtons.h \
@@ -6709,9 +6662,6 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		CQIllustratorToolbar.h \
 		../../CQUtil/include/CQUtil.h \
 		../../CMath/include/CAngle.h \
-		../../CUtil/include/CBrush.h \
-		../../CUtil/include/CBrushStyle.h \
-		../../CUtil/include/CPen.h \
 		../../CQUtil/include/CQUtilMeta.h \
 		../../CQUtil/include/CQMenu.h \
 		svg/select_svg.h \
@@ -6895,9 +6845,6 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CQUtil/include/CQMenu.h \
 		../../CQUtil/include/CQUtil.h \
 		../../CMath/include/CAngle.h \
-		../../CUtil/include/CBrush.h \
-		../../CUtil/include/CBrushStyle.h \
-		../../CUtil/include/CPen.h \
 		../../CQUtil/include/CQUtilMeta.h \
 		../../CQUtil/include/CQImageButton.h \
 		CQSwatch.h \
@@ -6998,9 +6945,6 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CQUtil/include/CQMenu.h \
 		../../CQUtil/include/CQUtil.h \
 		../../CMath/include/CAngle.h \
-		../../CUtil/include/CBrush.h \
-		../../CUtil/include/CBrushStyle.h \
-		../../CUtil/include/CPen.h \
 		../../CQUtil/include/CQUtilMeta.h \
 		../../CQUtil/include/CQRealEdit.h \
 		CQSwatch.h \
@@ -7098,9 +7042,6 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CQUtil/include/CQMenu.h \
 		../../CQUtil/include/CQUtil.h \
 		../../CMath/include/CAngle.h \
-		../../CUtil/include/CBrush.h \
-		../../CUtil/include/CBrushStyle.h \
-		../../CUtil/include/CPen.h \
 		../../CQUtil/include/CQUtilMeta.h \
 		../../CQUtil/include/CQRealEdit.h \
 		CQSwatch.h \
@@ -7212,9 +7153,6 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CUtil/include/CEvent.h \
 		../../CUtil/include/CKeyType.h \
 		../../CMath/include/CAngle.h \
-		../../CUtil/include/CBrush.h \
-		../../CUtil/include/CBrushStyle.h \
-		../../CUtil/include/CPen.h \
 		../../CQUtil/include/CQUtilMeta.h \
 		../../CQUtil/include/CQImageGaussianBlur.h \
 		../../CMath/include/CGaussianBlur.h \
@@ -7308,9 +7246,6 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CQUtil/include/CQFontUtil.h \
 		../../CQUtil/include/CQUtil.h \
 		../../CMath/include/CAngle.h \
-		../../CUtil/include/CBrush.h \
-		../../CUtil/include/CBrushStyle.h \
-		../../CUtil/include/CPen.h \
 		../../CQUtil/include/CQUtilMeta.h \
 		svg/control_point_svg.h \
 		../../CQUtil/include/CQPixmapCache.h \
@@ -7735,9 +7670,6 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		CQIllustratorPolygonShape.h \
 		../../CQUtil/include/CQUtil.h \
 		../../CMath/include/CAngle.h \
-		../../CUtil/include/CBrush.h \
-		../../CUtil/include/CBrushStyle.h \
-		../../CUtil/include/CPen.h \
 		../../CQUtil/include/CQUtilMeta.h \
 		../../CQUtil/include/CQMenu.h \
 		CQSwatch.h \
@@ -7988,9 +7920,6 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		CQIllustratorSnap.h \
 		../../CQUtil/include/CQUtil.h \
 		../../CMath/include/CAngle.h \
-		../../CUtil/include/CBrush.h \
-		../../CUtil/include/CBrushStyle.h \
-		../../CUtil/include/CPen.h \
 		../../CQUtil/include/CQUtilMeta.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CQIllustratorTextShape.o CQIllustratorTextShape.cpp
 
@@ -8166,9 +8095,6 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CQUtil/include/CQAngleSpinBox.h \
 		../../CMath/include/CAngle.h \
 		../../CQUtil/include/CQUtil.h \
-		../../CUtil/include/CBrush.h \
-		../../CUtil/include/CBrushStyle.h \
-		../../CUtil/include/CPen.h \
 		../../CQUtil/include/CQUtilMeta.h \
 		../../CQUtil/include/CQMenu.h \
 		CQDockWidget.h \
@@ -8429,9 +8355,6 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		CQIllustratorSnap.h \
 		../../CQUtil/include/CQUtil.h \
 		../../CMath/include/CAngle.h \
-		../../CUtil/include/CBrush.h \
-		../../CUtil/include/CBrushStyle.h \
-		../../CUtil/include/CPen.h \
 		../../CQUtil/include/CQUtilMeta.h \
 		../../CQUtil/include/CQMenu.h \
 		CQSwatch.h \
@@ -8494,17 +8417,6 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CUtil/include/CEvent.h \
 		../../CUtil/include/CKeyType.h \
 		../../CMath/include/CAngle.h \
-		../../CUtil/include/CBrush.h \
-		../../CUtil/include/CBrushStyle.h \
-		../../CImageLib/include/CImageLib.h \
-		../../CImageLib/include/CImageState.h \
-		../../CImageLib/include/CImageMgr.h \
-		../../CFile/include/CFile.h \
-		../../CFile/include/CFileBase.h \
-		../../CStrUtil/include/CStrUtil.h \
-		../../CImageLib/include/CImageAnim.h \
-		../../CImageLib/include/CImageFile.h \
-		../../CUtil/include/CPen.h \
 		../../CQUtil/include/CQUtilMeta.h \
 		../../CMath/include/CLinearGradient.h \
 		../../CMath/include/CRadialGradient.h \
@@ -8556,6 +8468,7 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CUtil/include/CCMYK.h \
 		../../CUtil/include/CHSL.h \
 		../../CUtil/include/CHSV.h \
+		../../CUtil/include/CHSVA.h \
 		../../CUtil/include/CHSB.h \
 		../../CUtil/include/CHSI.h \
 		../../CMath/include/CMathRound.h
@@ -8659,9 +8572,6 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CQUtil/include/CQRealEdit.h \
 		../../CQUtil/include/CQUtil.h \
 		../../CMath/include/CAngle.h \
-		../../CUtil/include/CBrush.h \
-		../../CUtil/include/CBrushStyle.h \
-		../../CUtil/include/CPen.h \
 		../../CQUtil/include/CQUtilMeta.h \
 		../../CMath/include/CRadialGradient.h \
 		../../COS/include/COSFile.h
@@ -8753,9 +8663,6 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		CQIllustratorSnap.h \
 		../../CQUtil/include/CQUtil.h \
 		../../CMath/include/CAngle.h \
-		../../CUtil/include/CBrush.h \
-		../../CUtil/include/CBrushStyle.h \
-		../../CUtil/include/CPen.h \
 		../../CQUtil/include/CQUtilMeta.h \
 		../../CMath/include/CRadialGradient.h \
 		CQGradientStopList.h \
@@ -8797,10 +8704,6 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CISize2D.h \
 		../../CMath/include/CIVector2D.h \
 		../../CMath/include/CMathGen.h \
-		../../CFont/include/CFont.h \
-		../../CFont/include/CFontPtr.h \
-		../../CUtil/include/CRefPtr.h \
-		../../CImageLib/include/CImagePtr.h \
 		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CVector2D.h \
@@ -8808,24 +8711,7 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../COS/include/COSNaN.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CMatrix2D.h \
-		../../CUtil/include/CBrush.h \
-		../../CUtil/include/CBrushStyle.h \
-		../../CUtil/include/CFillType.h \
-		../../CImageLib/include/CImageLib.h \
 		../../CUtil/include/CAlignType.h \
-		../../CImageLib/include/CImageState.h \
-		../../CImageLib/include/CImage.h \
-		../../CUtil/include/CRGBACombineDef.h \
-		../../CFile/include/CFileType.h \
-		../../CUtil/include/COptVal.h \
-		../../CImageLib/include/CImageMgr.h \
-		../../CFile/include/CFile.h \
-		../../CFile/include/CFileBase.h \
-		../../CStrUtil/include/CStrUtil.h \
-		../../CImageLib/include/CImageAnim.h \
-		../../CImageLib/include/CImageFile.h \
-		../../CMath/include/CGenGradient.h \
-		../../CUtil/include/CPen.h \
 		../../CQUtil/include/CQUtilMeta.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CQFontOptionTool.o CQFontOptionTool.cpp
 
@@ -8850,10 +8736,6 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CISize2D.h \
 		../../CMath/include/CIVector2D.h \
 		../../CMath/include/CMathGen.h \
-		../../CFont/include/CFont.h \
-		../../CFont/include/CFontPtr.h \
-		../../CUtil/include/CRefPtr.h \
-		../../CImageLib/include/CImagePtr.h \
 		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CVector2D.h \
@@ -8861,23 +8743,7 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../COS/include/COSNaN.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CMatrix2D.h \
-		../../CUtil/include/CBrush.h \
-		../../CUtil/include/CBrushStyle.h \
-		../../CUtil/include/CFillType.h \
-		../../CImageLib/include/CImageLib.h \
 		../../CUtil/include/CAlignType.h \
-		../../CImageLib/include/CImageState.h \
-		../../CImageLib/include/CImage.h \
-		../../CUtil/include/CRGBACombineDef.h \
-		../../CFile/include/CFileType.h \
-		../../CUtil/include/COptVal.h \
-		../../CImageLib/include/CImageMgr.h \
-		../../CFile/include/CFile.h \
-		../../CFile/include/CFileBase.h \
-		../../CStrUtil/include/CStrUtil.h \
-		../../CImageLib/include/CImageAnim.h \
-		../../CImageLib/include/CImageFile.h \
-		../../CUtil/include/CPen.h \
 		../../CQUtil/include/CQUtilMeta.h \
 		../../CQUtil/include/CQColorChooser.h \
 		../../CQUtil/include/CQRealEdit.h
@@ -8917,8 +8783,6 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CUtil/include/CFlags.h \
 		../../CUtil/include/CLineCapType.h \
 		../../CUtil/include/CLineJoinType.h \
-		../../CFont/include/CFont.h \
-		../../CFont/include/CFontPtr.h \
 		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CVector2D.h \
@@ -8926,13 +8790,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../COS/include/COSNaN.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CMatrix2D.h \
-		../../CUtil/include/CBrush.h \
-		../../CUtil/include/CBrushStyle.h \
-		../../CUtil/include/CFillType.h \
-		../../CMath/include/CGenGradient.h \
-		../../CUtil/include/CPen.h \
 		../../CQUtil/include/CQUtilMeta.h \
 		CQScrollArea.h \
+		../../CQUtil/include/CQImageUtil.h \
 		control.xpm
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CQImagePreview.o CQImagePreview.cpp
 
@@ -9046,10 +8906,6 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CISize2D.h \
 		../../CMath/include/CIVector2D.h \
 		../../CMath/include/CMathGen.h \
-		../../CFont/include/CFont.h \
-		../../CFont/include/CFontPtr.h \
-		../../CUtil/include/CRefPtr.h \
-		../../CImageLib/include/CImagePtr.h \
 		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CVector2D.h \
@@ -9057,28 +8913,12 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../COS/include/COSNaN.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CMatrix2D.h \
-		../../CUtil/include/CBrush.h \
-		../../CUtil/include/CBrushStyle.h \
-		../../CUtil/include/CFillType.h \
-		../../CImageLib/include/CImageLib.h \
 		../../CUtil/include/CAlignType.h \
-		../../CImageLib/include/CImageState.h \
-		../../CImageLib/include/CImage.h \
-		../../CUtil/include/CRGBACombineDef.h \
-		../../CFile/include/CFileType.h \
-		../../CUtil/include/COptVal.h \
-		../../CImageLib/include/CImageMgr.h \
-		../../CFile/include/CFile.h \
-		../../CFile/include/CFileBase.h \
-		../../CStrUtil/include/CStrUtil.h \
-		../../CImageLib/include/CImageAnim.h \
-		../../CImageLib/include/CImageFile.h \
-		../../CMath/include/CGenGradient.h \
-		../../CUtil/include/CPen.h \
 		../../CQUtil/include/CQUtilMeta.h \
-		pixmaps/cap_square.xpm \
-		pixmaps/cap_butt.xpm \
-		pixmaps/cap_round.xpm
+		../../CQUtil/include/CQPixmapCache.h \
+		svg/cap_square_svg.h \
+		svg/cap_butt_svg.h \
+		svg/cap_round_svg.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CQLineCap.o CQLineCap.cpp
 
 ../obj/CQLineJoin.o: CQLineJoin.cpp CQLineJoin.h \
@@ -9100,10 +8940,6 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CISize2D.h \
 		../../CMath/include/CIVector2D.h \
 		../../CMath/include/CMathGen.h \
-		../../CFont/include/CFont.h \
-		../../CFont/include/CFontPtr.h \
-		../../CUtil/include/CRefPtr.h \
-		../../CImageLib/include/CImagePtr.h \
 		../../CMath/include/CPoint2D.h \
 		../../CMath/include/CBBox2D.h \
 		../../CMath/include/CVector2D.h \
@@ -9111,28 +8947,12 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../COS/include/COSNaN.h \
 		../../CMath/include/CSize2D.h \
 		../../CMath/include/CMatrix2D.h \
-		../../CUtil/include/CBrush.h \
-		../../CUtil/include/CBrushStyle.h \
-		../../CUtil/include/CFillType.h \
-		../../CImageLib/include/CImageLib.h \
 		../../CUtil/include/CAlignType.h \
-		../../CImageLib/include/CImageState.h \
-		../../CImageLib/include/CImage.h \
-		../../CUtil/include/CRGBACombineDef.h \
-		../../CFile/include/CFileType.h \
-		../../CUtil/include/COptVal.h \
-		../../CImageLib/include/CImageMgr.h \
-		../../CFile/include/CFile.h \
-		../../CFile/include/CFileBase.h \
-		../../CStrUtil/include/CStrUtil.h \
-		../../CImageLib/include/CImageAnim.h \
-		../../CImageLib/include/CImageFile.h \
-		../../CMath/include/CGenGradient.h \
-		../../CUtil/include/CPen.h \
 		../../CQUtil/include/CQUtilMeta.h \
-		pixmaps/join_mitre.xpm \
-		pixmaps/join_round.xpm \
-		pixmaps/join_bevel.xpm
+		../../CQUtil/include/CQPixmapCache.h \
+		svg/join_mitre_svg.h \
+		svg/join_round_svg.h \
+		svg/join_bevel_svg.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CQLineJoin.o CQLineJoin.cpp
 
 ../obj/CQMatrix2D.o: CQMatrix2D.cpp CQMatrix2D.h \
@@ -9431,9 +9251,6 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		CQLineJoin.h \
 		../../CQUtil/include/CQUtil.h \
 		../../CMath/include/CAngle.h \
-		../../CUtil/include/CBrush.h \
-		../../CUtil/include/CBrushStyle.h \
-		../../CUtil/include/CPen.h \
 		../../CQUtil/include/CQUtilMeta.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CQStrokeOptionDialog.o CQStrokeOptionDialog.cpp
 
@@ -9523,9 +9340,6 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		CQIllustratorSnap.h \
 		../../CQUtil/include/CQUtil.h \
 		../../CMath/include/CAngle.h \
-		../../CUtil/include/CBrush.h \
-		../../CUtil/include/CBrushStyle.h \
-		../../CUtil/include/CPen.h \
 		../../CQUtil/include/CQUtilMeta.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../obj/CQStrokeOptionTool.o CQStrokeOptionTool.cpp
 

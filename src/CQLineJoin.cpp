@@ -1,25 +1,19 @@
 #include <CQLineJoin.h>
 #include <CQUtil.h>
+#include <CQPixmapCache.h>
 #include <QAction>
 
-#include <pixmaps/join_mitre.xpm>
-#include <pixmaps/join_round.xpm>
-#include <pixmaps/join_bevel.xpm>
+#include <svg/join_mitre_svg.h>
+#include <svg/join_round_svg.h>
+#include <svg/join_bevel_svg.h>
 
 CQLineJoin::
 CQLineJoin(QWidget *parent) :
  QComboBox(parent)
 {
-  CImagePtr join_image1 = CImage::create(join_mitre_data, sizeof(join_mitre_data)/sizeof(char *),
-                                         CFILE_TYPE_IMAGE_XPM);
-  CImagePtr join_image2 = CImage::create(join_round_data, sizeof(join_round_data)/sizeof(char *),
-                                         CFILE_TYPE_IMAGE_XPM);
-  CImagePtr join_image3 = CImage::create(join_bevel_data, sizeof(join_bevel_data)/sizeof(char *),
-                                         CFILE_TYPE_IMAGE_XPM);
-
-  addItem(CQUtil::imageToIcon(join_image1), "Mitre");
-  addItem(CQUtil::imageToIcon(join_image2), "Round");
-  addItem(CQUtil::imageToIcon(join_image3), "Bevel");
+  addItem(CQPixmapCacheInst->getIcon("JOIN_MITRE"), "Mitre");
+  addItem(CQPixmapCacheInst->getIcon("JOIN_ROUND"), "Round");
+  addItem(CQPixmapCacheInst->getIcon("JOIN_BEVEL"), "Bevel");
 
   setToolTip("Line Join");
 

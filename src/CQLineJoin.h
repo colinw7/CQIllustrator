@@ -8,7 +8,7 @@ class CQLineJoin : public QComboBox {
   Q_OBJECT
 
  public:
-  CQLineJoin(QWidget *parent=0);
+  CQLineJoin(QWidget *parent=NULL);
 
   void setLineJoin(CLineJoinType pen);
 
@@ -18,7 +18,7 @@ class CQLineJoin : public QComboBox {
   void joinChangedSlot(int join);
 
  signals:
-  void valueChanged(CLineJoinType join);
+  void valueChanged(const CLineJoinType &join);
 };
 
 #endif

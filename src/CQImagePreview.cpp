@@ -1,6 +1,7 @@
 #include <CQImagePreview.h>
 #include <CQUtil.h>
 #include <CQScrollArea.h>
+#include <CQImageUtil.h>
 
 #include <control.xpm>
 
@@ -12,7 +13,9 @@ CQImagePreview::
 CQImagePreview(QWidget *parent) :
  QWidget(parent)
 {
-  QHBoxLayout *layout = new QHBoxLayout(this);
+  setObjectName("preview");
+
+  auto *layout = new QHBoxLayout(this);
   layout->setMargin(0); layout->setSpacing(0);
 
   canvas_ = new CQImagePreviewCanvas(this);
@@ -104,11 +107,7 @@ scrollRight(bool page)
 
 CQImagePreviewCanvas::
 CQImagePreviewCanvas(CQImagePreview *view) :
- QWidget     (0),
- view_       (view),
- zoom_factor_(1.0),
- fill_screen_(false),
- keep_aspect_(true)
+ QWidget(nullptr), view_(view)
 {
   setFocusPolicy(Qt::StrongFocus);
 }
@@ -140,7 +139,7 @@ void
 CQImagePreviewCanvas::
 setZoomFactor(double factor)
 {
-  zoom_factor_ = factor;
+  zoomFactor_ = factor;
 
   update();
 }
@@ -191,7 +190,7 @@ paintEvent(QPaintEvent *)
   else
     dy = (height() - ih)/2;
 
-  painter.drawImage(QPoint(dx, dy), CQUtil::toQImage(image_));
+  painter.drawImage(QPoint(dx, dy), CQImageUtil::toQImage(image_));
 
   view_->getScrollArea()->setXSize(iw);
   view_->getScrollArea()->setYSize(ih);
