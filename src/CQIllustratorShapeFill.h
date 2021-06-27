@@ -23,7 +23,7 @@ class CQIllustratorShapeFill {
 
   CQIllustratorShapeFill(const CQIllustratorShapeFill &fill);
 
-  const CQIllustratorShapeFill &operator=(const CQIllustratorShapeFill &fill);
+  CQIllustratorShapeFill &operator=(const CQIllustratorShapeFill &fill);
 
  ~CQIllustratorShapeFill();
 

@@ -210,7 +210,7 @@ void
 CQIllustratorCreateStarToolbar::
 addWidgets()
 {
-  QBoxLayout *layout = qobject_cast<QBoxLayout *>(CQIllustratorToolbar::layout());
+  auto *layout = qobject_cast<QBoxLayout *>(CQIllustratorToolbar::layout());
 
   //-----
 
@@ -280,8 +280,8 @@ void
 CQIllustratorCreateStarToolbar::
 setSelectedShape(const CQIllustratorShape *shape)
 {
-  const CQIllustratorStarShape  *star = dynamic_cast<const CQIllustratorStarShape  *>(shape);
-  const CQIllustratorNPolyShape *poly = dynamic_cast<const CQIllustratorNPolyShape *>(shape);
+  const auto *star = dynamic_cast<const CQIllustratorStarShape  *>(shape);
+  const auto *poly = dynamic_cast<const CQIllustratorNPolyShape *>(shape);
 
   centerEdit_ ->setEnabled(star != 0 || poly != 0);
   numEdit_    ->setEnabled(star != 0 || poly != 0);
@@ -431,8 +431,8 @@ void
 CQIllustratorCreateStarSizer::
 drawHandles(QPainter *painter, const CQIllustratorShape *shape)
 {
-  const CQIllustratorStarShape  *star = dynamic_cast<const CQIllustratorStarShape  *>(shape);
-  const CQIllustratorNPolyShape *poly = dynamic_cast<const CQIllustratorNPolyShape *>(shape);
+  const auto *star = dynamic_cast<const CQIllustratorStarShape  *>(shape);
+  const auto *poly = dynamic_cast<const CQIllustratorNPolyShape *>(shape);
 
   if      (star) {
     CQIllustratorShape::ControlPointList controlPoints;

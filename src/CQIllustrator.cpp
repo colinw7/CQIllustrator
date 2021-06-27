@@ -1014,15 +1014,15 @@ keyPress(const KeyEvent &e)
     case CKEY_TYPE_Up: {
       if (! getFlipY()) {
         if (e.event->isShiftKey())
-          resizeSelectedShapes(CBBox2D(0,0,0,1));
+          resizeSelectedShapes(CBBox2D(0, 0, 0, 1));
         else
-          moveSelectedShapes(CPoint2D(0,1));
+          moveSelectedShapes(CPoint2D(0, 1));
       }
       else {
         if (e.event->isShiftKey())
-          resizeSelectedShapes(CBBox2D(0,0,0,-1));
+          resizeSelectedShapes(CBBox2D(0, 0, 0, -1));
         else
-          moveSelectedShapes(CPoint2D(0,-1));
+          moveSelectedShapes(CPoint2D(0, -1));
       }
 
       break;
@@ -1030,31 +1030,31 @@ keyPress(const KeyEvent &e)
     case CKEY_TYPE_Down: {
       if (! getFlipY()) {
         if (e.event->isShiftKey())
-          resizeSelectedShapes(CBBox2D(0,-1,0,0));
+          resizeSelectedShapes(CBBox2D(0, -1, 0, 0));
         else
-          moveSelectedShapes(CPoint2D(0,-1));
+          moveSelectedShapes(CPoint2D(0, -1));
       }
       else {
         if (e.event->isShiftKey())
-          resizeSelectedShapes(CBBox2D(0,1,0,0));
+          resizeSelectedShapes(CBBox2D(0, 1, 0, 0));
         else
-          moveSelectedShapes(CPoint2D(0,1));
+          moveSelectedShapes(CPoint2D(0, 1));
       }
 
       break;
     }
     case CKEY_TYPE_Left:
       if (e.event->isShiftKey())
-        resizeSelectedShapes(CBBox2D(-1,0,0,0));
+        resizeSelectedShapes(CBBox2D(-1, 0, 0, 0));
       else
-        moveSelectedShapes(CPoint2D(-1,0));
+        moveSelectedShapes(CPoint2D(-1, 0));
 
       break;
     case CKEY_TYPE_Right:
       if (e.event->isShiftKey())
-        resizeSelectedShapes(CBBox2D(0,0,1,0));
+        resizeSelectedShapes(CBBox2D(0, 0, 1, 0));
       else
-        moveSelectedShapes(CPoint2D(1,0));
+        moveSelectedShapes(CPoint2D(1, 0));
 
       break;
     case CKEY_TYPE_Return:
@@ -1520,7 +1520,7 @@ drawContents(QPainter *painter)
 
   QPen pen;
 
-  pen.setColor(QColor(0,0,0));
+  pen.setColor(QColor(0, 0, 0));
   pen.setStyle(Qt::SolidLine);
 
   painter->setPen(pen);
@@ -1608,7 +1608,7 @@ drawQuadTree(QPainter *painter, const CQIllustratorData::QuadTree *tree, uint ma
 
   //if (num > 0) gray = (1.0*num)/max_num;
 
-  painter->fillRect(CQUtil::toQRect(bbox), QBrush(CQUtil::rgbaToColor(CRGBA(0.0,0.0,0.8,0.5))));
+  painter->fillRect(CQUtil::toQRect(bbox), QBrush(CQUtil::rgbaToColor(CRGBA(0.0, 0.0, 0.8, 0.5))));
 
   uint depth = tree->getDepth();
 
@@ -1620,7 +1620,7 @@ drawQuadTree(QPainter *painter, const CQIllustratorData::QuadTree *tree, uint ma
   for ( ; p1 != p2; ++p1) {
     const CBBox2D &bbox = (*p1)->getBBox();
 
-    painter->fillRect(CQUtil::toQRect(bbox), QBrush(CQUtil::rgbaToColor(CRGBA(0.0,0.0,r,0.5))));
+    painter->fillRect(CQUtil::toQRect(bbox), QBrush(CQUtil::rgbaToColor(CRGBA(0.0, 0.0, r, 0.5))));
   }
 
   if (tree->getBLTree() != 0) {
@@ -1779,7 +1779,7 @@ ungroupSlot()
     // get parent group matrix
     CQIllustratorShape *shape = (*ps1).getShape();
 
-    const CQIllustratorGroupShape *group = dynamic_cast<CQIllustratorGroupShape *>(shape);
+    const auto *group = dynamic_cast<CQIllustratorGroupShape *>(shape);
     if (! group) continue;
 
     const CMatrix2D &m = group->getMatrix();
@@ -1839,7 +1839,7 @@ copySlot()
 
     CQIllustratorShape *shape1 = shape->dup();
 
-    //shape1->moveBy(CPoint2D(1,1));
+    //shape1->moveBy(CPoint2D(1, 1));
 
     getData()->addShape(shape1);
 
@@ -2278,7 +2278,7 @@ loadSVG(const QString &filename)
   startUndoGroup("Load SVG");
 
 #ifdef SVG_FLIP
-  CPoint2D c(0,0);
+  CPoint2D c(0, 0);
 #endif
 
   CSVGBlock *block = svg.getRoot();
@@ -2461,26 +2461,26 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
 
   switch (id) {
     case CSVGObjTypeId::PATH: {
-      CPoint2D lp(0,0);
+      CPoint2D lp(0, 0);
 
-      CQIllustratorPathShape *pathShape = createPathShape();
+      auto *pathShape = createPathShape();
 
       pathShape->startGroup();
 
       shape = pathShape;
 
-      CSVGPath *path = dynamic_cast<CSVGPath *>(object);
+      auto *path = dynamic_cast<CSVGPath *>(object);
 
-      const CSVGPathPartList &parts = path->getPartList();
+      const auto &parts = path->getPartList();
 
       for (const auto part : parts.parts()) {
         CSVGPathPartType type = part->getType();
 
         switch (type) {
           case CSVGPathPartType::MOVE_TO: {
-            CSVGPathMoveTo const *pp = dynamic_cast<CSVGPathMoveTo const *>(part);
+            auto const *pp = dynamic_cast<CSVGPathMoveTo const *>(part);
 
-            CPoint2D pp1 = pp->getPoint();
+            auto pp1 = pp->getPoint();
 
             pathShape->addMoveTo(pp1);
 
@@ -2489,9 +2489,9 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
             break;
           }
           case CSVGPathPartType::RMOVE_TO: {
-            CSVGPathRMoveTo const *pp = dynamic_cast<CSVGPathRMoveTo const *>(part);
+            auto const *pp = dynamic_cast<CSVGPathRMoveTo const *>(part);
 
-            CPoint2D pp1 = lp + pp->getPoint();
+            auto pp1 = lp + pp->getPoint();
 
             pathShape->addMoveTo(pp1);
 
@@ -2500,9 +2500,9 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
             break;
           }
           case CSVGPathPartType::LINE_TO: {
-            CSVGPathLineTo const *pp = dynamic_cast<CSVGPathLineTo const *>(part);
+            auto const *pp = dynamic_cast<CSVGPathLineTo const *>(part);
 
-            CPoint2D pp1 = pp->getPoint();
+            auto pp1 = pp->getPoint();
 
             pathShape->addLineTo(pp1);
 
@@ -2511,9 +2511,9 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
             break;
           }
           case CSVGPathPartType::RLINE_TO: {
-            CSVGPathRLineTo const *pp = dynamic_cast<CSVGPathRLineTo const *>(part);
+            auto const *pp = dynamic_cast<CSVGPathRLineTo const *>(part);
 
-            CPoint2D pp1 = lp + pp->getPoint();
+            auto pp1 = lp + pp->getPoint();
 
             pathShape->addLineTo(pp1);
 
@@ -2522,9 +2522,9 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
             break;
           }
           case CSVGPathPartType::HLINE_TO: {
-            CSVGPathHLineTo const *pp = dynamic_cast<CSVGPathHLineTo const *>(part);
+            auto const *pp = dynamic_cast<CSVGPathHLineTo const *>(part);
 
-            CPoint2D pp1 = CPoint2D(pp->getX(), lp.y);
+            auto pp1 = CPoint2D(pp->getX(), lp.y);
 
             pathShape->addLineTo(pp1);
 
@@ -2533,9 +2533,9 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
             break;
           }
           case CSVGPathPartType::RHLINE_TO: {
-            CSVGPathRHLineTo const *pp = dynamic_cast<CSVGPathRHLineTo const *>(part);
+            auto const *pp = dynamic_cast<CSVGPathRHLineTo const *>(part);
 
-            CPoint2D pp1 = lp + CPoint2D(pp->getDX(), 0);
+            auto pp1 = lp + CPoint2D(pp->getDX(), 0.0);
 
             pathShape->addLineTo(pp1);
 
@@ -2544,9 +2544,9 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
             break;
           }
           case CSVGPathPartType::VLINE_TO: {
-            CSVGPathVLineTo const *pp = dynamic_cast<CSVGPathVLineTo const *>(part);
+            auto const *pp = dynamic_cast<CSVGPathVLineTo const *>(part);
 
-            CPoint2D pp1 = lp + CPoint2D(lp.x, pp->getY());
+            auto pp1 = CPoint2D(lp.x, pp->getY());
 
             pathShape->addLineTo(pp1);
 
@@ -2555,9 +2555,9 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
             break;
           }
           case CSVGPathPartType::RVLINE_TO: {
-            CSVGPathRVLineTo const *pp = dynamic_cast<CSVGPathRVLineTo const *>(part);
+            auto const *pp = dynamic_cast<CSVGPathRVLineTo const *>(part);
 
-            CPoint2D pp1 = lp + CPoint2D(0, pp->getDY());
+            auto pp1 = lp + CPoint2D(0.0, pp->getDY());
 
             pathShape->addLineTo(pp1);
 
@@ -2566,13 +2566,13 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
             break;
           }
           case CSVGPathPartType::ARC_TO: {
-            CSVGPathArcTo const *pp = dynamic_cast<CSVGPathArcTo const *>(part);
+            auto const *pp = dynamic_cast<CSVGPathArcTo const *>(part);
 
             double xa = pp->getXA();
             int    fa = pp->getFA();
             int    fs = pp->getFS();
 
-            CPoint2D r = CPoint2D(pp->getRadiusX(), pp->getRadiusY());
+            auto r = CPoint2D(pp->getRadiusX(), pp->getRadiusY());
 
             double cx, cy, rx, ry, theta, delta;
 
@@ -2593,13 +2593,13 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
             break;
           }
           case CSVGPathPartType::RARC_TO: {
-            CSVGPathRArcTo const *pp = dynamic_cast<CSVGPathRArcTo const *>(part);
+            auto const *pp = dynamic_cast<CSVGPathRArcTo const *>(part);
 
             double xa = pp->getXA();
             int    fa = pp->getFA();
             int    fs = pp->getFS();
 
-            CPoint2D r = CPoint2D(pp->getRadiusX(), pp->getRadiusY());
+            auto r = CPoint2D(pp->getRadiusX(), pp->getRadiusY());
 
             double cx, cy, rx, ry, theta, delta;
 
@@ -2620,7 +2620,7 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
             break;
           }
           case CSVGPathPartType::BEZIER2_TO: {
-            CSVGPathBezier2To const *pp = dynamic_cast<CSVGPathBezier2To const *>(part);
+            auto const *pp = dynamic_cast<CSVGPathBezier2To const *>(part);
 
             pathShape->addCurveTo(pp->getPoint1(), pp->getPoint2());
 
@@ -2629,14 +2629,14 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
             break;
           }
           case CSVGPathPartType::MBEZIER2_TO: {
-           //CSVGPathMBezier2To const *pp = dynamic_cast<CSVGPathMBezier2To const *>(part);
+           //auto const *pp = dynamic_cast<CSVGPathMBezier2To const *>(part);
 
            std::cerr << "MBEZIER2_TO not handled" << std::endl;
 
            break;
           }
           case CSVGPathPartType::RBEZIER2_TO: {
-            CSVGPathRBezier2To const *pp = dynamic_cast<CSVGPathRBezier2To const *>(part);
+            auto const *pp = dynamic_cast<CSVGPathRBezier2To const *>(part);
 
             pathShape->addCurveTo(lp + pp->getPoint1(), lp + pp->getPoint2());
 
@@ -2645,14 +2645,14 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
             break;
           }
           case CSVGPathPartType::MRBEZIER2_TO: {
-            //CSVGPathMRBezier2To const *pp = dynamic_cast<CSVGPathMRBezier2To const *>(part);
+            //auto const *pp = dynamic_cast<CSVGPathMRBezier2To const *>(part);
 
             std::cerr << "MRBEZIER2_TO not handled" << std::endl;
 
             break;
           }
           case CSVGPathPartType::BEZIER3_TO: {
-            CSVGPathBezier3To const *pp = dynamic_cast<CSVGPathBezier3To const *>(part);
+            auto const *pp = dynamic_cast<CSVGPathBezier3To const *>(part);
 
             pathShape->addCurveTo(pp->getPoint1(), pp->getPoint2(), pp->getPoint3());
 
@@ -2661,14 +2661,14 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
             break;
           }
           case CSVGPathPartType::MBEZIER3_TO: {
-            //CSVGPathMBezier3To const *pp = dynamic_cast<CSVGPathMBezier3To const *>(part);
+            //auto const *pp = dynamic_cast<CSVGPathMBezier3To const *>(part);
 
             std::cerr << "MBEZIER3_TO not handled" << std::endl;
 
             break;
           }
           case CSVGPathPartType::RBEZIER3_TO: {
-            CSVGPathRBezier3To const *pp = dynamic_cast<CSVGPathRBezier3To const *>(part);
+            auto const *pp = dynamic_cast<CSVGPathRBezier3To const *>(part);
 
             pathShape->addCurveTo(lp + pp->getPoint1(), lp + pp->getPoint2(), lp + pp->getPoint3());
 
@@ -2677,7 +2677,7 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
             break;
           }
           case CSVGPathPartType::MRBEZIER3_TO: {
-            //CSVGPathMRBezier3To const *pp = dynamic_cast<CSVGPathMRBezier3To const *>(part);
+            //auto const *pp = dynamic_cast<CSVGPathMRBezier3To const *>(part);
 
             std::cerr << "MRBEZIER3_TO not handled" << std::endl;
 
@@ -2705,7 +2705,7 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
 
       shape = pathShape;
 
-      CSVGPolygon *polygon = dynamic_cast<CSVGPolygon *>(object);
+      auto *polygon = dynamic_cast<CSVGPolygon *>(object);
 
       const CSVGPolygon::PointList &points = polygon->getPoints();
 
@@ -2728,7 +2728,7 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
       break;
     }
     case CSVGObjTypeId::RECT: {
-      CSVGRect *rect = dynamic_cast<CSVGRect *>(object);
+      auto *rect = dynamic_cast<CSVGRect *>(object);
 
       const CBBox2D &bbox = rect->getBBox();
 
@@ -2771,7 +2771,7 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
       break;
     }
     case CSVGObjTypeId::CIRCLE: {
-      CSVGCircle *circle = dynamic_cast<CSVGCircle *>(object);
+      auto *circle = dynamic_cast<CSVGCircle *>(object);
 
       const CPoint2D &c = circle->getCenter();
       double          r = circle->getRadius().pxValue(CScreenUnits(1));
@@ -2790,7 +2790,7 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
       break;
     }
     case CSVGObjTypeId::ELLIPSE: {
-      CSVGEllipse *ellipse = dynamic_cast<CSVGEllipse *>(object);
+      auto *ellipse = dynamic_cast<CSVGEllipse *>(object);
 
       const CPoint2D &c  = ellipse->getCenter();
       double          rx = ellipse->getRadiusX().pxValue(CScreenUnits(1));
@@ -2814,7 +2814,7 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
 
       shape = pathShape;
 
-      CSVGLine *line = dynamic_cast<CSVGLine *>(object);
+      auto *line = dynamic_cast<CSVGLine *>(object);
 
       CPoint2D p1 = line->getStart();
       CPoint2D p2 = line->getEnd  ();
@@ -2831,7 +2831,7 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
 
       shape = pathShape;
 
-      CSVGPolyLine *poly = dynamic_cast<CSVGPolyLine *>(object);
+      auto *poly = dynamic_cast<CSVGPolyLine *>(object);
 
       const CSVGPolyLine::PointList &points = poly->getPoints();
 
@@ -2854,7 +2854,7 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
       break;
     }
     case CSVGObjTypeId::TEXT: {
-      CSVGText *text = dynamic_cast<CSVGText *>(object);
+      auto *text = dynamic_cast<CSVGText *>(object);
 
       CBBox2D bbox;
 
@@ -2874,7 +2874,7 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
       //---
 
       for (const auto &childObject : object->children()) {
-        CSVGTSpan *tspan = dynamic_cast<CSVGTSpan *>(childObject);
+        auto *tspan = dynamic_cast<CSVGTSpan *>(childObject);
 
         if (! tspan)
           continue;
@@ -2893,7 +2893,7 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
       break;
     }
     case CSVGObjTypeId::IMAGE: {
-      CSVGImage *image = dynamic_cast<CSVGImage *>(object);
+      auto *image = dynamic_cast<CSVGImage *>(object);
 
       CBBox2D bbox;
 
@@ -2953,7 +2953,7 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
 
       setShapeSVGStrokeAndFill(groupShape, object);
 
-      CSVGUse *use = dynamic_cast<CSVGUse *>(object);
+      auto *use = dynamic_cast<CSVGUse *>(object);
 
       CSVGObject *childObject = use->getLinkObject();
 
@@ -3158,7 +3158,7 @@ toPolygonSlot()
   for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
     CQIllustratorShape *shape = (*ps1).getShape();
 
-    CQIllustratorGroupShape *group = dynamic_cast<CQIllustratorGroupShape *>(shape);
+    auto *group = dynamic_cast<CQIllustratorGroupShape *>(shape);
 
     if (group) continue;
 
@@ -3209,7 +3209,7 @@ toPathSlot()
   for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
     CQIllustratorShape *shape = (*ps1).getShape();
 
-    CQIllustratorGroupShape *group = dynamic_cast<CQIllustratorGroupShape *>(shape);
+    auto *group = dynamic_cast<CQIllustratorGroupShape *>(shape);
 
     if (group) continue;
 
@@ -3267,7 +3267,7 @@ toCurve()
   for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
     CQIllustratorShape *shape = (*ps1).getShape();
 
-    CQIllustratorGroupShape *group = dynamic_cast<CQIllustratorGroupShape *>(shape);
+    auto *group = dynamic_cast<CQIllustratorGroupShape *>(shape);
 
     if (group) continue;
 
@@ -3329,7 +3329,7 @@ offsetPath(double o)
   for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
     CQIllustratorShape *shape = (*ps1).getShape();
 
-    CQIllustratorGroupShape *group = dynamic_cast<CQIllustratorGroupShape *>(shape);
+    auto *group = dynamic_cast<CQIllustratorGroupShape *>(shape);
 
     if (group) continue;
 
@@ -3384,7 +3384,7 @@ strokePath(double d)
   for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
     CQIllustratorShape *shape = (*ps1).getShape();
 
-    CQIllustratorGroupShape *group = dynamic_cast<CQIllustratorGroupShape *>(shape);
+    auto *group = dynamic_cast<CQIllustratorGroupShape *>(shape);
 
     if (group) continue;
 
@@ -3468,7 +3468,7 @@ geomOp(CBooleanOp op)
   for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
     CQIllustratorShape *shape = (*ps1).getShape();
 
-    CQIllustratorGroupShape *group = dynamic_cast<CQIllustratorGroupShape *>(shape);
+    auto *group = dynamic_cast<CQIllustratorGroupShape *>(shape);
 
     if (! group) {
       CPolygon2D polygon;
@@ -3817,7 +3817,7 @@ triangulateSlot()
   for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
     CQIllustratorShape *shape = (*ps1).getShape();
 
-    CQIllustratorGroupShape *group = dynamic_cast<CQIllustratorGroupShape *>(shape);
+    auto *group = dynamic_cast<CQIllustratorGroupShape *>(shape);
 
     if (group) continue;
 
@@ -3884,7 +3884,7 @@ giftWrapSlot()
   for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
     CQIllustratorShape *shape = (*ps1).getShape();
 
-    CQIllustratorGroupShape *group = dynamic_cast<CQIllustratorGroupShape *>(shape);
+    auto *group = dynamic_cast<CQIllustratorGroupShape *>(shape);
 
     if (group) continue;
 
@@ -3951,7 +3951,7 @@ delaunaySlot()
   for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
     CQIllustratorShape *shape = (*ps1).getShape();
 
-    CQIllustratorGroupShape *group = dynamic_cast<CQIllustratorGroupShape *>(shape);
+    auto *group = dynamic_cast<CQIllustratorGroupShape *>(shape);
 
     if (group) continue;
 
@@ -4311,12 +4311,12 @@ fontSlot(const QFont &font)
   for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
     CQIllustratorShape *shape = *ps1;
 
-    CQIllustratorTextShape *text = dynamic_cast<CQIllustratorTextShape *>(shape);
+    auto *text = dynamic_cast<CQIllustratorTextShape *>(shape);
 
     if (text) {
       checkoutShape(shape, CQIllustratorData::ChangeType::FONT);
 
-      CQIllustratorTextShape *text = dynamic_cast<CQIllustratorTextShape *>(shape);
+      auto *text = dynamic_cast<CQIllustratorTextShape *>(shape);
 
       text->setFont(cfont);
 
@@ -4350,27 +4350,31 @@ setShapeSVGStrokeAndFill(CQIllustratorShape *shape, CSVGObject *object)
 
   double opacity = object->getOpacity();
 
-  const CSVGStroke &objStroke = object->getStroke();
-  const CSVGFill   &objFill   = object->getFill();
+  const auto &objStroke = object->getStroke();
+  const auto &objFill   = object->getFill();
 
-  stroke.setStroked (! object->getFlatStrokeColor().isValid());
-  stroke.setColor   (object->colorToRGBA(object->getFlatStrokeColor().getValue(CRGBA(0,0,0))));
+  auto sc = object->getFlatStrokeColor();
+
+  stroke.setStroked (sc.isValid() && sc.getValue().type() != CSVGColor::Type::NONE);
+  stroke.setColor   (object->colorToRGBA(sc.getValue(CRGBA(0, 0, 0))));
   stroke.setOpacity (opacity*object->getFlatStrokeOpacity().getValue(1));
   stroke.setWidth   (object->getFlatStrokeWidth().getValue(0));
   stroke.setLineDash(object->getFlatStrokeLineDash().getValue(CSVGStrokeDash()).getLineDash());
   stroke.setLineCap (objStroke.getLineCap());
   stroke.setLineJoin(objStroke.getLineJoin());
 
-  fill.setFilled  (! object->getFlatFillColor().isValid());
-  fill.setColor   (object->colorToRGBA(object->getFlatFillColor().getValue(CRGBA(0,0,0))));
+  auto fc = object->getFlatFillColor();
+
+  fill.setFilled  (fc.isValid() && fc.getValue().type() != CSVGColor::Type::NONE);
+  fill.setColor   (object->colorToRGBA(fc.getValue(CRGBA(0, 0, 0))));
   fill.setOpacity (opacity*object->getFlatFillOpacity().getValue(1));
   fill.setFillRule(objFill.getRule());
 
   CSVGObject *fill_object = object->getFillFillObject();
 
   if (fill_object) {
-    CSVGLinearGradient *lg = dynamic_cast<CSVGLinearGradient *>(fill_object);
-    CSVGRadialGradient *rg = dynamic_cast<CSVGRadialGradient *>(fill_object);
+    auto *lg = dynamic_cast<CSVGLinearGradient *>(fill_object);
+    auto *rg = dynamic_cast<CSVGRadialGradient *>(fill_object);
 
     if      (lg) {
       CLinearGradient *lgradient = new CLinearGradient;
@@ -4476,8 +4480,8 @@ addLinearGradient(const CPoint2D &p1, const CPoint2D &p2)
 {
   CLinearGradient *lgradient = new CLinearGradient;
 
-  lgradient->addStop(0.0, CRGBA(1,1,1));
-  lgradient->addStop(1.0, CRGBA(0,0,0));
+  lgradient->addStop(0.0, CRGBA(1, 1, 1));
+  lgradient->addStop(1.0, CRGBA(0, 0, 0));
 
   // no selection so create rectangle
   if (selection_->empty()) {
@@ -4521,8 +4525,8 @@ addRadialGradient(const CPoint2D &p1, const CPoint2D &p2)
 {
   CRadialGradient *rgradient = new CRadialGradient;
 
-  rgradient->addStop(0.0, CRGBA(1,1,1));
-  rgradient->addStop(1.0, CRGBA(0,0,0));
+  rgradient->addStop(0.0, CRGBA(1, 1, 1));
+  rgradient->addStop(1.0, CRGBA(0, 0, 0));
 
   // no selection so create ellipse
   if (selection_->empty()) {
@@ -4822,7 +4826,7 @@ getAlignToolbar() const
 {
   CQIllustratorMode *mode = getMode(Mode::ALIGN);
 
-  CQIllustratorAlignMode *alignMode = dynamic_cast<CQIllustratorAlignMode *>(mode);
+  auto *alignMode = dynamic_cast<CQIllustratorAlignMode *>(mode);
 
   if (alignMode)
     return alignMode->getToolbar();
@@ -4940,7 +4944,7 @@ setFill(QPainter *painter, const CQIllustratorShape *,
         const CQIllustratorShapeFill &fill, const CBBox2D &bbox)
 {
   if      (fill.hasGradient()) {
-    painter->setBrushOrigin(QPointF(0,0));
+    painter->setBrushOrigin(QPointF(0, 0));
 
     const CGenGradient *g = fill.getGradient();
 
@@ -4971,7 +4975,7 @@ setFill(QPainter *painter, const CQIllustratorShape *,
 
       brush.setTextureImage(qimage);
 
-      painter->setBrushOrigin(QPointF(0,0));
+      painter->setBrushOrigin(QPointF(0, 0));
 
       int w = image->getWidth();
       int h = image->getHeight();
@@ -5211,7 +5215,7 @@ draw(CQIllustrator *illustrator, QPainter *painter) const
 
   QPen pen;
 
-  pen.setColor(QColor(0,0,0));
+  pen.setColor(QColor(0, 0, 0));
   pen.setStyle(Qt::DashLine);
   pen.setWidth(0);
 
@@ -5228,7 +5232,7 @@ draw(CQIllustrator *illustrator, QPainter *painter) const
 
   shape_->draw(illustrator->getDrawer());
 
-  pen.setColor(QColor(255,0,0));
+  pen.setColor(QColor(255, 0, 0));
   pen.setStyle(Qt::DashLine);
 
   painter->setPen(pen);
@@ -5249,7 +5253,7 @@ draw(CQIllustrator *, QPainter *painter) const
 {
   QPen pen;
 
-  pen.setColor(QColor(255,0,0));
+  pen.setColor(QColor(255, 0, 0));
   pen.setStyle(Qt::SolidLine);
 
   painter->setPen(pen);
@@ -5463,7 +5467,7 @@ exec(const std::vector<std::string> &words)
   double dx = args_.getRealArg("-dx");
   double dy = args_.getRealArg("-dy");
 
-  illustrator_->moveSelectedShapes(CPoint2D(dx,dy));
+  illustrator_->moveSelectedShapes(CPoint2D(dx, dy));
 
   return true;
 }
@@ -5494,7 +5498,7 @@ exec(const std::vector<std::string> &words)
   double dx = args_.getRealArg("-dx");
   double dy = args_.getRealArg("-dy");
 
-  illustrator_->moveSelectedPoints(CPoint2D(dx,dy));
+  illustrator_->moveSelectedPoints(CPoint2D(dx, dy));
 
   return true;
 }

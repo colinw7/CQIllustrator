@@ -45,8 +45,8 @@ class CPathShapePolygonProcess : public CPathShapeProcess {
   }
 
  private:
-  CPolygon2D                   &polygon_;
-  const CQIllustratorPathShape *path_ { 0 };
+  CPolygon2D&                   polygon_;
+  const CQIllustratorPathShape *path_ { nullptr };
   CMatrix2D                     m_;
 };
 
@@ -79,7 +79,7 @@ getPolygon(CPolygon2D &polygon) const
 
   process.init();
 
-  CQIllustratorPathShape *th = const_cast<CQIllustratorPathShape *>(this);
+  auto *th = const_cast<CQIllustratorPathShape *>(this);
 
   th->processPath(&process);
 
@@ -117,30 +117,30 @@ moveBy(const CPoint2D &d)
     CPathPartType type = part->getType();
 
     if      (type == CPATH_PART_TYPE_MOVE_TO) {
-      CPathShapeMoveTo *moveToPart = dynamic_cast<CPathShapeMoveTo *>(part);
+      auto *moveToPart = dynamic_cast<CPathShapeMoveTo *>(part);
 
       moveToPart->setPoint(im*(m*moveToPart->getPoint() + d));
     }
     else if (type == CPATH_PART_TYPE_LINE_TO) {
-      CPathShapeLineTo *lineToPart = dynamic_cast<CPathShapeLineTo *>(part);
+      auto *lineToPart = dynamic_cast<CPathShapeLineTo *>(part);
 
       lineToPart->setPoint(im*(m*lineToPart->getPoint() + d));
     }
     else if (type == CPATH_PART_TYPE_CURVE2_TO) {
-      CPathShapeCurve2To *curveToPart = dynamic_cast<CPathShapeCurve2To *>(part);
+      auto *curveToPart = dynamic_cast<CPathShapeCurve2To *>(part);
 
       curveToPart->setPoint1(im*(m*curveToPart->getPoint1() + d));
       curveToPart->setPoint2(im*(m*curveToPart->getPoint2() + d));
     }
     else if (type == CPATH_PART_TYPE_CURVE3_TO) {
-      CPathShapeCurve3To *curveToPart = dynamic_cast<CPathShapeCurve3To *>(part);
+      auto *curveToPart = dynamic_cast<CPathShapeCurve3To *>(part);
 
       curveToPart->setPoint1(im*(m*curveToPart->getPoint1() + d));
       curveToPart->setPoint2(im*(m*curveToPart->getPoint2() + d));
       curveToPart->setPoint3(im*(m*curveToPart->getPoint3() + d));
     }
     else if (type == CPATH_PART_TYPE_ARC) {
-      CPathShapeArc *arcToPart = dynamic_cast<CPathShapeArc *>(part);
+      auto *arcToPart = dynamic_cast<CPathShapeArc *>(part);
 
       arcToPart->setCenter(im*(m*arcToPart->getCenter() + d));
     }
@@ -197,27 +197,27 @@ distance(const CPoint2D &p) const
     CPoint2D p1;
 
     if      (type == CPATH_PART_TYPE_MOVE_TO) {
-      const CPathShapeMoveTo *moveToPart = dynamic_cast<const CPathShapeMoveTo *>(part);
+      const auto *moveToPart = dynamic_cast<const CPathShapeMoveTo *>(part);
 
       p1 = m*moveToPart->getPoint();
     }
     else if (type == CPATH_PART_TYPE_LINE_TO) {
-      const CPathShapeLineTo *lineToPart = dynamic_cast<const CPathShapeLineTo *>(part);
+      const auto *lineToPart = dynamic_cast<const CPathShapeLineTo *>(part);
 
       p1 = m*lineToPart->getPoint();
     }
     else if (type == CPATH_PART_TYPE_CURVE2_TO) {
-      const CPathShapeCurve2To *curveToPart = dynamic_cast<const CPathShapeCurve2To *>(part);
+      const auto *curveToPart = dynamic_cast<const CPathShapeCurve2To *>(part);
 
       p1 = m*curveToPart->getPoint2();
     }
     else if (type == CPATH_PART_TYPE_CURVE3_TO) {
-      const CPathShapeCurve3To *curveToPart = dynamic_cast<const CPathShapeCurve3To *>(part);
+      const auto *curveToPart = dynamic_cast<const CPathShapeCurve3To *>(part);
 
       p1 = m*curveToPart->getPoint3();
     }
     else if (type == CPATH_PART_TYPE_ARC) {
-      const CPathShapeArc *arcToPart = dynamic_cast<const CPathShapeArc *>(part);
+      const auto *arcToPart = dynamic_cast<const CPathShapeArc *>(part);
 
       p1 = m*arcToPart->getCenter();
     }
@@ -248,28 +248,28 @@ inside(const CPoint2D &p) const
     CPoint2D p1;
 
     if      (type == CPATH_PART_TYPE_MOVE_TO) {
-      const CPathShapeMoveTo *moveToPart = dynamic_cast<const CPathShapeMoveTo *>(part);
+      const auto *moveToPart = dynamic_cast<const CPathShapeMoveTo *>(part);
 
       p1 = m*moveToPart->getPoint();
     }
     else if (type == CPATH_PART_TYPE_LINE_TO) {
-      const CPathShapeLineTo *lineToPart = dynamic_cast<const CPathShapeLineTo *>(part);
+      const auto *lineToPart = dynamic_cast<const CPathShapeLineTo *>(part);
 
       p1 = m*lineToPart->getPoint();
     }
     else if (type == CPATH_PART_TYPE_CURVE2_TO) {
-      const CPathShapeCurve2To *curveToPart = dynamic_cast<const CPathShapeCurve2To *>(part);
+      const auto *curveToPart = dynamic_cast<const CPathShapeCurve2To *>(part);
 
       p1 = m*curveToPart->getPoint2();
     }
     else if (type == CPATH_PART_TYPE_CURVE3_TO) {
-      const CPathShapeCurve3To *curveToPart = dynamic_cast<const CPathShapeCurve3To *>(part);
+      const auto *curveToPart = dynamic_cast<const CPathShapeCurve3To *>(part);
 
       p1 = m*curveToPart->getPoint3();
     }
     else if (type == CPATH_PART_TYPE_ARC) {
       // TODO: use arc end points
-      const CPathShapeArc *arcToPart = dynamic_cast<const CPathShapeArc *>(part);
+      const auto *arcToPart = dynamic_cast<const CPathShapeArc *>(part);
 
       p1 = m*arcToPart->getCenter();
     }
@@ -312,14 +312,14 @@ getLines(std::vector<CLine2D> &lines) const
     CPathPartType type = part->getType();
 
     if      (type == CPATH_PART_TYPE_MOVE_TO) {
-      const CPathShapeMoveTo *moveToPart = dynamic_cast<const CPathShapeMoveTo *>(part);
+      const auto *moveToPart = dynamic_cast<const CPathShapeMoveTo *>(part);
 
       p1 = m*moveToPart->getPoint();
 
       p0 = p1;
     }
     else if (type == CPATH_PART_TYPE_LINE_TO) {
-      const CPathShapeLineTo *lineToPart = dynamic_cast<const CPathShapeLineTo *>(part);
+      const auto *lineToPart = dynamic_cast<const CPathShapeLineTo *>(part);
 
       p2 = m*lineToPart->getPoint();
 
@@ -328,7 +328,7 @@ getLines(std::vector<CLine2D> &lines) const
       p1 = p2;
     }
     else if (type == CPATH_PART_TYPE_CURVE2_TO) {
-      const CPathShapeCurve2To *curveToPart = dynamic_cast<const CPathShapeCurve2To *>(part);
+      const auto *curveToPart = dynamic_cast<const CPathShapeCurve2To *>(part);
 
       p2 = m*curveToPart->getPoint2();
 
@@ -337,14 +337,14 @@ getLines(std::vector<CLine2D> &lines) const
       p1 = p2;
     }
     else if (type == CPATH_PART_TYPE_CURVE3_TO) {
-      const CPathShapeCurve3To *curveToPart = dynamic_cast<const CPathShapeCurve3To *>(part);
+      const auto *curveToPart = dynamic_cast<const CPathShapeCurve3To *>(part);
 
       p2 = m*curveToPart->getPoint3();
 
       lines.push_back(CLine2D(p1, p2));
     }
     else if (type == CPATH_PART_TYPE_ARC) {
-      const CPathShapeArc *arcToPart = dynamic_cast<const CPathShapeArc *>(part);
+      const auto *arcToPart = dynamic_cast<const CPathShapeArc *>(part);
 
       CPoint2D pa1, pa2;
 
@@ -400,7 +400,7 @@ setLine(uint i, const CLine2D &l)
     CPathPartType type = part->getType();
 
     if      (type == CPATH_PART_TYPE_MOVE_TO) {
-      CPathShapeMoveTo *moveToPart = dynamic_cast<CPathShapeMoveTo *>(part);
+      auto *moveToPart = dynamic_cast<CPathShapeMoveTo *>(part);
 
       if      (sline_num == int(i))
         moveToPart->setPoint(im*l.start());
@@ -410,7 +410,7 @@ setLine(uint i, const CLine2D &l)
       eline_num = sline_num++;
     }
     else if (type == CPATH_PART_TYPE_LINE_TO) {
-      CPathShapeLineTo *lineToPart = dynamic_cast<CPathShapeLineTo *>(part);
+      auto *lineToPart = dynamic_cast<CPathShapeLineTo *>(part);
 
       if      (sline_num == int(i))
         lineToPart->setPoint(im*l.start());
@@ -454,7 +454,7 @@ setLineType(uint i, CPathPartType type)
     CPathPartType partType2 = part->getType();
 
     if      (partType2 == CPATH_PART_TYPE_MOVE_TO) {
-      CPathShapeMoveTo *moveToPart = dynamic_cast<CPathShapeMoveTo *>(part);
+      auto *moveToPart = dynamic_cast<CPathShapeMoveTo *>(part);
 
       p2 = moveToPart->getPoint();
       p0 = p2;
@@ -462,21 +462,21 @@ setLineType(uint i, CPathPartType type)
       line_num = -1;
     }
     else if (partType2 == CPATH_PART_TYPE_LINE_TO) {
-      CPathShapeLineTo *lineToPart = dynamic_cast<CPathShapeLineTo *>(part);
+      auto *lineToPart = dynamic_cast<CPathShapeLineTo *>(part);
 
       p2 = lineToPart->getPoint();
 
       ++line_num;
     }
     else if (partType2 == CPATH_PART_TYPE_CURVE2_TO) {
-      CPathShapeCurve2To *curve2Part = dynamic_cast<CPathShapeCurve2To *>(part);
+      auto *curve2Part = dynamic_cast<CPathShapeCurve2To *>(part);
 
       p2 = curve2Part->getPoint2();
 
       ++line_num;
     }
     else if (partType2 == CPATH_PART_TYPE_CURVE3_TO) {
-      CPathShapeCurve3To *curve3Part = dynamic_cast<CPathShapeCurve3To *>(part);
+      auto *curve3Part = dynamic_cast<CPathShapeCurve3To *>(part);
 
       p2 = curve3Part->getPoint3();
 
@@ -505,12 +505,12 @@ setLineType(uint i, CPathPartType type)
       if      (partType2 == CPATH_PART_TYPE_LINE_TO) {
       }
       else if (partType2 == CPATH_PART_TYPE_CURVE2_TO) {
-        CPathShapeCurve2To *curve2Part = dynamic_cast<CPathShapeCurve2To *>(part);
+        auto *curve2Part = dynamic_cast<CPathShapeCurve2To *>(part);
 
         pp2 = curve2Part->getPoint1(); pp2_set = true;
       }
       else if (partType2 == CPATH_PART_TYPE_CURVE3_TO) {
-        CPathShapeCurve3To *curve3Part = dynamic_cast<CPathShapeCurve3To *>(part);
+        auto *curve3Part = dynamic_cast<CPathShapeCurve3To *>(part);
 
         pp1 = curve3Part->getPoint1(); pp1_set = true;
         pp2 = curve3Part->getPoint2(); pp2_set = true;
@@ -568,21 +568,21 @@ getControlPoints(ControlPointList &points, ControlType type) const
       CPathPartType type = part->getType();
 
       if      (type == CPATH_PART_TYPE_MOVE_TO) {
-        const CPathShapeMoveTo *moveToPart = dynamic_cast<const CPathShapeMoveTo *>(part);
+        const auto *moveToPart = dynamic_cast<const CPathShapeMoveTo *>(part);
 
         CPoint2D p1 = m*moveToPart->getPoint();
 
         points.push_back(new CQIllustratorPathShapeControlPoint(i, p1));
       }
       else if (type == CPATH_PART_TYPE_LINE_TO) {
-        const CPathShapeLineTo *lineToPart = dynamic_cast<const CPathShapeLineTo *>(part);
+        const auto *lineToPart = dynamic_cast<const CPathShapeLineTo *>(part);
 
         CPoint2D p1 = m*lineToPart->getPoint();
 
         points.push_back(new CQIllustratorPathShapeControlPoint(i, p1));
       }
       else if (type == CPATH_PART_TYPE_CURVE2_TO) {
-        const CPathShapeCurve2To *curveToPart = dynamic_cast<const CPathShapeCurve2To *>(part);
+        const auto *curveToPart = dynamic_cast<const CPathShapeCurve2To *>(part);
 
         CPoint2D pp1 = m*curveToPart->getPoint1();
         CPoint2D pp2 = m*curveToPart->getPoint2();
@@ -591,7 +591,7 @@ getControlPoints(ControlPointList &points, ControlType type) const
         points.push_back(new CQIllustratorPathShapeControlPoint(i, pp2));
       }
       else if (type == CPATH_PART_TYPE_CURVE3_TO) {
-        const CPathShapeCurve3To *curveToPart = dynamic_cast<const CPathShapeCurve3To *>(part);
+        const auto *curveToPart = dynamic_cast<const CPathShapeCurve3To *>(part);
 
         CPoint2D pp1 = m*curveToPart->getPoint1();
         CPoint2D pp2 = m*curveToPart->getPoint2();
@@ -602,7 +602,7 @@ getControlPoints(ControlPointList &points, ControlType type) const
         points.push_back(new CQIllustratorPathShapeControlPoint(i, pp3));
       }
       else if (type == CPATH_PART_TYPE_ARC) {
-        const CPathShapeArc *arcToPart = dynamic_cast<const CPathShapeArc *>(part);
+        const auto *arcToPart = dynamic_cast<const CPathShapeArc *>(part);
 
         const CPoint2D &c = arcToPart->getCenter();
 
@@ -630,8 +630,7 @@ void
 CQIllustratorPathShape::
 setControlPoint(const CQIllustratorShapeControlPoint *point)
 {
-  const CQIllustratorPathShapeControlPoint *ppoint =
-    dynamic_cast<const CQIllustratorPathShapeControlPoint *>(point);
+  const auto *ppoint = dynamic_cast<const CQIllustratorPathShapeControlPoint *>(point);
   assert(ppoint);
 
   const CMatrix2D &m = getFlatMatrix();
@@ -663,21 +662,21 @@ getPoint(uint ind, uint ind1) const
   if      (type == CPATH_PART_TYPE_MOVE_TO) {
     assert(ind1 == 0);
 
-    const CPathShapeMoveTo *moveToPart = dynamic_cast<const CPathShapeMoveTo *>(part);
+    const auto *moveToPart = dynamic_cast<const CPathShapeMoveTo *>(part);
 
     p = moveToPart->getPoint();
   }
   else if (type == CPATH_PART_TYPE_LINE_TO) {
     assert(ind1 == 0);
 
-    const CPathShapeLineTo *lineToPart = dynamic_cast<const CPathShapeLineTo *>(part);
+    const auto *lineToPart = dynamic_cast<const CPathShapeLineTo *>(part);
 
     p = lineToPart->getPoint();
   }
   else if (type == CPATH_PART_TYPE_CURVE2_TO) {
     assert(ind1 < 2);
 
-    const CPathShapeCurve2To *curveToPart = dynamic_cast<const CPathShapeCurve2To *>(part);
+    const auto *curveToPart = dynamic_cast<const CPathShapeCurve2To *>(part);
 
     if (ind1 == 0)
       p = curveToPart->getPoint2();
@@ -687,7 +686,7 @@ getPoint(uint ind, uint ind1) const
   else if (type == CPATH_PART_TYPE_CURVE3_TO) {
     assert(ind1 < 3);
 
-    const CPathShapeCurve3To *curveToPart = dynamic_cast<const CPathShapeCurve3To *>(part);
+    const auto *curveToPart = dynamic_cast<const CPathShapeCurve3To *>(part);
 
     if      (ind1 == 0)
       p = curveToPart->getPoint3();
@@ -699,7 +698,7 @@ getPoint(uint ind, uint ind1) const
   else if (type == CPATH_PART_TYPE_ARC) {
     assert(ind1 < 3);
 
-    const CPathShapeArc *arcToPart = dynamic_cast<const CPathShapeArc *>(part);
+    const auto *arcToPart = dynamic_cast<const CPathShapeArc *>(part);
 
     CPoint2D p1, p2;
 
@@ -735,21 +734,21 @@ setPoint(uint ind, uint ind1, const CPoint2D &p)
   if      (type == CPATH_PART_TYPE_MOVE_TO) {
     assert(ind1 == 0);
 
-    CPathShapeMoveTo *moveToPart = dynamic_cast<CPathShapeMoveTo *>(part);
+    auto *moveToPart = dynamic_cast<CPathShapeMoveTo *>(part);
 
     moveToPart->setPoint(p);
   }
   else if (type == CPATH_PART_TYPE_LINE_TO) {
     assert(ind1 == 0);
 
-    CPathShapeLineTo *lineToPart = dynamic_cast<CPathShapeLineTo *>(part);
+    auto *lineToPart = dynamic_cast<CPathShapeLineTo *>(part);
 
     lineToPart->setPoint(p);
   }
   else if (type == CPATH_PART_TYPE_CURVE2_TO) {
     assert(ind1 < 2);
 
-    CPathShapeCurve2To *curveToPart = dynamic_cast<CPathShapeCurve2To *>(part);
+    auto *curveToPart = dynamic_cast<CPathShapeCurve2To *>(part);
 
     if (ind1 == 0)
       curveToPart->setPoint2(p);
@@ -759,7 +758,7 @@ setPoint(uint ind, uint ind1, const CPoint2D &p)
   else if (type == CPATH_PART_TYPE_CURVE3_TO) {
     assert(ind1 < 3);
 
-    CPathShapeCurve3To *curveToPart = dynamic_cast<CPathShapeCurve3To *>(part);
+    auto *curveToPart = dynamic_cast<CPathShapeCurve3To *>(part);
 
     if      (ind1 == 0)
       curveToPart->setPoint3(p);
@@ -771,7 +770,7 @@ setPoint(uint ind, uint ind1, const CPoint2D &p)
   else if (type == CPATH_PART_TYPE_ARC) {
     assert(ind1 < 3);
 
-    CPathShapeArc *arcToPart = dynamic_cast<CPathShapeArc *>(part);
+    auto *arcToPart = dynamic_cast<CPathShapeArc *>(part);
 
     if (ind1 == 0)
       arcToPart->setCenter(p);
@@ -833,8 +832,7 @@ bool
 CQIllustratorPathShape::
 doRemovePoint(const CQIllustratorShapeControlPoint *point)
 {
-  const CQIllustratorPathShapeControlPoint *ppoint =
-      dynamic_cast<const CQIllustratorPathShapeControlPoint *>(point);
+  const auto *ppoint = dynamic_cast<const CQIllustratorPathShapeControlPoint *>(point);
   assert(ppoint);
 
   uint ind = ppoint->getInd();
@@ -861,21 +859,21 @@ updateBBox() const
       CPathPartType type = part->getType();
 
       if      (type == CPATH_PART_TYPE_MOVE_TO) {
-        const CPathShapeMoveTo *moveToPart = dynamic_cast<const CPathShapeMoveTo *>(part);
+        const auto *moveToPart = dynamic_cast<const CPathShapeMoveTo *>(part);
 
         CPoint2D p1 = m*moveToPart->getPoint();
 
         bbox_ += p1;
       }
       else if (type == CPATH_PART_TYPE_LINE_TO) {
-        const CPathShapeLineTo *lineToPart = dynamic_cast<const CPathShapeLineTo *>(part);
+        const auto *lineToPart = dynamic_cast<const CPathShapeLineTo *>(part);
 
         CPoint2D p1 = m*lineToPart->getPoint();
 
         bbox_ += p1;
       }
       else if (type == CPATH_PART_TYPE_CURVE2_TO) {
-        const CPathShapeCurve2To *curveToPart = dynamic_cast<const CPathShapeCurve2To *>(part);
+        const auto *curveToPart = dynamic_cast<const CPathShapeCurve2To *>(part);
 
         CPoint2D pp1 = m*curveToPart->getPoint1();
         CPoint2D pp2 = m*curveToPart->getPoint2();
@@ -884,7 +882,7 @@ updateBBox() const
         bbox_ += pp2;
       }
       else if (type == CPATH_PART_TYPE_CURVE3_TO) {
-        const CPathShapeCurve3To *curveToPart = dynamic_cast<const CPathShapeCurve3To *>(part);
+        const auto *curveToPart = dynamic_cast<const CPathShapeCurve3To *>(part);
 
         CPoint2D pp1 = m*curveToPart->getPoint1();
         CPoint2D pp2 = m*curveToPart->getPoint2();
@@ -895,7 +893,7 @@ updateBBox() const
         bbox_ += pp3;
       }
       else if (type == CPATH_PART_TYPE_ARC) {
-        const CPathShapeArc *arcToPart = dynamic_cast<const CPathShapeArc *>(part);
+        const auto *arcToPart = dynamic_cast<const CPathShapeArc *>(part);
 
         CPoint2D c = m*arcToPart->getCenter();
 
@@ -1024,21 +1022,21 @@ flip(bool x_axis)
     CPathPartType type = part->getType();
 
     if      (type == CPATH_PART_TYPE_MOVE_TO) {
-      CPathShapeMoveTo *moveToPart = dynamic_cast<CPathShapeMoveTo *>(part);
+      auto *moveToPart = dynamic_cast<CPathShapeMoveTo *>(part);
 
       CPoint2D p = m*moveToPart->getPoint();
 
       moveToPart->setPoint(im*p.flip(rc, x_axis));
     }
     else if (type == CPATH_PART_TYPE_LINE_TO) {
-      CPathShapeLineTo *lineToPart = dynamic_cast<CPathShapeLineTo *>(part);
+      auto *lineToPart = dynamic_cast<CPathShapeLineTo *>(part);
 
       CPoint2D p = m*lineToPart->getPoint();
 
       lineToPart->setPoint(im*p.flip(rc, x_axis));
     }
     else if (type == CPATH_PART_TYPE_CURVE2_TO) {
-      CPathShapeCurve2To *curveToPart = dynamic_cast<CPathShapeCurve2To *>(part);
+      auto *curveToPart = dynamic_cast<CPathShapeCurve2To *>(part);
 
       CPoint2D p1 = m*curveToPart->getPoint1();
       CPoint2D p2 = m*curveToPart->getPoint2();
@@ -1047,7 +1045,7 @@ flip(bool x_axis)
       curveToPart->setPoint2(im*p2.flip(rc, x_axis));
     }
     else if (type == CPATH_PART_TYPE_CURVE3_TO) {
-      CPathShapeCurve3To *curveToPart = dynamic_cast<CPathShapeCurve3To *>(part);
+      auto *curveToPart = dynamic_cast<CPathShapeCurve3To *>(part);
 
       CPoint2D p1 = m*curveToPart->getPoint1();
       CPoint2D p2 = m*curveToPart->getPoint2();
@@ -1058,7 +1056,7 @@ flip(bool x_axis)
       curveToPart->setPoint3(im*p3.flip(rc, x_axis));
     }
     else if (type == CPATH_PART_TYPE_ARC) {
-      CPathShapeArc *arcToPart = dynamic_cast<CPathShapeArc *>(part);
+      auto *arcToPart = dynamic_cast<CPathShapeArc *>(part);
 
       CPoint2D c      = m*arcToPart->getCenter();
     //double   xr     = arcToPart->getRadiusX();
@@ -1090,26 +1088,26 @@ drawShape(CQIllustratorShapeDrawer *drawer) const
   drawer->pathInit();
 
   for (uint i = 0; i < num_parts; ++i) {
-    const CPathShapePart *part = parts_[i];
+    const auto *part = parts_[i];
 
-    CPathPartType type = part->getType();
+    auto type = part->getType();
 
     if      (type == CPATH_PART_TYPE_MOVE_TO) {
-      const CPathShapeMoveTo *moveToPart = dynamic_cast<const CPathShapeMoveTo *>(part);
+      const auto *moveToPart = dynamic_cast<const CPathShapeMoveTo *>(part);
 
       CPoint2D p1 = m*moveToPart->getPoint();
 
       drawer->pathMoveTo(p1);
     }
     else if (type == CPATH_PART_TYPE_LINE_TO) {
-      const CPathShapeLineTo *lineToPart = dynamic_cast<const CPathShapeLineTo *>(part);
+      const auto *lineToPart = dynamic_cast<const CPathShapeLineTo *>(part);
 
       CPoint2D p1 = m*lineToPart->getPoint();
 
       drawer->pathLineTo(p1);
     }
     else if (type == CPATH_PART_TYPE_CURVE2_TO) {
-      const CPathShapeCurve2To *curveToPart = dynamic_cast<const CPathShapeCurve2To *>(part);
+      const auto *curveToPart = dynamic_cast<const CPathShapeCurve2To *>(part);
 
       CPoint2D p11 = m*curveToPart->getPoint1();
       CPoint2D p22 = m*curveToPart->getPoint2();
@@ -1117,7 +1115,7 @@ drawShape(CQIllustratorShapeDrawer *drawer) const
       drawer->pathBezierTo(p11, p22);
     }
     else if (type == CPATH_PART_TYPE_CURVE3_TO) {
-      const CPathShapeCurve3To *curveToPart = dynamic_cast<const CPathShapeCurve3To *>(part);
+      const auto *curveToPart = dynamic_cast<const CPathShapeCurve3To *>(part);
 
       const CPoint2D &p1 = curveToPart->getPoint1();
       const CPoint2D &p2 = curveToPart->getPoint2();
@@ -1130,7 +1128,7 @@ drawShape(CQIllustratorShapeDrawer *drawer) const
       drawer->pathBezierTo(p11, p22, p33);
     }
     else if (type == CPATH_PART_TYPE_ARC) {
-      const CPathShapeArc *arcToPart = dynamic_cast<const CPathShapeArc *>(part);
+      const auto *arcToPart = dynamic_cast<const CPathShapeArc *>(part);
 
       const CPoint2D &c      = arcToPart->getCenter();
       double          xr     = arcToPart->getRadiusX();
@@ -1166,7 +1164,7 @@ void
 CQIllustratorPathShape::
 doSetGeometry(const CQIllustratorShapeGeometry *geom)
 {
-  const CQIllustratorPathGeometry *geom1 = dynamic_cast<const CQIllustratorPathGeometry *>(geom);
+  const auto *geom1 = dynamic_cast<const CQIllustratorPathGeometry *>(geom);
 
   if (! geom1) return;
 

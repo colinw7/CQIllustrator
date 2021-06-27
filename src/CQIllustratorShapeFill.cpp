@@ -17,7 +17,7 @@ CQIllustratorShapeFill(const CQIllustratorShapeFill &fill) :
     image_ = new CQIllustratorImageFill(*fill.image_);
 }
 
-const CQIllustratorShapeFill &
+CQIllustratorShapeFill &
 CQIllustratorShapeFill::
 operator=(const CQIllustratorShapeFill &fill)
 {
@@ -67,7 +67,7 @@ CQIllustratorShapeFill::
 getImage() const
 {
   if (! image_) {
-    CQIllustratorShapeFill *th = const_cast<CQIllustratorShapeFill *>(this);
+    auto *th = const_cast<CQIllustratorShapeFill *>(this);
 
     th->image_ = new CQIllustratorImageFill;
   }
@@ -80,7 +80,7 @@ CQIllustratorShapeFill::
 setImage(CImagePtr image)
 {
   if (! image_) {
-    CQIllustratorShapeFill *th = const_cast<CQIllustratorShapeFill *>(this);
+    auto *th = const_cast<CQIllustratorShapeFill *>(this);
 
     th->image_ = new CQIllustratorImageFill;
   }
@@ -112,7 +112,7 @@ CQIllustratorShapeFill::
 setImageScale(ImageScale scale)
 {
   if (! image_) {
-    CQIllustratorShapeFill *th = const_cast<CQIllustratorShapeFill *>(this);
+    auto *th = const_cast<CQIllustratorShapeFill *>(this);
 
     th->image_ = new CQIllustratorImageFill;
   }
@@ -135,7 +135,7 @@ CQIllustratorShapeFill::
 setImageHAlign(CHAlignType halign)
 {
   if (! image_) {
-    CQIllustratorShapeFill *th = const_cast<CQIllustratorShapeFill *>(this);
+    auto *th = const_cast<CQIllustratorShapeFill *>(this);
 
     th->image_ = new CQIllustratorImageFill;
   }
@@ -158,7 +158,7 @@ CQIllustratorShapeFill::
 setImageVAlign(CVAlignType valign)
 {
   if (! image_) {
-    CQIllustratorShapeFill *th = const_cast<CQIllustratorShapeFill *>(this);
+    auto *th = const_cast<CQIllustratorShapeFill *>(this);
 
     th->image_ = new CQIllustratorImageFill;
   }

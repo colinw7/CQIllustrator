@@ -53,7 +53,7 @@ initWidgets()
 
   //-----
 
-  QHBoxLayout *buttonLayout = new QHBoxLayout;
+  auto *buttonLayout = new QHBoxLayout;
   buttonLayout->setMargin(2); buttonLayout->setSpacing(8);
 
   flatButton_  = new CQImageButton(CQPixmapCacheInst->getIcon("FLAT"     ));
@@ -88,11 +88,11 @@ initWidgets()
   //-----
 
   // Normal Fill
-  QWidget *flatPanel = new QWidget;
+  auto *flatPanel = new QWidget;
 
   stack_->addWidget(flatPanel);
 
-  QGridLayout *flatLayout = new QGridLayout(flatPanel);
+  auto *flatLayout = new QGridLayout(flatPanel);
   flatLayout->setMargin(2); flatLayout->setSpacing(2);
 
   flatLayout->addWidget(new QLabel("Shown"  ), 0, 0);
@@ -119,8 +119,7 @@ initWidgets()
   opacityEdit_->setDecimals(5);
 //opacityEdit_->setRange(0.00, 1.0, 5);
 
-  connect(opacityEdit_, SIGNAL(valueChanged(double)),
-          this, SLOT(opacitySlot(double)));
+  connect(opacityEdit_, SIGNAL(valueChanged(double)), this, SLOT(opacitySlot(double)));
 
   fillRule_ = new QComboBox;
 
@@ -145,15 +144,15 @@ initWidgets()
 
   // Linear Gradient
 
-  QWidget *lgradPanel = new QWidget;
+  auto *lgradPanel = new QWidget;
 
   stack_->addWidget(lgradPanel);
 
-  QVBoxLayout *lgradLayout = new QVBoxLayout(lgradPanel);
+  auto *lgradLayout = new QVBoxLayout(lgradPanel);
 
   lgradLayout->setMargin(0); lgradLayout->setSpacing(0);
 
-  QGridLayout *lgradEditLayout = new QGridLayout;
+  auto *lgradEditLayout = new QGridLayout;
 
   lgradEditLayout->setMargin(2); lgradEditLayout->setSpacing(2);
 
@@ -177,12 +176,12 @@ initWidgets()
 
   lgradLayout->addWidget(lgradStops_);
 
-  QHBoxLayout *lbuttonLayout = new QHBoxLayout;
+  auto *lbuttonLayout = new QHBoxLayout;
 
   lgradLayout->addLayout(lbuttonLayout);
 
-  QPushButton *addLGradStopButton    = new QPushButton("Add");
-  QPushButton *deleteLGradStopButton = new QPushButton("Delete");
+  auto *addLGradStopButton    = new QPushButton("Add");
+  auto *deleteLGradStopButton = new QPushButton("Delete");
 
   connect(addLGradStopButton   , SIGNAL(clicked()), this, SLOT(addLGradStop()));
   connect(deleteLGradStopButton, SIGNAL(clicked()), this, SLOT(removeLGradStop()));
@@ -550,10 +549,8 @@ void
 CQFillOptionDialog::
 updateLGrad()
 {
-  CGenGradient *g = fill_.getGradient();
-
-  CLinearGradient *lg = dynamic_cast<CLinearGradient *>(g);
-
+  auto *g  = fill_.getGradient();
+  auto *lg = dynamic_cast<CLinearGradient *>(g);
   if (! lg) return;
 
   lg->setPoint1(lgrad1_->getValue());
@@ -566,12 +563,10 @@ void
 CQFillOptionDialog::
 updateLGradStops()
 {
-  const CGenGradient::StopList &stops = lgradStops_->getStops();
+  const auto &stops = lgradStops_->getStops();
 
-  CGenGradient *g = fill_.getGradient();
-
-  CLinearGradient *lg = dynamic_cast<CLinearGradient *>(g);
-
+  auto *g  = fill_.getGradient();
+  auto *lg = dynamic_cast<CLinearGradient *>(g);
   if (! lg) return;
 
   lg->setStops(stops);
@@ -583,10 +578,8 @@ void
 CQFillOptionDialog::
 addLGradStop()
 {
-  CGenGradient *g = fill_.getGradient();
-
-  CLinearGradient *lg = dynamic_cast<CLinearGradient *>(g);
-
+  auto *g  = fill_.getGradient();
+  auto *lg = dynamic_cast<CLinearGradient *>(g);
   if (! lg) return;
 
   lg->addStop(1.0, CRGBA(1,1,1));
@@ -606,10 +599,8 @@ void
 CQFillOptionDialog::
 updateRGrad()
 {
-  CGenGradient *g = fill_.getGradient();
-
-  CRadialGradient *rg = dynamic_cast<CRadialGradient *>(g);
-
+  auto *g  = fill_.getGradient();
+  auto *rg = dynamic_cast<CRadialGradient *>(g);
   if (! rg) return;
 
   rg->setCenter(rgradC_->getValue());
@@ -625,10 +616,8 @@ updateRGradStops()
 {
   const CGenGradient::StopList &stops = rgradStops_->getStops();
 
-  CGenGradient *g = fill_.getGradient();
-
-  CRadialGradient *rg = dynamic_cast<CRadialGradient *>(g);
-
+  auto *g  = fill_.getGradient();
+  auto *rg = dynamic_cast<CRadialGradient *>(g);
   if (! rg) return;
 
   rg->setStops(stops);
@@ -640,10 +629,8 @@ void
 CQFillOptionDialog::
 addRGradStop()
 {
-  CGenGradient *g = fill_.getGradient();
-
-  CRadialGradient *rg = dynamic_cast<CRadialGradient *>(g);
-
+  auto *g  = fill_.getGradient();
+  auto *rg = dynamic_cast<CRadialGradient *>(g);
   if (! rg) return;
 
   rg->addStop(1.0, CRGBA(1,1,1));
@@ -667,7 +654,7 @@ setImageSlot()
   QString cwd    = QString(COSFile::getCurrentDir().c_str());
   QString filter = "Image Files (*)";
 
-  QStringList filenames = QFileDialog::getOpenFileNames(this, title, cwd, filter);
+  auto filenames = QFileDialog::getOpenFileNames(this, title, cwd, filter);
 
   if (filenames.size() == 0)
     return;
@@ -677,7 +664,7 @@ setImageSlot()
   while (fi.hasNext()) {
     CImageFileSrc src(fi.next().toStdString());
 
-    CImagePtr image = CImageMgrInst->lookupImage(src);
+    auto image = CImageMgrInst->lookupImage(src);
 
     if (image.isValid()) {
       fill_.setImage(image);

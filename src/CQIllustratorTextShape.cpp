@@ -380,8 +380,8 @@ drawSelect(CQIllustratorShapeDrawer *drawer)
 
 //const CMatrix2D &m = getFlatMatrix();
 
-  double a = font_->getCharAscent();
-  double d = font_->getCharDescent();
+  double a = (font_.isValid() ? font_->getCharAscent () : 10);
+  double d = (font_.isValid() ? font_->getCharDescent() : 2);
 
   double f = d/(a + d);
 

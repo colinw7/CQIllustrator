@@ -68,11 +68,11 @@ loadShape(const QString &parentName, CQIllustratorShape *shape)
   tree_->addProperty(objName, shape, "visible");
   tree_->addProperty(objName, shape, "clip");
 
-  CQIllustratorEllipseShape *ellipse = dynamic_cast<CQIllustratorEllipseShape *>(shape);
-  CQIllustratorNPolyShape   *npoly   = dynamic_cast<CQIllustratorNPolyShape *>(shape);
-  CQIllustratorRectShape    *rect    = dynamic_cast<CQIllustratorRectShape *>(shape);
-  CQIllustratorStarShape    *star    = dynamic_cast<CQIllustratorStarShape *>(shape);
-  CQIllustratorTextShape    *text    = dynamic_cast<CQIllustratorTextShape *>(shape);
+  auto *ellipse = dynamic_cast<CQIllustratorEllipseShape *>(shape);
+  auto *npoly   = dynamic_cast<CQIllustratorNPolyShape *>(shape);
+  auto *rect    = dynamic_cast<CQIllustratorRectShape *>(shape);
+  auto *star    = dynamic_cast<CQIllustratorStarShape *>(shape);
+  auto *text    = dynamic_cast<CQIllustratorTextShape *>(shape);
 
   if      (ellipse) {
     tree_->addProperty(objName, ellipse, "angle1");
@@ -108,7 +108,7 @@ void
 CQIllustratorPropertiesDlg::
 itemSelectedSlot(QObject *obj, const QString & /*path*/)
 {
-  CQIllustratorShape *shape = qobject_cast<CQIllustratorShape *>(obj);
+  auto *shape = qobject_cast<CQIllustratorShape *>(obj);
   if (! obj) return;
 
   illustrator_->setSelectShape(shape);

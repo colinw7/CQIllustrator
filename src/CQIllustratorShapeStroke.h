@@ -21,7 +21,7 @@ class CQIllustratorShapeStroke {
 
   virtual ~CQIllustratorShapeStroke() { }
 
-  const CQIllustratorShapeStroke &operator=(const CQIllustratorShapeStroke &stroke) {
+  CQIllustratorShapeStroke &operator=(const CQIllustratorShapeStroke &stroke) {
     stroked_ = stroke.stroked_;
     color_   = stroke.color_;
     width_   = stroke.width_;

@@ -167,7 +167,7 @@ handleKeyPress(const KeyEvent &e)
 
   const CQIllustratorShape *shape = sshape.getShape();
 
-  const CQIllustratorTextShape *text = dynamic_cast<const CQIllustratorTextShape *>(shape);
+  const auto *text = dynamic_cast<const CQIllustratorTextShape *>(shape);
 
   if (! text) return false;
 
@@ -190,7 +190,7 @@ handleKeyPress(const KeyEvent &e)
     return CQIllustratorMode::handleKeyPress(e);
 
   if (str != str1) {
-    CQIllustratorTextShape *text1 = const_cast<CQIllustratorTextShape *>(text);
+    auto *text1 = const_cast<CQIllustratorTextShape *>(text);
 
     illustrator_->checkoutShape(text1, CQIllustratorData::ChangeType::GEOMETRY);
 
@@ -273,7 +273,7 @@ void
 CQIllustratorCreateTextSizer::
 drawHandles(QPainter *painter, const CQIllustratorShape *shape)
 {
-  const CQIllustratorTextShape *text = dynamic_cast<const CQIllustratorTextShape *>(shape);
+  const auto *text = dynamic_cast<const CQIllustratorTextShape *>(shape);
 
   if (text) {
     CQIllustratorShape::ControlPointList controlPoints;

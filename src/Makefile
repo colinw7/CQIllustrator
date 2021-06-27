@@ -885,6 +885,9 @@ compiler_moc_header_clean:
 		../../CUtil/include/COptVal.h \
 		../../CImageLib/include/CImagePtr.h \
 		../../CUtil/include/CRefPtr.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -1020,6 +1023,9 @@ compiler_moc_header_clean:
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -1096,6 +1102,9 @@ compiler_moc_header_clean:
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -1171,6 +1180,9 @@ compiler_moc_header_clean:
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -1246,6 +1258,9 @@ compiler_moc_header_clean:
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -1321,6 +1336,9 @@ compiler_moc_header_clean:
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -1396,6 +1414,9 @@ compiler_moc_header_clean:
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -1498,6 +1519,9 @@ compiler_moc_header_clean:
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -1569,6 +1593,9 @@ compiler_moc_header_clean:
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -1613,6 +1640,9 @@ compiler_moc_header_clean:
 		../../CUtil/include/COptVal.h \
 		../../CImageLib/include/CImagePtr.h \
 		../../CUtil/include/CRefPtr.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -1751,6 +1781,9 @@ compiler_moc_header_clean:
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -1819,6 +1852,9 @@ compiler_moc_header_clean:
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -1896,6 +1932,9 @@ compiler_moc_header_clean:
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -1971,6 +2010,9 @@ compiler_moc_header_clean:
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -2040,6 +2082,9 @@ compiler_moc_header_clean:
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -2117,6 +2162,9 @@ compiler_moc_header_clean:
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -2186,6 +2234,9 @@ compiler_moc_header_clean:
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -2267,6 +2318,9 @@ compiler_moc_header_clean:
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -2338,6 +2392,9 @@ compiler_moc_header_clean:
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -2415,6 +2472,9 @@ compiler_moc_header_clean:
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -2492,6 +2552,9 @@ compiler_moc_header_clean:
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -2578,6 +2641,9 @@ compiler_moc_header_clean:
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -2664,6 +2730,9 @@ compiler_moc_header_clean:
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -2743,6 +2812,9 @@ compiler_moc_header_clean:
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -2820,6 +2892,9 @@ compiler_moc_header_clean:
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -2894,6 +2969,9 @@ compiler_moc_header_clean:
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -2965,6 +3043,9 @@ compiler_moc_header_clean:
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -3015,6 +3096,9 @@ compiler_moc_header_clean:
 		../../CUtil/include/COptVal.h \
 		../../CImageLib/include/CImagePtr.h \
 		../../CUtil/include/CRefPtr.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -3136,6 +3220,9 @@ compiler_moc_header_clean:
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -3210,6 +3297,9 @@ compiler_moc_header_clean:
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -3254,6 +3344,9 @@ compiler_moc_header_clean:
 		../../CUtil/include/COptVal.h \
 		../../CImageLib/include/CImagePtr.h \
 		../../CUtil/include/CRefPtr.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -3317,6 +3410,9 @@ compiler_moc_header_clean:
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -3383,6 +3479,9 @@ compiler_moc_header_clean:
 		../../CUtil/include/COptVal.h \
 		../../CImageLib/include/CImagePtr.h \
 		../../CUtil/include/CRefPtr.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -3494,6 +3593,9 @@ compiler_moc_header_clean:
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -3572,6 +3674,9 @@ compiler_moc_header_clean:
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -3645,6 +3750,9 @@ compiler_moc_header_clean:
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -3706,6 +3814,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CUtil/include/COptVal.h \
 		../../CImageLib/include/CImagePtr.h \
 		../../CUtil/include/CRefPtr.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -3824,6 +3935,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CUtil/include/COptVal.h \
 		../../CImageLib/include/CImagePtr.h \
 		../../CUtil/include/CRefPtr.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -3905,6 +4019,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CUtil/include/COptVal.h \
 		../../CImageLib/include/CImagePtr.h \
 		../../CUtil/include/CRefPtr.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -3987,6 +4104,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CUtil/include/COptVal.h \
 		../../CImageLib/include/CImagePtr.h \
 		../../CUtil/include/CRefPtr.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -4240,6 +4360,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -4341,6 +4464,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -4455,6 +4581,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -4562,6 +4691,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -4662,6 +4794,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -4768,6 +4903,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -4869,6 +5007,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -4966,6 +5107,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -5032,6 +5176,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -5104,6 +5251,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -5149,6 +5299,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CUtil/include/COptVal.h \
 		../../CImageLib/include/CImagePtr.h \
 		../../CUtil/include/CRefPtr.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -5233,6 +5386,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CUtil/include/COptVal.h \
 		../../CImageLib/include/CImagePtr.h \
 		../../CUtil/include/CRefPtr.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -5291,6 +5447,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -5386,6 +5545,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -5474,6 +5636,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -5552,6 +5717,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -5650,6 +5818,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -5733,6 +5904,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -5804,6 +5978,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -5872,6 +6049,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -5953,6 +6133,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -6042,6 +6225,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -6088,6 +6274,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CUtil/include/COptVal.h \
 		../../CImageLib/include/CImagePtr.h \
 		../../CUtil/include/CRefPtr.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -6172,6 +6361,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CUtil/include/COptVal.h \
 		../../CImageLib/include/CImagePtr.h \
 		../../CUtil/include/CRefPtr.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -6287,6 +6479,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -6363,6 +6558,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -6443,6 +6641,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -6532,6 +6733,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -6630,6 +6834,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -6721,6 +6928,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -6809,6 +7019,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -6911,6 +7124,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -7007,6 +7223,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -7121,6 +7340,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -7188,6 +7410,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -7273,6 +7498,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CUtil/include/COptVal.h \
 		../../CImageLib/include/CImagePtr.h \
 		../../CUtil/include/CRefPtr.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -7322,6 +7550,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CUtil/include/COptVal.h \
 		../../CImageLib/include/CImagePtr.h \
 		../../CUtil/include/CRefPtr.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -7417,6 +7648,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -7473,6 +7707,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -7508,6 +7745,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CUtil/include/COptVal.h \
 		../../CImageLib/include/CImagePtr.h \
 		../../CUtil/include/CRefPtr.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -7638,6 +7878,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -7701,6 +7944,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CUtil/include/COptVal.h \
 		../../CImageLib/include/CImagePtr.h \
 		../../CUtil/include/CRefPtr.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -7810,6 +8056,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -7882,6 +8131,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -7944,6 +8196,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CUtil/include/COptVal.h \
 		../../CImageLib/include/CImagePtr.h \
 		../../CUtil/include/CRefPtr.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -8030,6 +8285,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CUtil/include/COptVal.h \
 		../../CImageLib/include/CImagePtr.h \
 		../../CUtil/include/CRefPtr.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -8154,6 +8412,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -8207,6 +8468,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CUtil/include/COptVal.h \
 		../../CImageLib/include/CImagePtr.h \
 		../../CUtil/include/CRefPtr.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -8324,6 +8588,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -8405,10 +8672,6 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CMathRound.h \
 		CQSVGImageData.h \
 		../../CSVG/include/CSVGImageData.h \
-		../../CImageLib/include/CImage.h \
-		../../CUtil/include/CRGBACombineDef.h \
-		../../CMath/include/CIBBox2D.h \
-		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		CQSVGFontObj.h \
 		../../CSVG/include/CSVGFontObj.h \
@@ -8417,6 +8680,8 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CUtil/include/CEvent.h \
 		../../CUtil/include/CKeyType.h \
 		../../CMath/include/CAngle.h \
+		../../CMath/include/CIBBox2D.h \
+		../../CMath/include/CIVector2D.h \
 		../../CQUtil/include/CQUtilMeta.h \
 		../../CMath/include/CLinearGradient.h \
 		../../CMath/include/CRadialGradient.h \
@@ -8446,24 +8711,35 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CSVG/include/CSVGTypes.h \
 		../../CUtil/include/COptVal.h \
 		../../CUtil/include/CScreenUnits.h \
-		../../CImageLib/include/CImage.h \
+		../../CImageLib/include/CImagePtr.h \
+		../../CUtil/include/CRefPtr.h \
+		../../CFile/include/CFileType.h \
 		../../CUtil/include/CRGBA.h \
 		../../CUtil/include/CRGB.h \
 		../../CRGBName/include/CRGBName.h \
-		../../CUtil/include/CRGBACombineDef.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CUtil/include/CAlignType.h \
+		../../CMath/include/CTurbulenceUtil.h \
+		../../CMath/include/CGaussianBlur.h \
+		../../CMath/include/CMathUtil.h \
+		../../COS/include/COSNaN.h \
+		../../CUtil/include/CRGBACombineDef.h \
+		../../CImageLib/include/CImageLib.h \
+		../../CImageLib/include/CImageState.h \
+		../../CImageLib/include/CImage.h \
 		../../CMath/include/CISize2D.h \
 		../../CMath/include/CIBBox2D.h \
 		../../CMath/include/CIPoint2D.h \
 		../../CMath/include/CIVector2D.h \
 		../../CMath/include/CMathGen.h \
-		../../CFile/include/CFileType.h \
-		../../CImageLib/include/CImagePtr.h \
-		../../CUtil/include/CRefPtr.h \
-		../../CMath/include/CTurbulenceUtil.h \
-		../../CMath/include/CGaussianBlur.h \
-		../../CMath/include/CMathUtil.h \
-		../../COS/include/COSNaN.h \
+		../../CImageLib/include/CImageMgr.h \
+		../../CFile/include/CFile.h \
+		../../CFile/include/CFileBase.h \
+		../../CStrUtil/include/CStrUtil.h \
+		../../CImageLib/include/CImageAnim.h \
+		../../CImageLib/include/CImageFile.h \
 		../../CUtil/include/CRGBUtil.h \
 		../../CUtil/include/CCMYK.h \
 		../../CUtil/include/CHSL.h \
@@ -8500,6 +8776,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CUtil/include/COptVal.h \
 		../../CImageLib/include/CImagePtr.h \
 		../../CUtil/include/CRefPtr.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -8626,6 +8905,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -8767,6 +9049,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CUtil/include/COptVal.h \
 		../../CImageLib/include/CImagePtr.h \
 		../../CUtil/include/CRefPtr.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -8819,6 +9104,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CUtil/include/COptVal.h \
 		../../CImageLib/include/CImagePtr.h \
 		../../CUtil/include/CRefPtr.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -8991,6 +9279,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CUtil/include/COptVal.h \
 		../../CImageLib/include/CImagePtr.h \
 		../../CUtil/include/CRefPtr.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -9116,6 +9407,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -9210,6 +9504,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \
@@ -9303,6 +9600,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 		../../CMath/include/CIVector2D.h \
 		../../CFile/include/CFileType.h \
 		../../CUtil/include/COptVal.h \
+		../../CImageLib/include/CImageResizeType.h \
+		../../CImageLib/include/CImageConvolveData.h \
+		../../CImageLib/include/CImageTileData.h \
 		../../CImageLib/include/CImageMgr.h \
 		../../CFile/include/CFile.h \
 		../../CFile/include/CFileBase.h \

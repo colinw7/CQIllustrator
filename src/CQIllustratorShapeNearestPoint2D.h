@@ -13,7 +13,7 @@ class CQIllustratorShapeNearestPoint2D {
    set_(p.set_), dist_(p.dist_), p_(p.p_ ? p.p_->dup() : 0) {
   }
 
-  const CQIllustratorShapeNearestPoint2D &operator=(const CQIllustratorShapeNearestPoint2D &p) {
+  CQIllustratorShapeNearestPoint2D &operator=(const CQIllustratorShapeNearestPoint2D &p) {
     set_  = p.set_;
     dist_ = p.dist_;
     p_    = (p.p_ ? p.p_->dup() : 0);

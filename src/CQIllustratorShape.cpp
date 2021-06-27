@@ -145,7 +145,7 @@ getControlPoints(ControlPointList &points, ControlType type) const
 
     const CGenGradient *g = fill.getGradient();
 
-    const CLinearGradient *lg = dynamic_cast<const CLinearGradient *>(g);
+    const auto *lg = dynamic_cast<const CLinearGradient *>(g);
 
     if (! lg) return;
 
@@ -174,7 +174,7 @@ getControlPoints(ControlPointList &points, ControlType type) const
 
     const CGenGradient *g = fill.getGradient();
 
-    const CRadialGradient *rg = dynamic_cast<const CRadialGradient *>(g);
+    const auto *rg = dynamic_cast<const CRadialGradient *>(g);
 
     if (! rg) return;
 
@@ -446,7 +446,7 @@ getRotateCenter() const
 {
   CMatrix2D save_m = m_;
 
-  CQIllustratorShape *th = const_cast<CQIllustratorShape *>(this);
+  auto *th = const_cast<CQIllustratorShape *>(this);
 
   th->m_.setIdentity();
 
@@ -469,7 +469,7 @@ setRotateCenter(const CPoint2D &rc)
 {
   CMatrix2D save_m = m_;
 
-  CQIllustratorShape *th = const_cast<CQIllustratorShape *>(this);
+  auto *th = const_cast<CQIllustratorShape *>(this);
 
   th->m_.setIdentity();
 

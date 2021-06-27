@@ -20,14 +20,12 @@ CPoint2D
 CQIllustratorShapeLGradientControlPoint::
 getPoint(const CQIllustratorShape *shape) const
 {
-  CBBox2D bbox = shape->getFlatBBox();
+  auto bbox = shape->getFlatBBox();
 
-  const CQIllustratorShapeFill &fill = shape->getFill();
+  const auto &fill = shape->getFill();
 
-  const CGenGradient *g = fill.getGradient();
-
-  const CLinearGradient *lg = dynamic_cast<const CLinearGradient *>(g);
-
+  const auto *g  = fill.getGradient();
+  const auto *lg = dynamic_cast<const CLinearGradient *>(g);
   assert(lg);
 
   CPoint2D p;
@@ -55,12 +53,10 @@ void
 CQIllustratorShapeLGradientControlPoint::
 setPoint(CQIllustratorShape *shape, const CPoint2D &point)
 {
-  CQIllustratorShapeFill &fill = shape->getFill();
+  auto &fill = shape->getFill();
 
-  CGenGradient *g = fill.getGradient();
-
-  CLinearGradient *lg = dynamic_cast<CLinearGradient *>(g);
-
+  auto *g  = fill.getGradient();
+  auto *lg = dynamic_cast<CLinearGradient *>(g);
   if (! lg) return;
 
   CBBox2D bbox = shape->getFlatBBox();

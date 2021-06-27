@@ -828,7 +828,7 @@ addNodeToCurrent()
   CPoint2D p1 = controlPoint1->getPoint(shape);
   CPoint2D p2 = controlPoint2->getPoint(shape);
 
-  CQIllustratorPathShape *path = dynamic_cast<CQIllustratorPathShape *>(shape);
+  auto *path = dynamic_cast<CQIllustratorPathShape *>(shape);
 
   int ind = std::min(controlPoint1->getInd(), controlPoint2->getInd());
 
@@ -862,7 +862,7 @@ void
 CQIllustratorCreatePathToolbar::
 addWidgets()
 {
-  QBoxLayout *layout = qobject_cast<QBoxLayout *>(CQIllustratorToolbar::layout());
+  auto *layout = qobject_cast<QBoxLayout *>(CQIllustratorToolbar::layout());
 
   //-----
 
@@ -1208,7 +1208,7 @@ void
 CQIllustratorCreatePathToolbar::
 setSelectedShape(const CQIllustratorShape *shape)
 {
-  const CQIllustratorPathShape *path = dynamic_cast<const CQIllustratorPathShape *>(shape);
+  const auto *path = dynamic_cast<const CQIllustratorPathShape *>(shape);
 
   if (! path) return;
 }
@@ -1218,7 +1218,7 @@ CQIllustratorCreatePathToolbar::
 setSelectedShapePoint(const CQIllustratorShape *shape,
                       const CQIllustratorShapeControlPoint *point)
 {
-  const CQIllustratorPathShape *path = dynamic_cast<const CQIllustratorPathShape *>(shape);
+  const auto *path = dynamic_cast<const CQIllustratorPathShape *>(shape);
 
   if (! path) return;
 
@@ -1234,10 +1234,9 @@ void
 CQIllustratorCreatePathToolbar::
 updateShape()
 {
-  CQIllustrator *illustrator = mode_->getIllustrator();
+  auto *illustrator = mode_->getIllustrator();
 
-  CQIllustratorPathShape *shape =
-    CQIllustratorUtil::getCurrentShape<CQIllustratorPathShape>(illustrator);
+  auto *shape = CQIllustratorUtil::getCurrentShape<CQIllustratorPathShape>(illustrator);
 
   CQIllustratorPathShape *path = 0;
 
@@ -1272,7 +1271,7 @@ void
 CQIllustratorCreatePathSizer::
 drawHandles(QPainter *painter, const CQIllustratorShape *shape)
 {
-  const CQIllustratorPathShape *path = dynamic_cast<const CQIllustratorPathShape *>(shape);
+  const auto *path = dynamic_cast<const CQIllustratorPathShape *>(shape);
 
   if (path) {
     CQIllustratorShape::ControlPointList controlPoints;

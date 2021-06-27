@@ -24,7 +24,7 @@ CPoint2D
 CQIllustratorPathShapeControlPoint::
 getPoint(const CQIllustratorShape *shape) const
 {
-  const CQIllustratorPathShape *path = dynamic_cast<const CQIllustratorPathShape *>(shape);
+  const auto *path = dynamic_cast<const CQIllustratorPathShape *>(shape);
   assert(path);
 
   return path->getPoint(ind_, ind1_);
@@ -34,7 +34,7 @@ void
 CQIllustratorPathShapeControlPoint::
 setPoint(CQIllustratorShape *shape, const CPoint2D &point)
 {
-  CQIllustratorPathShape *path = dynamic_cast<CQIllustratorPathShape *>(shape);
+  auto *path = dynamic_cast<CQIllustratorPathShape *>(shape);
   assert(path);
 
   path->setPoint(ind_, ind1_, point);
@@ -44,7 +44,7 @@ void
 CQIllustratorPathShapeControlPoint::
 setCornerNode(CQIllustratorShape *shape) const
 {
-  CQIllustratorPathShape *path = dynamic_cast<CQIllustratorPathShape *>(shape);
+  auto *path = dynamic_cast<CQIllustratorPathShape *>(shape);
   assert(path);
 
   path->setCornerPoint(ind_);
@@ -54,7 +54,7 @@ void
 CQIllustratorPathShapeControlPoint::
 setCurveNode(CQIllustratorShape *shape) const
 {
-  CQIllustratorPathShape *path = dynamic_cast<CQIllustratorPathShape *>(shape);
+  auto *path = dynamic_cast<CQIllustratorPathShape *>(shape);
   assert(path);
 
   path->setCurvePoint(ind_);

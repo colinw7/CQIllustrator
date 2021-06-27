@@ -80,7 +80,7 @@ void
 CQIllustratorUndoDock::
 itemSelectedSlot(QListWidgetItem *item)
 {
-  CQIllustratorUndoListGroupItem *item1 = dynamic_cast<CQIllustratorUndoListGroupItem *>(item);
+  auto *item1 = dynamic_cast<CQIllustratorUndoListGroupItem *>(item);
 
   int ind = item1->getInd();
 
