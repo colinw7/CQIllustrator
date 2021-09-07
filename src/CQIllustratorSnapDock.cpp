@@ -1,10 +1,11 @@
 #include <CQIllustratorSnapDock.h>
 #include <CQIllustrator.h>
 
+#include <CQRealSpin.h>
+
 #include <QVBoxLayout>
 #include <QLabel>
 #include <QCheckBox>
-#include <QDoubleSpinBox>
 
 CQIllustratorSnapDock::
 CQIllustratorSnapDock(CQIllustrator *illustrator) :
@@ -21,7 +22,7 @@ CQIllustratorSnapDock(CQIllustrator *illustrator) :
 
   QGridLayout *gridLayout = new QGridLayout;
 
-  xPitch_ = new QDoubleSpinBox;
+  xPitch_ = new CQRealSpin;
 
   xPitch_->setRange(0.01, 1000);
   xPitch_->setSingleStep(1.0);
@@ -29,7 +30,7 @@ CQIllustratorSnapDock(CQIllustrator *illustrator) :
 
   connect(xPitch_, SIGNAL(valueChanged(double)), this, SLOT(xPitchSlot(double)));
 
-  yPitch_ = new QDoubleSpinBox;
+  yPitch_ = new CQRealSpin;
 
   yPitch_->setRange(0.01, 1000);
   yPitch_->setSingleStep(1.0);

@@ -12,7 +12,8 @@ class CQImagePreview;
 class CQPointEdit;
 class CQRealEdit;
 class CQColorChooser;
-class QDoubleSpinBox;
+class CQRealSpin;
+
 class QStackedWidget;
 class QCheckBox;
 class QComboBox;
@@ -67,38 +68,38 @@ class CQFillOptionDialog : public CQOptionToolDialog {
   void clipChanged(bool);
 
  private:
-  CQFillOptionTool       *tool_ { 0 };
+  CQFillOptionTool       *tool_ { nullptr };
   CQIllustratorShapeFill  fill_;
 
   // Mode Buttons
-  CQImageButton *flatButton_  { 0 };
-  CQImageButton *lgradButton_ { 0 };
-  CQImageButton *rgradButton_ { 0 };
-  CQImageButton *imageButton_ { 0 };
+  CQImageButton *flatButton_  { nullptr };
+  CQImageButton *lgradButton_ { nullptr };
+  CQImageButton *rgradButton_ { nullptr };
+  CQImageButton *imageButton_ { nullptr };
 
-  QStackedWidget *stack_ { 0 };
+  QStackedWidget *stack_ { nullptr };
 
   // Flat Widgets
-  QCheckBox*      shownCheck_   { 0 };
-  CQColorChooser* colorChooser_ { 0 };
-  QDoubleSpinBox* opacityEdit_  { 0 };
-  QComboBox*      fillRule_     { 0 };
-  QCheckBox*      clipCheck_    { 0 };
+  QCheckBox*      shownCheck_   { nullptr };
+  CQColorChooser* colorChooser_ { nullptr };
+  CQRealSpin*     opacityEdit_  { nullptr };
+  QComboBox*      fillRule_     { nullptr };
+  QCheckBox*      clipCheck_    { nullptr };
 
   // Linear Gradient Widgets
-  CQPointEdit        *lgrad1_     { 0 };
-  CQPointEdit        *lgrad2_     { 0 };
-  CQGradientStopList *lgradStops_ { 0 };
+  CQPointEdit        *lgrad1_     { nullptr };
+  CQPointEdit        *lgrad2_     { nullptr };
+  CQGradientStopList *lgradStops_ { nullptr };
 
   // Radial Gradient Widgets
-  CQPointEdit        *rgradC_     { 0 };
-  CQRealEdit         *rgradR_     { 0 };
-  CQPointEdit        *rgradF_     { 0 };
-  CQGradientStopList *rgradStops_ { 0 };
+  CQPointEdit        *rgradC_     { nullptr };
+  CQRealEdit         *rgradR_     { nullptr };
+  CQPointEdit        *rgradF_     { nullptr };
+  CQGradientStopList *rgradStops_ { nullptr };
 
   // Image Widgets
-  CQImagePreview *imagePreview_ { 0 };
-  QComboBox      *imageScale_   { 0 };
+  CQImagePreview *imagePreview_ { nullptr };
+  QComboBox      *imageScale_   { nullptr };
 };
 
 #endif

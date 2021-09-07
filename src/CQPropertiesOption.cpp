@@ -435,7 +435,7 @@ clone() const
 
 QString
 CQControlPointItem::
-getString()
+getString() const
 {
   return CQPointEdit::pointToString(point_->getPoint(shape_)).c_str();
 }

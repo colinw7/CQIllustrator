@@ -13,10 +13,10 @@ class CQStrokeOptionSwab : public QWidget {
   CQStrokeOptionSwab(CQStrokeOptionDialog *dialog);
 
  private:
-  void paintEvent(QPaintEvent *e);
+  void paintEvent(QPaintEvent *e) override;
 
  private:
-  CQStrokeOptionDialog *dialog_ { 0 };
+  CQStrokeOptionDialog *dialog_ { nullptr };
   int                   tw_ { 1 }, th_ { 1 }, fw_ { 1 };
 };
 
@@ -30,11 +30,9 @@ CQStrokeOptionTool(CQIllustrator *illustrator) :
 
   dialog_ = new CQStrokeOptionDialog(this);
 
-  QVBoxLayout *layout = new QVBoxLayout(this);
-  layout->setMargin(0); layout->setSpacing(0);
+  auto *layout = CQUtil::makeLayout<QVBoxLayout>(this, 0, 0);
 
-  QLabel *label = new QLabel("<small><b>Stroke</b></small>");
-  label->setObjectName("label");
+  auto *label = CQUtil::makeLabelWidget<QLabel>("<small><b>Stroke</b></small>", "label");
 
   layout->addWidget(label);
 

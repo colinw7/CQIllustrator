@@ -6,12 +6,12 @@
 #include <CQLineDash.h>
 #include <CQLineCap.h>
 #include <CQLineJoin.h>
+#include <CQRealSpin.h>
 #include <CQUtil.h>
 
 #include <QVBoxLayout>
 #include <QGridLayout>
 #include <QLabel>
-#include <QDoubleSpinBox>
 #include <QPushButton>
 #include <QCheckBox>
 #include <QPainter>
@@ -38,10 +38,11 @@ void
 CQStrokeOptionDialog::
 initWidgets()
 {
-  QVBoxLayout *layout = new QVBoxLayout(this);
-  layout->setMargin(0); layout->setSpacing(0);
+  auto *layout = CQUtil::makeLayout<QVBoxLayout>(this, 0, 0);
 
-  QGridLayout *gridLayout = new QGridLayout;
+  //---
+
+  auto *gridLayout = CQUtil::makeLayout<QGridLayout>(2, 2);
 
   gridLayout->addWidget(new QLabel("Shown"      ), 0, 0);
   gridLayout->addWidget(new QLabel("Color"      ), 1, 0);
@@ -54,12 +55,12 @@ initWidgets()
 
   shownCheck_   = new QCheckBox;
   colorChooser_ = new CQColorChooser;
-  widthEdit_    = new QDoubleSpinBox;
-  opacityEdit_  = new QDoubleSpinBox;
+  widthEdit_    = new CQRealSpin;
+  opacityEdit_  = new CQRealSpin;
   dashEdit_     = new CQLineDash;
   capEdit_      = new CQLineCap;
   joinEdit_     = new CQLineJoin;
-  mitreEdit_    = new QDoubleSpinBox;
+  mitreEdit_    = new CQRealSpin;
 
   widthEdit_->setRange(0.01, 1000);
   widthEdit_->setSingleStep(1.0);
@@ -108,7 +109,7 @@ initWidgets()
 
   //------
 
-  QPushButton *defButton = new QPushButton("Set Default");
+  auto *defButton = CQUtil::makeLabelWidget<QPushButton>("Set Default", "defButton");
 
   connect(defButton, SIGNAL(clicked()), this, SLOT(setDefaultSlot()));
 

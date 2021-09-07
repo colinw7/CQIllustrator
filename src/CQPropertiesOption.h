@@ -95,17 +95,17 @@ class CQControlPointItem : public CQTableWidgetItem {
 
   CQIllustratorShapeControlPoint *getPoint() const { return point_; }
 
-  CQControlPointItem *clone() const;
+  CQControlPointItem *clone() const override;
 
-  QString getString();
+  QString getString() const override;
 
-  QWidget *createEditor(QWidget *parent) const;
+  QWidget *createEditor(QWidget *parent) const override;
 
-  void setEditorData();
+  void setEditorData() override;
 
-  void getEditorData(QString &str);
+  void getEditorData(QString &str) override;
 
-  bool sizeHint(const QStyleOptionViewItem &option, QSize &size) const;
+  bool sizeHint(const QStyleOptionViewItem &option, QSize &size) const override;
 
  private:
   CQControlPointsTable           *table_;

@@ -21,19 +21,19 @@ class CQGradientStopColorItem : public CQTableWidgetItem {
 
   const CRGBA &getColor() const { return rgba_; }
 
-  CQGradientStopColorItem *clone() const;
+  CQGradientStopColorItem *clone() const override;
 
-  QString getString();
+  QString getString() const override;
 
-  QWidget *createEditor(QWidget *parent) const;
+  QWidget *createEditor(QWidget *parent) const override;
 
-  void setEditorData();
+  void setEditorData() override;
 
-  void getEditorData(QString &str);
+  void getEditorData(QString &str) override;
 
-  bool sizeHint(const QStyleOptionViewItem &option, QSize &size) const;
+  bool sizeHint(const QStyleOptionViewItem &option, QSize &size) const override;
 
-  bool paint(QPainter *painter, const QStyleOptionViewItem &option) const;
+  bool paint(QPainter *painter, const QStyleOptionViewItem &option) const override;
 
  private:
   CQGradientStopTable              *table_ { 0 };
@@ -52,15 +52,15 @@ class CQGradientStopAlphaItem : public CQTableWidgetItem {
 
   double getAlpha() const { return alpha_; }
 
-  CQGradientStopAlphaItem *clone() const;
+  CQGradientStopAlphaItem *clone() const override;
 
-  QString getString();
+  QString getString() const override;
 
-  QWidget *createEditor(QWidget *parent) const;
+  QWidget *createEditor(QWidget *parent) const override;
 
-  void setEditorData();
+  void setEditorData() override;
 
-  void getEditorData(QString &str);
+  void getEditorData(QString &str) override;
 
   QString toString() const;
 
@@ -81,15 +81,15 @@ class CQGradientStopOffsetItem : public CQTableWidgetItem {
 
   double getOffset() const { return offset_; }
 
-  CQGradientStopOffsetItem *clone() const;
+  CQGradientStopOffsetItem *clone() const override;
 
-  QString getString();
+  QString getString() const override;
 
-  QWidget *createEditor(QWidget *parent) const;
+  QWidget *createEditor(QWidget *parent) const override;
 
-  void setEditorData();
+  void setEditorData() override;
 
-  void getEditorData(QString &r);
+  void getEditorData(QString &r) override;
 
   QString toString() const;
 

@@ -1,5 +1,6 @@
 #include <CQObjectOption.h>
 #include <CQIllustrator.h>
+#include <CQUtil.h>
 
 #include <QHBoxLayout>
 #include <QVBoxLayout>
@@ -8,14 +9,13 @@
 
 CQObjectOptionTool::
 CQObjectOptionTool(CQIllustrator *illustrator) :
- CQOptionTool(), illustrator_(illustrator), dialog_(0)
+ CQOptionTool(), illustrator_(illustrator)
 {
   dialog_ = new CQObjectOptionDialog(this);
 
-  QVBoxLayout *layout = new QVBoxLayout(this);
-  layout->setMargin(0); layout->setSpacing(0);
+  auto *layout = CQUtil::makeLayout<QVBoxLayout>(this, 0, 0);
 
-  QLabel *label = new QLabel("<small><b>Selection</b></small>");
+  auto *label = CQUtil::makeLabelWidget<QLabel>("<small><b>Selection</b></small>", "label");
 
   layout->addWidget(label);
 
@@ -49,16 +49,16 @@ void
 CQObjectOptionTool::
 selectionChangedSlot()
 {
-  const CQIllustratorSelectedShapes *selection = illustrator_->getSelection();
+  const auto *selection = illustrator_->getSelection();
 
   uint num_selected = selection->size();
 
   if      (num_selected == 0)
     label_->setText("None");
   else if (num_selected == 1) {
-    const CQIllustratorSelectedShape &sshape = selection->front();
+    const auto &sshape = selection->front();
 
-    const CQIllustratorShape *shape = sshape.getShape();
+    const auto *shape = sshape.getShape();
 
     uint num_points = sshape.numPoints();
     uint num_lines  = sshape.numLines ();
@@ -104,7 +104,7 @@ void
 CQObjectOptionDialog::
 initWidgets()
 {
-  QVBoxLayout *layout = new QVBoxLayout(this);
+  auto *layout = CQUtil::makeLayout<QVBoxLayout>(this, 2, 2);
 
   list_ = new QTreeWidget;
 
@@ -126,7 +126,7 @@ void
 CQObjectOptionDialog::
 itemSelectedSlot(QTreeWidgetItem *item, int pos)
 {
-  QString name = item->text(pos);
+  auto name = item->text(pos);
 
   tool_->selectShape(name.toStdString());
 }
@@ -137,12 +137,12 @@ populate(CQIllustrator *illustrator)
 {
   list_->clear();
 
-  const CQIllustratorData::ShapeStack &shapes = illustrator->getShapes();
+  const auto &shapes = illustrator->getShapes();
 
   CQIllustratorData::ShapeStack::const_iterator ps1, ps2;
 
   for (ps1 = shapes.begin(), ps2 = shapes.end(); ps1 != ps2; ++ps1) {
-    const CQIllustratorShape *shape = *ps1;
+    const auto *shape = *ps1;
 
     if (shape->getParent()) continue;
 
@@ -150,7 +150,7 @@ populate(CQIllustrator *illustrator)
 
     strs << shape->getName().c_str();
 
-    QTreeWidgetItem *item = new QTreeWidgetItem(strs);
+    auto *item = new QTreeWidgetItem(strs);
 
     list_->addTopLevelItem(item);
 
@@ -163,18 +163,18 @@ CQObjectOptionDialog::
 populateChildren(CQIllustrator *illustrator, QTreeWidgetItem *pitem,
                  const CQIllustratorShape *shape)
 {
-  const CQIllustratorShape::ShapeList &children = shape->getChildren();
+  const auto &children = shape->getChildren();
 
   CQIllustratorShape::ShapeList::const_iterator pc1, pc2;
 
   for (pc1 = children.begin(), pc2 = children.end(); pc1 != pc2; ++pc1) {
-    const CQIllustratorShape *child = *pc1;
+    const auto *child = *pc1;
 
     QStringList strs;
 
     strs << child->getName().c_str();
 
-    QTreeWidgetItem *item = new QTreeWidgetItem(strs);
+    auto *item = new QTreeWidgetItem(strs);
 
     pitem->addChild(item);
 

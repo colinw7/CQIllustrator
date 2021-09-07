@@ -4,8 +4,8 @@
 #include <QWidget>
 
 class CQIllustrator;
+class CQRealSpin;
 class QCheckBox;
-class QDoubleSpinBox;
 
 class CQIllustratorSnapDock : public QWidget {
   Q_OBJECT
@@ -19,10 +19,10 @@ class CQIllustratorSnapDock : public QWidget {
   void yPitchSlot(double ypitch);
 
  private:
-  CQIllustrator  *illustrator_;
-  QCheckBox      *enabledCheck_;
-  QDoubleSpinBox *xPitch_;
-  QDoubleSpinBox *yPitch_;
+  CQIllustrator* illustrator_  { nullptr };
+  QCheckBox*     enabledCheck_ { nullptr };
+  CQRealSpin*    xPitch_       { nullptr };
+  CQRealSpin*    yPitch_       { nullptr };
 };
 
 #endif

@@ -128,7 +128,7 @@ clone() const
 
 QString
 CQGradientStopColorItem::
-getString()
+getString() const
 {
   return "";
 }
@@ -211,7 +211,7 @@ clone() const
 
 QString
 CQGradientStopAlphaItem::
-getString()
+getString() const
 {
   return toString();
 }
@@ -269,7 +269,7 @@ clone() const
 
 QString
 CQGradientStopOffsetItem::
-getString()
+getString() const
 {
   return toString();
 }

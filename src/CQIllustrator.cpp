@@ -59,6 +59,7 @@
 #include <CSVGUtil.h>
 #include <CSVGBuffer.h>
 #include <CQSVGRenderer.h>
+#include <CSVGStrokeDash.h>
 
 #include <CLinearGradient.h>
 #include <CRadialGradient.h>
@@ -127,7 +128,7 @@ main(int argc, char **argv)
 
   app.setStyle(new CQStyle);
 
-  CQIllustrator *w = new CQIllustrator;
+  auto *w = new CQIllustrator;
 
   w->init();
 
@@ -305,7 +306,7 @@ initTerm()
   addMode(new CQIllustratorSetAnchorPositionMode(this));
 
   for (auto &modePair : modeMap_) {
-    CQIllustratorMode *mode = modePair.second;
+    auto *mode = modePair.second;
 
     if (mode->getParentMode() == 0) {
       if      (mode->isCreateMode())
@@ -398,29 +399,29 @@ createMenus()
 {
   fileMenu_ = new CQMenu(this, "File");
 
-  CQMenuItem *loadFileItem = new CQMenuItem(fileMenu_, "Load File");
+  auto *loadFileItem = new CQMenuItem(fileMenu_, "Load File");
 
   connect(loadFileItem->getAction(), SIGNAL(triggered()), this, SLOT(loadFileSlot()));
 
-  CQMenuItem *saveSvgItem = new CQMenuItem(fileMenu_, "Save SVG");
+  auto *saveSvgItem = new CQMenuItem(fileMenu_, "Save SVG");
 
   connect(saveSvgItem->getAction(), SIGNAL(triggered()), this, SLOT(saveSVGSlot()));
 
-  CQMenuItem *saveCmdItem = new CQMenuItem(fileMenu_, "Save Cmd");
+  auto *saveCmdItem = new CQMenuItem(fileMenu_, "Save Cmd");
 
   connect(saveCmdItem->getAction(), SIGNAL(triggered()), this, SLOT(saveCmdSlot()));
 
-  CQMenuItem *snapshotItem = new CQMenuItem(fileMenu_, "Snapshot");
+  auto *snapshotItem = new CQMenuItem(fileMenu_, "Snapshot");
 
   snapshotItem->setStatusTip("Screen dump");
 
   connect(snapshotItem->getAction(), SIGNAL(triggered()), this, SLOT(snapShotSlot()));
 
-  CQMenuItem *objectsItem = new CQMenuItem(fileMenu_, "Shapes");
+  auto *objectsItem = new CQMenuItem(fileMenu_, "Shapes");
 
   connect(objectsItem->getAction(), SIGNAL(triggered()), this, SLOT(objectsSlot()));
 
-  CQMenuItem *quitItem = new CQMenuItem(fileMenu_, "Quit");
+  auto *quitItem = new CQMenuItem(fileMenu_, "Quit");
 
   quitItem->setShortcut("Ctrl+Q");
   quitItem->setStatusTip("Quit the application");
@@ -567,10 +568,10 @@ createMenus()
 
   viewMenu_ = new CQMenu(this, "View");
 
-  CQMenuItem *zoomFullItem = new CQMenuItem(viewMenu_, "Zoom Full");
-  CQMenuItem *zoomFitItem  = new CQMenuItem(viewMenu_, "Zoom Fit");
-  CQMenuItem *zoomSelItem  = new CQMenuItem(viewMenu_, "Zoom Selected");
-  CQMenuItem *gridItem     = new CQMenuItem(viewMenu_, "Grid");
+  auto *zoomFullItem = new CQMenuItem(viewMenu_, "Zoom Full");
+  auto *zoomFitItem  = new CQMenuItem(viewMenu_, "Zoom Fit");
+  auto *zoomSelItem  = new CQMenuItem(viewMenu_, "Zoom Selected");
+  auto *gridItem     = new CQMenuItem(viewMenu_, "Grid");
 
   connect(zoomFullItem->getAction(), SIGNAL(triggered()), this, SLOT(zoomFullSlot()));
   connect(zoomFitItem ->getAction(), SIGNAL(triggered()), this, SLOT(zoomFitSlot()));
@@ -585,39 +586,39 @@ createMenus()
 
   viewMenu_ = new CQMenu(this, "Geometry");
 
-  CQMenuItem *toPolygonItem = new CQMenuItem(viewMenu_, "To Polygon");
-  CQMenuItem *toPathItem    = new CQMenuItem(viewMenu_, "To Path"   );
+  auto *toPolygonItem = new CQMenuItem(viewMenu_, "To Polygon");
+  auto *toPathItem    = new CQMenuItem(viewMenu_, "To Path"   );
 
   connect(toPolygonItem ->getAction(), SIGNAL(triggered()), this, SLOT(toPolygonSlot()));
   connect(toPathItem    ->getAction(), SIGNAL(triggered()), this, SLOT(toPathSlot   ()));
 
-  CQMenuItem *offsetPathItem = new CQMenuItem(viewMenu_, "Offset Path");
-  CQMenuItem *strokePathItem = new CQMenuItem(viewMenu_, "Stroke Path");
+  auto *offsetPathItem = new CQMenuItem(viewMenu_, "Offset Path");
+  auto *strokePathItem = new CQMenuItem(viewMenu_, "Stroke Path");
 
   connect(offsetPathItem->getAction(), SIGNAL(triggered()), this, SLOT(offsetPathSlot()));
   connect(strokePathItem->getAction(), SIGNAL(triggered()), this, SLOT(strokePathSlot()));
 
-  CQMenuItem *geomAndItem = new CQMenuItem(viewMenu_, "And");
-  CQMenuItem *geomOrItem  = new CQMenuItem(viewMenu_, "Or" );
-  CQMenuItem *geomXorItem = new CQMenuItem(viewMenu_, "Xor");
-  CQMenuItem *geomNotItem = new CQMenuItem(viewMenu_, "Not");
+  auto *geomAndItem = new CQMenuItem(viewMenu_, "And");
+  auto *geomOrItem  = new CQMenuItem(viewMenu_, "Or" );
+  auto *geomXorItem = new CQMenuItem(viewMenu_, "Xor");
+  auto *geomNotItem = new CQMenuItem(viewMenu_, "Not");
 
   connect(geomAndItem->getAction(), SIGNAL(triggered()), this, SLOT(geomAndSlot()));
   connect(geomOrItem ->getAction(), SIGNAL(triggered()), this, SLOT(geomOrSlot ()));
   connect(geomXorItem->getAction(), SIGNAL(triggered()), this, SLOT(geomXorSlot()));
   connect(geomNotItem->getAction(), SIGNAL(triggered()), this, SLOT(geomNotSlot()));
 
-  CQMenuItem *toCurveItem = new CQMenuItem(viewMenu_, "To Curve");
-  CQMenuItem *flattenItem = new CQMenuItem(viewMenu_, "Flatten" );
+  auto *toCurveItem = new CQMenuItem(viewMenu_, "To Curve");
+  auto *flattenItem = new CQMenuItem(viewMenu_, "Flatten" );
 
   connect(toCurveItem->getAction(), SIGNAL(triggered()), this, SLOT(toCurveSlot()));
   connect(flattenItem->getAction(), SIGNAL(triggered()), this, SLOT(flattenSlot()));
 
-  CQMenuItem *intersectOrItem   = new CQMenuItem(viewMenu_, "Intersect (OR)");
-  CQMenuItem *intersectAndItem  = new CQMenuItem(viewMenu_, "Intersect (AND)");
-  CQMenuItem *intersectXor1Item = new CQMenuItem(viewMenu_, "Intersect (XOR Single)");
-  CQMenuItem *intersectXor2Item = new CQMenuItem(viewMenu_, "Intersect (XOR Split)");
-  CQMenuItem *combineItem       = new CQMenuItem(viewMenu_, "Combine");
+  auto *intersectOrItem   = new CQMenuItem(viewMenu_, "Intersect (OR)");
+  auto *intersectAndItem  = new CQMenuItem(viewMenu_, "Intersect (AND)");
+  auto *intersectXor1Item = new CQMenuItem(viewMenu_, "Intersect (XOR Single)");
+  auto *intersectXor2Item = new CQMenuItem(viewMenu_, "Intersect (XOR Split)");
+  auto *combineItem       = new CQMenuItem(viewMenu_, "Combine");
 
   connect(intersectOrItem  ->getAction(), SIGNAL(triggered()), this, SLOT(intersectOrSlot()));
   connect(intersectAndItem ->getAction(), SIGNAL(triggered()), this, SLOT(intersectAndSlot()));
@@ -625,15 +626,15 @@ createMenus()
   connect(intersectXor2Item->getAction(), SIGNAL(triggered()), this, SLOT(intersectXor2Slot()));
   connect(combineItem      ->getAction(), SIGNAL(triggered()), this, SLOT(combineSlot()));
 
-  CQMenuItem *triangulateItem = new CQMenuItem(viewMenu_, "Triangulate");
+  auto *triangulateItem = new CQMenuItem(viewMenu_, "Triangulate");
 
   connect(triangulateItem->getAction(), SIGNAL(triggered()), this, SLOT(triangulateSlot()));
 
-  CQMenuItem *giftWrapItem = new CQMenuItem(viewMenu_, "Gift Wrap");
+  auto *giftWrapItem = new CQMenuItem(viewMenu_, "Gift Wrap");
 
   connect(giftWrapItem->getAction(), SIGNAL(triggered()), this, SLOT(giftWrapSlot()));
 
-  CQMenuItem *delaunayItem = new CQMenuItem(viewMenu_, "Delaunay");
+  auto *delaunayItem = new CQMenuItem(viewMenu_, "Delaunay");
 
   connect(delaunayItem->getAction(), SIGNAL(triggered()), this, SLOT(delaunaySlot()));
 
@@ -647,7 +648,7 @@ createMenus()
 
   //----
 
-  CQMenuItem *aboutItem = new CQMenuItem(helpMenu_, "About");
+  auto *aboutItem = new CQMenuItem(helpMenu_, "About");
 
   aboutItem->setStatusTip("Show the application's About box");
 
@@ -755,7 +756,7 @@ createToolBars()
 
   //-------
 
-  CQOptionToolSet *styleSet = new CQOptionToolSet;
+  auto *styleSet = new CQOptionToolSet;
 
   styleSet->setPopupArea(canvas_);
 
@@ -778,7 +779,7 @@ createToolBars()
 
   //------
 
-  CQOptionToolSet *objectSet = new CQOptionToolSet;
+  auto *objectSet = new CQOptionToolSet;
 
   objectSet->setPopupArea(canvas_);
 
@@ -835,7 +836,7 @@ createDockWindows()
 {
   undoDock_ = new CQIllustratorUndoDock(this);
 
-  CQDockWidget *undoDock = new CQDockWidget(this, "Undo", undoDock_);
+  auto *undoDock = new CQDockWidget(this, "Undo", undoDock_);
 
   undoDock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
 
@@ -845,7 +846,7 @@ createDockWindows()
 
   preferenceDock_ = new CQIllustratorPreferenceDock(this);
 
-  CQDockWidget *preferenceDock = new CQDockWidget(this, "Preference", preferenceDock_);
+  auto *preferenceDock = new CQDockWidget(this, "Preference", preferenceDock_);
 
   preferenceDock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
 
@@ -855,7 +856,7 @@ createDockWindows()
 
   snapDock_ = new CQIllustratorSnapDock(this);
 
-  CQDockWidget *snapDock = new CQDockWidget(this, "Snap", snapDock_);
+  auto *snapDock = new CQDockWidget(this, "Snap", snapDock_);
 
   snapDock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
 
@@ -952,7 +953,7 @@ void
 CQIllustrator::
 mouseDrag(const MouseEvent &e)
 {
-  //QPointF prev_wpos = getITransform().map(QPointF(current_ppos_));
+  //auto prev_wpos = getITransform().map(QPointF(current_ppos_));
 
   current_ppos_ = e.pixel;
 
@@ -962,7 +963,7 @@ mouseDrag(const MouseEvent &e)
   double pdx = e.window.x() - press_wpos_.x();
   double pdy = e.window.y() - press_wpos_.y();
 
-  QString msg = QString("(%1,%2)").arg(pdx).arg(pdy);
+  auto msg = QString("(%1,%2)").arg(pdx).arg(pdy);
 
   setDeltaLabel("Delta", msg);
 
@@ -975,7 +976,7 @@ mouseMove(const MouseEvent &e)
 {
   current_ppos_ = e.pixel;
 
-  CPoint2D p = CQUtil::fromQPoint(e.window);
+  auto p = CQUtil::fromQPoint(e.window);
 
   posLabel_->setText(QString("<small><b>Position</b></small><br>"
                              "(%1,%2)").arg(p.x).arg(p.y));
@@ -990,7 +991,7 @@ keyPress(const KeyEvent &e)
   if (currentMode_->keyPress(e))
     return;
 
-  CKeyType key = e.event->getType();
+  auto key = e.event->getType();
 
   switch (key) {
     case CKEY_TYPE_BracketLeft:
@@ -1123,7 +1124,7 @@ void
 CQIllustrator::
 setDeltaLabel(const QString &title, const QString &str)
 {
-  QString label = QString("<small><b>%1</b></small><br>%2").arg(title).arg(str);
+  auto label = QString("<small><b>%1</b></small><br>%2").arg(title).arg(str);
 
   deltaLabel_->setText(label);
 
@@ -1150,7 +1151,7 @@ CQIllustratorShape *
 CQIllustrator::
 selectAt(const CPoint2D &p, bool add, bool remove)
 {
-  CQIllustratorShape *select_shape = getObjectAt(p);
+  auto *select_shape = getObjectAt(p);
 
   if      (add)
     addSelectShape(select_shape);
@@ -1222,17 +1223,17 @@ selectPointAt(const CPoint2D &p, CQIllustratorShape::ControlType type, bool add,
   clearSelection();
 
   double                            dist  = 0.0;
-  CQIllustratorShape               *shape = 0;
+  CQIllustratorShape               *shape = nullptr;
   CQIllustratorShapeNearestPoint2D  npoint;
 
-  const CQIllustratorData::ShapeStack &shapes = getShapes();
+  const auto &shapes = getShapes();
 
   CQIllustratorData::ShapeStack::const_reverse_iterator ps1, ps2;
 
   for (ps1 = shapes.rbegin(), ps2 = shapes.rend(); ps1 != ps2; ++ps1) {
-    CQIllustratorShape *shape1 = *ps1;
+    auto *shape1 = *ps1;
 
-    CQIllustratorShapeNearestPoint2D point = shape1->nearestPoint(p, type);
+    auto point = shape1->nearestPoint(p, type);
 
     if (shape == 0 || point.getDist() < dist) {
       shape  = shape1;
@@ -1243,7 +1244,7 @@ selectPointAt(const CPoint2D &p, CQIllustratorShape::ControlType type, bool add,
   if (shape) {
     setSelectShape(shape);
 
-    CQIllustratorSelectedShape &sshape = selection_->front();
+    auto &sshape = selection_->front();
 
     if (! add && ! remove)
       selection_->clearShapePoints(sshape);
@@ -1260,7 +1261,7 @@ CQIllustrator::
 selectPointAt(CQIllustratorShape *shape, const CPoint2D &p, CQIllustratorShape::ControlType type,
               bool add, bool remove)
 {
-  CQIllustratorShapeNearestPoint2D npoint = shape->nearestPoint(p, type);
+  auto npoint = shape->nearestPoint(p, type);
 
   if (! npoint.isSet())
     return;
@@ -1270,7 +1271,7 @@ selectPointAt(CQIllustratorShape *shape, const CPoint2D &p, CQIllustratorShape::
   else if (! remove)
     setSelectShape(shape);
 
-  CQIllustratorSelectedShape &sshape = selection_->front();
+  auto &sshape = selection_->front();
 
   if (! add && ! remove)
     selection_->clearShapePoints(sshape);
@@ -1303,13 +1304,13 @@ selectPointsIn(const CBBox2D &bbox, CQIllustratorShape::ControlType type,
     uint numControlPoints = controlPoints.size();
 
     for (uint i = 0; i < numControlPoints; ++i) {
-      CPoint2D p = controlPoints[i]->getPoint(shape);
+      auto p = controlPoints[i]->getPoint(shape);
 
       if (! bbox.inside(p)) continue;
 
       addSelectShape(shape);
 
-      CQIllustratorSelectedShape &sshape = selection_->get(shape);
+      auto &sshape = selection_->get(shape);
 
       if (! remove)
         selection_->addShapePoint(sshape, controlPoints[i]);
@@ -1342,16 +1343,16 @@ selectLinesIn(const CBBox2D &bbox, bool add, bool remove)
     uint numControlLines = controlLines.size();
 
     for (uint i = 0; i < numControlLines; ++i) {
-      CLine2D l = controlLines[i]->getLine(shape);
+      auto l = controlLines[i]->getLine(shape);
 
-      const CPoint2D &p1 = l.start();
-      const CPoint2D &p2 = l.end();
+      const auto &p1 = l.start();
+      const auto &p2 = l.end();
 
       if (! bbox.inside(p1) || ! bbox.inside(p2)) continue;
 
       addSelectShape(shape);
 
-      CQIllustratorSelectedShape &sshape = selection_->get(shape);
+      auto &sshape = selection_->get(shape);
 
       if (! remove)
         selection_->addShapeLine(sshape, controlLines[i]);
@@ -1367,14 +1368,14 @@ void
 CQIllustrator::
 cyclePrev()
 {
-  CQIllustratorShape *select_shape = 0;
+  CQIllustratorShape *select_shape = nullptr;
 
   if (selection_->size() == 1)
     select_shape = selection_->front().getShape();
 
-  CQIllustratorShape *shape = 0;
+  CQIllustratorShape *shape = nullptr;
 
-  const CQIllustratorData::ShapeStack &shapes = getShapes();
+  const auto &shapes = getShapes();
 
   CQIllustratorData::ShapeStack::const_reverse_iterator ps1, ps2;
 
@@ -1403,14 +1404,14 @@ void
 CQIllustrator::
 cycleNext()
 {
-  CQIllustratorShape *select_shape = 0;
+  CQIllustratorShape *select_shape = nullptr;
 
   if (selection_->size() == 1)
     select_shape = selection_->front().getShape();
 
-  CQIllustratorShape *shape = 0;
+  CQIllustratorShape *shape = nullptr;
 
-  const CQIllustratorData::ShapeStack &shapes = getShapes();
+  const auto &shapes = getShapes();
 
   CQIllustratorData::ShapeStack::const_iterator ps1, ps2;
 
@@ -1495,7 +1496,7 @@ dimQImage(const QImage &qimage, QImage &dim_qimage)
 
   for (uint y = 0; y < h; ++y) {
     for (uint x = 0; x < w; ++x) {
-      QRgb rgb = qimage.pixel(x, y);
+      auto rgb = qimage.pixel(x, y);
 
       int g = std::min(int(127.0*(qGray(rgb)/255.0) + 128.0), 255);
 
@@ -1511,10 +1512,10 @@ drawContents(QPainter *painter)
   int w = qimage_.width ();
   int h = qimage_.height();
 
-  QPointF tl = getITransform().map(QPointF(0    , h - 1));
-  QPointF br = getITransform().map(QPointF(w - 1, 0    ));
+  auto tl = getITransform().map(QPointF(0    , h - 1));
+  auto br = getITransform().map(QPointF(w - 1, 0    ));
 
-  CBBox2D bbox = CQUtil::fromQRect(QRectF(tl, br));
+  auto bbox = CQUtil::fromQRect(QRectF(tl, br));
 
   //------
 
@@ -1535,14 +1536,14 @@ drawContents(QPainter *painter)
 
   //------
 
-  const CQIllustratorLayerStack::LayerStack &layerStack = layerStack_->getLayerStack();
+  const auto &layerStack = layerStack_->getLayerStack();
 
   CQIllustratorLayerStack::LayerStack::const_iterator p1, p2;
 
   for (p1 = layerStack.begin(), p2 = layerStack.end(); p1 != p2; ++p1) {
-    const CQIllustratorLayer *layer = layerStack_->getLayer(*p1);
+    const auto *layer = layerStack_->getLayer(*p1);
 
-    CQIllustratorData *data = layer->getData();
+    auto *data = layer->getData();
 
     CQIllustratorData::ShapeList shapes;
 
@@ -1551,11 +1552,11 @@ drawContents(QPainter *painter)
     CQIllustratorData::ShapeList::const_iterator ps1, ps2;
 
     for (ps1 = shapes.begin(), ps2 = shapes.end(); ps1 != ps2; ++ps1) {
-      CQIllustratorShape *shape = *ps1;
+      auto *shape = *ps1;
 
       if (! shape->getVisible()) continue;
 
-      const CBBox2D &bbox = shape->getFlatBBox();
+      const auto &bbox = shape->getFlatBBox();
 
       drawer_->setBBox(bbox);
 
@@ -1587,7 +1588,7 @@ void
 CQIllustrator::
 drawQuadTree(QPainter *painter)
 {
-  const CQIllustratorData::QuadTree *tree = getData()->getQuadTree();
+  const auto *tree = getData()->getQuadTree();
 
   uint max_num = tree->maxElements();
 
@@ -1598,9 +1599,9 @@ void
 CQIllustrator::
 drawQuadTree(QPainter *painter, const CQIllustratorData::QuadTree *tree, uint max_num)
 {
-  const CQIllustratorData::QuadTree::DataList &dataList = tree->getDataList();
+  const auto &dataList = tree->getDataList();
 
-  const CBBox2D &bbox = tree->getBBox();
+  const auto &bbox = tree->getBBox();
 
   //uint num = dataList.size();
 
@@ -1614,20 +1615,20 @@ drawQuadTree(QPainter *painter, const CQIllustratorData::QuadTree *tree, uint ma
 
   double r = 1.0 - 0.1*depth;
 
-  CQIllustratorData::QuadTree::DataList::const_iterator p1 = dataList.begin();
-  CQIllustratorData::QuadTree::DataList::const_iterator p2 = dataList.end  ();
+  auto p1 = dataList.begin();
+  auto p2 = dataList.end  ();
 
   for ( ; p1 != p2; ++p1) {
-    const CBBox2D &bbox = (*p1)->getBBox();
+    const auto &bbox = (*p1)->getBBox();
 
     painter->fillRect(CQUtil::toQRect(bbox), QBrush(CQUtil::rgbaToColor(CRGBA(0.0, 0.0, r, 0.5))));
   }
 
   if (tree->getBLTree() != 0) {
-    const CQIllustratorData::QuadTree *bl_tree = tree->getBLTree();
-    const CQIllustratorData::QuadTree *br_tree = tree->getBRTree();
-    const CQIllustratorData::QuadTree *tl_tree = tree->getTLTree();
-    const CQIllustratorData::QuadTree *tr_tree = tree->getTRTree();
+    const auto *bl_tree = tree->getBLTree();
+    const auto *br_tree = tree->getBRTree();
+    const auto *tl_tree = tree->getTLTree();
+    const auto *tr_tree = tree->getTRTree();
 
     drawQuadTree(painter, bl_tree, max_num);
     drawQuadTree(painter, br_tree, max_num);
@@ -1749,12 +1750,12 @@ groupSlot()
 {
   if (selection_->empty()) return;
 
-  CQIllustratorGroupShape *group = createGroupShape();
+  auto *group = createGroupShape();
 
   CQIllustratorSelectedShapes::iterator ps1, ps2;
 
   for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
-    CQIllustratorShape *shape = (*ps1).getShape();
+    auto *shape = (*ps1).getShape();
 
     shape->setParent(group);
 
@@ -1777,12 +1778,12 @@ ungroupSlot()
 
   for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
     // get parent group matrix
-    CQIllustratorShape *shape = (*ps1).getShape();
+    auto *shape = (*ps1).getShape();
 
     const auto *group = dynamic_cast<CQIllustratorGroupShape *>(shape);
     if (! group) continue;
 
-    const CMatrix2D &m = group->getMatrix();
+    const auto &m = group->getMatrix();
 
     //---
 
@@ -1790,7 +1791,7 @@ ungroupSlot()
     std::vector<CQIllustratorShape *> shapes;
 
     for (const auto &groupShape : group->getChildren()) {
-      const CMatrix2D &m1 = groupShape->getMatrix();
+      const auto &m1 = groupShape->getMatrix();
 
       groupShape->setMatrix(m*m1);
 
@@ -1805,7 +1806,7 @@ ungroupSlot()
     //---
 
     // move shapes to new parent (or none)
-    CQIllustratorShape *parent = group->getParent();
+    auto *parent = group->getParent();
 
     for (auto &groupShape : shapes)
       groupShape->setParent(parent);
@@ -1815,7 +1816,7 @@ ungroupSlot()
 
   // reparent groups (now empty)
   for (auto &group : groups) {
-    CQIllustratorShape *parent = group->getParent();
+    auto *parent = group->getParent();
 
     group->setParent(parent);
   }
@@ -1835,9 +1836,9 @@ copySlot()
   CQIllustratorSelectedShapes::iterator ps1, ps2;
 
   for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
-    CQIllustratorShape *shape = (*ps1).getShape();
+    auto *shape = (*ps1).getShape();
 
-    CQIllustratorShape *shape1 = shape->dup();
+    auto *shape1 = shape->dup();
 
     //shape1->moveBy(CPoint2D(1, 1));
 
@@ -1853,7 +1854,7 @@ copySlot()
   std::vector<CQIllustratorShape *>::const_iterator pcs1, pcs2;
 
   for (pcs1 = shapes.begin(), pcs2 = shapes.end(); pcs1 != pcs2; ++pcs1) {
-    CQIllustratorShape *shape = *pcs1;
+    auto *shape = *pcs1;
 
     addSelectShape(shape);
   }
@@ -1875,7 +1876,7 @@ CQIllustrator::
 raiseSlot()
 {
   if (selection_->size() == 1) {
-    CQIllustratorShape *shape = selection_->front().getShape();
+    auto *shape = selection_->front().getShape();
 
     getData()->raiseShape(shape);
 
@@ -1888,7 +1889,7 @@ CQIllustrator::
 lowerSlot()
 {
   if (selection_->size() == 1) {
-    CQIllustratorShape *shape = selection_->front().getShape();
+    auto *shape = selection_->front().getShape();
 
     getData()->lowerShape(shape);
 
@@ -1903,7 +1904,7 @@ flipXSlot()
   CQIllustratorSelectedShapes::iterator ps1, ps2;
 
   for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
-    CQIllustratorShape *shape = (*ps1).getShape();
+    auto *shape = (*ps1).getShape();
 
     checkoutShape(shape, CQIllustratorData::ChangeType::GEOMETRY);
 
@@ -1920,7 +1921,7 @@ flipYSlot()
   CQIllustratorSelectedShapes::iterator ps1, ps2;
 
   for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
-    CQIllustratorShape *shape = (*ps1).getShape();
+    auto *shape = (*ps1).getShape();
 
     checkoutShape(shape, CQIllustratorData::ChangeType::GEOMETRY);
 
@@ -1937,7 +1938,7 @@ lockSlot()
   CQIllustratorSelectedShapes::iterator ps1, ps2;
 
   for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
-    CQIllustratorShape *shape = (*ps1).getShape();
+    auto *shape = (*ps1).getShape();
 
     checkoutShape(shape, CQIllustratorData::ChangeType::GEOMETRY);
 
@@ -1954,7 +1955,7 @@ unlockSlot()
   CQIllustratorSelectedShapes::iterator ps1, ps2;
 
   for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
-    CQIllustratorShape *shape = (*ps1).getShape();
+    auto *shape = (*ps1).getShape();
 
     checkoutShape(shape, CQIllustratorData::ChangeType::GEOMETRY);
 
@@ -1969,7 +1970,7 @@ CQIllustrator::
 copyStrokeSlot()
 {
   if (selection_->size() == 1) {
-    CQIllustratorShape *shape = selection_->front().getShape();
+    auto *shape = selection_->front().getShape();
 
     save_stroke_ = shape->getStroke();
     save_fill_   = shape->getFill  ();
@@ -1983,7 +1984,7 @@ pasteStrokeSlot()
   CQIllustratorSelectedShapes::iterator ps1, ps2;
 
   for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
-    CQIllustratorShape *shape = (*ps1).getShape();
+    auto *shape = (*ps1).getShape();
 
     //------
 
@@ -2007,11 +2008,11 @@ void
 CQIllustrator::
 loadFileSlot()
 {
-  QString title  = "Load Vector File";
-  QString cwd    = QString(COSFile::getCurrentDir().c_str());
-  QString filter = "SVG, Postscript, Cmd (*.svg *.ps *.cmd)";
+  auto title  = QString("Load Vector File");
+  auto cwd    = QString(COSFile::getCurrentDir().c_str());
+  auto filter = QString("SVG, Postscript, Cmd (*.svg *.ps *.cmd)");
 
-  QStringList filenames = QFileDialog::getOpenFileNames(this, title, cwd, filter);
+  auto filenames = QFileDialog::getOpenFileNames(this, title, cwd, filter);
 
   if (filenames.size() == 0)
     return;
@@ -2026,11 +2027,11 @@ void
 CQIllustrator::
 saveSVGSlot()
 {
-  QString title  = "Save SVG File";
-  QString cwd    = QString(COSFile::getCurrentDir().c_str());
-  QString filter = "SVG (*.svg)";
+  auto title  = QString("Save SVG File");
+  auto cwd    = QString(COSFile::getCurrentDir().c_str());
+  auto filter = QString("SVG (*.svg)");
 
-  QString fileName = QFileDialog::getSaveFileName(this, title, cwd, filter);
+  auto fileName = QFileDialog::getSaveFileName(this, title, cwd, filter);
 
   if (fileName.length() == 0)
     return;
@@ -2042,11 +2043,11 @@ void
 CQIllustrator::
 saveCmdSlot()
 {
-  QString title  = "Save Cmd File";
-  QString cwd    = QString(COSFile::getCurrentDir().c_str());
-  QString filter = "Cmd (*.cmd)";
+  auto title  = QString("Save Cmd File");
+  auto cwd    = QString(COSFile::getCurrentDir().c_str());
+  auto filter = QString("Cmd (*.cmd)");
 
-  QString fileName = QFileDialog::getSaveFileName(this, title, cwd, filter);
+  auto fileName = QFileDialog::getSaveFileName(this, title, cwd, filter);
 
   if (fileName.length() == 0)
     return;
@@ -2147,7 +2148,7 @@ setMode(Mode mode)
   ModeMap::const_iterator p1, p2;
 
   for (p1 = modeMap_.begin(), p2 = modeMap_.end(); p1 != p2; ++p1) {
-    CQMenuItem *menuItem = (*p1).second->getMenuItem();
+    auto *menuItem = (*p1).second->getMenuItem();
 
     if (menuItem)
       menuItem->setChecked(mode_ == (*p1).first);
@@ -2242,7 +2243,7 @@ loadFile(const QString &filename)
     loadCmd(filename1);
   }
   else {
-    CFileType type = CFileUtil::getType(filename.toStdString());
+    auto type = CFileUtil::getType(filename.toStdString());
 
     if (type != CFILE_TYPE_IMAGE_SVG && type != CFILE_TYPE_IMAGE_PS)
       type = CFILE_TYPE_IMAGE_SVG;
@@ -2281,15 +2282,15 @@ loadSVG(const QString &filename)
   CPoint2D c(0, 0);
 #endif
 
-  CSVGBlock *block = svg.getRoot();
+  auto *block = svg.getRoot();
 
   for (const auto &object : block->children()) {
-    CQIllustratorShape *shape = addSVGObject(0, object);
+    auto *shape = addSVGObject(0, object);
 
     if (! shape) continue;
 
 #ifdef SVG_FLIP
-    CPoint2D c1 = shape->getRotateCenter();
+    auto c1 = shape->getRotateCenter();
 
     shape->setRotateCenter(c);
 
@@ -2351,7 +2352,7 @@ void
 CQIllustrator::
 saveSVG(const QString &filename)
 {
-  //CPoint2D c = bbox.getCenter();
+  //auto c = bbox.getCenter();
 
   CFile file(filename.toStdString());
 
@@ -2365,16 +2366,16 @@ saveSVG(const QString &filename)
 
   file.printf("<svg>\n");
 
-  const CQIllustratorData::ShapeStack &shapes = getShapes();
+  const auto &shapes = getShapes();
 
   CQIllustratorData::ShapeStack::const_iterator ps1, ps2;
 
   for (ps1 = shapes.begin(), ps2 = shapes.end(); ps1 != ps2; ++ps1) {
-    CQIllustratorShape *shape = *ps1;
+    auto *shape = *ps1;
 
     if (shape->getParent()) continue;
 
-    //CPoint2D c1 = shape->getRotateCenter();
+    //auto c1 = shape->getRotateCenter();
 
     //shape->setRotateCenter(c);
 
@@ -2415,12 +2416,12 @@ saveCmd(const QString &filename)
   saveData.bbox = getBBox();
   saveData.file = &file;
 
-  const CQIllustratorData::ShapeStack &shapes = getShapes();
+  const auto &shapes = getShapes();
 
   CQIllustratorData::ShapeStack::const_iterator ps1, ps2;
 
   for (ps1 = shapes.begin(), ps2 = shapes.end(); ps1 != ps2; ++ps1) {
-    CQIllustratorShape *shape = *ps1;
+    auto *shape = *ps1;
 
     if (shape->getParent()) continue;
 
@@ -2453,11 +2454,11 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
 
   //---
 
-  CMatrix2D m = object->getTransform().getMatrix();
+  auto m = object->getTransform().getMatrix();
 
-  CQIllustratorShape *shape = 0;
+  CQIllustratorShape *shape = nullptr;
 
-  CSVGObjTypeId id = object->getObjTypeId();
+  auto id = object->getObjTypeId();
 
   switch (id) {
     case CSVGObjTypeId::PATH: {
@@ -2474,7 +2475,7 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
       const auto &parts = path->getPartList();
 
       for (const auto part : parts.parts()) {
-        CSVGPathPartType type = part->getType();
+        auto type = part->getType();
 
         switch (type) {
           case CSVGPathPartType::MOVE_TO: {
@@ -2578,7 +2579,7 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
 
             bool unit_circle = false;
 
-            CPoint2D pp2 = pp->getPoint2();
+            auto pp2 = pp->getPoint2();
 
             CSVGUtil::convertArcCoords(lp.x, lp.y, pp2.x, pp2.y, xa, r.x, r.y, fa, fs,
                                        unit_circle, &cx, &cy, &rx, &ry, &theta, &delta);
@@ -2605,7 +2606,7 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
 
             bool unit_circle = false;
 
-            CPoint2D pp2 = lp + pp->getPoint2();
+            auto pp2 = lp + pp->getPoint2();
 
             CSVGUtil::convertArcCoords(lp.x, lp.y, pp2.x, pp2.y, xa, r.x, r.y, fa, fs,
                                        unit_circle, &cx, &cy, &rx, &ry, &theta, &delta);
@@ -2701,22 +2702,22 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
       break;
     }
     case CSVGObjTypeId::POLYGON: {
-      CQIllustratorPathShape *pathShape = createPathShape();
+      auto *pathShape = createPathShape();
 
       shape = pathShape;
 
       auto *polygon = dynamic_cast<CSVGPolygon *>(object);
 
-      const CSVGPolygon::PointList &points = polygon->getPoints();
+      const auto &points = polygon->getPoints();
 
       uint num_points = points.size();
 
-      CPoint2D pp1 = points[0];
+      auto pp1 = points[0];
 
       pathShape->addMoveTo(pp1);
 
       for (uint i = 1; i < num_points; ++i) {
-        CPoint2D pp1 = points[i];
+        auto pp1 = points[i];
 
         pathShape->addLineTo(pp1);
       }
@@ -2730,7 +2731,7 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
     case CSVGObjTypeId::RECT: {
       auto *rect = dynamic_cast<CSVGRect *>(object);
 
-      const CBBox2D &bbox = rect->getBBox();
+      const auto &bbox = rect->getBBox();
 
       //---
 
@@ -2752,10 +2753,10 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
 
       //---
 
-      CPoint2D p1 = bbox.getUL();
-      CPoint2D p2 = bbox.getLR();
+      auto p1 = bbox.getUL();
+      auto p2 = bbox.getLR();
 
-      CQIllustratorRectShape *rectShape = createRectShape(p1, p2);
+      auto *rectShape = createRectShape(p1, p2);
 
       shape = rectShape;
 
@@ -2773,15 +2774,15 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
     case CSVGObjTypeId::CIRCLE: {
       auto *circle = dynamic_cast<CSVGCircle *>(object);
 
-      const CPoint2D &c = circle->getCenter();
-      double          r = circle->getRadius().pxValue(CScreenUnits(1));
+      const auto &c = circle->getCenter();
+      double      r = circle->getRadius().pxValue(CScreenUnits(1));
 
       CBBox2D bbox(CPoint2D(c.x - r, c.y - r), CPoint2D(c.x + r, c.y + r));
 
-      CPoint2D p1 = bbox.getUL();
-      CPoint2D p2 = bbox.getLR();
+      auto p1 = bbox.getUL();
+      auto p2 = bbox.getLR();
 
-      CQIllustratorEllipseShape *ellipseShape = createEllipseShape(p1, p2);
+      auto *ellipseShape = createEllipseShape(p1, p2);
 
       shape = ellipseShape;
 
@@ -2792,16 +2793,16 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
     case CSVGObjTypeId::ELLIPSE: {
       auto *ellipse = dynamic_cast<CSVGEllipse *>(object);
 
-      const CPoint2D &c  = ellipse->getCenter();
-      double          rx = ellipse->getRadiusX().pxValue(CScreenUnits(1));
-      double          ry = ellipse->getRadiusY().pxValue(CScreenUnits(1));
+      const auto &c  = ellipse->getCenter();
+      double      rx = ellipse->getRadiusX().pxValue(CScreenUnits(1));
+      double      ry = ellipse->getRadiusY().pxValue(CScreenUnits(1));
 
       CBBox2D bbox(CPoint2D(c.x - rx, c.y - ry), CPoint2D(c.x + rx, c.y + ry));
 
-      CPoint2D p1 = bbox.getUL();
-      CPoint2D p2 = bbox.getLR();
+      auto p1 = bbox.getUL();
+      auto p2 = bbox.getLR();
 
-      CQIllustratorEllipseShape *ellipseShape = createEllipseShape(p1, p2);
+      auto *ellipseShape = createEllipseShape(p1, p2);
 
       shape = ellipseShape;
 
@@ -2810,14 +2811,14 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
       break;
     }
     case CSVGObjTypeId::LINE: {
-      CQIllustratorPathShape *pathShape = createPathShape();
+      auto *pathShape = createPathShape();
 
       shape = pathShape;
 
       auto *line = dynamic_cast<CSVGLine *>(object);
 
-      CPoint2D p1 = line->getStart();
-      CPoint2D p2 = line->getEnd  ();
+      auto p1 = line->getStart();
+      auto p2 = line->getEnd  ();
 
       pathShape->addMoveTo(p1);
       pathShape->addLineTo(p2);
@@ -2827,24 +2828,24 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
       break;
     }
     case CSVGObjTypeId::POLYLINE: {
-      CQIllustratorPathShape *pathShape = createPathShape();
+      auto *pathShape = createPathShape();
 
       shape = pathShape;
 
       auto *poly = dynamic_cast<CSVGPolyLine *>(object);
 
-      const CSVGPolyLine::PointList &points = poly->getPoints();
+      const auto &points = poly->getPoints();
 
       uint numPoints = points.size();
 
       if (numPoints > 0) {
-        CPoint2D p = points[0];
+        auto p = points[0];
 
         pathShape->addMoveTo(p);
       }
 
       for (uint i = 1; i < numPoints; ++i) {
-        CPoint2D p = points[i];
+        auto p = points[i];
 
         pathShape->addLineTo(p);
       }
@@ -2862,7 +2863,7 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
 
       const std::string &str = text->getText();
 
-      CQIllustratorTextShape *textShape = createTextShape(bbox.getLL(), bbox.getUR(), str);
+      auto *textShape = createTextShape(bbox.getLL(), bbox.getUR(), str);
 
       // TODO:
       //textShape->setFont(object->getFont());
@@ -2899,16 +2900,16 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
 
       image->getBBox(bbox);
 
-      CSVGObject *childObject = image->getObject();
+      auto *childObject = image->getObject();
 
       if (childObject) {
-        CQIllustratorGroupShape *groupShape = createGroupShape();
+        auto *groupShape = createGroupShape();
 
         shape = groupShape;
 
         setShapeSVGStrokeAndFill(groupShape, object);
 
-        CQIllustratorShape *childShape = addSVGObject(object, childObject);
+        auto *childShape = addSVGObject(object, childObject);
 
         if (childShape) {
           groupShape->addChild(childShape);
@@ -2921,19 +2922,19 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
         }
       }
       else {
-        CPoint2D p1 = bbox.getUL();
-        CPoint2D p2 = bbox.getLR();
+        auto p1 = bbox.getUL();
+        auto p2 = bbox.getLR();
 
-        CQIllustratorRectShape *rectShape = createRectShape(p1, p2);
+        auto *rectShape = createRectShape(p1, p2);
 
         shape = rectShape;
 
         setShapeSVGStrokeAndFill(rectShape, object);
 
-        CImagePtr img = image->getImageBuffer()->getImage()->image();
+        auto img = image->getImageBuffer()->getImage()->image();
 
         if (img.isValid()) {
-          CQIllustratorShapeFill &fill = shape->getFill();
+          auto &fill = shape->getFill();
 
           fill.setImage(img);
 
@@ -2947,7 +2948,7 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
       break;
     }
     case CSVGObjTypeId::USE: {
-      CQIllustratorGroupShape *groupShape = createGroupShape();
+      auto *groupShape = createGroupShape();
 
       shape = groupShape;
 
@@ -2955,13 +2956,13 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
 
       auto *use = dynamic_cast<CSVGUse *>(object);
 
-      CSVGObject *childObject = use->getLinkObject();
+      auto *childObject = use->getLinkObject();
 
-      CSVGObject *parent = childObject->getParent();
+      auto *parent = childObject->getParent();
 
       childObject->setParent(use);
 
-      CQIllustratorShape *childShape = addSVGObject(object, childObject, /*force*/true);
+      auto *childShape = addSVGObject(object, childObject, /*force*/true);
 
       if (childShape) {
         groupShape->addChild(childShape);
@@ -2978,14 +2979,14 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
       break;
     }
     case CSVGObjTypeId::GROUP: {
-      CQIllustratorGroupShape *groupShape = createGroupShape();
+      auto *groupShape = createGroupShape();
 
       shape = groupShape;
 
       setShapeSVGStrokeAndFill(groupShape, object);
 
       for (const auto &childObject : object->children()) {
-        CQIllustratorShape *childShape = addSVGObject(object, childObject);
+        auto *childShape = addSVGObject(object, childObject);
 
         if (! childShape) continue;
 
@@ -3001,14 +3002,14 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
       break;
     }
     case CSVGObjTypeId::SYMBOL: {
-      CQIllustratorGroupShape *groupShape = createGroupShape();
+      auto *groupShape = createGroupShape();
 
       shape = groupShape;
 
       setShapeSVGStrokeAndFill(groupShape, object);
 
       for (const auto &childObject : object->children()) {
-        CQIllustratorShape *childShape = addSVGObject(object, childObject);
+        auto *childShape = addSVGObject(object, childObject);
 
         if (! childShape) continue;
 
@@ -3156,7 +3157,7 @@ toPolygonSlot()
   CQIllustratorSelectedShapes::iterator ps1, ps2;
 
   for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
-    CQIllustratorShape *shape = (*ps1).getShape();
+    auto *shape = (*ps1).getShape();
 
     auto *group = dynamic_cast<CQIllustratorGroupShape *>(shape);
 
@@ -3167,7 +3168,7 @@ toPolygonSlot()
     if (! shape->getPolygon(polygon))
       continue;
 
-    CQIllustratorPolygonShape *pshape = createPolygonShape();
+    auto *pshape = createPolygonShape();
 
     pshape->setStroke(shape->getStroke());
     pshape->setFill  (shape->getFill ());
@@ -3207,7 +3208,7 @@ toPathSlot()
   CQIllustratorSelectedShapes::iterator ps1, ps2;
 
   for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
-    CQIllustratorShape *shape = (*ps1).getShape();
+    auto *shape = (*ps1).getShape();
 
     auto *group = dynamic_cast<CQIllustratorGroupShape *>(shape);
 
@@ -3218,7 +3219,7 @@ toPathSlot()
     if (! shape->getPath(parts))
       continue;
 
-    CQIllustratorPathShape *pshape = createPathShape();
+    auto *pshape = createPathShape();
 
     pshape->setParts(parts);
 
@@ -3265,7 +3266,7 @@ toCurve()
   CQIllustratorSelectedShapes::iterator ps1, ps2;
 
   for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
-    CQIllustratorShape *shape = (*ps1).getShape();
+    auto *shape = (*ps1).getShape();
 
     auto *group = dynamic_cast<CQIllustratorGroupShape *>(shape);
 
@@ -3281,7 +3282,7 @@ toCurve()
     if (! parts.removeArcs(parts1))
       parts1 = parts;
 
-    CQIllustratorPathShape *pshape = createPathShape();
+    auto *pshape = createPathShape();
 
     pshape->setParts(parts1);
 
@@ -3327,7 +3328,7 @@ offsetPath(double o)
   CQIllustratorSelectedShapes::iterator ps1, ps2;
 
   for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
-    CQIllustratorShape *shape = (*ps1).getShape();
+    auto *shape = (*ps1).getShape();
 
     auto *group = dynamic_cast<CQIllustratorGroupShape *>(shape);
 
@@ -3341,7 +3342,7 @@ offsetPath(double o)
 
     parts.offsetPath(o, shape->getCenter(), parts1);
 
-    CQIllustratorPathShape *pshape = createPathShape();
+    auto *pshape = createPathShape();
 
     pshape->setParts(parts1);
 
@@ -3382,7 +3383,7 @@ strokePath(double d)
   CQIllustratorSelectedShapes::iterator ps1, ps2;
 
   for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
-    CQIllustratorShape *shape = (*ps1).getShape();
+    auto *shape = (*ps1).getShape();
 
     auto *group = dynamic_cast<CQIllustratorGroupShape *>(shape);
 
@@ -3397,7 +3398,7 @@ strokePath(double d)
 
     parts.strokePath(d, parts1);
 
-    CQIllustratorPathShape *pshape = createPathShape();
+    auto *pshape = createPathShape();
 
     pshape->setParts(parts1);
 
@@ -3466,7 +3467,7 @@ geomOp(CBooleanOp op)
   CQIllustratorSelectedShapes::iterator ps1, ps2;
 
   for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
-    CQIllustratorShape *shape = (*ps1).getShape();
+    auto *shape = (*ps1).getShape();
 
     auto *group = dynamic_cast<CQIllustratorGroupShape *>(shape);
 
@@ -3497,7 +3498,7 @@ geomOp(CBooleanOp op)
       uint num_polygons = polygons.size();
 
       for (uint i = 0; i <  num_polygons; ++i) {
-        const CPolygon2D &polygon = polygons[i];
+        const auto &polygon = polygons[i];
 
         if (! subjectSet && ! shape->getFixed()) {
           subject.addPolygon(polygon.getX(), polygon.getY(), polygon.getNumPoints());
@@ -3555,17 +3556,17 @@ geomOp(CBooleanOp op)
   uint num_contours = result.getNumContours();
 
   for (uint i = 0; i < num_contours; ++i) {
-    CQIllustratorPolygonShape *pshape = createPolygonShape();
+    auto *pshape = createPolygonShape();
 
     pshape->setStroke(shape1->getStroke());
     pshape->setFill  (shape1->getFill ());
 
-    CGenPolygonContourRef contour = result.getContour(i);
+    auto contour = result.getContour(i);
 
     uint num_vertices = contour.getNumVertices();
 
     for (uint j = 0; j < num_vertices; ++j) {
-      CGenPolygonVertexRef vertex = contour.getVertex(j);
+      auto vertex = contour.getVertex(j);
 
       pshape->addPoint(CPoint2D(vertex.getX(), vertex.getY()));
     }
@@ -3581,17 +3582,17 @@ geomOp(CBooleanOp op)
     uint num_contours = result1.getNumContours();
 
     for (uint i = 0; i < num_contours; ++i) {
-      CQIllustratorPolygonShape *pshape = createPolygonShape();
+      auto *pshape = createPolygonShape();
 
       pshape->setStroke(shape1->getStroke());
       pshape->setFill  (shape1->getFill ());
 
-      CGenPolygonContourRef contour = result1.getContour(i);
+      auto contour = result1.getContour(i);
 
       uint num_vertices = contour.getNumVertices();
 
       for (uint j = 0; j < num_vertices; ++j) {
-        CGenPolygonVertexRef vertex = contour.getVertex(j);
+        auto vertex = contour.getVertex(j);
 
         pshape->addPoint(CPoint2D(vertex.getX(), vertex.getY()));
       }
@@ -3627,7 +3628,7 @@ flatten()
   CQIllustratorSelectedShapes::iterator ps1, ps2;
 
   for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
-    CQIllustratorShape *shape = (*ps1).getShape();
+    auto *shape = (*ps1).getShape();
 
     CPathShapePartList parts;
 
@@ -3640,11 +3641,11 @@ flatten()
     uint num_polygons = polygons.size();
 
     for (uint i = 0; i < num_polygons; ++i) {
-      const CPolygon2D &polygon = polygons[i];
+      const auto &polygon = polygons[i];
 
-      const std::vector<CPoint2D> &points = polygon.getPoints();
+      const auto &points = polygon.getPoints();
 
-      CQIllustratorPolygonShape *poly = createPolygonShape();
+      auto *poly = createPolygonShape();
 
       poly->setStroke(shape->getStroke());
       poly->setFill  (shape->getFill ());
@@ -3702,12 +3703,12 @@ void
 CQIllustrator::
 intersectOp(CBooleanOp op, bool split, bool keepOld)
 {
-  CQIllustratorShape *shape1 = 0, *shape2 = 0;
+  CQIllustratorShape *shape1 = nullptr, *shape2 = nullptr;
 
   CQIllustratorSelectedShapes::iterator ps1, ps2;
 
   for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
-    CQIllustratorShape *shape = (*ps1).getShape();
+    auto *shape = (*ps1).getShape();
 
     if      (! shape1) shape1 = shape;
     else if (! shape2) shape2 = shape;
@@ -3740,7 +3741,7 @@ intersectOp(CBooleanOp op, bool split, bool keepOld)
   }
 
   for (uint i = 0; i < numParts; ++i) {
-    CQIllustratorPathShape *path1 = createPathShape();
+    auto *path1 = createPathShape();
 
     path1->setParts(ipartsList[i]);
 
@@ -3759,12 +3760,12 @@ void
 CQIllustrator::
 combineSlot()
 {
-  CQIllustratorShape *shape1 = 0, *shape2 = 0;
+  CQIllustratorShape *shape1 = nullptr, *shape2 = nullptr;
 
   CQIllustratorSelectedShapes::iterator ps1, ps2;
 
   for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
-    CQIllustratorShape *shape = (*ps1).getShape();
+    auto *shape = (*ps1).getShape();
 
     if      (! shape1) shape1 = shape;
     else if (! shape2) shape2 = shape;
@@ -3789,7 +3790,7 @@ combineSlot()
   removeShape(shape1);
   removeShape(shape2);
 
-  CQIllustratorPathShape *path1 = createPathShape();
+  auto *path1 = createPathShape();
 
   path1->setParts(cparts);
 
@@ -3815,7 +3816,7 @@ triangulateSlot()
   CQIllustratorSelectedShapes::iterator ps1, ps2;
 
   for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
-    CQIllustratorShape *shape = (*ps1).getShape();
+    auto *shape = (*ps1).getShape();
 
     auto *group = dynamic_cast<CQIllustratorGroupShape *>(shape);
 
@@ -3826,7 +3827,7 @@ triangulateSlot()
     if (! shape->getPolygon(polygon))
       continue;
 
-    const std::vector<CPoint2D> &points = polygon.getPoints();
+    const auto &points = polygon.getPoints();
 
     std::vector<CTriangle2D> triangleList;
 
@@ -3836,9 +3837,9 @@ triangulateSlot()
     uint numTriangleList = triangleList.size();
 
     for (uint i = 0; i < numTriangleList; ++i) {
-      const CTriangle2D &t = triangleList[i];
+      const auto &t = triangleList[i];
 
-      CQIllustratorPolygonShape *pshape = createPolygonShape();
+      auto *pshape = createPolygonShape();
 
       pshape->setStroke(shape->getStroke());
       pshape->setFill  (shape->getFill ());
@@ -3882,7 +3883,7 @@ giftWrapSlot()
   CQIllustratorSelectedShapes::iterator ps1, ps2;
 
   for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
-    CQIllustratorShape *shape = (*ps1).getShape();
+    auto *shape = (*ps1).getShape();
 
     auto *group = dynamic_cast<CQIllustratorGroupShape *>(shape);
 
@@ -3893,7 +3894,7 @@ giftWrapSlot()
     if (! shape->getPolygon(polygon))
       continue;
 
-    const std::vector<CPoint2D> &points = polygon.getPoints();
+    const auto &points = polygon.getPoints();
 
     CGiftWrap giftWrap;
 
@@ -3909,7 +3910,7 @@ giftWrapSlot()
     for (uint i = 0; i < num_inds; ++i)
       gpoints.push_back(points[poly_inds[i]]);
 
-    CQIllustratorPolygonShape *pshape = createPolygonShape();
+    auto *pshape = createPolygonShape();
 
     pshape->setStroke(shape->getStroke());
     pshape->setFill  (shape->getFill ());
@@ -3949,7 +3950,7 @@ delaunaySlot()
   CQIllustratorSelectedShapes::iterator ps1, ps2;
 
   for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
-    CQIllustratorShape *shape = (*ps1).getShape();
+    auto *shape = (*ps1).getShape();
 
     auto *group = dynamic_cast<CQIllustratorGroupShape *>(shape);
 
@@ -3960,7 +3961,7 @@ delaunaySlot()
     if (! shape->getPolygon(polygon))
       continue;
 
-    const std::vector<CPoint2D> &points = polygon.getPoints();
+    const auto &points = polygon.getPoints();
 
     CDelaunay delaunay;
 
@@ -3974,23 +3975,23 @@ delaunaySlot()
     CDelaunay::FaceIterator pf1, pf2;
 
     for (pf1 = delaunay.facesBegin(), pf2 = delaunay.facesEnd(); pf1 != pf2; ++pf1) {
-      const CDelaunay::Face *f = *pf1;
+      const auto *f = *pf1;
 
       if (! f->isLower()) continue;
 
-      CDelaunay::Vertex *v1 = f->vertex(0);
-      CDelaunay::Vertex *v2 = f->vertex(1);
-      CDelaunay::Vertex *v3 = f->vertex(2);
+      auto *v1 = f->vertex(0);
+      auto *v2 = f->vertex(1);
+      auto *v3 = f->vertex(2);
 
       CTriangle2D triangle(CPoint2D(v1->x(), v1->y()),
                            CPoint2D(v2->x(), v2->y()),
                            CPoint2D(v3->x(), v3->y()));
 
-      CPoint2D c = triangle.centroid();
+      auto c = triangle.centroid();
 
       if (! polygon.insideEvenOdd(c)) continue;
 
-      CQIllustratorPolygonShape *pshape = createPolygonShape();
+      auto *pshape = createPolygonShape();
 
       pshape->setStroke(shape->getStroke());
       pshape->setFill  (shape->getFill ());
@@ -4040,7 +4041,7 @@ void
 CQIllustrator::
 zoomFit()
 {
-  CBBox2D bbox = getFitBBox();
+  auto bbox = getFitBBox();
 
   setBBox(bbox);
 }
@@ -4067,7 +4068,7 @@ zoomSelected()
     CQIllustratorSelectedShapes::iterator ps1, ps2;
 
     for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
-      CQIllustratorShape *shape = (*ps1).getShape();
+      auto *shape = (*ps1).getShape();
 
       bbox += shape->getFlatBBox();
     }
@@ -4178,7 +4179,7 @@ deleteSelectedShapes()
   CQIllustratorSelectedShapes::iterator ps1, ps2;
 
   for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
-    CQIllustratorShape *shape = (*ps1).getShape();
+    auto *shape = (*ps1).getShape();
 
     removeShape(shape);
 
@@ -4195,15 +4196,14 @@ deleteSelectedPoints()
   CQIllustratorSelectedShapes::iterator ps1, ps2;
 
   for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
-    const CQIllustratorSelectedShape &sshape = *ps1;
+    const auto &sshape = *ps1;
 
-    CQIllustratorSelectedShape &sshape1 =
-      selection_->checkoutShape(sshape, CQIllustratorData::ChangeType::GEOMETRY);
+    auto &sshape1 = selection_->checkoutShape(sshape, CQIllustratorData::ChangeType::GEOMETRY);
 
     uint num_points = sshape.numPoints();
 
     for (uint i = 0; i < num_points; ++i) {
-      const CQIllustratorShapeControlPoint *point = sshape.getPoint(i);
+      const auto *point = sshape.getPoint(i);
 
       sshape1.getShape()->removePoint(point);
     }
@@ -4216,7 +4216,7 @@ void
 CQIllustrator::
 zoomIn()
 {
-  CPoint2D c = getBBox().getCenter();
+  auto c = getBBox().getCenter();
 
   double scale = sqrt(2);
 
@@ -4231,7 +4231,7 @@ void
 CQIllustrator::
 zoomOut()
 {
-  CPoint2D c = getBBox().getCenter();
+  auto c = getBBox().getCenter();
 
   double scale = sqrt(2);
 
@@ -4256,7 +4256,7 @@ strokeSlot(const CQIllustratorShapeStroke &stroke)
     CQIllustratorSelectedShapes::iterator ps1, ps2;
 
     for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
-      CQIllustratorShape *shape = (*ps1).getShape();
+      auto *shape = (*ps1).getShape();
 
       shape->setStroke(stroke);
     }
@@ -4273,7 +4273,7 @@ fillSlot(const CQIllustratorShapeFill &fill)
     CQIllustratorSelectedShapes::iterator ps1, ps2;
 
     for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
-      CQIllustratorShape *shape = (*ps1).getShape();
+      auto *shape = (*ps1).getShape();
 
       shape->setFill(fill);
     }
@@ -4290,7 +4290,7 @@ clipSlot(bool clip)
     CQIllustratorSelectedShapes::iterator ps1, ps2;
 
     for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
-      CQIllustratorShape *shape = (*ps1).getShape();
+      auto *shape = (*ps1).getShape();
 
       shape->setClip(clip);
     }
@@ -4304,12 +4304,12 @@ void
 CQIllustrator::
 fontSlot(const QFont &font)
 {
-  CFontPtr cfont = CQFontUtil::fromQFont(font);
+  auto cfont = CQFontUtil::fromQFont(font);
 
   CQIllustratorSelectedShapes::iterator ps1, ps2;
 
   for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
-    CQIllustratorShape *shape = *ps1;
+    auto *shape = *ps1;
 
     auto *text = dynamic_cast<CQIllustratorTextShape *>(shape);
 
@@ -4348,41 +4348,59 @@ setShapeSVGStrokeAndFill(CQIllustratorShape *shape, CSVGObject *object)
   CQIllustratorShapeStroke stroke;
   CQIllustratorShapeFill   fill;
 
-  double opacity = object->getOpacity();
+  double opacity = object->getOpacity().getValue();
 
   const auto &objStroke = object->getStroke();
   const auto &objFill   = object->getFill();
 
   auto sc = object->getFlatStrokeColor();
 
-  stroke.setStroked (sc.isValid() && sc.getValue().type() != CSVGColor::Type::NONE);
-  stroke.setColor   (object->colorToRGBA(sc.getValue(CRGBA(0, 0, 0))));
-  stroke.setOpacity (opacity*object->getFlatStrokeOpacity().getValue(1));
-  stroke.setWidth   (object->getFlatStrokeWidth().getValue(0));
-  stroke.setLineDash(object->getFlatStrokeLineDash().getValue(CSVGStrokeDash()).getLineDash());
-  stroke.setLineCap (objStroke.getLineCap());
-  stroke.setLineJoin(objStroke.getLineJoin());
+  if (sc.isValid()) {
+    auto sc1 = sc.getValue();
+
+    stroke.setStroked(sc1.getValue().type() != CSVGColor::Type::NONE);
+    stroke.setColor  (object->colorToRGBA(sc1));
+  }
+  else {
+    stroke.setStroked(false);
+    stroke.setColor  (CRGBA(0, 0, 0));
+  }
+
+  stroke.setOpacity (opacity*object->getFlatStrokeOpacity().getValue().getValue(1));
+  stroke.setWidth   (object->getFlatStrokeWidth().getValue().getValue(0));
+  stroke.setLineDash(CSVGStrokeDash(object->getFlatStrokeDashArray().getValue().getValue().dashes()).getLineDash());
+  stroke.setLineCap (objStroke.getLineCap().getValue());
+  stroke.setLineJoin(objStroke.getLineJoin().getValue());
 
   auto fc = object->getFlatFillColor();
 
-  fill.setFilled  (fc.isValid() && fc.getValue().type() != CSVGColor::Type::NONE);
-  fill.setColor   (object->colorToRGBA(fc.getValue(CRGBA(0, 0, 0))));
-  fill.setOpacity (opacity*object->getFlatFillOpacity().getValue(1));
-  fill.setFillRule(objFill.getRule());
+  if (fc.isValid()) {
+    auto fc1 = fc.getValue();
 
-  CSVGObject *fill_object = object->getFillFillObject();
+    fill.setFilled(fc1.getValue().type() != CSVGColor::Type::NONE);
+    fill.setColor (object->colorToRGBA(fc1));
+  }
+  else {
+    fill.setFilled(false);
+    fill.setColor (CRGBA(0, 0, 0));
+  }
+
+  fill.setOpacity (opacity*object->getFlatFillOpacity().getValue().getValue(1));
+  fill.setFillRule(objFill.getRule().getValue());
+
+  auto *fill_object = object->getFillFillObject();
 
   if (fill_object) {
     auto *lg = dynamic_cast<CSVGLinearGradient *>(fill_object);
     auto *rg = dynamic_cast<CSVGRadialGradient *>(fill_object);
 
     if      (lg) {
-      CLinearGradient *lgradient = new CLinearGradient;
+      auto *lgradient = new CLinearGradient;
 
       for (const auto &stop : lg->stops()) {
         double o = stop->getOffset().ratioValue(CScreenUnits(1));
 
-        CRGBA rgba = object->colorToRGBA(stop->getColor());
+        auto rgba = object->colorToRGBA(stop->getColor());
 
         lgradient->addStop(o, rgba);
       }
@@ -4401,7 +4419,7 @@ setShapeSVGStrokeAndFill(CQIllustratorShape *shape, CSVGObject *object)
       p2 = m1*p2;
 
       if (lg->getUnitsValid() && lg->getUnits() != CSVGCoordUnits::OBJECT_BBOX) {
-        const CBBox2D &bbox = shape->getBBox(); // Flat ?
+        const auto &bbox = shape->getBBox(); // Flat ?
 
         p1.x = (p1.x - bbox.getXMin())/(bbox.getXMax() - bbox.getXMin());
         p1.y = (p1.y - bbox.getYMin())/(bbox.getYMax() - bbox.getYMin());
@@ -4418,12 +4436,12 @@ setShapeSVGStrokeAndFill(CQIllustratorShape *shape, CSVGObject *object)
       delete lgradient;
     }
     else if (rg) {
-      CRadialGradient *rgradient = new CRadialGradient;
+      auto *rgradient = new CRadialGradient;
 
       for (const auto &stop : rg->stops()) {
         double o = stop->getOffset().ratioValue(CScreenUnits(1));
 
-        CRGBA rgba = object->colorToRGBA(stop->getColor());
+        auto rgba = object->colorToRGBA(stop->getColor());
 
         rgradient->addStop(o, rgba);
       }
@@ -4447,7 +4465,7 @@ setShapeSVGStrokeAndFill(CQIllustratorShape *shape, CSVGObject *object)
       r = m1*r;
 
       if (rg->getUnitsValid() && rg->getUnits() != CSVGCoordUnits::OBJECT_BBOX) {
-        const CBBox2D &bbox = shape->getBBox(); // Flat ?
+        const auto &bbox = shape->getBBox(); // Flat ?
 
         c.x = (c.x - bbox.getXMin())/(bbox.getXMax() - bbox.getXMin());
         c.y = (c.y - bbox.getYMin())/(bbox.getYMax() - bbox.getYMin());
@@ -4478,14 +4496,14 @@ void
 CQIllustrator::
 addLinearGradient(const CPoint2D &p1, const CPoint2D &p2)
 {
-  CLinearGradient *lgradient = new CLinearGradient;
+  auto *lgradient = new CLinearGradient;
 
   lgradient->addStop(0.0, CRGBA(1, 1, 1));
   lgradient->addStop(1.0, CRGBA(0, 0, 0));
 
   // no selection so create rectangle
   if (selection_->empty()) {
-    CQIllustratorRectShape *rect = createRectShape(p1, p2);
+    auto *rect = createRectShape(p1, p2);
 
     addShape(rect);
 
@@ -4496,9 +4514,9 @@ addLinearGradient(const CPoint2D &p1, const CPoint2D &p2)
   CQIllustratorSelectedShapes::iterator ps1, ps2;
 
   for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
-    CQIllustratorShape *shape = (*ps1).getShape();
+    auto *shape = (*ps1).getShape();
 
-    const CBBox2D &bbox = shape->getBBox(); // Flat ?
+    const auto &bbox = shape->getBBox(); // Flat ?
 
     double x1 = (p1.x - bbox.getXMin())/(bbox.getXMax() - bbox.getXMin());
     double y1 = (p1.y - bbox.getYMin())/(bbox.getYMax() - bbox.getYMin());
@@ -4509,7 +4527,7 @@ addLinearGradient(const CPoint2D &p1, const CPoint2D &p2)
 
     lgradient->init(1, 1);
 
-    CQIllustratorShapeFill fill = shape->getFill();
+    auto fill = shape->getFill();
 
     fill.setGradient(lgradient);
 
@@ -4523,14 +4541,14 @@ void
 CQIllustrator::
 addRadialGradient(const CPoint2D &p1, const CPoint2D &p2)
 {
-  CRadialGradient *rgradient = new CRadialGradient;
+  auto *rgradient = new CRadialGradient;
 
   rgradient->addStop(0.0, CRGBA(1, 1, 1));
   rgradient->addStop(1.0, CRGBA(0, 0, 0));
 
   // no selection so create ellipse
   if (selection_->empty()) {
-    CQIllustratorEllipseShape *ellipse = createEllipseShape(p1, p2);
+    auto *ellipse = createEllipseShape(p1, p2);
 
     addShape(ellipse);
 
@@ -4541,9 +4559,9 @@ addRadialGradient(const CPoint2D &p1, const CPoint2D &p2)
   CQIllustratorSelectedShapes::iterator ps1, ps2;
 
   for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
-    CQIllustratorShape *shape = (*ps1).getShape();
+    auto *shape = (*ps1).getShape();
 
-    const CBBox2D &bbox = shape->getBBox(); // Flat ?
+    const auto &bbox = shape->getBBox(); // Flat ?
 
     double x1 = (p1.x - bbox.getXMin())/(bbox.getXMax() - bbox.getXMin());
     double y1 = (p1.y - bbox.getYMin())/(bbox.getYMax() - bbox.getYMin());
@@ -4558,7 +4576,7 @@ addRadialGradient(const CPoint2D &p1, const CPoint2D &p2)
 
     rgradient->init(1, 1);
 
-    CQIllustratorShapeFill fill = shape->getFill();
+    auto fill = shape->getFill();
 
     fill.setGradient(rgradient);
 
@@ -4575,7 +4593,7 @@ setSVGShapeName(CQIllustratorShape *shape, CSVGObject *object)
   std::string id = object->getId();
 
   if (id != "") {
-    CQIllustratorData *data = shape->getData();
+    auto *data = shape->getData();
 
     shape->setData(0);
 
@@ -4610,7 +4628,7 @@ setShapeName(CQIllustratorShape *shape)
   static int num = 1;
 
   if (shape->getName() == "") {
-    CQIllustratorData *data = shape->getData();
+    auto *data = shape->getData();
 
     shape->setData(0);
 
@@ -4633,7 +4651,7 @@ void
 CQIllustrator::
 setSelectShape(const std::string &name)
 {
-  CQIllustratorShape *shape = getShape(name);
+  auto *shape = getShape(name);
 
   setSelectShape(shape);
 }
@@ -4678,7 +4696,7 @@ removeShapeFromSelection(CQIllustratorShape *shape)
   CQIllustratorSelectedShapes::iterator ps1, ps2;
 
   for (ps1 = selection_->begin(), ps2 = selection_->end(); ps1 != ps2; ++ps1) {
-    CQIllustratorShape *shape1 = (*ps1).getShape();
+    auto *shape1 = (*ps1).getShape();
 
     if (shape == shape1) {
       selection_->remove(ps1);
@@ -4692,12 +4710,12 @@ CQIllustratorShape *
 CQIllustrator::
 getShape(const std::string &name) const
 {
-  const CQIllustratorData::ShapeStack &shapes = getShapes();
+  const auto &shapes = getShapes();
 
   CQIllustratorData::ShapeStack::const_iterator ps1, ps2;
 
   for (ps1 = shapes.begin(), ps2 = shapes.end(); ps1 != ps2; ++ps1) {
-    CQIllustratorShape *shape = *ps1;
+    auto *shape = *ps1;
 
     if (shape->getName() == name)
       return shape;
@@ -4710,12 +4728,12 @@ CQIllustratorShape *
 CQIllustrator::
 getShape(uint id) const
 {
-  const CQIllustratorData::ShapeStack &shapes = getShapes();
+  const auto &shapes = getShapes();
 
   CQIllustratorData::ShapeStack::const_iterator ps1, ps2;
 
   for (ps1 = shapes.begin(), ps2 = shapes.end(); ps1 != ps2; ++ps1) {
-    CQIllustratorShape *shape = *ps1;
+    auto *shape = *ps1;
 
     if (shape->getId() == int(id))
       return shape;
@@ -4824,7 +4842,7 @@ CQIllustratorAlignToolbar *
 CQIllustrator::
 getAlignToolbar() const
 {
-  CQIllustratorMode *mode = getMode(Mode::ALIGN);
+  auto *mode = getMode(Mode::ALIGN);
 
   auto *alignMode = dynamic_cast<CQIllustratorAlignMode *>(mode);
 
@@ -4877,7 +4895,7 @@ setStroke(QPainter *painter, const CQIllustratorShape *shape,
 {
   QPen pen;
 
-  CRGBA color = stroke.getColor();
+  auto color = stroke.getColor();
 
   color.setAlpha(stroke.getOpacity());
 
@@ -4889,7 +4907,7 @@ setStroke(QPainter *painter, const CQIllustratorShape *shape,
 
   pen.setWidthF(width);
 
-  const CLineDash &dash = stroke.getLineDash();
+  const auto &dash = stroke.getLineDash();
 
   int num = dash.getNumLengths();
 
@@ -4946,10 +4964,10 @@ setFill(QPainter *painter, const CQIllustratorShape *,
   if      (fill.hasGradient()) {
     painter->setBrushOrigin(QPointF(0, 0));
 
-    const CGenGradient *g = fill.getGradient();
+    const auto *g = fill.getGradient();
 
-    const CLinearGradient *lg = 0;
-    const CRadialGradient *rg = 0;
+    const CLinearGradient *lg = nullptr;
+    const CRadialGradient *rg = nullptr;
 
     if      ((lg = dynamic_cast<const CLinearGradient *>(g)) != 0) {
       QBrush brush(CQUtil::toQGradient(lg));
@@ -4963,15 +4981,15 @@ setFill(QPainter *painter, const CQIllustratorShape *,
     }
   }
   else if (fill.hasImage()) {
-    CImagePtr                          image  = fill.getImage();
-    CQIllustratorShapeFill::ImageScale scale  = fill.getImageScale();
-    CHAlignType                        halign = fill.getImageHAlign();
-    CVAlignType                        valign = fill.getImageVAlign();
+    auto image  = fill.getImage();
+    auto scale  = fill.getImageScale();
+    auto halign = fill.getImageHAlign();
+    auto valign = fill.getImageVAlign();
 
     QBrush brush;
 
     if (image.isValid()) {
-      QImage qimage = image.cast<CQImage>()->getQImage();
+      auto qimage = image.cast<CQImage>()->getQImage();
 
       brush.setTextureImage(qimage);
 
@@ -4980,8 +4998,8 @@ setFill(QPainter *painter, const CQIllustratorShape *,
       int w = image->getWidth();
       int h = image->getHeight();
 
-      QTransform t  = getTransform();
-      QTransform it = getITransform();
+      auto t  = getTransform();
+      auto it = getITransform();
 
       if      (scale == CQIllustratorShapeFill::ImageScale::NONE) {
         double x, y;
@@ -5085,7 +5103,7 @@ setFill(QPainter *painter, const CQIllustratorShape *,
     painter->setBrush(brush);
   }
   else {
-    CRGBA color = fill.getColor();
+    auto color = fill.getColor();
 
     color.setAlpha(fill.getOpacity());
 
@@ -5099,7 +5117,7 @@ CQIllustratorRectShape *
 CQIllustrator::
 createRectShape(const CPoint2D &p1, const CPoint2D &p2, double rx, double ry)
 {
-  CQIllustratorRectShape *rect = new CQIllustratorRectShape(p1, p2, rx, ry);
+  auto *rect = new CQIllustratorRectShape(p1, p2, rx, ry);
 
   rect->setStroke(def_stroke_);
   rect->setFill  (def_fill_);
@@ -5111,7 +5129,7 @@ CQIllustratorEllipseShape *
 CQIllustrator::
 createEllipseShape(const CPoint2D &p1, const CPoint2D &p2)
 {
-  CQIllustratorEllipseShape *ellipse = new CQIllustratorEllipseShape(p1, p2);
+  auto *ellipse = new CQIllustratorEllipseShape(p1, p2);
 
   ellipse->setStroke(def_stroke_);
   ellipse->setFill  (def_fill_);
@@ -5123,7 +5141,7 @@ CQIllustratorPolygonShape *
 CQIllustrator::
 createPolygonShape(const std::vector<CPoint2D> &points)
 {
-  CQIllustratorPolygonShape *polygon = new CQIllustratorPolygonShape(points);
+  auto *polygon = new CQIllustratorPolygonShape(points);
 
   polygon->setStroke(def_stroke_);
   polygon->setFill  (def_fill_);
@@ -5135,7 +5153,7 @@ CQIllustratorPathShape *
 CQIllustrator::
 createPathShape()
 {
-  CQIllustratorPathShape *path = new CQIllustratorPathShape();
+  auto *path = new CQIllustratorPathShape();
 
   path->setStroke(def_stroke_);
   path->setFill  (def_fill_);
@@ -5147,7 +5165,7 @@ CQIllustratorNPolyShape *
 CQIllustrator::
 createNPolyShape(const CPoint2D &c, uint n, double r, double a)
 {
-  CQIllustratorNPolyShape *npoly = new CQIllustratorNPolyShape(c, n, r, a);
+  auto *npoly = new CQIllustratorNPolyShape(c, n, r, a);
 
   npoly->setStroke(def_stroke_);
   npoly->setFill  (def_fill_);
@@ -5159,7 +5177,7 @@ CQIllustratorStarShape *
 CQIllustrator::
 createStarShape(const CPoint2D &c, uint n, double r1, double r2, double a1, double a2)
 {
-  CQIllustratorStarShape *star = new CQIllustratorStarShape(c, n, r1, r2, a1, a2);
+  auto *star = new CQIllustratorStarShape(c, n, r1, r2, a1, a2);
 
   star->setStroke(def_stroke_);
   star->setFill  (def_fill_);
@@ -5171,7 +5189,7 @@ CQIllustratorTextShape *
 CQIllustrator::
 createTextShape(const CPoint2D &p1, const CPoint2D &p2, const std::string &str)
 {
-  CQIllustratorTextShape *text = new CQIllustratorTextShape(p1, p2, str);
+  auto *text = new CQIllustratorTextShape(p1, p2, str);
 
   text->setStroke(def_stroke_);
   text->setFill  (def_fill_);
@@ -5183,7 +5201,7 @@ CQIllustratorGroupShape *
 CQIllustrator::
 createGroupShape()
 {
-  CQIllustratorGroupShape *group = new CQIllustratorGroupShape();
+  auto *group = new CQIllustratorGroupShape();
 
   group->setStroke(def_stroke_);
   group->setFill  (def_fill_);
@@ -5209,7 +5227,7 @@ void
 CQIllustrator::PreviewShape::
 draw(CQIllustrator *illustrator, QPainter *painter) const
 {
-  CQIllustratorShapeDrawer *drawer = illustrator->getDrawer();
+  auto *drawer = illustrator->getDrawer();
 
   drawer->setPainter(painter);
 
@@ -5224,7 +5242,7 @@ draw(CQIllustrator *illustrator, QPainter *painter) const
 
   painter->drawRect(CQUtil::toQRect(shape_->getFlatBBox()));
 
-  CQIllustratorData *data = shape_->getData();
+  auto *data = shape_->getData();
 
   shape_->setData(0);
 
@@ -5270,13 +5288,13 @@ draw(CQIllustratorShapeDrawer *drawer, const CBBox2D &bbox)
 {
   if (! enabled_) return;
 
-  //QTransform transform = drawer->getPainter()->worldTransform();
-  QTransform transform = drawer->getPainter()->transform();
+  //auto transform = drawer->getPainter()->worldTransform();
+  auto transform = drawer->getPainter()->transform();
 
-  QTransform itransform = transform.inverted();
+  auto itransform = transform.inverted();
 
-  QPointF p1 = itransform.map(QPointF(0   , 0   ));
-  QPointF p2 = itransform.map(QPointF(1000, 1000));
+  auto p1 = itransform.map(QPointF(0   , 0   ));
+  auto p2 = itransform.map(QPointF(1000, 1000));
 
   CAxis2D axis(0, p2.x() - p1.x());
 

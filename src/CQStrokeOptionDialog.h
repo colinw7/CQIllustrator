@@ -6,11 +6,11 @@ class CQIllustratorShapeStroke;
 class CQStrokeOptionTool;
 class CQStrokeOptionSwab;
 class CQColorChooser;
-class QPaintEvent;
 class CQLineDash;
 class CQLineCap;
 class CQLineJoin;
-class QDoubleSpinBox;
+class CQRealSpin;
+
 class QCheckBox;
 
 class CQStrokeOptionDialog : public CQOptionToolDialog {
@@ -43,14 +43,14 @@ class CQStrokeOptionDialog : public CQOptionToolDialog {
   void valueChanged(const CQIllustratorShapeStroke &stroke);
 
  private:
-  CQStrokeOptionTool*      tool_ { 0 };
+  CQStrokeOptionTool*      tool_        { nullptr };
   CQIllustratorShapeStroke stroke_;
-  QCheckBox*               shownCheck_ { 0 };
-  CQColorChooser*          colorChooser_ { 0 };
-  QDoubleSpinBox*          widthEdit_ { 0 };
-  QDoubleSpinBox*          opacityEdit_ { 0 };
-  CQLineDash*              dashEdit_ { 0 };
-  CQLineCap*               capEdit_ { 0 };
-  CQLineJoin*              joinEdit_ { 0 };
-  QDoubleSpinBox*          mitreEdit_ { 0 };
+  QCheckBox*               shownCheck_   { nullptr };
+  CQColorChooser*          colorChooser_ { nullptr };
+  CQRealSpin*              widthEdit_    { nullptr };
+  CQRealSpin*              opacityEdit_  { nullptr };
+  CQLineDash*              dashEdit_     { nullptr };
+  CQLineCap*               capEdit_      { nullptr };
+  CQLineJoin*              joinEdit_     { nullptr };
+  CQRealSpin*              mitreEdit_    { nullptr };
 };

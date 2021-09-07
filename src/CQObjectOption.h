@@ -25,10 +25,12 @@ class CQObjectOptionTool : public CQOptionTool {
   void populateSlot();
 
  private:
-  CQIllustrator        *illustrator_;
-  CQObjectOptionDialog *dialog_;
-  QLabel               *label_;
+  CQIllustrator*        illustrator_ { nullptr };
+  CQObjectOptionDialog* dialog_      { nullptr };
+  QLabel*               label_       { nullptr };
 };
+
+//---
 
 class CQObjectOptionDialog : public CQOptionToolDialog {
   Q_OBJECT
@@ -52,6 +54,6 @@ class CQObjectOptionDialog : public CQOptionToolDialog {
   void itemSelectedSlot(QTreeWidgetItem *item, int pos);
 
  private:
-  CQObjectOptionTool *tool_;
-  QTreeWidget        *list_;
+  CQObjectOptionTool* tool_ { nullptr };
+  QTreeWidget*        list_ { nullptr };
 };

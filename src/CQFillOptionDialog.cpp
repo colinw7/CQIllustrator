@@ -8,6 +8,7 @@
 #include <CQImagePreview.h>
 #include <CQPointEdit.h>
 #include <CQRealEdit.h>
+#include <CQRealSpin.h>
 #include <CQUtil.h>
 
 #include <CRadialGradient.h>
@@ -16,7 +17,6 @@
 #include <QVBoxLayout>
 #include <QFileDialog>
 #include <QStackedWidget>
-#include <QDoubleSpinBox>
 #include <QPushButton>
 #include <QCheckBox>
 #include <QComboBox>
@@ -48,13 +48,11 @@ void
 CQFillOptionDialog::
 initWidgets()
 {
-  QVBoxLayout *layout = new QVBoxLayout(this);
-  layout->setMargin(0); layout->setSpacing(0);
+  auto *layout = CQUtil::makeLayout<QVBoxLayout>(this, 0, 0);
 
   //-----
 
-  auto *buttonLayout = new QHBoxLayout;
-  buttonLayout->setMargin(2); buttonLayout->setSpacing(8);
+  auto *buttonLayout = CQUtil::makeLayout<QHBoxLayout>(2, 8);
 
   flatButton_  = new CQImageButton(CQPixmapCacheInst->getIcon("FLAT"     ));
   lgradButton_ = new CQImageButton(CQPixmapCacheInst->getIcon("LGRADIENT"));
@@ -81,19 +79,18 @@ initWidgets()
 
   //-----
 
-  stack_ = new QStackedWidget;
+  stack_ = CQUtil::makeWidget<QStackedWidget>("stack");
 
   layout->addWidget(stack_);
 
   //-----
 
   // Normal Fill
-  auto *flatPanel = new QWidget;
+  auto *flatPanel = CQUtil::makeWidget<QFrame>("flatPanel");
 
   stack_->addWidget(flatPanel);
 
-  auto *flatLayout = new QGridLayout(flatPanel);
-  flatLayout->setMargin(2); flatLayout->setSpacing(2);
+  auto *flatLayout = CQUtil::makeLayout<QGridLayout>(flatPanel, 2, 2);
 
   flatLayout->addWidget(new QLabel("Shown"  ), 0, 0);
   flatLayout->addWidget(new QLabel("Color"  ), 1, 0);
@@ -101,7 +98,7 @@ initWidgets()
   flatLayout->addWidget(new QLabel("Rule"   ), 3, 0);
   flatLayout->addWidget(new QLabel("Clip"   ), 4, 0);
 
-  shownCheck_ = new QCheckBox;
+  shownCheck_ = CQUtil::makeWidget<QCheckBox>("shownCheck");
 
   connect(shownCheck_, SIGNAL(stateChanged(int)), this, SLOT(shownSlot(int)));
 
@@ -112,7 +109,7 @@ initWidgets()
   connect(colorChooser_, SIGNAL(colorChanged(const QColor &)),
           this, SLOT(colorSlot(const QColor &)));
 
-  opacityEdit_ = new QDoubleSpinBox;
+  opacityEdit_ = CQUtil::makeWidget<CQRealSpin>("opacityEdit");
 
   opacityEdit_->setRange(0.0, 1.0);
   opacityEdit_->setSingleStep(0.1);
@@ -121,14 +118,14 @@ initWidgets()
 
   connect(opacityEdit_, SIGNAL(valueChanged(double)), this, SLOT(opacitySlot(double)));
 
-  fillRule_ = new QComboBox;
+  fillRule_ = CQUtil::makeWidget<QComboBox>("fillRule");
 
   fillRule_->addItems(QStringList() << "Winding" << "Even Odd");
 
   connect(fillRule_, SIGNAL(currentIndexChanged(const QString &)),
           this, SLOT(fillRuleSlot(const QString &)));
 
-  clipCheck_ = new QCheckBox("Yes");
+  clipCheck_ = CQUtil::makeLabelWidget<QCheckBox>("Yes", "clipCheck");
 
   connect(clipCheck_, SIGNAL(clicked(bool)), this, SLOT(clipSlot()));
 
@@ -143,18 +140,13 @@ initWidgets()
   //-----
 
   // Linear Gradient
-
-  auto *lgradPanel = new QWidget;
+  auto *lgradPanel = CQUtil::makeWidget<QFrame>("lgradPanel");
 
   stack_->addWidget(lgradPanel);
 
-  auto *lgradLayout = new QVBoxLayout(lgradPanel);
+  auto *lgradLayout = CQUtil::makeLayout<QVBoxLayout>(lgradPanel, 0, 0);
 
-  lgradLayout->setMargin(0); lgradLayout->setSpacing(0);
-
-  auto *lgradEditLayout = new QGridLayout;
-
-  lgradEditLayout->setMargin(2); lgradEditLayout->setSpacing(2);
+  auto *lgradEditLayout = CQUtil::makeLayout<QGridLayout>(2, 2);
 
   lgradLayout->addLayout(lgradEditLayout);
 
@@ -176,12 +168,12 @@ initWidgets()
 
   lgradLayout->addWidget(lgradStops_);
 
-  auto *lbuttonLayout = new QHBoxLayout;
+  auto *lbuttonLayout = CQUtil::makeLayout<QHBoxLayout>(2, 2);
 
   lgradLayout->addLayout(lbuttonLayout);
 
-  auto *addLGradStopButton    = new QPushButton("Add");
-  auto *deleteLGradStopButton = new QPushButton("Delete");
+  auto *addLGradStopButton    = CQUtil::makeLabelWidget<QPushButton>("Add", "addButton");
+  auto *deleteLGradStopButton = CQUtil::makeLabelWidget<QPushButton>("Delete", "deleteButton");
 
   connect(addLGradStopButton   , SIGNAL(clicked()), this, SLOT(addLGradStop()));
   connect(deleteLGradStopButton, SIGNAL(clicked()), this, SLOT(removeLGradStop()));
@@ -192,18 +184,13 @@ initWidgets()
   //-----
 
   // Radial Gradient
-
-  QWidget *rgradPanel = new QWidget;
+  auto *rgradPanel = CQUtil::makeWidget<QFrame>("rgradPanel");
 
   stack_->addWidget(rgradPanel);
 
-  QVBoxLayout *rgradLayout = new QVBoxLayout(rgradPanel);
+  auto *rgradLayout = CQUtil::makeLayout<QVBoxLayout>(rgradPanel, 0, 0);
 
-  rgradLayout->setMargin(0); rgradLayout->setSpacing(0);
-
-  QGridLayout *rgradEditLayout = new QGridLayout;
-
-  rgradEditLayout->setMargin(2); rgradEditLayout->setSpacing(2);
+  auto *rgradEditLayout = CQUtil::makeLayout<QGridLayout>(2, 2);
 
   rgradLayout->addLayout(rgradEditLayout);
 
@@ -229,12 +216,12 @@ initWidgets()
 
   rgradLayout->addWidget(rgradStops_);
 
-  QHBoxLayout *rbuttonLayout = new QHBoxLayout;
+  auto *rbuttonLayout = CQUtil::makeLayout<QHBoxLayout>(2, 2);
 
   rgradLayout->addLayout(rbuttonLayout);
 
-  QPushButton *addRGradStopButton    = new QPushButton("Add");
-  QPushButton *deleteRGradStopButton = new QPushButton("Delete");
+  auto *addRGradStopButton    = CQUtil::makeLabelWidget<QPushButton>("Add", "addButton");
+  auto *deleteRGradStopButton = CQUtil::makeLabelWidget<QPushButton>("Delete", "deleteButton");
 
   connect(addRGradStopButton   , SIGNAL(clicked()), this, SLOT(addRGradStop()));
   connect(deleteRGradStopButton, SIGNAL(clicked()), this, SLOT(removeRGradStop()));
@@ -245,12 +232,11 @@ initWidgets()
   //-----
 
   // Image
-
-  QWidget *imagePanel = new QWidget;
+  auto *imagePanel = CQUtil::makeWidget<QFrame>("imagePanel");
 
   stack_->addWidget(imagePanel);
 
-  QVBoxLayout *imageLayout = new QVBoxLayout(imagePanel);
+  auto *imageLayout = CQUtil::makeLayout<QVBoxLayout>(imagePanel, 2, 2);
 
   imagePreview_ = new CQImagePreview;
 
@@ -258,13 +244,13 @@ initWidgets()
 
   imageLayout->addWidget(imagePreview_);
 
-  QPushButton *setImage = new QPushButton("Set Image ...");
+  auto *setImage = CQUtil::makeLabelWidget<QPushButton>("Set Image ...", "setImage");
 
   connect(setImage, SIGNAL(clicked()), this, SLOT(setImageSlot()));
 
   imageLayout->addWidget(setImage);
 
-  imageScale_ = new QComboBox;
+  imageScale_ = CQUtil::makeWidget<QComboBox>("imageScale");
 
   imageScale_->addItems(QStringList() << "None" << "Fit" << "Equal");
 
@@ -275,10 +261,10 @@ initWidgets()
 
   //-----
 
-  QHBoxLayout *buttonLayout1 = new QHBoxLayout;
+  auto *buttonLayout1 = CQUtil::makeLayout<QHBoxLayout>(2, 2);
 
-  QPushButton *defButton = new QPushButton("Set Default");
-  QPushButton *bgButton  = new QPushButton("Set Background");
+  auto *defButton = CQUtil::makeLabelWidget<QPushButton>("Set Default", "defButton");
+  auto *bgButton  = CQUtil::makeLabelWidget<QPushButton>("Set Background", "bgButton");
 
   connect(defButton, SIGNAL(clicked()), this, SLOT(setDefaultSlot()));
   connect(bgButton , SIGNAL(clicked()), this, SLOT(setBackgroundSlot()));
@@ -326,7 +312,7 @@ lgradSlot()
   }
 
   if (lg == 0) {
-    CLinearGradient *lg1 = new CLinearGradient;
+    auto *lg1 = new CLinearGradient;
 
     lg1->addStop(0.0, CRGBA(1,1,1));
     lg1->addStop(1.0, CRGBA(0,0,0));
@@ -359,7 +345,7 @@ rgradSlot()
   }
 
   if (rg == 0) {
-    CRadialGradient *rg1 = new CRadialGradient;
+    auto *rg1 = new CRadialGradient;
 
     rg1->addStop(0.0, CRGBA(1,1,1));
     rg1->addStop(1.0, CRGBA(0,0,0));
@@ -650,9 +636,9 @@ void
 CQFillOptionDialog::
 setImageSlot()
 {
-  QString title  = "Load Image";
-  QString cwd    = QString(COSFile::getCurrentDir().c_str());
-  QString filter = "Image Files (*)";
+  auto title  = QString("Load Image");
+  auto cwd    = QString(COSFile::getCurrentDir().c_str());
+  auto filter = QString("Image Files (*)");
 
   auto filenames = QFileDialog::getOpenFileNames(this, title, cwd, filter);
 

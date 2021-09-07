@@ -43,16 +43,16 @@ class CQIllustratorCanvas : public QWidget {
   void timeoutSlot();
 
  private:
-  CQIllustrator      *illustrator_ { 0 };
-  QPainter           *painter_ { 0 };
-  QMenu              *popupMenu_ { 0 };
+  CQIllustrator      *illustrator_ { nullptr };
+  QPainter           *painter_     { nullptr };
+  QMenu              *popupMenu_   { nullptr };
   CDisplayRange2D     range_;
-  bool                pressed_ { false };
+  bool                pressed_     { false };
   QTransform          transform_;
   QTransform          itransform_;
-  QTimer             *timer_ { 0 };
-  CQIllustratorShape *infoShape_ { 0 };
-  CQIllustratorInfo  *infoLabel_ { 0 };
+  QTimer             *timer_       { nullptr };
+  CQIllustratorShape *infoShape_   { nullptr };
+  CQIllustratorInfo  *infoLabel_   { nullptr };
 };
 
 #endif

@@ -45,10 +45,9 @@ CQFillOptionTool(CQIllustrator *illustrator) :
 
   dialog_ = new CQFillOptionDialog(this);
 
-  QVBoxLayout *layout = new QVBoxLayout(this);
-  layout->setMargin(0); layout->setSpacing(0);
+  auto *layout = CQUtil::makeLayout<QVBoxLayout>(this, 0, 0);
 
-  QLabel *label = new QLabel("<small><b>Fill</b></small>");
+  auto *label = CQUtil::makeLabelWidget<QLabel>("<small><b>Fill</b></small>", "label");
 
   layout->addWidget(label);
 
