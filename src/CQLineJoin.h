@@ -8,7 +8,7 @@ class CQLineJoin : public QComboBox {
   Q_OBJECT
 
  public:
-  CQLineJoin(QWidget *parent=NULL);
+  CQLineJoin(QWidget *parent=nullptr);
 
   void setLineJoin(CLineJoinType pen);
 
