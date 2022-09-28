@@ -415,7 +415,7 @@ unsetFilter()
 {
   checkoutShape(CQIllustratorData::ChangeType::GEOMETRY);
 
-  setFilter((CQIllustratorShapeFilter *) 0);
+  setFilter(static_cast<CQIllustratorShapeFilter *>(nullptr));
 
   checkinShape(CQIllustratorData::ChangeType::GEOMETRY);
 }

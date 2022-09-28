@@ -5,7 +5,7 @@
 
 CQIllustratorShapeRGradientControlPoint::
 CQIllustratorShapeRGradientControlPoint(Position pos, const CPoint2D &p) :
- CQIllustratorShapeControlPoint((uint) pos, p), pos_(pos)
+ CQIllustratorShapeControlPoint(uint(pos), p), pos_(pos)
 {
 }
 

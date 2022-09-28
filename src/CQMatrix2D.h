@@ -17,8 +17,9 @@ class CQMatrix2D : public QWidget {
   CQMatrix2D(QWidget *parent, const CMatrix2D &m=CMatrix2D(CMatrix2D::Type::IDENTITY));
   CQMatrix2D(const CMatrix2D &m=CMatrix2D(CMatrix2D::Type::IDENTITY));
 
-  QSize minimumSizeHint() const;
-  QSize sizeHint() const;
+  QSize minimumSizeHint() const override;
+
+  QSize sizeHint() const override;
 
   CQTableWidget *getTableWidget() const { return table_; }
 

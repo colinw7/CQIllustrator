@@ -20,7 +20,7 @@
 
 CQIllustratorSetRGradientMode::
 CQIllustratorSetRGradientMode(CQIllustrator *illustrator) :
- CQIllustratorMode(illustrator, (uint) CQIllustrator::Mode::RGRADIENT)
+ CQIllustratorMode(illustrator, uint(CQIllustrator::Mode::RGRADIENT))
 {
 }
 

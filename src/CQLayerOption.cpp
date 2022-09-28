@@ -29,7 +29,7 @@ CQLayerOptionTool(CQIllustrator *illustrator) :
 
   QFontMetrics fm(font());
 
-  int width = fm.width("ABCDEFGHIJKLM");
+  int width = fm.horizontalAdvance("ABCDEFGHIJKLM");
 
   label_->setMinimumWidth(width);
 

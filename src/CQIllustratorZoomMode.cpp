@@ -21,7 +21,7 @@
 
 CQIllustratorZoomMode::
 CQIllustratorZoomMode(CQIllustrator *illustrator) :
- CQIllustratorMode(illustrator, (uint) CQIllustrator::Mode::ZOOM)
+ CQIllustratorMode(illustrator, uint(CQIllustrator::Mode::ZOOM))
 {
   setCursor(zoom_bits, zoommask_bits, 2, 2);
 }

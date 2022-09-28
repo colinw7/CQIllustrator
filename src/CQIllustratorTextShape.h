@@ -6,9 +6,9 @@
 class CQIllustratorTextShape : public CQIllustratorShape {
   Q_OBJECT
 
-  Q_PROPERTY(QString text READ getQText WRITE setQText);
-  Q_PROPERTY(QPointF ll   READ getQLL   WRITE setQLL  );
-  Q_PROPERTY(QPointF ur   READ getQUR   WRITE setQUR  );
+  Q_PROPERTY(QString text READ getQText WRITE setQText)
+  Q_PROPERTY(QPointF ll   READ getQLL   WRITE setQLL  )
+  Q_PROPERTY(QPointF ur   READ getQUR   WRITE setQUR  )
 
  public:
   enum class ControlPointType {

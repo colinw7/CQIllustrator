@@ -8,6 +8,7 @@
 #include <CQIllustratorUtil.h>
 
 #include <QPainter>
+#include <QPainterPath>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QRadioButton>
@@ -43,7 +44,7 @@
 
 CQIllustratorCreatePathMode::
 CQIllustratorCreatePathMode(CQIllustrator *illustrator) :
- CQIllustratorMode(illustrator, (uint) CQIllustrator::Mode::PATH)
+ CQIllustratorMode(illustrator, uint(CQIllustrator::Mode::PATH))
 {
   setCursor(select_bits, selectmask_bits, 2, 2);
 }

@@ -27,7 +27,7 @@
 
 CQIllustratorTransformMode::
 CQIllustratorTransformMode(CQIllustrator *illustrator) :
- CQIllustratorMode(illustrator, (uint) CQIllustrator::Mode::TRANSFORM)
+ CQIllustratorMode(illustrator, uint(CQIllustrator::Mode::TRANSFORM))
 {
 }
 

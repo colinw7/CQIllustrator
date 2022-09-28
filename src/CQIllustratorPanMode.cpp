@@ -7,7 +7,7 @@
 
 CQIllustratorPanMode::
 CQIllustratorPanMode(CQIllustrator *illustrator) :
- CQIllustratorMode(illustrator, (uint) CQIllustrator::Mode::PAN)
+ CQIllustratorMode(illustrator, uint(CQIllustrator::Mode::PAN))
 {
 }
 

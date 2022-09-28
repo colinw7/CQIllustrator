@@ -29,7 +29,7 @@
 
 CQIllustratorCreateStarMode::
 CQIllustratorCreateStarMode(CQIllustrator *illustrator) :
- CQIllustratorMode(illustrator, (uint) CQIllustrator::Mode::STAR)
+ CQIllustratorMode(illustrator, uint(CQIllustrator::Mode::STAR))
 {
   setCursor(star_bits, starmask_bits, 2, 2);
 }

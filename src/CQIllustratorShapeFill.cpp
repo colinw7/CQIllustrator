@@ -104,7 +104,7 @@ getImageScale() const
   if (! image_)
     return ImageScale::NONE;
 
-  return (ImageScale) image_->getScale();
+  return ImageScale(image_->getScale());
 }
 
 void
@@ -117,7 +117,7 @@ setImageScale(ImageScale scale)
     th->image_ = new CQIllustratorImageFill;
   }
 
-  image_->setScale((CQIllustratorImageFill::Scale) scale);
+  image_->setScale(CQIllustratorImageFill::Scale(scale));
 }
 
 CHAlignType

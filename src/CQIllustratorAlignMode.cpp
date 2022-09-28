@@ -44,7 +44,7 @@
 
 CQIllustratorAlignMode::
 CQIllustratorAlignMode(CQIllustrator *illustrator) :
- CQIllustratorMode(illustrator, (uint) CQIllustrator::Mode::ALIGN)
+ CQIllustratorMode(illustrator, uint(CQIllustrator::Mode::ALIGN))
 {
 }
 

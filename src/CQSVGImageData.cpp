@@ -118,7 +118,8 @@ void
 CQSVGImageData::
 set(const CRGBA &rgba)
 {
-  qimage_.fill(QColor(rgba.getRedI(), rgba.getGreenI(), rgba.getBlueI(), rgba.getAlphaI()));
+  qimage_.fill(QColor(int(rgba.getRedI ()), int(rgba.getGreenI()),
+                      int(rgba.getBlueI()), int(rgba.getAlphaI())));
 }
 
 void
@@ -167,7 +168,7 @@ setPixel(int x, int y, const CRGBA &c)
 {
   //assert(validPixel(x, y));
 
-  QRgb rgba = qRgba(c.getRedI(), c.getGreenI(), c.getBlueI(), c.getAlphaI());
+  QRgb rgba = qRgba(int(c.getRedI()), int(c.getGreenI()), int(c.getBlueI()), int(c.getAlphaI()));
 
   qimage_.setPixel(x, y, rgba);
 }
@@ -178,7 +179,7 @@ void
 CQSVGImageData::
 subCopyTo(CSVGImageData *dst, int src_x, int src_y, int width, int height, int dst_x, int dst_y)
 {
-  CQSVGImageData *qdst = dynamic_cast<CQSVGImageData *>(dst);
+  auto *qdst = dynamic_cast<CQSVGImageData *>(dst);
   assert(qdst);
 
   int src_width  = getWidth ();
@@ -211,7 +212,7 @@ subCopyTo(CSVGImageData *dst, int src_x, int src_y, int width, int height, int d
       if (validPixel(xs, ys))
         rgba = getPixel(xs, ys);
       else
-        rgba = CRGBA(0,0,0,0);
+        rgba = CRGBA(0, 0, 0, 0);
 
       if (qdst->validPixel(xd, yd))
         qdst->setPixel(xd, yd, rgba);
@@ -242,7 +243,7 @@ void
 CQSVGImageData::
 copyAlpha(CSVGImageData *dst, int x, int y)
 {
-  CQSVGImageData *qdst = dynamic_cast<CQSVGImageData *>(dst);
+  auto *qdst = dynamic_cast<CQSVGImageData *>(dst);
   assert(qdst);
 
   int iwidth  = getWidth ();
@@ -313,7 +314,7 @@ reshape(int width, int height)
 
   assert(! locked_);
 
-  CQSVGImageData *qdata = dynamic_cast<CQSVGImageData *>(image);
+  auto *qdata = dynamic_cast<CQSVGImageData *>(image);
   assert(qdata);
 
   qimage_ = qdata->qimage_;
@@ -563,7 +564,7 @@ void
 CQSVGImageData::
 clipOutside(int x1, int y1, int x2, int y2)
 {
-  CRGBA a(0,0,0,0);
+  CRGBA a(0, 0, 0, 0);
 
   for (int y = 0; y < getHeight(); ++y) {
     for (int x = 0; x < getWidth(); ++x) {
@@ -579,7 +580,7 @@ void
 CQSVGImageData::
 combine(CSVGImageData *in, CRGBABlendMode mode)
 {
-  CQSVGImageData *image = dynamic_cast<CQSVGImageData *>(in);
+  auto *image = dynamic_cast<CQSVGImageData *>(in);
   assert(image);
 
   int w = std::min(getWidth (), image->getWidth ());
@@ -601,7 +602,7 @@ void
 CQSVGImageData::
 combine(CSVGImageData *in, const CRGBACombineDef &def)
 {
-  CQSVGImageData *image = dynamic_cast<CQSVGImageData *>(in);
+  auto *image = dynamic_cast<CQSVGImageData *>(in);
   assert(image);
 
   int w = std::min(getWidth (), image->getWidth ());
@@ -623,7 +624,7 @@ void
 CQSVGImageData::
 combine(int x, int y, CSVGImageData *in)
 {
-  CQSVGImageData *image = dynamic_cast<CQSVGImageData *>(in);
+  auto *image = dynamic_cast<CQSVGImageData *>(in);
   assert(image);
 
   int w = std::min(getWidth (), image->getWidth ());
@@ -649,17 +650,17 @@ void
 CQSVGImageData::
 convolve(CSVGImageData *in, const CImageConvolveData &data)
 {
-  CQSVGImageData *dst = dynamic_cast<CQSVGImageData *>(in);
+  auto *dst = dynamic_cast<CQSVGImageData *>(in);
   assert(dst);
 
   int xsize = data.xsize;
   int ysize = data.ysize;
 
   if (xsize < 0)
-    xsize = sqrt(data.kernel.size());
+    xsize = int(sqrt(double(data.kernel.size())));
 
   if (ysize < 0)
-    ysize = sqrt(data.kernel.size());
+    ysize = int(sqrt(double(data.kernel.size())));
 
   //---
 
@@ -714,7 +715,7 @@ convolve(CSVGImageData *in, const CImageConvolveData &data)
         for (int xk = -xborder; xk <= xborder; ++xk) {
           CRGBA rgba = getPixel(x + xk, y + yk);
 
-          sum += rgba*data.kernel[k];
+          sum += rgba*data.kernel[size_t(k)];
 
           ++k;
         }
@@ -781,7 +782,7 @@ applyColorMatrix(const std::vector<double> &m)
         setPixel(x, y, rgba1);
       }
       else
-        setPixel(x, y, CRGBA(0,0,0,0));
+        setPixel(x, y, CRGBA(0, 0, 0, 0));
     }
   }
 }
@@ -920,8 +921,7 @@ void
 CQSVGImageData::
 tableFunc(CRGBAComponent component, const std::vector<double> &values)
 {
-  int num_ranges = values.size() - 1;
-
+  int num_ranges = int(values.size() - 1);
   if (num_ranges < 1) return;
 
   double delta = 1.0/num_ranges;
@@ -951,9 +951,9 @@ tableFunc(CRGBAComponent component, const std::vector<double> &values)
       if (i >= num_ranges) continue;
 
       // remap to new range
-      double m = (values[i + 1] - values[i])/(value2 - value1);
+      double m = (values[size_t(i + 1)] - values[size_t(i)])/(value2 - value1);
 
-      value = (value - value1)*m + values[i];
+      value = (value - value1)*m + values[size_t(i)];
 
       // update color
       rgba.setComponent(component, value);
@@ -967,8 +967,7 @@ void
 CQSVGImageData::
 discreteFunc(CRGBAComponent component, const std::vector<double> &values)
 {
-  uint num_ranges = values.size();
-
+  auto num_ranges = uint(values.size());
   if (num_ranges < 1) return;
 
   double delta = 1.0/num_ranges;
@@ -1011,7 +1010,7 @@ CSVGImageData *
 CQSVGImageData::
 displacementMap(CSVGImageData *in, CRGBAComponent xcolor, CRGBAComponent ycolor, double scale)
 {
-  CQSVGImageData *dispImage = dynamic_cast<CQSVGImageData *>(in);
+  auto *dispImage = dynamic_cast<CQSVGImageData *>(in);
   assert(dispImage);
 
   CSVGImageData *dst = dup();
@@ -1022,7 +1021,7 @@ displacementMap(CSVGImageData *in, CRGBAComponent xcolor, CRGBAComponent ycolor,
 
   for (int y = wy1; y <= wy2; ++y) {
     for (int x = wx1; x <= wx2; ++x) {
-      CRGBA rgba1(0,0,0,0);
+      CRGBA rgba1(0, 0, 0, 0);
 
       // get displacement from dispImage color components
       if (dispImage->validPixel(x, y)) {
@@ -1095,7 +1094,7 @@ gaussianBlur(CSVGImageData *in, double stdDevX, double stdDevY)
 
   //---
 
-  CQSVGImageData *qin = dynamic_cast<CQSVGImageData *>(in);
+  auto *qin = dynamic_cast<CQSVGImageData *>(in);
   assert(qin);
 
   CGaussianBlur<CImageWrapper> blur;
@@ -1115,13 +1114,13 @@ erode(int r, bool isAlpha)
 
   std::vector<int> mask;
 
-  mask.resize(r2);
+  mask.resize(size_t(r2));
 
   for (int i = 0, iy = -r; iy <= r; ++iy) {
     for (int ix = -r; ix <= r; ++ix, ++i) {
       double r1 = hypot(ix, iy);
 
-      mask[i] = (r1 <= r ? 1 : 0);
+      mask[size_t(i)] = (r1 <= r ? 1 : 0);
     }
   }
 
@@ -1144,13 +1143,13 @@ dilate(int r, bool isAlpha)
 
   std::vector<int> mask;
 
-  mask.resize(r2);
+  mask.resize(size_t(r2));
 
   for (int i = 0, iy = -r; iy <= r; ++iy) {
     for (int ix = -r; ix <= r; ++ix, ++i) {
       double r1 = hypot(ix, iy);
 
-      mask[i] = (r1 <= r ? 1 : 0);
+      mask[size_t(i)] = (r1 <= r ? 1 : 0);
     }
   }
 
@@ -1168,7 +1167,7 @@ CSVGImageData *
 CQSVGImageData::
 erodeDilate(const std::vector<int> &mask, bool isAlpha, bool isErode) const
 {
-  int r = (sqrt(mask.size()) - 1)/2;
+  int r = int((sqrt(double(mask.size())) - 1)/2);
 
   // count mask bits
   int num_hits = 0;
@@ -1205,7 +1204,7 @@ erodeDilate(const std::vector<int> &mask, bool isAlpha, bool isErode) const
 
         for (int i = 0, ix = -r; ix <= r; ++ix)
           for (int iy = -r; iy <= r; ++iy, ++i)
-            if (mask[i] && isErodePixel(x + ix, y + iy, isAlpha, rgba))
+            if (mask[size_t(i)] && isErodePixel(x + ix, y + iy, isAlpha, rgba))
               ++hits;
 
         if (isErode)

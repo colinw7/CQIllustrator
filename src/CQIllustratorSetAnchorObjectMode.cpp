@@ -10,7 +10,7 @@
 CQIllustratorSetAnchorObjectMode::
 CQIllustratorSetAnchorObjectMode(CQIllustrator *illustrator) :
  CQIllustratorMode(illustrator->getMode(CQIllustrator::Mode::ALIGN),
-                   (uint) CQIllustrator::Mode::ANCHOR_OBJECT)
+                   uint(CQIllustrator::Mode::ANCHOR_OBJECT))
 {
 }
 

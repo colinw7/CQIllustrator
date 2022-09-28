@@ -481,7 +481,7 @@ getAngle() const
 CQIllustratorRectShapeControlPoint::
 CQIllustratorRectShapeControlPoint(CQIllustratorRectShape::ControlPointType type,
                                    const CPoint2D &p) :
- CQIllustratorShapeControlPoint((uint) type, p), type_(type)
+ CQIllustratorShapeControlPoint(uint(type), p), type_(type)
 {
 }
 

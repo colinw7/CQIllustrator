@@ -92,7 +92,7 @@ CQStrokeOptionSwab(CQStrokeOptionDialog *dialog) :
 
   QFontMetrics fm(font());
 
-  tw_ = fm.width("XX.XX");
+  tw_ = fm.horizontalAdvance("XX.XX");
   th_ = fm.ascent() + fm.descent();
   fw_ = 32;
 
@@ -111,7 +111,7 @@ paintEvent(QPaintEvent *)
 
   QFontMetrics fm(font());
 
-  //int w = fm.width(wstr);
+  //int w = fm.horizontalAdvance(wstr);
 
   int x1 = 2;
   int x2 = x1 + fw_;

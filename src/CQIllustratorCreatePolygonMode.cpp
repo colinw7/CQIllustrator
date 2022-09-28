@@ -6,6 +6,7 @@
 #include <CQIllustratorUtil.h>
 
 #include <QPainter>
+#include <QPainterPath>
 #include <QHBoxLayout>
 #include <QRadioButton>
 
@@ -34,7 +35,7 @@
 
 CQIllustratorCreatePolygonMode::
 CQIllustratorCreatePolygonMode(CQIllustrator *illustrator) :
- CQIllustratorMode(illustrator, (uint) CQIllustrator::Mode::POLYGON)
+ CQIllustratorMode(illustrator, uint(CQIllustrator::Mode::POLYGON))
 {
   setCursor(select_bits, selectmask_bits, 2, 2);
 }

@@ -71,7 +71,7 @@ CQFontOptionSwab(CQFontOptionDialog *dialog) :
 {
   QFontMetrics fm(font());
 
-  tw_ = fm.width("ABCabc");
+  tw_ = fm.horizontalAdvance("ABCabc");
   th_ = fm.ascent() + fm.descent();
   fw_ = 32;
 

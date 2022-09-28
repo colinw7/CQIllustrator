@@ -27,7 +27,7 @@
 
 CQIllustratorSetImageMode::
 CQIllustratorSetImageMode(CQIllustrator *illustrator) :
- CQIllustratorMode(illustrator, (uint) CQIllustrator::Mode::IMAGE)
+ CQIllustratorMode(illustrator, uint(CQIllustrator::Mode::IMAGE))
 {
 }
 

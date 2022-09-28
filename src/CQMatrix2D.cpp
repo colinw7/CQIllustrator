@@ -14,21 +14,21 @@ class MatrixCell : public CQTableWidgetItem {
    CQTableWidgetItem(m->getTableWidget()), m_(m), row_(row), col_(col) {
   }
 
-  MatrixCell *clone() const { return new MatrixCell(m_); }
+  MatrixCell *clone() const override { return new MatrixCell(m_); }
 
-  QString getString()  {
+  QString getString() const override {
     double v = getValue();
 
     return CStrUtil::toString(v).c_str();
   }
 
-  QWidget *createEditor(QWidget *parent) const {
+  QWidget *createEditor(QWidget *parent) const override {
     edit_ = new CQRealEdit(parent);
 
     return edit_;
   }
 
-  void setEditorData() {
+  void setEditorData() override {
     if (edit_.isNull()) return;
 
     double v = getValue();
@@ -36,7 +36,7 @@ class MatrixCell : public CQTableWidgetItem {
     edit_->setValue(v);
   }
 
-  void getEditorData(QString &str) {
+  void getEditorData(QString &str) override {
     if (edit_.isNull()) return;
 
     double v = edit_->getValue();
@@ -46,10 +46,10 @@ class MatrixCell : public CQTableWidgetItem {
     str = getString();
   }
 
-  bool sizeHint(const QStyleOptionViewItem &, QSize &size) const {
+  bool sizeHint(const QStyleOptionViewItem &, QSize &size) const override {
     QFontMetrics fm(font());
 
-    size = QSize(fm.width("XXX.XXXX") + 8, fm.ascent() + fm.descent() + 8);
+    size = QSize(fm.horizontalAdvance("XXX.XXXX") + 8, fm.ascent() + fm.descent() + 8);
 
     return true;
   }
@@ -102,7 +102,7 @@ sizeHint() const
 {
   QFontMetrics fm(font());
 
-  QSize size(fm.width("XXX.XXXX") + 8, fm.ascent() + fm.descent() + 8);
+  QSize size(fm.horizontalAdvance("XXX.XXXX") + 8, fm.ascent() + fm.descent() + 8);
 
   return QSize(3*size.width() + 42, 4*size.height() + 42);
 }
@@ -111,7 +111,7 @@ void
 CQMatrix2D::
 init()
 {
-  QVBoxLayout *layout = new QVBoxLayout(this);
+  auto *layout = new QVBoxLayout(this);
 
   table_ = new CQTableWidget;
 
@@ -152,16 +152,16 @@ void
 CQMatrix2D::
 updateValues()
 {
-  for (int row = 0; row < 3; ++row)
-    for (int col = 0; col < 3; ++col)
-      table_->getItem<MatrixCell>(row, col)->setValue(m_.getValue(row, col));
+  for (uint row = 0; row < 3; ++row)
+    for (uint col = 0; col < 3; ++col)
+      table_->getItem<MatrixCell>(int(row), int(col))->setValue(m_.getValue(row, col));
 }
 
 void
 CQMatrix2D::
 setValue(int row, int col, double v)
 {
-  m_.setValue(col, row, v);
+  m_.setValue(uint(col), uint(row), v);
 
   emit valueChanged();
 }
@@ -170,5 +170,5 @@ double
 CQMatrix2D::
 getValue(int row, int col) const
 {
-  return m_.getValue(col, row);
+  return m_.getValue(uint(col), uint(row));
 }

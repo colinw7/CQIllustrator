@@ -22,7 +22,7 @@ enum { ROTATE_SMALL = 1, ROTATE_NORMAL = 15, ROTATE_LARGE = 90 };
 
 CQIllustratorSelectMode::
 CQIllustratorSelectMode(CQIllustrator *illustrator) :
- CQIllustratorMode(illustrator, (uint) CQIllustrator::Mode::SELECT), sizing_(false), inside_(true)
+ CQIllustratorMode(illustrator, uint(CQIllustrator::Mode::SELECT)), sizing_(false), inside_(true)
 {
   setCursor(select_bits, selectmask_bits, 2, 2);
 

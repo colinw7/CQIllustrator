@@ -16,16 +16,16 @@ class CQIllustratorCanvas : public QWidget {
  public:
   CQIllustratorCanvas(CQIllustrator *illustrator);
 
-  void mousePressEvent  (QMouseEvent *event);
-  void mouseMoveEvent   (QMouseEvent *event);
-  void mouseReleaseEvent(QMouseEvent *event);
+  void mousePressEvent  (QMouseEvent *event) override;
+  void mouseMoveEvent   (QMouseEvent *event) override;
+  void mouseReleaseEvent(QMouseEvent *event) override;
 
-  void keyPressEvent(QKeyEvent *e);
+  void keyPressEvent(QKeyEvent *e) override;
 
-  void wheelEvent(QWheelEvent *event);
+  void wheelEvent(QWheelEvent *event) override;
 
-  void paintEvent (QPaintEvent  *event);
-  void resizeEvent(QResizeEvent *event);
+  void paintEvent (QPaintEvent  *event) override;
+  void resizeEvent(QResizeEvent *event) override;
 
   bool getPressed() const { return pressed_; }
 

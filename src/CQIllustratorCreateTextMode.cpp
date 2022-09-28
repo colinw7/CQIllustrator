@@ -22,7 +22,7 @@
 
 CQIllustratorCreateTextMode::
 CQIllustratorCreateTextMode(CQIllustrator *illustrator) :
- CQIllustratorMode(illustrator, (uint) CQIllustrator::Mode::TEXT), text_("Hello")
+ CQIllustratorMode(illustrator, uint(CQIllustrator::Mode::TEXT)), text_("Hello")
 {
   setCursor(text_bits, textmask_bits, 2, 2);
 }
@@ -177,7 +177,7 @@ handleKeyPress(const KeyEvent &e)
   CKeyType key = e.event->getType();
 
   if      (key >= CKEY_TYPE_Space && key <= CKEY_TYPE_AsciiTilde) {
-    str1 += (char) key;
+    str1 += char(key);
   }
   else if (key == CKEY_TYPE_Return) {
     str1 += '\n';

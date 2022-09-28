@@ -363,7 +363,7 @@ addMode(CQIllustratorMode *mode)
 {
   mode->init();
 
-  modeMap_[(Mode) mode->getId()] = mode;
+  modeMap_[Mode(mode->getId())] = mode;
 }
 
 CQIllustratorMode *
@@ -801,17 +801,17 @@ createToolBars()
   modeLabel_ = new QLabel("<small><b>Mode</b></small><br>");
 
   modeLabel_->setAlignment(Qt::AlignLeft);
-  modeLabel_->setFixedWidth(fm.width("Set Radial Gradient"));
+  modeLabel_->setFixedWidth(fm.horizontalAdvance("Set Radial Gradient"));
 
   posLabel_ = new QLabel("<small><b>Position</b></small><br>");
 
   posLabel_->setAlignment(Qt::AlignLeft);
-  posLabel_->setFixedWidth(fm.width("(XXXX.XXX, XXXX.XXX)"));
+  posLabel_->setFixedWidth(fm.horizontalAdvance("(XXXX.XXX, XXXX.XXX)"));
 
   deltaLabel_ = new QLabel("<small><b>Delta</b></small><br>");
 
   deltaLabel_->setAlignment(Qt::AlignLeft);
-  deltaLabel_->setFixedWidth(fm.width("XXXX.XXX"));
+  deltaLabel_->setFixedWidth(fm.horizontalAdvance("XXXX.XXX"));
 
   //------
 
@@ -4885,7 +4885,7 @@ void
 CQIllustrator::
 setStroke(QPainter *painter, CQIllustratorShape *shape, const CQIllustratorShapeStroke &stroke)
 {
-  setStroke(painter, (const CQIllustratorShape *) shape, stroke);
+  setStroke(painter, const_cast<const CQIllustratorShape *>(shape), stroke);
 }
 
 void
@@ -4953,7 +4953,7 @@ CQIllustrator::
 setFill(QPainter *painter, CQIllustratorShape *shape,
         const CQIllustratorShapeFill &fill, const CBBox2D &bbox)
 {
-  setFill(painter, (const CQIllustratorShape *) shape, fill, bbox);
+  setFill(painter, const_cast<const CQIllustratorShape *>(shape), fill, bbox);
 }
 
 void
@@ -5215,7 +5215,7 @@ sizeHint() const
 {
   QFontMetrics fm(font());
 
-  int tw = fm.width("X");
+  int tw = fm.horizontalAdvance("X");
   int th = fm.height();
 
   return QSize(120*tw, 50*th);

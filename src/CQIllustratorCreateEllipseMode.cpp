@@ -32,7 +32,7 @@ class CQIllustratorCreateEllipseCmd : public CQIllustratorCmd {
 
 CQIllustratorCreateEllipseMode::
 CQIllustratorCreateEllipseMode(CQIllustrator *illustrator) :
- CQIllustratorMode(illustrator, (uint) CQIllustrator::Mode::ELLIPSE)
+ CQIllustratorMode(illustrator, uint(CQIllustrator::Mode::ELLIPSE))
 {
   setCursor(circle_bits, circlemask_bits, 2, 2);
 

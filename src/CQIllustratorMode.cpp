@@ -259,7 +259,7 @@ void
 CQIllustratorMode::
 menuItemSlot()
 {
-  illustrator_->setMode((CQIllustrator::Mode) id_);
+  illustrator_->setMode(CQIllustrator::Mode(id_));
 }
 
 void

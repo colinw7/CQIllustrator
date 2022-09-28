@@ -6,6 +6,7 @@
 #include <CQFontUtil.h>
 #include <CQUtil.h>
 #include <QPainter>
+#include <QPainterPath>
 
 #include <svg/control_point_svg.h>
 #include <svg/control_point_active_svg.h>

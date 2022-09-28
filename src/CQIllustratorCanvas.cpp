@@ -1,6 +1,7 @@
 #include <CQIllustratorCanvas.h>
 #include <CQIllustratorInfo.h>
 #include <CQIllustrator.h>
+#include <CQWidgetUtil.h>
 #include <CQUtil.h>
 
 #include <QPainter>
@@ -89,7 +90,7 @@ wheelEvent(QWheelEvent *event)
 {
   CBBox2D bbox = illustrator_->getBBox();
 
-  int num = abs(event->delta())/15;
+  int num = abs(CQWidgetUtil::wheelDelta(event))/15;
 
   double dx, dy;
 
@@ -98,7 +99,7 @@ wheelEvent(QWheelEvent *event)
   else
     dy = num*bbox.getHeight()/64;
 
-  if (event->delta() > 0)
+  if (CQWidgetUtil::wheelDelta(event) > 0)
     bbox.moveBy(CVector2D( dx,  dy));
   else
     bbox.moveBy(CVector2D(-dx, -dy));

@@ -20,7 +20,7 @@
 
 CQIllustratorPointSelectMode::
 CQIllustratorPointSelectMode(CQIllustrator *illustrator) :
- CQIllustratorMode(illustrator, (uint) CQIllustrator::Mode::POINT_SELECT)
+ CQIllustratorMode(illustrator, uint(CQIllustrator::Mode::POINT_SELECT))
 {
   setCursor(select_bits, selectmask_bits, 2, 2);
 }

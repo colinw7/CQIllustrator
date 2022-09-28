@@ -33,7 +33,7 @@ class CQIllustratorCreateRectCmd : public CQIllustratorCmd {
 
 CQIllustratorCreateRectMode::
 CQIllustratorCreateRectMode(CQIllustrator *illustrator) :
- CQIllustratorMode(illustrator, (uint) CQIllustrator::Mode::RECT)
+ CQIllustratorMode(illustrator, uint(CQIllustrator::Mode::RECT))
 {
   setCursor(rect_bits, rectmask_bits, 2, 2);
 

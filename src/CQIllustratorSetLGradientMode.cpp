@@ -21,7 +21,7 @@
 
 CQIllustratorSetLGradientMode::
 CQIllustratorSetLGradientMode(CQIllustrator *illustrator) :
- CQIllustratorMode(illustrator, (uint) CQIllustrator::Mode::LGRADIENT)
+ CQIllustratorMode(illustrator, uint(CQIllustrator::Mode::LGRADIENT))
 {
 }
 

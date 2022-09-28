@@ -18,7 +18,7 @@
 
 CQIllustratorSliceMode::
 CQIllustratorSliceMode(CQIllustrator *illustrator) :
- CQIllustratorMode(illustrator, (uint) CQIllustrator::Mode::SLICE)
+ CQIllustratorMode(illustrator, uint(CQIllustrator::Mode::SLICE))
 {
   setCursor(slice_bits, slicemask_bits, 2, 2);
 }
