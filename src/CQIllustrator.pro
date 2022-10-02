@@ -7,7 +7,7 @@ DEPENDPATH += .
 QT += widgets
 
 QMAKE_CXXFLAGS += \
--std=c++14 \
+-std=c++17 \
 -DCQUTIL_PEN \
 -DCQUTIL_BRUSH \
 -DCQUTIL_FONT \
