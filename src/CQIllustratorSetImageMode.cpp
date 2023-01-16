@@ -14,6 +14,7 @@
 #include <CLinearGradient.h>
 #include <CQMenu.h>
 #include <CQUtil.h>
+#include <CQUtilGeom.h>
 #include <CQImageButton.h>
 #include <CQSwatch.h>
 

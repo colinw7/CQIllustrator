@@ -12,6 +12,7 @@
 
 #include <CQMenu.h>
 #include <CQUtil.h>
+#include <CQUtilGeom.h>
 #include <CQPointEdit.h>
 #include <CQImageButton.h>
 #include <CQSwatch.h>

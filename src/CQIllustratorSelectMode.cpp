@@ -7,6 +7,7 @@
 
 #include <CQMenu.h>
 #include <CQUtil.h>
+#include <CQUtilGeom.h>
 #include <CQSwatch.h>
 #include <CQRadioButtons.h>
 #include <CQImageButton.h>

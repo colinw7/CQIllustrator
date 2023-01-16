@@ -11,6 +11,7 @@
 #include <CLinearGradient.h>
 #include <CQMenu.h>
 #include <CQUtil.h>
+#include <CQUtilGeom.h>
 #include <CQRealEdit.h>
 #include <CQSwatch.h>
 

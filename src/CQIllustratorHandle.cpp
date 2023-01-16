@@ -3,6 +3,7 @@
 
 #include <CQImage.h>
 #include <CQUtil.h>
+#include <CQUtilGeom.h>
 
 #include <QPainter>
 

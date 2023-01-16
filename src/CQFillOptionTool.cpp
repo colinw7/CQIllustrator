@@ -2,6 +2,8 @@
 #include <CQFillOptionDialog.h>
 #include <CQIllustrator.h>
 #include <CQUtil.h>
+#include <CQUtilRGBA.h>
+#include <CQUtilGradient.h>
 #include <CLinearGradient.h>
 #include <CRadialGradient.h>
 

@@ -9,6 +9,7 @@
 #include <CQIllustratorShapeRGradientControlPoint.h>
 
 #include <CQUtil.h>
+#include <CQUtilGeom.h>
 #include <CQImageGaussianBlur.h>
 #include <CLinearGradient.h>
 #include <CRadialGradient.h>

@@ -10,6 +10,7 @@
 #include <CQRealEdit.h>
 #include <CQRealSpin.h>
 #include <CQUtil.h>
+#include <CQUtilRGBA.h>
 
 #include <CRadialGradient.h>
 #include <COSFile.h>

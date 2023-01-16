@@ -7,6 +7,7 @@
 #include <QBoxLayout>
 
 #include <CQUtil.h>
+#include <CQUtilGeom.h>
 #include <CQMenu.h>
 #include <CQSwatch.h>
 #include <CQImageButton.h>

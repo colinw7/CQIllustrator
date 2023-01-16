@@ -3,6 +3,7 @@
 #include <CQIllustrator.h>
 #include <CQWidgetUtil.h>
 #include <CQUtil.h>
+#include <CQUtilGeom.h>
 
 #include <QPainter>
 #include <QResizeEvent>

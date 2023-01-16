@@ -11,6 +11,7 @@
 #include <CQMenu.h>
 #include <CQFontUtil.h>
 #include <CQUtil.h>
+#include <CQUtilGeom.h>
 #include <CQRealEdit.h>
 #include <CQImageButton.h>
 #include <CQSwatch.h>

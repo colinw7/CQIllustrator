@@ -2,6 +2,7 @@
 #include <CQStrokeOptionDialog.h>
 #include <CQIllustrator.h>
 #include <CQUtil.h>
+#include <CQUtilRGBA.h>
 
 #include <QVBoxLayout>
 #include <QGridLayout>

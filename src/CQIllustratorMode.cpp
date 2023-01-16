@@ -5,6 +5,8 @@
 #include <CQIllustratorShapeControlLine.h>
 #include <CQIllustratorShapeDrawer.h>
 #include <CQUtil.h>
+#include <CQUtilGeom.h>
+#include <CQUtilEvent.h>
 #include <CMathRound.h>
 
 #include <QBitmap>

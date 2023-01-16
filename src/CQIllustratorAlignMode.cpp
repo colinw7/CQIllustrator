@@ -18,6 +18,7 @@
 #include <CQRealEdit.h>
 #include <CQPointEdit.h>
 #include <CQUtil.h>
+#include <CQUtilGeom.h>
 #include <CQMenu.h>
 #include <CQDockWidget.h>
 

@@ -5,6 +5,8 @@
 #include <CQImage.h>
 #include <CQFontUtil.h>
 #include <CQUtil.h>
+#include <CQUtilGeom.h>
+#include <CQUtilAlignType.h>
 #include <QPainter>
 #include <QPainterPath>
 

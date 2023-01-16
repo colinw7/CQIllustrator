@@ -10,6 +10,7 @@
 
 #include <CQMenu.h>
 #include <CQUtil.h>
+#include <CQUtilGeom.h>
 #include <CQPointEdit.h>
 #include <CQRealEdit.h>
 #include <CQSwatch.h>

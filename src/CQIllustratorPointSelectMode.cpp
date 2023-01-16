@@ -9,6 +9,7 @@
 
 #include <CQMenu.h>
 #include <CQUtil.h>
+#include <CQUtilGeom.h>
 #include <CQSwatch.h>
 
 #include <svg/point_select_svg.h>

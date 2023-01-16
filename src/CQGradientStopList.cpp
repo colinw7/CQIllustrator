@@ -1,5 +1,6 @@
 #include <CQGradientStopList.h>
 #include <CQUtil.h>
+#include <CQUtilRGBA.h>
 #include <CQColorChooser.h>
 #include <CQRealEdit.h>
 

@@ -82,6 +82,9 @@
 #include <CQToolBar.h>
 #include <CQDockWidget.h>
 #include <CQUtil.h>
+#include <CQUtilGeom.h>
+#include <CQUtilRGBA.h>
+#include <CQUtilGradient.h>
 #include <CSVG.h>
 #include <CGenPoly.h>
 #include <CFileUtil.h>
