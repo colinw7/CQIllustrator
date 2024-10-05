@@ -124,7 +124,7 @@ addPoint(const CQIllustratorShapeControlPoint *before_point, const CPoint2D &p)
 {
   points_.push_back(p);
 
-  if (before_point != 0) {
+  if (before_point != nullptr) {
     const CQIllustratorPolygonShapeControlPoint *before_point1 =
       dynamic_cast<const CQIllustratorPolygonShapeControlPoint *>(before_point);
 

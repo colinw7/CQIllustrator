@@ -25,9 +25,9 @@ class CQIllustratorCreateRectCmd : public CQIllustratorCmd {
  public:
   CQIllustratorCreateRectCmd();
 
-  const char *getName() const { return "create_rect"; }
+  const char *getName() const override { return "create_rect"; }
 
-  bool exec(const std::vector<std::string> &words);
+  bool exec(const std::vector<std::string> &words) override;
 };
 
 //------
@@ -292,11 +292,11 @@ setSelectedShape(const CQIllustratorShape *shape)
 {
   const CQIllustratorRectShape *rect = dynamic_cast<const CQIllustratorRectShape *>(shape);
 
-  posEdit_   ->setEnabled(rect != 0);
-  widthEdit_ ->setEnabled(rect != 0);
-  heightEdit_->setEnabled(rect != 0);
-  xRadEdit_  ->setEnabled(rect != 0);
-  yRadEdit_  ->setEnabled(rect != 0);
+  posEdit_   ->setEnabled(rect != nullptr);
+  widthEdit_ ->setEnabled(rect != nullptr);
+  heightEdit_->setEnabled(rect != nullptr);
+  xRadEdit_  ->setEnabled(rect != nullptr);
+  yRadEdit_  ->setEnabled(rect != nullptr);
 
   if (rect) {
     const CBBox2D &bbox = rect->getBBox();

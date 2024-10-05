@@ -16,7 +16,7 @@ class CQIllustratorNPolyGeometry : public CQIllustratorShapeGeometry {
    r_(geometry.r_), a_(geometry.a_) {
   }
 
-  virtual CQIllustratorNPolyGeometry *dup() {
+  CQIllustratorNPolyGeometry *dup() override {
     return new CQIllustratorNPolyGeometry(*this);
   }
 

@@ -13,9 +13,9 @@ class CQIllustratorPanToolbar : public CQIllustratorToolbar {
  public:
   CQIllustratorPanToolbar(CQIllustratorPanMode *mode);
 
-  const char *getTitle() const { return "Pan"; }
+  const char *getTitle() const override { return "Pan"; }
 
-  QIcon getIcon();
+  QIcon getIcon() override;
 
  private:
   CQIllustratorPanMode *panMode_;
@@ -25,23 +25,23 @@ class CQIllustratorPanMode : public CQIllustratorMode {
  public:
   CQIllustratorPanMode(CQIllustrator *illustrator);
 
-  const char *getTitle() const { return "Pan"; }
+  const char *getTitle() const override { return "Pan"; }
 
-  CQIllustratorPanToolbar *createToolbar();
+  CQIllustratorPanToolbar *createToolbar() override;
 
-  CQMenuItem *createMenuItem(CQMenu *menu);
+  CQMenuItem *createMenuItem(CQMenu *menu) override;
 
-  CQIllustratorPanToolbar *getToolbar() const { return toolbar_; }
+  CQIllustratorPanToolbar *getToolbar() const override { return toolbar_; }
 
-  void handleMousePress  (const MouseEvent &e);
-  void handleMouseRelease(const MouseEvent &e);
-  void handleMouseDrag   (const MouseEvent &e);
-  void handleMouseMove   (const MouseEvent &e);
+  void handleMousePress  (const MouseEvent &e) override;
+  void handleMouseRelease(const MouseEvent &e) override;
+  void handleMouseDrag   (const MouseEvent &e) override;
+  void handleMouseMove   (const MouseEvent &e) override;
 
-  QCursor getCursor() const;
+  QCursor getCursor() const override;
 
  private:
-  CQIllustratorPanToolbar *toolbar_;
+  CQIllustratorPanToolbar *toolbar_ { nullptr };
 };
 
 #endif

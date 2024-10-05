@@ -7,6 +7,7 @@
 #include <CQUtil.h>
 #include <CQUtilGeom.h>
 #include <CQUtilAlignType.h>
+#include <CStrUtil.h>
 #include <QPainter>
 #include <QPainterPath>
 

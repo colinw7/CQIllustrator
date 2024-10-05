@@ -25,7 +25,7 @@ class CQStrokeOptionSwab : public QWidget {
 
 CQStrokeOptionTool::
 CQStrokeOptionTool(CQIllustrator *illustrator) :
- CQOptionTool(), illustrator_(illustrator), dialog_(0)
+ CQOptionTool(), illustrator_(illustrator), dialog_(nullptr)
 {
   setObjectName("stroke");
 
@@ -59,7 +59,7 @@ void
 CQStrokeOptionTool::
 selectionChangedSlot()
 {
-  const CQIllustratorShape *shape = 0;
+  const CQIllustratorShape *shape = nullptr;
 
   const CQIllustratorSelectedShapes *selection = illustrator_->getSelection();
 

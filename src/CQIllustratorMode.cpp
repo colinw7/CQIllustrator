@@ -48,7 +48,7 @@ CQIllustratorModeSizer *
 CQIllustratorMode::
 createSizer()
 {
-  return 0;
+  return nullptr;
 }
 
 void
@@ -273,9 +273,9 @@ selectionSlot()
   uint num_shapes = selection->size();
 
   if      (num_shapes == 0) {
-    setSelectedShape(0);
+    setSelectedShape(nullptr);
 
-    setSelectedShapePoint(0, 0);
+    setSelectedShapePoint(nullptr, nullptr);
   }
   else if (num_shapes == 1) {
     const CQIllustratorSelectedShape &sshape = selection->front();
@@ -287,19 +287,19 @@ selectionSlot()
     uint num_points = sshape.numPoints();
 
     if      (num_points == 0)
-      setSelectedShapePoint(shape, 0);
+      setSelectedShapePoint(shape, nullptr);
     else if (num_points == 1) {
       const CQIllustratorShapeControlPoint *point = sshape.getPoint(0);
 
       setSelectedShapePoint(shape, point);
     }
     else
-      setSelectedShapePoint(shape, 0);
+      setSelectedShapePoint(shape, nullptr);
   }
   else {
-    setSelectedShape(0);
+    setSelectedShape(nullptr);
 
-    setSelectedShapePoint(0, 0);
+    setSelectedShapePoint(nullptr, nullptr);
   }
 }
 

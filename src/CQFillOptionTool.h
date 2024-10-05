@@ -14,7 +14,7 @@ class CQFillOptionTool : public CQOptionTool {
  public:
   CQFillOptionTool(CQIllustrator *illustrator);
 
-  CQOptionToolDialog *getDialog();
+  CQOptionToolDialog *getDialog() override;
 
   CQIllustrator *getIllustrator() const { return illustrator_; }
 

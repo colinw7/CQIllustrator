@@ -19,7 +19,7 @@ class CQIllustratorTextGeometry : public CQIllustratorShapeGeometry {
    font_(geometry.font_), halign_(geometry.halign_), valign_(geometry.valign_) {
   }
 
-  virtual CQIllustratorTextGeometry *dup() {
+  CQIllustratorTextGeometry *dup() override {
     return new CQIllustratorTextGeometry(*this);
   }
 

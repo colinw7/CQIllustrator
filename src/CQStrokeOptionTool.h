@@ -12,7 +12,7 @@ class CQStrokeOptionTool : public CQOptionTool {
  public:
   CQStrokeOptionTool(CQIllustrator *illustrator);
 
-  CQOptionToolDialog *getDialog();
+  CQOptionToolDialog *getDialog() override;
 
   CQIllustrator *getIllustrator() const { return illustrator_; }
 

@@ -287,7 +287,7 @@ flatSlot()
   stack_->setCurrentIndex(0);
 
   if (fill_.hasGradient() || fill_.hasImage()) {
-    fill_.setGradient(0);
+    fill_.setGradient(nullptr);
     fill_.resetImage();
 
     emit valueChanged(fill_);
@@ -304,7 +304,7 @@ lgradSlot()
 {
   stack_->setCurrentIndex(1);
 
-  const CLinearGradient *lg = 0;
+  const CLinearGradient *lg = nullptr;
 
   if (fill_.hasGradient()) {
     const CGenGradient *g = fill_.getGradient();
@@ -312,7 +312,7 @@ lgradSlot()
     lg = dynamic_cast<const CLinearGradient *>(g);
   }
 
-  if (lg == 0) {
+  if (lg == nullptr) {
     auto *lg1 = new CLinearGradient;
 
     lg1->addStop(0.0, CRGBA(1,1,1));
@@ -337,7 +337,7 @@ rgradSlot()
 {
   stack_->setCurrentIndex(2);
 
-  const CRadialGradient *rg = 0;
+  const CRadialGradient *rg = nullptr;
 
   if (fill_.hasGradient()) {
     const CGenGradient *g = fill_.getGradient();
@@ -345,7 +345,7 @@ rgradSlot()
     rg = dynamic_cast<const CRadialGradient *>(g);
   }
 
-  if (rg == 0) {
+  if (rg == nullptr) {
     auto *rg1 = new CRadialGradient;
 
     rg1->addStop(0.0, CRGBA(1,1,1));
@@ -372,7 +372,7 @@ imageSlot()
 
   if (! fill_.hasImage()) {
     fill_.setImage(CImagePtr());
-    fill_.setGradient(0);
+    fill_.setGradient(nullptr);
 
     emit valueChanged(fill_);
 
@@ -386,8 +386,8 @@ void
 CQFillOptionDialog::
 setActiveState()
 {
-  const CLinearGradient *lg = 0;
-  const CRadialGradient *rg = 0;
+  const CLinearGradient *lg = nullptr;
+  const CRadialGradient *rg = nullptr;
 
   bool is_image = false;
 
@@ -411,8 +411,8 @@ void
 CQFillOptionDialog::
 updateWidgets()
 {
-  const CLinearGradient *lg = 0;
-  const CRadialGradient *rg = 0;
+  const CLinearGradient *lg = nullptr;
+  const CRadialGradient *rg = nullptr;
 
   bool is_image = false;
 
@@ -421,7 +421,7 @@ updateWidgets()
 
     lg = dynamic_cast<const CLinearGradient *>(g);
 
-    if (lg != 0) {
+    if (lg != nullptr) {
       stack_->setCurrentIndex(1);
 
       lgrad1_->setValue(lg->getPoint1());
@@ -432,7 +432,7 @@ updateWidgets()
 
     rg = dynamic_cast<const CRadialGradient *>(g);
 
-    if (rg != 0) {
+    if (rg != nullptr) {
       stack_->setCurrentIndex(2);
 
       rgradC_->setValue(rg->getCenter());
@@ -458,18 +458,18 @@ updateWidgets()
     fillRule_    ->setCurrentIndex(fill_.getFillRule() == FILL_TYPE_WINDING ? 0 : 1);
   }
 
-  colorChooser_->setEnabled(lg == 0 && rg == 0 && ! is_image);
-  opacityEdit_ ->setEnabled(lg == 0 && rg == 0 && ! is_image);
-  fillRule_    ->setEnabled(lg == 0 && rg == 0 && ! is_image);
+  colorChooser_->setEnabled(lg == nullptr && rg == nullptr && ! is_image);
+  opacityEdit_ ->setEnabled(lg == nullptr && rg == nullptr && ! is_image);
+  fillRule_    ->setEnabled(lg == nullptr && rg == nullptr && ! is_image);
 
-  lgrad1_     ->setEnabled(lg != 0);
-  lgrad2_     ->setEnabled(lg != 0);
-  lgradStops_ ->setEnabled(lg != 0);
+  lgrad1_     ->setEnabled(lg != nullptr);
+  lgrad2_     ->setEnabled(lg != nullptr);
+  lgradStops_ ->setEnabled(lg != nullptr);
 
-  rgradC_    ->setEnabled(rg != 0);
-  rgradR_    ->setEnabled(rg != 0);
-  rgradF_    ->setEnabled(rg != 0);
-  rgradStops_->setEnabled(rg != 0);
+  rgradC_    ->setEnabled(rg != nullptr);
+  rgradR_    ->setEnabled(rg != nullptr);
+  rgradF_    ->setEnabled(rg != nullptr);
+  rgradStops_->setEnabled(rg != nullptr);
 
   imagePreview_->setEnabled(is_image);
 }

@@ -14,13 +14,13 @@ class CQIllustratorShapeRGradientControlPoint : public CQIllustratorShapeControl
  public:
   CQIllustratorShapeRGradientControlPoint(Position pos, const CPoint2D &p);
 
-  CQIllustratorShapeRGradientControlPoint *dup() const;
+  CQIllustratorShapeRGradientControlPoint *dup() const override;
 
   Position getPosition() const { return pos_; }
 
-  CPoint2D getPoint(const CQIllustratorShape *shape) const;
+  CPoint2D getPoint(const CQIllustratorShape *shape) const override;
 
-  void setPoint(CQIllustratorShape *shape, const CPoint2D &point);
+  void setPoint(CQIllustratorShape *shape, const CPoint2D &point) override;
 
  protected:
   Position pos_;

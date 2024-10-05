@@ -16,11 +16,11 @@ class CQIllustratorLGradSizer : public CQIllustratorModeSizer {
  public:
   CQIllustratorLGradSizer(CQIllustratorSetLGradientMode *mode);
 
-  void drawHandles(QPainter *painter, const CQIllustratorShape *shape);
+  void drawHandles(QPainter *painter, const CQIllustratorShape *shape) override;
 
  private:
-  CQIllustratorControlPointHandle *start_handle_;
-  CQIllustratorControlPointHandle *end_handle_;
+  CQIllustratorControlPointHandle *start_handle_ { nullptr };
+  CQIllustratorControlPointHandle *end_handle_ { nullptr };
 };
 
 class CQIllustratorSetLGradientToolbar : public CQIllustratorToolbar {
@@ -29,13 +29,13 @@ class CQIllustratorSetLGradientToolbar : public CQIllustratorToolbar {
  public:
   CQIllustratorSetLGradientToolbar(CQIllustratorSetLGradientMode *mode);
 
-  const char *getTitle() const { return "Linear Gradient"; }
+  const char *getTitle() const override { return "Linear Gradient"; }
 
-  QIcon getIcon();
+  QIcon getIcon() override;
 
-  void addWidgets();
+  void addWidgets() override;
 
-  void setSelectedShape(const CQIllustratorShape *shape);
+  void setSelectedShape(const CQIllustratorShape *shape) override;
 
  private slots:
   void modeChangedSlot();
@@ -56,33 +56,33 @@ class CQIllustratorSetLGradientMode : public CQIllustratorMode {
  public:
   CQIllustratorSetLGradientMode(CQIllustrator *illustrator);
 
-  const char *getTitle() const { return "Set Linear Gradient"; }
+  const char *getTitle() const override { return "Set Linear Gradient"; }
 
-  CQIllustratorSetLGradientToolbar *createToolbar();
+  CQIllustratorSetLGradientToolbar *createToolbar() override;
 
-  CQIllustratorLGradSizer *createSizer();
+  CQIllustratorLGradSizer *createSizer() override;
 
-  CQMenuItem *createMenuItem(CQMenu *menu);
+  CQMenuItem *createMenuItem(CQMenu *menu) override;
 
-  CQIllustratorSetLGradientToolbar *getToolbar() const { return toolbar_; }
+  CQIllustratorSetLGradientToolbar *getToolbar() const override { return toolbar_; }
 
-  CQIllustratorData::ChangeType getChangeType() const {
+  CQIllustratorData::ChangeType getChangeType() const override {
     return CQIllustratorData::ChangeType::FILL;
   }
 
-  CQIllustratorShape::ControlType getControlType() const {
+  CQIllustratorShape::ControlType getControlType() const override {
     return CQIllustratorShape::ControlType::LGRADIENT;
   }
 
-  void handleMouseRelease(const MouseEvent &e);
-  void handleMouseDrag   (const MouseEvent &e);
+  void handleMouseRelease(const MouseEvent &e) override;
+  void handleMouseDrag   (const MouseEvent &e) override;
 
-  void drawOverlay(CQIllustratorShapeDrawer *drawer);
+  void drawOverlay(CQIllustratorShapeDrawer *drawer) override;
 
-  QCursor getCursor() const;
+  QCursor getCursor() const override;
 
  private:
-  CQIllustratorSetLGradientToolbar  *toolbar_;
+  CQIllustratorSetLGradientToolbar  *toolbar_ { nullptr };
   CAutoPtr<CQIllustratorLGradSizer>  sizer_;
 };
 

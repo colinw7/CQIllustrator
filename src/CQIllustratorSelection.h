@@ -8,7 +8,7 @@ class CQIllustratorSelectedShape {
  protected:
   friend class CQIllustratorSelectedShapes;
 
-  CQIllustratorSelectedShape(CQIllustratorShape *shape=0);
+  CQIllustratorSelectedShape(CQIllustratorShape *shape=nullptr);
 
  public:
  ~CQIllustratorSelectedShape();

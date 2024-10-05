@@ -24,18 +24,18 @@ class CQIllustratorCreatePolygonToolbar : public CQIllustratorToolbar {
  public:
   CQIllustratorCreatePolygonToolbar(CQIllustratorCreatePolygonMode *mode);
 
-  const char *getTitle() const { return "Create Polygon"; }
+  const char *getTitle() const override { return "Create Polygon"; }
 
-  QIcon getIcon();
+  QIcon getIcon() override;
 
-  void addWidgets();
+  void addWidgets() override;
 
   CreateMode getCreateMode() const { return createMode_; }
 
-  void setSelectedShape(const CQIllustratorShape *shape);
+  void setSelectedShape(const CQIllustratorShape *shape) override;
 
   void setSelectedShapePoint(const CQIllustratorShape *shape,
-                             const CQIllustratorShapeControlPoint *point);
+                             const CQIllustratorShapeControlPoint *point) override;
 
   void updateShape();
 
@@ -72,7 +72,7 @@ class CQIllustratorCreatePolygonSizer : public CQIllustratorModeSizer {
  public:
   CQIllustratorCreatePolygonSizer(CQIllustratorCreatePolygonMode *mode);
 
-  void drawHandles(QPainter *painter, const CQIllustratorShape *shape);
+  void drawHandles(QPainter *painter, const CQIllustratorShape *shape) override;
 
   void updateHandles(uint numHandles);
 };
@@ -81,24 +81,24 @@ class CQIllustratorCreatePolygonMode : public CQIllustratorMode {
  public:
   CQIllustratorCreatePolygonMode(CQIllustrator *illustrator);
 
-  const char *getTitle() const { return "Create Polygon"; }
+  const char *getTitle() const override { return "Create Polygon"; }
 
-  CQIllustratorCreatePolygonToolbar *createToolbar();
+  CQIllustratorCreatePolygonToolbar *createToolbar() override;
 
-  CQIllustratorCreatePolygonSizer *createSizer();
+  CQIllustratorCreatePolygonSizer *createSizer() override;
 
-  CQMenuItem *createMenuItem(CQMenu *menu);
+  CQMenuItem *createMenuItem(CQMenu *menu) override;
 
-  bool isCreateMode() const { return true; }
+  bool isCreateMode() const override { return true; }
 
-  CQIllustratorCreatePolygonToolbar *getToolbar() const { return toolbar_; }
+  CQIllustratorCreatePolygonToolbar *getToolbar() const override { return toolbar_; }
 
-  void handleMousePress  (const MouseEvent &e);
-  void handleMouseRelease(const MouseEvent &e);
-  void handleMouseDrag   (const MouseEvent &e);
-  void handleMouseMove   (const MouseEvent &e);
+  void handleMousePress  (const MouseEvent &e) override;
+  void handleMouseRelease(const MouseEvent &e) override;
+  void handleMouseDrag   (const MouseEvent &e) override;
+  void handleMouseMove   (const MouseEvent &e) override;
 
-  bool handleKeyPress(const KeyEvent &e);
+  bool handleKeyPress(const KeyEvent &e) override;
 
  private:
   void addPoint(QPointF w, QPoint p);
@@ -108,15 +108,15 @@ class CQIllustratorCreatePolygonMode : public CQIllustratorMode {
   void addCloseHandle(const CPoint2D &cp, const CPoint2D &p);
   void addSnapHandle (const CPoint2D &cp, const CPoint2D &p);
 
-  void accept();
+  void accept() override;
 
-  bool cancel();
+  bool cancel() override;
 
-  void drawOverlay(CQIllustratorShapeDrawer *drawer);
+  void drawOverlay(CQIllustratorShapeDrawer *drawer) override;
 
   void drawPolygonPoints(QPainter *painter);
 
-  QCursor getCursor() const;
+  QCursor getCursor() const override;
 
   void commitPolygonPoints();
 

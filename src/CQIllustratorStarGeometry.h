@@ -16,7 +16,7 @@ class CQIllustratorStarGeometry : public CQIllustratorShapeGeometry {
    r2_(geometry.r2_), a1_(geometry.a1_), a2_(geometry.a2_) {
   }
 
-  virtual CQIllustratorStarGeometry *dup() {
+  CQIllustratorStarGeometry *dup() override {
     return new CQIllustratorStarGeometry(*this);
   }
 

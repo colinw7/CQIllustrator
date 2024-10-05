@@ -9,11 +9,11 @@ class CQIllustratorPathShapeControlPoint : public CQIllustratorShapeControlPoint
 
   CQIllustratorPathShapeControlPoint(uint ind, uint ind1, const CPoint2D &p);
 
-  CQIllustratorPathShapeControlPoint *dup() const;
+  CQIllustratorPathShapeControlPoint *dup() const override;
 
-  CPoint2D getPoint(const CQIllustratorShape *shape) const;
+  CPoint2D getPoint(const CQIllustratorShape *shape) const override;
 
-  void setPoint(CQIllustratorShape *shape, const CPoint2D &point);
+  void setPoint(CQIllustratorShape *shape, const CPoint2D &point) override;
 
   uint getInd () const { return ind_ ; }
   uint getInd1() const { return ind1_; }

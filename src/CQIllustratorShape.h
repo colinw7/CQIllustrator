@@ -60,7 +60,7 @@ class CQIllustratorShape : public QObject {
   typedef std::list<CQIllustratorShape *> ShapeList;
 
  public:
-  CQIllustratorShape(CQIllustratorShape *parent=0);
+  CQIllustratorShape(CQIllustratorShape *parent=nullptr);
   CQIllustratorShape(const CQIllustratorShape &rhs);
 
   virtual ~CQIllustratorShape();

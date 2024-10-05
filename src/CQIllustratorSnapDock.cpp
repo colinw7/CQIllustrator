@@ -9,7 +9,7 @@
 
 CQIllustratorSnapDock::
 CQIllustratorSnapDock(CQIllustrator *illustrator) :
- QWidget(0), illustrator_(illustrator)
+ QWidget(nullptr), illustrator_(illustrator)
 {
   QVBoxLayout *layout = new QVBoxLayout(this);
   layout->setMargin(2); layout->setSpacing(2);

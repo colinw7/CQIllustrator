@@ -297,7 +297,7 @@ align(CQIllustrator::AlignSide side, bool commit)
 
   //------
 
-  CQIllustratorShape *ashape = 0;
+  CQIllustratorShape *ashape = nullptr;
 
   CBBox2D abbox;
   CBBox2D bbbox;
@@ -352,7 +352,7 @@ align(CQIllustrator::AlignSide side, bool commit)
   else if (anchorMode == CQIllustratorAlignToolbar::AnchorMode::OBJECT) {
     CQIllustratorShape *shape = illustrator_->getShape(toolbar_->getAnchorObject().toStdString());
 
-    if (shape == 0) return;
+    if (shape == nullptr) return;
 
     CQIllustratorAlignToolbar::ObjectEdgeType edgeType =
       toolbar_->getAnchorObjectEdgeType();
@@ -681,9 +681,9 @@ resetSelectMode()
 
 CQAlignButtons::
 CQAlignButtons() :
- QWidget(0)
+ QWidget(nullptr)
 {
-  QGridLayout *agrid = new QGridLayout(this);
+  auto *agrid = new QGridLayout(this);
   agrid->setMargin(0); agrid->setSpacing(8);
 
   CQToolButton *alignl  = new CQToolButton(CQPixmapCacheInst->getIcon("ALIGN_TO_LEFT"));
@@ -735,9 +735,9 @@ CQAlignButtons() :
 
 CQDistButtons::
 CQDistButtons() :
- QWidget(0)
+ QWidget(nullptr)
 {
-  QGridLayout *dgrid = new QGridLayout(this);
+  auto *dgrid = new QGridLayout(this);
   dgrid->setMargin(0); dgrid->setSpacing(8);
 
   CQToolButton *distl = new CQToolButton(CQPixmapCacheInst->getIcon("DISTRIBUTE_LEFT"));
@@ -757,9 +757,9 @@ CQDistButtons() :
 
 CQSpreadButtons::
 CQSpreadButtons() :
- QWidget(0)
+ QWidget(nullptr)
 {
-  QGridLayout *sgrid = new QGridLayout(this);
+  auto *sgrid = new QGridLayout(this);
   sgrid->setMargin(0); sgrid->setSpacing(8);
 
   CQToolButton *spreadh = new CQToolButton(CQPixmapCacheInst->getIcon("SPREAD_HORIZ"));
@@ -777,7 +777,7 @@ CQAlignAnchor::
 CQAlignAnchor(QWidget *parent) :
  QWidget(parent)
 {
-  QGridLayout *layout = new QGridLayout(this);
+  auto *layout = new QGridLayout(this);
   layout->setMargin(0); layout->setSpacing(2);
 
   QLabel *anchorLabel = new QLabel("<small><b>Anchor</b></small>");
@@ -1049,7 +1049,7 @@ selectSlot(bool enabled)
 
 CQToolButton::
 CQToolButton(const QIcon &icon) :
- QToolButton(0)
+ QToolButton(nullptr)
 {
   setAutoRaise(true);
 

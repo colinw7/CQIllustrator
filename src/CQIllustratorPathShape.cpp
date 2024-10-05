@@ -14,31 +14,31 @@ class CPathShapePolygonProcess : public CPathShapeProcess {
   void init() {
   }
 
-  void moveTo(const CPoint2D &p) {
+  void moveTo(const CPoint2D &p) override {
     polygon_.addPoint(m_*p);
   }
 
-  void lineTo(const CPoint2D &p) {
+  void lineTo(const CPoint2D &p) override {
     polygon_.addPoint(m_*p);
   }
 
-  void curve2To(const CPoint2D &p1, const CPoint2D &p2) {
+  void curve2To(const CPoint2D &p1, const CPoint2D &p2) override {
     polygon_.addPoint(m_*p1);
     polygon_.addPoint(m_*p2);
   }
 
-  void curve3To(const CPoint2D &p1, const CPoint2D &p2, const CPoint2D &p3) {
+  void curve3To(const CPoint2D &p1, const CPoint2D &p2, const CPoint2D &p3) override {
     polygon_.addPoint(m_*p1);
     polygon_.addPoint(m_*p2);
     polygon_.addPoint(m_*p3);
   }
 
   void arcTo(const CPoint2D &/*c*/, double /*xr*/, double /*yr*/,
-             double /*angle1*/, double /*angle2*/) {
+             double /*angle1*/, double /*angle2*/) override {
     // TODO ?
   }
 
-  void close() {
+  void close() override {
   }
 
   void term() {
@@ -495,7 +495,7 @@ setLineType(uint i, CPathPartType type)
     else
       continue;
 
-    CPathShapePart *part1 = 0;
+    CPathShapePart *part1 = nullptr;
 
     if (line_num == int(i)) {
       CPoint2D pp1, pp2;
@@ -1186,31 +1186,31 @@ class CPathShapeSVGProcess : public CPathShapeProcess {
     file_->printf("<path d=\"");
   }
 
-  void moveTo(const CPoint2D &p) {
+  void moveTo(const CPoint2D &p) override {
     file_->printf("%sM %g,%g", sep_.c_str(), p.x, p.y);
 
     sep_ = " ";
   }
 
-  void lineTo(const CPoint2D &p) {
+  void lineTo(const CPoint2D &p) override {
     file_->printf("%sL %g,%g", sep_.c_str(), p.x, p.y);
 
     sep_ = " ";
   }
 
-  void curve2To(const CPoint2D &p1, const CPoint2D &p2) {
+  void curve2To(const CPoint2D &p1, const CPoint2D &p2) override {
     file_->printf("%sQ %g,%g %g,%g", sep_.c_str(), p1.x, p1.y, p2.x, p2.y);
 
     sep_ = " ";
   }
 
-  void curve3To(const CPoint2D &p1, const CPoint2D &p2, const CPoint2D &p3) {
+  void curve3To(const CPoint2D &p1, const CPoint2D &p2, const CPoint2D &p3) override {
     file_->printf("%sC %g,%g %g,%g %g,%g", sep_.c_str(), p1.x, p1.y, p2.x, p2.y, p3.x, p3.y);
 
     sep_ = " ";
   }
 
-  void arcTo(const CPoint2D &c, double xr, double yr, double angle1, double angle2) {
+  void arcTo(const CPoint2D &c, double xr, double yr, double angle1, double angle2) override {
     double a1 = CMathGen::RadToDeg(angle1);
     double a2 = CMathGen::RadToDeg(angle2);
 
@@ -1227,7 +1227,7 @@ class CPathShapeSVGProcess : public CPathShapeProcess {
     sep_ = " ";
   }
 
-  void close() {
+  void close() override {
     file_->printf("%sz", sep_.c_str());
 
     sep_ = " ";

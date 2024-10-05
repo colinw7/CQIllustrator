@@ -26,9 +26,9 @@ class CQIllustratorCreateEllipseCmd : public CQIllustratorCmd {
  public:
   CQIllustratorCreateEllipseCmd();
 
-  const char *getName() const { return "create_ellipse"; }
+  const char *getName() const override { return "create_ellipse"; }
 
-  bool exec(const std::vector<std::string> &words);
+  bool exec(const std::vector<std::string> &words) override;
 };
 
 CQIllustratorCreateEllipseMode::
@@ -288,12 +288,12 @@ setSelectedShape(const CQIllustratorShape *shape)
   const CQIllustratorEllipseShape *ellipse =
     dynamic_cast<const CQIllustratorEllipseShape *>(shape);
 
-  posEdit_    ->setEnabled(ellipse != 0);
-  widthEdit_  ->setEnabled(ellipse != 0);
-  heightEdit_ ->setEnabled(ellipse != 0);
-  angle1Edit_ ->setEnabled(ellipse != 0);
-  angle1Edit_ ->setEnabled(ellipse != 0);
-  connectEdit_->setEnabled(ellipse != 0);
+  posEdit_    ->setEnabled(ellipse != nullptr);
+  widthEdit_  ->setEnabled(ellipse != nullptr);
+  heightEdit_ ->setEnabled(ellipse != nullptr);
+  angle1Edit_ ->setEnabled(ellipse != nullptr);
+  angle1Edit_ ->setEnabled(ellipse != nullptr);
+  connectEdit_->setEnabled(ellipse != nullptr);
 
   if (ellipse) {
     const CBBox2D &bbox = ellipse->getBBox();

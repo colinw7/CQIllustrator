@@ -7,7 +7,7 @@
 namespace CQIllustratorUtil {
   template<typename T>
   T *getCurrentShape(CQIllustrator *illustrator) {
-    T *shape = 0;
+    T *shape = nullptr;
 
     CQIllustratorSelectedShapes *selection = illustrator->getSelection();
 
@@ -18,9 +18,9 @@ namespace CQIllustratorUtil {
 
       T *tshape = dynamic_cast<T *>(shape1);
 
-      if (tshape == 0) continue;
+      if (tshape == nullptr) continue;
 
-      if (shape == 0)
+      if (shape == nullptr)
         shape = tshape;
       else
         break;

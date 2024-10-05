@@ -22,13 +22,13 @@ class CQIllustratorTransformToolbar : public CQIllustratorToolbar {
  public:
   CQIllustratorTransformToolbar(CQIllustratorTransformMode *mode);
 
-  const char *getTitle() const { return "Transform"; }
+  const char *getTitle() const override { return "Transform"; }
 
   CQIllustrator *getIllustrator() const;
 
-  QIcon getIcon();
+  QIcon getIcon() override;
 
-  void addWidgets();
+  void addWidgets() override;
 
   void resetSelectMode();
 
@@ -51,20 +51,20 @@ class CQIllustratorTransformMode : public CQIllustratorMode {
  public:
   CQIllustratorTransformMode(CQIllustrator *illustrator);
 
-  const char *getTitle() const { return "Transform"; }
+  const char *getTitle() const override { return "Transform"; }
 
-  CQIllustratorTransformToolbar *createToolbar();
+  CQIllustratorTransformToolbar *createToolbar() override;
 
-  CQMenuItem *createMenuItem(CQMenu *menu);
+  CQMenuItem *createMenuItem(CQMenu *menu) override;
 
-  CQIllustratorTransformToolbar *getToolbar() const { return toolbar_; }
+  CQIllustratorTransformToolbar *getToolbar() const override { return toolbar_; }
 
-  void handleMouseRelease(const MouseEvent &e);
-  void handleMouseDrag   (const MouseEvent &e);
+  void handleMouseRelease(const MouseEvent &e) override;
+  void handleMouseDrag   (const MouseEvent &e) override;
 
-  void drawOverlay(CQIllustratorShapeDrawer *drawer);
+  void drawOverlay(CQIllustratorShapeDrawer *drawer) override;
 
-  QCursor getCursor() const;
+  QCursor getCursor() const override;
 
  private:
   CQIllustratorTransformToolbar *toolbar_;

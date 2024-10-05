@@ -14,11 +14,11 @@ class CQIllustratorZoomToolbar : public CQIllustratorToolbar {
  public:
   CQIllustratorZoomToolbar(CQIllustratorZoomMode *mode);
 
-  const char *getTitle() const { return "Zoom"; }
+  const char *getTitle() const override { return "Zoom"; }
 
-  QIcon getIcon();
+  QIcon getIcon() override;
 
-  void addWidgets();
+  void addWidgets() override;
 
  private slots:
   void zoomFitSlot();
@@ -27,11 +27,11 @@ class CQIllustratorZoomToolbar : public CQIllustratorToolbar {
   void zoomOutSlot();
 
  private:
-  CQIllustratorZoomMode *mode_ { 0 };
-  CQImageButton         *zoomFitButton_ { 0 };
-  CQImageButton         *zoomSelButton_ { 0 };
-  CQImageButton         *zoomInButton_ { 0 };
-  CQImageButton         *zoomOutButton_ { 0 };
+  CQIllustratorZoomMode *mode_ { nullptr };
+  CQImageButton         *zoomFitButton_ { nullptr };
+  CQImageButton         *zoomSelButton_ { nullptr };
+  CQImageButton         *zoomInButton_ { nullptr };
+  CQImageButton         *zoomOutButton_ { nullptr };
 };
 
 //------
@@ -40,23 +40,23 @@ class CQIllustratorZoomMode : public CQIllustratorMode {
  public:
   CQIllustratorZoomMode(CQIllustrator *illustrator);
 
-  const char *getTitle() const { return "Zoom"; }
+  const char *getTitle() const override { return "Zoom"; }
 
-  CQIllustratorZoomToolbar *createToolbar();
+  CQIllustratorZoomToolbar *createToolbar() override;
 
-  CQMenuItem *createMenuItem(CQMenu *menu);
+  CQMenuItem *createMenuItem(CQMenu *menu) override;
 
-  CQIllustratorZoomToolbar *getToolbar() const { return toolbar_; }
+  CQIllustratorZoomToolbar *getToolbar() const override { return toolbar_; }
 
-  void handleMousePress  (const MouseEvent &e);
-  void handleMouseRelease(const MouseEvent &e);
-  void handleMouseDrag   (const MouseEvent &e);
-  void handleMouseMove   (const MouseEvent &e);
+  void handleMousePress  (const MouseEvent &e) override;
+  void handleMouseRelease(const MouseEvent &e) override;
+  void handleMouseDrag   (const MouseEvent &e) override;
+  void handleMouseMove   (const MouseEvent &e) override;
 
-  void drawOverlay(CQIllustratorShapeDrawer *drawer);
+  void drawOverlay(CQIllustratorShapeDrawer *drawer) override;
 
  private:
-  CQIllustratorZoomToolbar *toolbar_ { 0 };
+  CQIllustratorZoomToolbar *toolbar_ { nullptr };
 };
 
 #endif

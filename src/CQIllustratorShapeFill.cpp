@@ -31,14 +31,14 @@ operator=(const CQIllustratorShapeFill &fill)
   if (fill.gradient_)
     gradient_ = fill.gradient_->dup();
   else
-    gradient_ = 0;
+    gradient_ = nullptr;
 
   delete image_;
 
   if (fill.image_)
     image_ = new CQIllustratorImageFill(*fill.image_);
   else
-    image_ = 0;
+    image_ = nullptr;
 
   return *this;
 }
@@ -59,7 +59,7 @@ setGradient(const CGenGradient *g)
   if (g)
     gradient_ = g->dup();
   else
-    gradient_ = 0;
+    gradient_ = nullptr;
 }
 
 CImagePtr
@@ -94,7 +94,7 @@ resetImage()
 {
   delete image_;
 
-  image_ = 0;
+  image_ = nullptr;
 }
 
 CQIllustratorShapeFill::ImageScale

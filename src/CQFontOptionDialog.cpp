@@ -7,7 +7,7 @@
 
 CQFontOptionDialog::
 CQFontOptionDialog(CQFontOptionTool *tool) :
- CQOptionToolDialog(), tool_(tool), fontChooser_(0)
+ CQOptionToolDialog(), tool_(tool), fontChooser_(nullptr)
 {
   initWidgets();
 }

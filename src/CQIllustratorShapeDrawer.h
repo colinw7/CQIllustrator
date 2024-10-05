@@ -19,7 +19,7 @@ class CQIllustratorShapeFill;
 
 class CQIllustratorShapeDrawer {
  public:
-  CQIllustratorShapeDrawer(CQIllustrator *illustrator, QPainter *painter=0);
+  CQIllustratorShapeDrawer(CQIllustrator *illustrator, QPainter *painter=nullptr);
 
   virtual ~CQIllustratorShapeDrawer();
 

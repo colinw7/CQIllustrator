@@ -1,6 +1,7 @@
 #include <CQObjectOption.h>
 #include <CQIllustrator.h>
 #include <CQUtil.h>
+#include <CStrUtil.h>
 
 #include <QHBoxLayout>
 #include <QVBoxLayout>

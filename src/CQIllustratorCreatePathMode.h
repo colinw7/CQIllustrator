@@ -24,18 +24,18 @@ class CQIllustratorCreatePathToolbar : public CQIllustratorToolbar {
  public:
   CQIllustratorCreatePathToolbar(CQIllustratorCreatePathMode *mode);
 
-  const char *getTitle() const { return "Create Path"; }
+  const char *getTitle() const override { return "Create Path"; }
 
-  QIcon getIcon();
+  QIcon getIcon() override;
 
-  void addWidgets();
+  void addWidgets() override;
 
   CreateMode getCreateMode() const { return createMode_; }
 
-  void setSelectedShape(const CQIllustratorShape *shape);
+  void setSelectedShape(const CQIllustratorShape *shape) override;
 
   void setSelectedShapePoint(const CQIllustratorShape *shape,
-                             const CQIllustratorShapeControlPoint *point);
+                             const CQIllustratorShapeControlPoint *point) override;
 
   void updateShape();
 
@@ -95,7 +95,7 @@ class CQIllustratorCreatePathSizer : public CQIllustratorModeSizer {
  public:
   CQIllustratorCreatePathSizer(CQIllustratorCreatePathMode *mode);
 
-  void drawHandles(QPainter *painter, const CQIllustratorShape *shape);
+  void drawHandles(QPainter *painter, const CQIllustratorShape *shape) override;
 
   void updateHandles(uint numHandles);
 };
@@ -112,11 +112,11 @@ class CQIllustratorCreatePathMode : public CQIllustratorMode {
  public:
   CQIllustratorCreatePathMode(CQIllustrator *illustrator);
 
-  const char *getTitle() const { return "Create Path"; }
+  const char *getTitle() const override { return "Create Path"; }
 
-  CQIllustratorCreatePathToolbar *createToolbar();
+  CQIllustratorCreatePathToolbar *createToolbar() override;
 
-  CQIllustratorCreatePathSizer *createSizer();
+  CQIllustratorCreatePathSizer *createSizer() override;
 
   void setSelMode(SelMode mode);
 
@@ -126,18 +126,18 @@ class CQIllustratorCreatePathMode : public CQIllustratorMode {
 
   CPathPartType getPathMode() const { return pathMode_; }
 
-  CQMenuItem *createMenuItem(CQMenu *menu);
+  CQMenuItem *createMenuItem(CQMenu *menu) override;
 
-  bool isCreateMode() const { return true; }
+  bool isCreateMode() const override { return true; }
 
-  CQIllustratorCreatePathToolbar *getToolbar() const { return toolbar_; }
+  CQIllustratorCreatePathToolbar *getToolbar() const override { return toolbar_; }
 
-  void handleMousePress  (const MouseEvent &e);
-  void handleMouseRelease(const MouseEvent &e);
-  void handleMouseDrag   (const MouseEvent &e);
-  void handleMouseMove   (const MouseEvent &e);
+  void handleMousePress  (const MouseEvent &e) override;
+  void handleMouseRelease(const MouseEvent &e) override;
+  void handleMouseDrag   (const MouseEvent &e) override;
+  void handleMouseMove   (const MouseEvent &e) override;
 
-  bool handleKeyPress(const KeyEvent &e);
+  bool handleKeyPress(const KeyEvent &e) override;
 
  private:
   void addPoint(QPointF w, QPoint p);
@@ -147,15 +147,15 @@ class CQIllustratorCreatePathMode : public CQIllustratorMode {
   void addCloseHandle(const CPoint2D &cp, const CPoint2D &p);
   void addSnapHandle (const CPoint2D &cp, const CPoint2D &p);
 
-  void accept();
+  void accept() override;
 
-  bool cancel();
+  bool cancel() override;
 
-  void drawOverlay(CQIllustratorShapeDrawer *drawer);
+  void drawOverlay(CQIllustratorShapeDrawer *drawer) override;
 
   void drawPathPoints(QPainter *painter);
 
-  QCursor getCursor() const;
+  QCursor getCursor() const override;
 
   void commitPathPoints(bool closed);
 

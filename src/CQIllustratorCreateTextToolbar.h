@@ -18,15 +18,15 @@ class CQIllustratorCreateTextToolbar : public CQIllustratorToolbar {
  public:
   CQIllustratorCreateTextToolbar(CQIllustratorCreateTextMode *createTextMode);
 
-  const char *getTitle() const { return "Create Text"; }
+  const char *getTitle() const override { return "Create Text"; }
 
   QFont getFont() const { return qfont_; }
 
-  QIcon getIcon();
+  QIcon getIcon() override;
 
-  void addWidgets();
+  void addWidgets() override;
 
-  void setSelectedShape(const CQIllustratorShape *shape);
+  void setSelectedShape(const CQIllustratorShape *shape) override;
 
   void setSize(const CBBox2D &bbox);
 

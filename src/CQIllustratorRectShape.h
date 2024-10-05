@@ -18,13 +18,14 @@ class CQIllustratorRectShape : public CQIllustratorShape {
   CQIllustratorRectShape(const CPoint2D &p1, const CPoint2D &p2, double rx=0.0, double ry=0.0);
   CQIllustratorRectShape(const CQIllustratorRectShape &rect);
 
-  CQIllustratorRectShape *dup() const;
+  CQIllustratorRectShape *dup() const override;
 
-  const char *getClassName() const { return "rect"; }
+  const char *getClassName() const override { return "rect"; }
 
-  void getControlPoints(ControlPointList &points, ControlType type=ControlType::GEOMETRY) const;
+  void getControlPoints(ControlPointList &points,
+                        ControlType type=ControlType::GEOMETRY) const override;
 
-  void setControlPoint(const CQIllustratorShapeControlPoint *point);
+  void setControlPoint(const CQIllustratorShapeControlPoint *point) override;
 
   double getRadiusX() const { return rx_; }
   void setRadiusX(double rx);
@@ -44,29 +45,29 @@ class CQIllustratorRectShape : public CQIllustratorShape {
   CPoint2D getRYPoint() const;
   void setRYPoint(const CPoint2D &p);
 
-  bool getPolygon(CPolygon2D &polygon) const;
+  bool getPolygon(CPolygon2D &polygon) const override;
 
-  bool getPath(CPathShapePartList &path) const;
+  bool getPath(CPathShapePartList &path) const override;
 
-  void moveBy(const CPoint2D &d);
+  void moveBy(const CPoint2D &d) override;
 
-  void resizeBy(double dw, double dh);
+  void resizeBy(double dw, double dh) override;
 
-  bool flip(bool x_axis);
+  bool flip(bool x_axis) override;
 
-  void drawShape(CQIllustratorShapeDrawer *drawer) const;
+  void drawShape(CQIllustratorShapeDrawer *drawer) const override;
 
-  CQIllustratorShapeGeometry *getGeometry();
+  CQIllustratorShapeGeometry *getGeometry() override;
 
-  void doSetGeometry(const CQIllustratorShapeGeometry *geom);
+  void doSetGeometry(const CQIllustratorShapeGeometry *geom) override;
 
-  void saveSVG(const CQIllustratorSaveData &saveData);
-  void saveCmd(const CQIllustratorSaveData &saveData);
+  void saveSVG(const CQIllustratorSaveData &saveData) override;
+  void saveCmd(const CQIllustratorSaveData &saveData) override;
 
   double getAngle() const;
 
  protected:
-  void updateBBox() const;
+  void updateBBox() const override;
 
  protected:
   CPoint2D p1_, p2_;
@@ -80,13 +81,13 @@ class CQIllustratorRectShapeControlPoint : public CQIllustratorShapeControlPoint
   CQIllustratorRectShapeControlPoint(CQIllustratorRectShape::ControlPointType type,
                                      const CPoint2D &p);
 
-  CQIllustratorRectShapeControlPoint *dup() const;
+  CQIllustratorRectShapeControlPoint *dup() const override;
 
   CQIllustratorRectShape::ControlPointType getType() const { return type_; }
 
-  CPoint2D getPoint(const CQIllustratorShape *shape) const;
+  CPoint2D getPoint(const CQIllustratorShape *shape) const override;
 
-  void setPoint(CQIllustratorShape *shape, const CPoint2D &point);
+  void setPoint(CQIllustratorShape *shape, const CPoint2D &point) override;
 
  protected:
   CQIllustratorRectShape::ControlPointType type_;

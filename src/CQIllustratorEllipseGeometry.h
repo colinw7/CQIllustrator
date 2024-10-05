@@ -22,7 +22,7 @@ class CQIllustratorEllipseGeometry : public CQIllustratorShapeGeometry {
    angle1_(geometry.angle1_), angle2_(geometry.angle2_) {
   }
 
-  virtual CQIllustratorEllipseGeometry *dup() {
+  CQIllustratorEllipseGeometry *dup() override {
     return new CQIllustratorEllipseGeometry(*this);
   }
 

@@ -20,7 +20,7 @@ class CQEllipseShape2DConnectType : public QComboBox {
   Q_OBJECT
 
  public:
-  CQEllipseShape2DConnectType(QWidget *parent=0);
+  CQEllipseShape2DConnectType(QWidget *parent=nullptr);
 
   void setType(CQIllustratorEllipseShape::ConnectType value);
 
@@ -51,13 +51,13 @@ class CQIllustratorCreateEllipseToolbar : public CQIllustratorToolbar {
  public:
   CQIllustratorCreateEllipseToolbar(CQIllustratorCreateEllipseMode *mode);
 
-  const char *getTitle() const { return "Create Ellipse"; }
+  const char *getTitle() const override { return "Create Ellipse"; }
 
-  QIcon getIcon();
+  QIcon getIcon() override;
 
-  void addWidgets();
+  void addWidgets() override;
 
-  void setSelectedShape(const CQIllustratorShape *shape);
+  void setSelectedShape(const CQIllustratorShape *shape) override;
 
   void setSize(const CBBox2D &bbox);
 
@@ -65,13 +65,13 @@ class CQIllustratorCreateEllipseToolbar : public CQIllustratorToolbar {
   void updateShape();
 
  private:
-  CQIllustratorCreateEllipseMode *mode_ { 0 };
-  CQPointEdit                    *posEdit_ { 0 };
-  CQRealEdit                     *widthEdit_ { 0 };
-  CQRealEdit                     *heightEdit_ { 0 };
-  CQAngleSpinBox                 *angle1Edit_ { 0 };
-  CQAngleSpinBox                 *angle2Edit_ { 0 };
-  CQEllipseShape2DConnectType    *connectEdit_ { 0 };
+  CQIllustratorCreateEllipseMode *mode_ { nullptr };
+  CQPointEdit                    *posEdit_ { nullptr };
+  CQRealEdit                     *widthEdit_ { nullptr };
+  CQRealEdit                     *heightEdit_ { nullptr };
+  CQAngleSpinBox                 *angle1Edit_ { nullptr };
+  CQAngleSpinBox                 *angle2Edit_ { nullptr };
+  CQEllipseShape2DConnectType    *connectEdit_ { nullptr };
 };
 
 //------
@@ -80,13 +80,13 @@ class CQIllustratorCreateEllipseSizer : public CQIllustratorModeSizer {
  public:
   CQIllustratorCreateEllipseSizer(CQIllustratorCreateEllipseMode *mode);
 
-  void drawHandles(QPainter *painter, const CQIllustratorShape *shape);
+  void drawHandles(QPainter *painter, const CQIllustratorShape *shape) override;
 
  private:
-  CQIllustratorControlPointHandle *rx_handle_ { 0 };
-  CQIllustratorControlPointHandle *ry_handle_ { 0 };
-  CQIllustratorControlPointHandle *a1_handle_ { 0 };
-  CQIllustratorControlPointHandle *a2_handle_ { 0 };
+  CQIllustratorControlPointHandle *rx_handle_ { nullptr };
+  CQIllustratorControlPointHandle *ry_handle_ { nullptr };
+  CQIllustratorControlPointHandle *a1_handle_ { nullptr };
+  CQIllustratorControlPointHandle *a2_handle_ { nullptr };
 };
 
 //------
@@ -97,28 +97,28 @@ class CQIllustratorCreateEllipseMode : public CQIllustratorMode {
  public:
   CQIllustratorCreateEllipseMode(CQIllustrator *illustrator);
 
-  const char *getTitle() const { return "Create Ellipse"; }
+  const char *getTitle() const override { return "Create Ellipse"; }
 
   CQIllustratorCreateEllipseToolbar *getToolbar() { return toolbar_; }
 
-  CQIllustratorCreateEllipseToolbar *createToolbar();
+  CQIllustratorCreateEllipseToolbar *createToolbar() override;
 
-  CQIllustratorCreateEllipseSizer *createSizer();
+  CQIllustratorCreateEllipseSizer *createSizer() override;
 
-  CQMenuItem *createMenuItem(CQMenu *menu);
+  CQMenuItem *createMenuItem(CQMenu *menu) override;
 
-  bool isCreateMode() const { return true; }
+  bool isCreateMode() const override { return true; }
 
-  CQIllustratorCreateEllipseToolbar *getToolbar() const { return toolbar_; }
+  CQIllustratorCreateEllipseToolbar *getToolbar() const override { return toolbar_; }
 
-  void handleMouseRelease(const MouseEvent &e);
-  void handleMouseDrag   (const MouseEvent &e);
+  void handleMouseRelease(const MouseEvent &e) override;
+  void handleMouseDrag   (const MouseEvent &e) override;
 
-  void drawOverlay(CQIllustratorShapeDrawer *drawer);
+  void drawOverlay(CQIllustratorShapeDrawer *drawer) override;
 
  private:
-  CQIllustratorCreateEllipseToolbar *toolbar_ { 0 };
-  CQIllustratorCreateEllipseSizer   *sizer_ { 0 };
+  CQIllustratorCreateEllipseToolbar *toolbar_ { nullptr };
+  CQIllustratorCreateEllipseSizer   *sizer_ { nullptr };
   bool                               equalSize_ { false };
 };
 

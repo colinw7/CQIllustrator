@@ -233,7 +233,7 @@ addWidgets()
   //-----
 
   centerEdit_  = new CQPointEdit;
-  numEdit_     = new QSpinBox(0);
+  numEdit_     = new QSpinBox(nullptr);
   radius1Edit_ = new CQRealEdit(0.0);
   radius2Edit_ = new CQRealEdit(0.0);
   angle1Edit_  = new CQAngleSpinBox(CAngle(0.0));
@@ -284,12 +284,12 @@ setSelectedShape(const CQIllustratorShape *shape)
   const auto *star = dynamic_cast<const CQIllustratorStarShape  *>(shape);
   const auto *poly = dynamic_cast<const CQIllustratorNPolyShape *>(shape);
 
-  centerEdit_ ->setEnabled(star != 0 || poly != 0);
-  numEdit_    ->setEnabled(star != 0 || poly != 0);
-  radius1Edit_->setEnabled(star != 0 || poly != 0);
-  radius2Edit_->setEnabled(star != 0);
-  angle1Edit_ ->setEnabled(star != 0 || poly != 0);
-  angle2Edit_ ->setEnabled(star != 0);
+  centerEdit_ ->setEnabled(star != nullptr || poly != nullptr);
+  numEdit_    ->setEnabled(star != nullptr || poly != nullptr);
+  radius1Edit_->setEnabled(star != nullptr || poly != nullptr);
+  radius2Edit_->setEnabled(star != nullptr);
+  angle1Edit_ ->setEnabled(star != nullptr || poly != nullptr);
+  angle2Edit_ ->setEnabled(star != nullptr);
 
   disconnect(numEdit_   , SIGNAL(valueChanged(int)), this, SLOT(updateShape()));
   disconnect(angle1Edit_, SIGNAL(angleChanged(const CAngle &)), this, SLOT(updateShape()));

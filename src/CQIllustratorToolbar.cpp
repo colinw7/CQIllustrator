@@ -14,7 +14,7 @@
 
 CQIllustratorToolbar::
 CQIllustratorToolbar(CQIllustratorMode *mode) :
- QWidget(0), mode_(mode)
+ QWidget(nullptr), mode_(mode)
 {
 }
 

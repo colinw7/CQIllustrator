@@ -10,17 +10,17 @@ class CQIllustratorPathShape : public CQIllustratorShape {
   CQIllustratorPathShape(const CPathShapePartList &parts=CPathShapePartList());
   CQIllustratorPathShape(const CQIllustratorPathShape &path);
 
-  CQIllustratorPathShape *dup() const;
+  CQIllustratorPathShape *dup() const override;
 
-  const char *getClassName() const { return "path"; }
+  const char *getClassName() const override { return "path"; }
 
   const CPathShapePartList &getParts() const { return parts_; }
 
-  bool getPolygon(CPolygon2D &polygon) const;
+  bool getPolygon(CPolygon2D &polygon) const override;
 
-  bool getPath(CPathShapePartList &path) const;
+  bool getPath(CPathShapePartList &path) const override;
 
-  void moveBy(const CPoint2D &d);
+  void moveBy(const CPoint2D &d) override;
 
   void startGroup();
   void endGroup();
@@ -38,20 +38,20 @@ class CQIllustratorPathShape : public CQIllustratorShape {
 
   bool empty() const;
 
-  double distance(const CPoint2D &p) const;
+  double distance(const CPoint2D &p) const override;
 
-  bool inside(const CPoint2D &p) const;
+  bool inside(const CPoint2D &p) const override;
 
-  void getControlLines(ControlLineList &lines) const;
+  void getControlLines(ControlLineList &lines) const override;
 
   void getLines(std::vector<CLine2D> &lines) const;
 
   void getControlPoints(ControlPointList &points,
-                        ControlType type=ControlType::GEOMETRY) const;
+                        ControlType type=ControlType::GEOMETRY) const override;
 
-  void setControlPoint(const CQIllustratorShapeControlPoint *point);
+  void setControlPoint(const CQIllustratorShapeControlPoint *point) override;
 
-  bool doRemovePoint(const CQIllustratorShapeControlPoint *point);
+  bool doRemovePoint(const CQIllustratorShapeControlPoint *point) override;
 
   CLine2D getLine(uint ind) const;
 
@@ -66,21 +66,21 @@ class CQIllustratorPathShape : public CQIllustratorShape {
   void setCornerPoint(uint ind);
   void setCurvePoint(uint ind);
 
-  bool flip(bool x_axis);
+  bool flip(bool x_axis) override;
 
-  void drawShape(CQIllustratorShapeDrawer *drawer) const;
+  void drawShape(CQIllustratorShapeDrawer *drawer) const override;
 
-  CQIllustratorShapeGeometry *getGeometry();
+  CQIllustratorShapeGeometry *getGeometry() override;
 
-  void doSetGeometry(const CQIllustratorShapeGeometry *geom);
+  void doSetGeometry(const CQIllustratorShapeGeometry *geom) override;
 
-  void saveSVG(const CQIllustratorSaveData &saveData);
-  void saveCmd(const CQIllustratorSaveData &saveData);
+  void saveSVG(const CQIllustratorSaveData &saveData) override;
+  void saveCmd(const CQIllustratorSaveData &saveData) override;
 
   void processPath(CPathShapeProcess *process);
 
  protected:
-  void updateBBox() const;
+  void updateBBox() const override;
 
  protected:
   CPathShapePartList parts_;

@@ -150,8 +150,8 @@ showMenu(const QPoint &p)
   if (! popupMenu_) {
     popupMenu_ = new QMenu(this);
 
-    QAction *applyAction  = new QAction("Apply" , 0);
-    QAction *cancelAction = new QAction("Cancel", 0);
+    QAction *applyAction  = new QAction("Apply" , nullptr);
+    QAction *cancelAction = new QAction("Cancel", nullptr);
 
     popupMenu_->addAction(applyAction);
     popupMenu_->addAction(cancelAction);

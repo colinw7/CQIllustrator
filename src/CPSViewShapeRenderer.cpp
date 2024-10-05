@@ -110,7 +110,7 @@ pathStroke()
 
   illustrator_->addShape(path_);
 
-  path_ = 0;
+  path_ = nullptr;
 }
 
 void
@@ -124,7 +124,7 @@ pathFill()
 
   illustrator_->addShape(path_);
 
-  path_ = 0;
+  path_ = nullptr;
 }
 
 void
@@ -135,7 +135,7 @@ pathClip()
 
   illustrator_->addShape(path_);
 
-  path_ = 0;
+  path_ = nullptr;
 }
 
 CPoint2D

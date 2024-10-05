@@ -19,10 +19,10 @@ class CQIllustratorUndo : public QObject, public CUndo {
 
   CQIllustrator *getIllustrator() const { return illustrator_; }
 
-  bool addUndo(CUndoData *data);
+  bool addUndo(CUndoData *data) override;
 
-  bool undo(uint n=1);
-  bool redo(uint n=1);
+  bool undo(uint n=1) override;
+  bool redo(uint n=1) override;
 
   void emitUndoChanged();
 
@@ -46,9 +46,9 @@ class CQIllustratorUndoSetShapeGeometry : public CUndoData {
 
  ~CQIllustratorUndoSetShapeGeometry() { }
 
-  bool exec();
+  bool exec() override;
 
-  std::string getDesc() const;
+  std::string getDesc() const override;
 
  private:
   CQIllustratorUndo          *undo_;
@@ -62,9 +62,9 @@ class CQIllustratorUndoSetShapeStroke : public CUndoData {
 
  ~CQIllustratorUndoSetShapeStroke() { }
 
-  bool exec();
+  bool exec() override;
 
-  std::string getDesc() const;
+  std::string getDesc() const override;
 
  private:
   CQIllustratorUndo        *undo_;
@@ -78,9 +78,9 @@ class CQIllustratorUndoSetShapeFill : public CUndoData {
 
  ~CQIllustratorUndoSetShapeFill() { }
 
-  bool exec();
+  bool exec() override;
 
-  std::string getDesc() const;
+  std::string getDesc() const override;
 
  private:
   CQIllustratorUndo      *undo_;
@@ -94,9 +94,9 @@ class CQIllustratorUndoCreateShape : public CUndoData {
 
  ~CQIllustratorUndoCreateShape() { }
 
-  bool exec();
+  bool exec() override;
 
-  std::string getDesc() const;
+  std::string getDesc() const override;
 
  private:
   CQIllustratorUndo  *undo_;

@@ -11,9 +11,9 @@ class CQFontOptionTool : public CQOptionTool {
   Q_OBJECT
 
  public:
-  CQFontOptionTool(QWidget *parent=0);
+  CQFontOptionTool(QWidget *parent=nullptr);
 
-  CQOptionToolDialog *getDialog();
+  CQOptionToolDialog *getDialog() override;
 
   void setFont(QFont font);
 

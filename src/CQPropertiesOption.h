@@ -27,7 +27,7 @@ class CQPropertiesOptionTool : public CQOptionTool {
 
   CQIllustrator *getIllustrator() const { return illustrator_; }
 
-  CQOptionToolDialog *getDialog();
+  CQOptionToolDialog *getDialog() override;
 
   void setObject(CQIllustratorShape *shape);
 

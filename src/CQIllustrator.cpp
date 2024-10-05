@@ -149,81 +149,81 @@ class CQIllustratorSourceCmd : public CQIllustratorCmd {
  public:
   CQIllustratorSourceCmd();
 
-  const char *getName() const { return "source"; }
+  const char *getName() const override { return "source"; }
 
-  bool exec(const std::vector<std::string> &words);
+  bool exec(const std::vector<std::string> &words) override;
 };
 
 class CQIllustratorSelectCmd : public CQIllustratorCmd {
  public:
   CQIllustratorSelectCmd();
 
-  const char *getName() const { return "select"; }
+  const char *getName() const override { return "select"; }
 
-  bool exec(const std::vector<std::string> &words);
+  bool exec(const std::vector<std::string> &words) override;
 };
 
 class CQIllustratorMoveCmd : public CQIllustratorCmd {
  public:
   CQIllustratorMoveCmd();
 
-  const char *getName() const { return "move"; }
+  const char *getName() const override { return "move"; }
 
-  bool exec(const std::vector<std::string> &words);
+  bool exec(const std::vector<std::string> &words) override;
 };
 
 class CQIllustratorMovePointCmd : public CQIllustratorCmd {
  public:
   CQIllustratorMovePointCmd();
 
-  const char *getName() const { return "move_point"; }
+  const char *getName() const override { return "move_point"; }
 
-  bool exec(const std::vector<std::string> &words);
+  bool exec(const std::vector<std::string> &words) override;
 };
 
 class CQIllustratorUndoCmd : public CQIllustratorCmd {
  public:
   CQIllustratorUndoCmd();
 
-  const char *getName() const { return "undo"; }
+  const char *getName() const override { return "undo"; }
 
-  bool exec(const std::vector<std::string> &words);
+  bool exec(const std::vector<std::string> &words) override;
 };
 
 class CQIllustratorRedoCmd : public CQIllustratorCmd {
  public:
   CQIllustratorRedoCmd();
 
-  const char *getName() const { return "redo"; }
+  const char *getName() const override { return "redo"; }
 
-  bool exec(const std::vector<std::string> &words);
+  bool exec(const std::vector<std::string> &words) override;
 };
 
 class CQIllustratorOffsetPathCmd : public CQIllustratorCmd {
  public:
   CQIllustratorOffsetPathCmd();
 
-  const char *getName() const { return "offset_path"; }
+  const char *getName() const override { return "offset_path"; }
 
-  bool exec(const std::vector<std::string> &words);
+  bool exec(const std::vector<std::string> &words) override;
 };
 
 class CQIllustratorStrokePathCmd : public CQIllustratorCmd {
  public:
   CQIllustratorStrokePathCmd();
 
-  const char *getName() const { return "stroke_path"; }
+  const char *getName() const override { return "stroke_path"; }
 
-  bool exec(const std::vector<std::string> &words);
+  bool exec(const std::vector<std::string> &words) override;
 };
 
 class CQIllustratorIntersectCmd : public CQIllustratorCmd {
  public:
   CQIllustratorIntersectCmd();
 
-  const char *getName() const { return "intersect"; }
+  const char *getName() const override { return "intersect"; }
 
-  bool exec(const std::vector<std::string> &words);
+  bool exec(const std::vector<std::string> &words) override;
 };
 
 //----------------
@@ -311,7 +311,7 @@ initTerm()
   for (auto &modePair : modeMap_) {
     auto *mode = modePair.second;
 
-    if (mode->getParentMode() == 0) {
+    if (mode->getParentMode() == nullptr) {
       if      (mode->isCreateMode())
         mode->createMenuItem(createMenu_);
       else if (mode->isSelectMode())
@@ -376,7 +376,7 @@ getMode(Mode id) const
   auto p = modeMap_.find(id);
 
   if (p == modeMap_.end())
-    return 0;
+    return nullptr;
 
   return (*p).second;
 }
@@ -1238,7 +1238,7 @@ selectPointAt(const CPoint2D &p, CQIllustratorShape::ControlType type, bool add,
 
     auto point = shape1->nearestPoint(p, type);
 
-    if (shape == 0 || point.getDist() < dist) {
+    if (shape == nullptr || point.getDist() < dist) {
       shape  = shape1;
       npoint = point;
     }
@@ -1383,7 +1383,7 @@ cyclePrev()
   CQIllustratorData::ShapeStack::const_reverse_iterator ps1, ps2;
 
   for (ps1 = shapes.rbegin(), ps2 = shapes.rend(); ps1 != ps2; ++ps1) {
-    if      (select_shape == 0) {
+    if      (select_shape == nullptr) {
       shape = *ps1;
 
       break;
@@ -1419,7 +1419,7 @@ cycleNext()
   CQIllustratorData::ShapeStack::const_iterator ps1, ps2;
 
   for (ps1 = shapes.begin(), ps2 = shapes.end(); ps1 != ps2; ++ps1) {
-    if      (select_shape == 0) {
+    if      (select_shape == nullptr) {
       shape = *ps1;
 
       break;
@@ -1627,7 +1627,7 @@ drawQuadTree(QPainter *painter, const CQIllustratorData::QuadTree *tree, uint ma
     painter->fillRect(CQUtil::toQRect(bbox), QBrush(CQUtil::rgbaToColor(CRGBA(0.0, 0.0, r, 0.5))));
   }
 
-  if (tree->getBLTree() != 0) {
+  if (tree->getBLTree() != nullptr) {
     const auto *bl_tree = tree->getBLTree();
     const auto *br_tree = tree->getBRTree();
     const auto *tl_tree = tree->getTLTree();
@@ -2288,7 +2288,7 @@ loadSVG(const QString &filename)
   auto *block = svg.getRoot();
 
   for (const auto &object : block->children()) {
-    auto *shape = addSVGObject(0, object);
+    auto *shape = addSVGObject(nullptr, object);
 
     if (! shape) continue;
 
@@ -2449,10 +2449,10 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
 {
   if (! force) {
     if (! object->isHierDrawable())
-      return 0;
+      return nullptr;
 
     if (! object->isDrawable())
-      return 0;
+      return nullptr;
   }
 
   //---
@@ -3191,7 +3191,7 @@ toPolygonSlot()
   for (uint i = 0; i < num_old_shapes; ++i)
     removeShape(old_shapes[i]);
 
-  setSelectShape(0);
+  setSelectShape(nullptr);
 
   uint num_new_shapes = new_shapes.size();
 
@@ -3242,7 +3242,7 @@ toPathSlot()
   for (uint i = 0; i < num_old_shapes; ++i)
     removeShape(old_shapes[i]);
 
-  setSelectShape(0);
+  setSelectShape(nullptr);
 
   uint num_new_shapes = new_shapes.size();
 
@@ -3305,7 +3305,7 @@ toCurve()
   for (uint i = 0; i < num_old_shapes; ++i)
     removeShape(old_shapes[i]);
 
-  setSelectShape(0);
+  setSelectShape(nullptr);
 
   uint num_new_shapes = new_shapes.size();
 
@@ -3359,7 +3359,7 @@ offsetPath(double o)
 
   endUndoGroup();
 
-  setSelectShape(0);
+  setSelectShape(nullptr);
 
   uint num_new_shapes = new_shapes.size();
 
@@ -3421,7 +3421,7 @@ strokePath(double d)
   for (uint i = 0; i < num_old_shapes; ++i)
     removeShape(old_shapes[i]);
 
-  setSelectShape(0);
+  setSelectShape(nullptr);
 
   uint num_new_shapes = new_shapes.size();
 
@@ -3552,7 +3552,7 @@ geomOp(CBooleanOp op)
 
   startUndoGroup("Boolean Geometry Op");
 
-  setSelectShape(0);
+  setSelectShape(nullptr);
 
   std::vector<CQIllustratorShape *> shapes;
 
@@ -3664,7 +3664,7 @@ flatten()
     }
   }
 
-  setSelectShape(0);
+  setSelectShape(nullptr);
 
   uint num_shapes = shapes.size();
 
@@ -3736,7 +3736,7 @@ intersectOp(CBooleanOp op, bool split, bool keepOld)
 
   startUndoGroup("Intersect");
 
-  setSelectShape(0);
+  setSelectShape(nullptr);
 
   if (! keepOld) {
     removeShape(shape1);
@@ -3866,7 +3866,7 @@ triangulateSlot()
 
   endUndoGroup();
 
-  setSelectShape(0);
+  setSelectShape(nullptr);
 
   uint num_new_shapes = new_shapes.size();
 
@@ -3933,7 +3933,7 @@ giftWrapSlot()
   for (uint i = 0; i < num_old_shapes; ++i)
     removeShape(old_shapes[i]);
 
-  setSelectShape(0);
+  setSelectShape(nullptr);
 
   uint num_new_shapes = new_shapes.size();
 
@@ -4018,7 +4018,7 @@ delaunaySlot()
 
   endUndoGroup();
 
-  setSelectShape(0);
+  setSelectShape(nullptr);
 
   uint num_new_shapes = new_shapes.size();
 
@@ -4369,9 +4369,23 @@ setShapeSVGStrokeAndFill(CQIllustratorShape *shape, CSVGObject *object)
     stroke.setColor  (CRGBA(0, 0, 0));
   }
 
-  stroke.setOpacity (opacity*object->getFlatStrokeOpacity().getValue().getValue(1));
-  stroke.setWidth   (object->getFlatStrokeWidth().getValue().getValue(0));
-  stroke.setLineDash(CSVGStrokeDash(object->getFlatStrokeDashArray().getValue().getValue().dashes()).getLineDash());
+  auto so  = object->getFlatStrokeOpacity();
+  auto sw  = object->getFlatStrokeWidth();
+  auto sda = object->getFlatStrokeDashArray();
+
+  if (so.isValid())
+    stroke.setOpacity(opacity*so.getValue().getValue(1));
+  else
+    stroke.setOpacity(opacity);
+
+  if (sw.isValid())
+    stroke.setWidth(sw.getValue().getValue(0));
+  else
+    stroke.setWidth(0);
+
+  if (sda.isValid())
+    stroke.setLineDash(CSVGStrokeDash(sda.getValue().getValue().dashes()).getLineDash());
+
   stroke.setLineCap (objStroke.getLineCap().getValue());
   stroke.setLineJoin(objStroke.getLineJoin().getValue());
 
@@ -4388,7 +4402,13 @@ setShapeSVGStrokeAndFill(CQIllustratorShape *shape, CSVGObject *object)
     fill.setColor (CRGBA(0, 0, 0));
   }
 
-  fill.setOpacity (opacity*object->getFlatFillOpacity().getValue().getValue(1));
+  auto fo = object->getFlatFillOpacity();
+
+  if (fo.isValid())
+    fill.setOpacity(opacity*fo.getValue().getValue(1));
+  else
+    fill.setOpacity(opacity);
+
   fill.setFillRule(objFill.getRule().getValue());
 
   auto *fill_object = object->getFillFillObject();
@@ -4598,7 +4618,7 @@ setSVGShapeName(CQIllustratorShape *shape, CSVGObject *object)
   if (id != "") {
     auto *data = shape->getData();
 
-    shape->setData(0);
+    shape->setData(nullptr);
 
     shape->setName(id);
 
@@ -4633,7 +4653,7 @@ setShapeName(CQIllustratorShape *shape)
   if (shape->getName() == "") {
     auto *data = shape->getData();
 
-    shape->setData(0);
+    shape->setData(nullptr);
 
     shape->setName(CStrUtil::strprintf("%s%d", shape->getClassName(), num));
 
@@ -4673,7 +4693,7 @@ void
 CQIllustrator::
 addSelectShape(CQIllustratorShape *shape)
 {
-  if (shape == 0)
+  if (shape == nullptr)
     return;
 
   selection_->add(shape);
@@ -4683,7 +4703,7 @@ void
 CQIllustrator::
 removeSelectShape(CQIllustratorShape *shape)
 {
-  if (shape == 0)
+  if (shape == nullptr)
     return;
 
   removeShapeFromSelection(shape);
@@ -4693,7 +4713,7 @@ void
 CQIllustrator::
 removeShapeFromSelection(CQIllustratorShape *shape)
 {
-  if (shape == 0)
+  if (shape == nullptr)
     return;
 
   CQIllustratorSelectedShapes::iterator ps1, ps2;
@@ -4724,7 +4744,7 @@ getShape(const std::string &name) const
       return shape;
   }
 
-  return 0;
+  return nullptr;
 }
 
 CQIllustratorShape *
@@ -4742,7 +4762,7 @@ getShape(uint id) const
       return shape;
   }
 
-  return 0;
+  return nullptr;
 }
 
 void
@@ -4852,7 +4872,7 @@ getAlignToolbar() const
   if (alignMode)
     return alignMode->getToolbar();
   else
-    return 0;
+    return nullptr;
 }
 
 void
@@ -4972,12 +4992,12 @@ setFill(QPainter *painter, const CQIllustratorShape *,
     const CLinearGradient *lg = nullptr;
     const CRadialGradient *rg = nullptr;
 
-    if      ((lg = dynamic_cast<const CLinearGradient *>(g)) != 0) {
+    if      ((lg = dynamic_cast<const CLinearGradient *>(g)) != nullptr) {
       QBrush brush(CQUtil::toQGradient(lg));
 
       painter->setBrush(brush);
     }
-    else if ((rg = dynamic_cast<const CRadialGradient *>(g)) != 0) {
+    else if ((rg = dynamic_cast<const CRadialGradient *>(g)) != nullptr) {
       QBrush brush(CQUtil::toQGradient(rg));
 
       painter->setBrush(brush);
@@ -5247,7 +5267,7 @@ draw(CQIllustrator *illustrator, QPainter *painter) const
 
   auto *data = shape_->getData();
 
-  shape_->setData(0);
+  shape_->setData(nullptr);
 
   shape_->moveBy(d_);
 

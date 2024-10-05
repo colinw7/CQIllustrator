@@ -14,7 +14,7 @@ class CQIllustratorGroupGeometry : public CQIllustratorShapeGeometry {
    CQIllustratorShapeGeometry(geometry) {
   }
 
-  virtual CQIllustratorGroupGeometry *dup() {
+  CQIllustratorGroupGeometry *dup() override {
     return new CQIllustratorGroupGeometry(*this);
   }
 

@@ -226,7 +226,7 @@ void
 CQIllustratorSetRGradientToolbar::
 setSelectedShape(const CQIllustratorShape *shape)
 {
-  const CRadialGradient *rg = 0;
+  const CRadialGradient *rg = nullptr;
 
   if (shape) {
     CQIllustratorShapeFill fill = shape->getFill();
@@ -236,11 +236,11 @@ setSelectedShape(const CQIllustratorShape *shape)
     rg = dynamic_cast<const CRadialGradient *>(g);
   }
 
-  centerXEdit_->setEnabled(rg != 0);
-  centerYEdit_->setEnabled(rg != 0);
-  focusXEdit_ ->setEnabled(rg != 0);
-  focusYEdit_ ->setEnabled(rg != 0);
-  radiusEdit_ ->setEnabled(rg != 0);
+  centerXEdit_->setEnabled(rg != nullptr);
+  centerYEdit_->setEnabled(rg != nullptr);
+  focusXEdit_ ->setEnabled(rg != nullptr);
+  focusYEdit_ ->setEnabled(rg != nullptr);
+  radiusEdit_ ->setEnabled(rg != nullptr);
 
   if (rg) {
     centerXEdit_->setValue(rg->getCenterX());

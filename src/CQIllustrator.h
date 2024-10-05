@@ -125,7 +125,7 @@ class CQIllustrator : public CQMainWindow {
 
     const CBBox2D &getBBox() const;
 
-    void draw(CQIllustrator *illustrator, QPainter *painter) const;
+    void draw(CQIllustrator *illustrator, QPainter *painter) const override;
   };
 
   class PreviewLine : public PreviewObject {
@@ -137,7 +137,7 @@ class CQIllustrator : public CQMainWindow {
      p1_(p1), p2_(p2) {
     }
 
-    void draw(CQIllustrator *illustrator, QPainter *painter) const;
+    void draw(CQIllustrator *illustrator, QPainter *painter) const override;
   };
 
   typedef CQIllustratorMode::MouseEvent MouseEvent;
@@ -152,16 +152,16 @@ class CQIllustrator : public CQMainWindow {
 
   CQIllustratorMode *getMode(Mode id) const;
 
-  QWidget *createCentralWidget();
+  QWidget *createCentralWidget() override;
 
   CQIllustratorShapeDrawer *getDrawer() const { return drawer_; }
 
-  void initTerm();
-  void createWorkspace();
-  void createMenus();
-  void createToolBars();
-  void createStatusBar();
-  void createDockWindows();
+  void initTerm() override;
+  void createWorkspace() override;
+  void createMenus() override;
+  void createToolBars() override;
+  void createStatusBar() override;
+  void createDockWindows() override;
 
   void emitFillChanged();
 
@@ -519,7 +519,7 @@ class CQIllustrator : public CQMainWindow {
   void redraw();
 
  public:
-  QSize sizeHint() const;
+  QSize sizeHint() const override;
 
  private:
   typedef std::map<Mode,CQIllustratorMode *> ModeMap;

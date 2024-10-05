@@ -16,7 +16,7 @@ class CQIllustratorRectGeometry : public CQIllustratorShapeGeometry {
    rx_(geometry.rx_), ry_(geometry.ry_) {
   }
 
-  virtual CQIllustratorRectGeometry *dup() {
+  CQIllustratorRectGeometry *dup() override {
     return new CQIllustratorRectGeometry(*this);
   }
 

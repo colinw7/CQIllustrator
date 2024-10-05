@@ -5,18 +5,16 @@
 
 class CQIllustratorShapeNearestPoint2D {
  public:
-  CQIllustratorShapeNearestPoint2D() :
-   set_(false), dist_(0.0), p_(0) {
-  }
+  CQIllustratorShapeNearestPoint2D() { }
 
   CQIllustratorShapeNearestPoint2D(const CQIllustratorShapeNearestPoint2D &p) :
-   set_(p.set_), dist_(p.dist_), p_(p.p_ ? p.p_->dup() : 0) {
+   set_(p.set_), dist_(p.dist_), p_(p.p_ ? p.p_->dup() : nullptr) {
   }
 
   CQIllustratorShapeNearestPoint2D &operator=(const CQIllustratorShapeNearestPoint2D &p) {
     set_  = p.set_;
     dist_ = p.dist_;
-    p_    = (p.p_ ? p.p_->dup() : 0);
+    p_    = (p.p_ ? p.p_->dup() : nullptr);
 
     return *this;
   }
@@ -44,8 +42,8 @@ class CQIllustratorShapeNearestPoint2D {
 
  private:
   bool                            set_ { false };
-  double                          dist_ { 0 };
-  CQIllustratorShapeControlPoint *p_;
+  double                          dist_ { 0.0 };
+  CQIllustratorShapeControlPoint *p_ { nullptr };
 };
 
 #endif

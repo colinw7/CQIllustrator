@@ -16,13 +16,13 @@ class CQIllustratorOffsetPathToolbar : public CQIllustratorToolbar {
  public:
   CQIllustratorOffsetPathToolbar(CQIllustratorOffsetPathMode *mode);
 
-  const char *getTitle() const { return "Offset Path"; }
+  const char *getTitle() const override { return "Offset Path"; }
 
-  QIcon getIcon();
+  QIcon getIcon() override;
 
-  void addWidgets();
+  void addWidgets() override;
 
-  void setSelectedShape(const CQIllustratorShape *shape);
+  void setSelectedShape(const CQIllustratorShape *shape) override;
 
   void setWidth(double w);
 
@@ -40,9 +40,9 @@ class CQIllustratorOffsetPathSizer : public CQIllustratorModeSizer {
 
   void setSelectedShape(CQIllustratorShape *shape);
 
-  void updatePoint(CQIllustratorShape *shape, const QPointF &p);
+  void updatePoint(CQIllustratorShape *shape, const QPointF &p) override;
 
-  void drawHandles(QPainter *painter, const CQIllustratorShape *shape);
+  void drawHandles(QPainter *painter, const CQIllustratorShape *shape) override;
 
  private:
   CQIllustratorHandle *width_handle_;
@@ -55,24 +55,24 @@ class CQIllustratorOffsetPathMode : public CQIllustratorMode {
  public:
   CQIllustratorOffsetPathMode(CQIllustrator *illustrator);
 
-  const char *getTitle() const { return "Offset Path"; }
+  const char *getTitle() const override { return "Offset Path"; }
 
   CQIllustratorOffsetPathToolbar *getToolbar() { return toolbar_; }
 
-  CQIllustratorOffsetPathToolbar *createToolbar();
+  CQIllustratorOffsetPathToolbar *createToolbar() override;
 
-  CQIllustratorOffsetPathSizer *createSizer();
+  CQIllustratorOffsetPathSizer *createSizer() override;
 
-  CQMenuItem *createMenuItem(CQMenu *menu);
+  CQMenuItem *createMenuItem(CQMenu *menu) override;
 
-  CQIllustratorOffsetPathToolbar *getToolbar() const { return toolbar_; }
+  CQIllustratorOffsetPathToolbar *getToolbar() const override { return toolbar_; }
 
-  void handleMouseRelease(const MouseEvent &e);
-  void handleMouseDrag   (const MouseEvent &e);
+  void handleMouseRelease(const MouseEvent &e) override;
+  void handleMouseDrag   (const MouseEvent &e) override;
 
-  void addSelectionToSandbox();
+  void addSelectionToSandbox() override;
 
-  void drawOverlay(CQIllustratorShapeDrawer *drawer);
+  void drawOverlay(CQIllustratorShapeDrawer *drawer) override;
 
   void setSelectedShape(CQIllustratorShape *shape);
 

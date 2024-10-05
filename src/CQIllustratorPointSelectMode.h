@@ -15,23 +15,23 @@ class CQIllustratorPointSelectToolbar : public CQIllustratorToolbar {
  public:
   CQIllustratorPointSelectToolbar(CQIllustratorPointSelectMode *selectMode);
 
-  const char *getTitle() const { return "Point Select"; }
+  const char *getTitle() const override { return "Point Select"; }
 
-  QIcon getIcon();
+  QIcon getIcon() override;
 
-  void addWidgets();
+  void addWidgets() override;
 
-  void setSelectedShape(const CQIllustratorShape *shape);
+  void setSelectedShape(const CQIllustratorShape *shape) override;
 
  private:
-  CQIllustratorPointSelectMode *mode_;
+  CQIllustratorPointSelectMode *mode_ { nullptr };
 };
 
 class CQIllustratorPointSelectSizer : public CQIllustratorModeSizer {
  public:
   CQIllustratorPointSelectSizer(CQIllustratorPointSelectMode *mode);
 
-  void drawHandles(QPainter *painter, const CQIllustratorShape *shape);
+  void drawHandles(QPainter *painter, const CQIllustratorShape *shape) override;
 
   void updateHandles(uint numHandles);
 };
@@ -40,28 +40,28 @@ class CQIllustratorPointSelectMode : public CQIllustratorMode {
  public:
   CQIllustratorPointSelectMode(CQIllustrator *illustrator);
 
-  CQIllustratorPointSelectToolbar *createToolbar();
+  CQIllustratorPointSelectToolbar *createToolbar() override;
 
-  CQIllustratorPointSelectSizer *createSizer();
+  CQIllustratorPointSelectSizer *createSizer() override;
 
-  const char *getTitle() const { return "Select Shape Point"; }
+  const char *getTitle() const override { return "Select Shape Point"; }
 
-  CQMenuItem *createMenuItem(CQMenu *menu);
+  CQMenuItem *createMenuItem(CQMenu *menu) override;
 
-  bool isSelectMode() const { return true; }
+  bool isSelectMode() const override { return true; }
 
-  CQIllustratorPointSelectToolbar *getToolbar() const { return toolbar_; }
+  CQIllustratorPointSelectToolbar *getToolbar() const override { return toolbar_; }
 
-  void handleMouseRelease(const MouseEvent &e);
-  void handleMouseDrag   (const MouseEvent &e);
+  void handleMouseRelease(const MouseEvent &e) override;
+  void handleMouseDrag   (const MouseEvent &e) override;
 
-  void drawOverlay(CQIllustratorShapeDrawer *drawer);
+  void drawOverlay(CQIllustratorShapeDrawer *drawer) override;
 
-  QCursor getCursor() const;
+  QCursor getCursor() const override;
 
  private:
-  CQIllustratorPointSelectToolbar *toolbar_;
-  CQIllustratorPointSelectSizer   *sizer_;
+  CQIllustratorPointSelectToolbar *toolbar_ { nullptr };
+  CQIllustratorPointSelectSizer   *sizer_ { nullptr };
 };
 
 #endif

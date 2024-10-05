@@ -222,13 +222,13 @@ applySlot()
 
 CQTransformMoveTool::
 CQTransformMoveTool(CQIllustratorTransformToolbar *toolbar) :
- QWidget(0), toolbar_(toolbar)
+ QWidget(nullptr), toolbar_(toolbar)
 {
-  QGridLayout *grid = new QGridLayout(this);
+  auto *grid = new QGridLayout(this);
   grid->setMargin(0); grid->setSpacing(8);
 
-  QLabel *hlabel = new QLabel("H");
-  QLabel *vlabel = new QLabel("V");
+  auto *hlabel = new QLabel("H");
+  auto *vlabel = new QLabel("V");
 
   hedit_ = new CQRealEdit(0.0);
   vedit_ = new CQRealEdit(0.0);
@@ -298,13 +298,13 @@ apply()
 
 CQTransformScaleTool::
 CQTransformScaleTool(CQIllustratorTransformToolbar *toolbar) :
- QWidget(0), toolbar_(toolbar)
+ QWidget(nullptr), toolbar_(toolbar)
 {
-  QGridLayout *grid = new QGridLayout(this);
+  auto *grid = new QGridLayout(this);
   grid->setMargin(0); grid->setSpacing(8);
 
-  QLabel *wlabel = new QLabel("W");
-  QLabel *hlabel = new QLabel("H");
+  auto *wlabel = new QLabel("W");
+  auto *hlabel = new QLabel("H");
 
   wedit_ = new CQRealEdit(1.0);
   hedit_ = new CQRealEdit(1.0);
@@ -362,9 +362,9 @@ apply()
 
 CQTransformRotateTool::
 CQTransformRotateTool(CQIllustratorTransformToolbar *toolbar) :
- QWidget(0), toolbar_(toolbar)
+ QWidget(nullptr), toolbar_(toolbar)
 {
-  QGridLayout *grid = new QGridLayout(this);
+  auto *grid = new QGridLayout(this);
   grid->setMargin(0); grid->setSpacing(8);
 
   angleEdit_ = new CQAngleSpinBox(CAngle(0.0));
@@ -409,13 +409,13 @@ apply()
 
 CQTransformSkewTool::
 CQTransformSkewTool(CQIllustratorTransformToolbar *toolbar) :
- QWidget(0), toolbar_(toolbar)
+ QWidget(nullptr), toolbar_(toolbar)
 {
-  QGridLayout *grid = new QGridLayout(this);
+  auto *grid = new QGridLayout(this);
   grid->setMargin(0); grid->setSpacing(8);
 
-  QLabel *hlabel = new QLabel("H");
-  QLabel *vlabel = new QLabel("V");
+  auto *hlabel = new QLabel("H");
+  auto *vlabel = new QLabel("V");
 
   hedit_ = new CQRealEdit(0.0);
   vedit_ = new CQRealEdit(0.0);

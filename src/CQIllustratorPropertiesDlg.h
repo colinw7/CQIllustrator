@@ -21,14 +21,14 @@ class CQIllustratorPropertiesDlg : public QFrame {
 
   void loadShape(const QString &parentName, CQIllustratorShape *object);
 
-  QSize sizeHint() const;
+  QSize sizeHint() const override;
 
  private slots:
   void itemSelectedSlot(QObject *obj, const QString &path);
 
  private:
-  CQIllustrator  *illustrator_ { 0 };
-  CQPropertyTree *tree_        { 0 };
+  CQIllustrator  *illustrator_ { nullptr };
+  CQPropertyTree *tree_        { nullptr };
 };
 
 #endif

@@ -171,7 +171,7 @@ drawI(QPainter *painter)
 
 CQIllustratorControlPointHandle::
 CQIllustratorControlPointHandle(CQIllustrator *illustrator) :
- CQIllustratorHandle(illustrator), point_(0)
+ CQIllustratorHandle(illustrator), point_(nullptr)
 {
 }
 

@@ -17,13 +17,13 @@ class CQIllustratorCreateRectToolbar : public CQIllustratorToolbar {
  public:
   CQIllustratorCreateRectToolbar(CQIllustratorCreateRectMode *mode);
 
-  const char *getTitle() const { return "Create Rect"; }
+  const char *getTitle() const override { return "Create Rect"; }
 
-  QIcon getIcon();
+  QIcon getIcon() override;
 
-  void addWidgets();
+  void addWidgets() override;
 
-  void setSelectedShape(const CQIllustratorShape *shape);
+  void setSelectedShape(const CQIllustratorShape *shape) override;
 
   void setSize(const CBBox2D &bbox);
 
@@ -31,12 +31,12 @@ class CQIllustratorCreateRectToolbar : public CQIllustratorToolbar {
   void updateShape();
 
  private:
-  CQIllustratorCreateRectMode *mode_ { 0 };
-  CQPointEdit                 *posEdit_ { 0 };
-  CQRealEdit                  *widthEdit_ { 0 };
-  CQRealEdit                  *heightEdit_ { 0 };
-  CQRealEdit                  *xRadEdit_ { 0 };
-  CQRealEdit                  *yRadEdit_ { 0 };
+  CQIllustratorCreateRectMode *mode_ { nullptr };
+  CQPointEdit                 *posEdit_ { nullptr };
+  CQRealEdit                  *widthEdit_ { nullptr };
+  CQRealEdit                  *heightEdit_ { nullptr };
+  CQRealEdit                  *xRadEdit_ { nullptr };
+  CQRealEdit                  *yRadEdit_ { nullptr };
 };
 
 //------
@@ -45,13 +45,13 @@ class CQIllustratorCreateRectSizer : public CQIllustratorModeSizer {
  public:
   CQIllustratorCreateRectSizer(CQIllustratorCreateRectMode *mode);
 
-  void drawHandles(QPainter *painter, const CQIllustratorShape *shape);
+  void drawHandles(QPainter *painter, const CQIllustratorShape *shape) override;
 
  private:
-  CQIllustratorControlPointHandle *ll_handle_ { 0 };
-  CQIllustratorControlPointHandle *ur_handle_ { 0 };
-  CQIllustratorControlPointHandle *rx_handle_ { 0 };
-  CQIllustratorControlPointHandle *ry_handle_ { 0 };
+  CQIllustratorControlPointHandle *ll_handle_ { nullptr };
+  CQIllustratorControlPointHandle *ur_handle_ { nullptr };
+  CQIllustratorControlPointHandle *rx_handle_ { nullptr };
+  CQIllustratorControlPointHandle *ry_handle_ { nullptr };
 };
 
 //------
@@ -62,24 +62,24 @@ class CQIllustratorCreateRectMode : public CQIllustratorMode {
  public:
   CQIllustratorCreateRectMode(CQIllustrator *illustrator);
 
-  const char *getTitle() const { return "Create Rectangle"; }
+  const char *getTitle() const override { return "Create Rectangle"; }
 
   CQIllustratorCreateRectToolbar *getToolbar() { return toolbar_; }
 
-  CQIllustratorCreateRectToolbar *createToolbar();
+  CQIllustratorCreateRectToolbar *createToolbar() override;
 
-  CQIllustratorCreateRectSizer *createSizer();
+  CQIllustratorCreateRectSizer *createSizer() override;
 
-  CQMenuItem *createMenuItem(CQMenu *menu);
+  CQMenuItem *createMenuItem(CQMenu *menu) override;
 
-  bool isCreateMode() const { return true; }
+  bool isCreateMode() const override { return true; }
 
-  CQIllustratorCreateRectToolbar *getToolbar() const { return toolbar_; }
+  CQIllustratorCreateRectToolbar *getToolbar() const override { return toolbar_; }
 
-  void handleMouseRelease(const MouseEvent &e);
-  void handleMouseDrag   (const MouseEvent &e);
+  void handleMouseRelease(const MouseEvent &e) override;
+  void handleMouseDrag   (const MouseEvent &e) override;
 
-  void drawOverlay(CQIllustratorShapeDrawer *drawer);
+  void drawOverlay(CQIllustratorShapeDrawer *drawer) override;
 
  private:
   CQIllustratorCreateRectToolbar *toolbar_ { 0 };

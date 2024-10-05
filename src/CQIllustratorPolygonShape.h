@@ -10,52 +10,52 @@ class CQIllustratorPolygonShape : public CQIllustratorShape {
   CQIllustratorPolygonShape(const PointList &points=PointList());
   CQIllustratorPolygonShape(const CQIllustratorPolygonShape &polygon);
 
-  CQIllustratorPolygonShape *dup() const;
+  CQIllustratorPolygonShape *dup() const override;
 
-  const char *getClassName() const { return "polygon"; }
+  const char *getClassName() const override { return "polygon"; }
 
   void setPoints(const CPolygon2D &polygon);
 
   void addPoint(const CPoint2D &p);
 
-  double distance(const CPoint2D &p) const;
+  double distance(const CPoint2D &p) const override;
 
-  bool inside(const CPoint2D &p) const;
+  bool inside(const CPoint2D &p) const override;
 
   CPoint2D getPoint(uint i) const;
 
   void setPoint(uint i, const CPoint2D &p);
 
   void getControlPoints(ControlPointList &points,
-                        ControlType type=ControlType::GEOMETRY) const;
+                        ControlType type=ControlType::GEOMETRY) const override;
 
-  void setControlPoint(const CQIllustratorShapeControlPoint *point);
+  void setControlPoint(const CQIllustratorShapeControlPoint *point) override;
 
   bool addPoint(const CQIllustratorShapeControlPoint *before_point, const CPoint2D &p);
 
-  bool doRemovePoint(const CQIllustratorShapeControlPoint *point);
+  bool doRemovePoint(const CQIllustratorShapeControlPoint *point) override;
 
-  bool getPolygon(CPolygon2D &polygon) const;
+  bool getPolygon(CPolygon2D &polygon) const override;
 
-  bool getPath(CPathShapePartList &path) const;
+  bool getPath(CPathShapePartList &path) const override;
 
-  void moveBy(const CPoint2D &d);
+  void moveBy(const CPoint2D &d) override;
 
-  void resizeBy(double dw, double dh);
+  void resizeBy(double dw, double dh) override;
 
-  bool flip(bool x_axis);
+  bool flip(bool x_axis) override;
 
-  void drawShape(CQIllustratorShapeDrawer *drawer) const;
+  void drawShape(CQIllustratorShapeDrawer *drawer) const override;
 
-  CQIllustratorShapeGeometry *getGeometry();
+  CQIllustratorShapeGeometry *getGeometry() override;
 
-  void doSetGeometry(const CQIllustratorShapeGeometry *geom);
+  void doSetGeometry(const CQIllustratorShapeGeometry *geom) override;
 
-  void saveSVG(const CQIllustratorSaveData &saveData);
-  void saveCmd(const CQIllustratorSaveData &saveData);
+  void saveSVG(const CQIllustratorSaveData &saveData) override;
+  void saveCmd(const CQIllustratorSaveData &saveData) override;
 
  protected:
-  void updateBBox() const;
+  void updateBBox() const override;
 
  protected:
   PointList points_;
@@ -67,11 +67,11 @@ class CQIllustratorPolygonShapeControlPoint : public CQIllustratorShapeControlPo
  public:
   CQIllustratorPolygonShapeControlPoint(uint ind, const CPoint2D &p);
 
-  CQIllustratorPolygonShapeControlPoint *dup() const;
+  CQIllustratorPolygonShapeControlPoint *dup() const override;
 
-  CPoint2D getPoint(const CQIllustratorShape *shape) const;
+  CPoint2D getPoint(const CQIllustratorShape *shape) const override;
 
-  void setPoint(CQIllustratorShape *shape, const CPoint2D &point);
+  void setPoint(CQIllustratorShape *shape, const CPoint2D &point) override;
 
   int getInd() const { return ind_; }
 

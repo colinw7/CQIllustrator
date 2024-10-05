@@ -8,9 +8,9 @@
 
 CQIllustratorPreferenceDock::
 CQIllustratorPreferenceDock(CQIllustrator *illustrator) :
- QWidget(0), illustrator_(illustrator)
+ QWidget(nullptr), illustrator_(illustrator)
 {
-  QVBoxLayout *layout = new QVBoxLayout(this);
+  auto *layout = new QVBoxLayout(this);
   layout->setMargin(0); layout->setSpacing(0);
 
   fullMin_ = new CQPointEdit;

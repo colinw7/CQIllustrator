@@ -15,7 +15,7 @@ class CQIllustratorPathGeometry : public CQIllustratorShapeGeometry {
    CQIllustratorShapeGeometry(geometry), parts_(geometry.parts_) {
   }
 
-  virtual CQIllustratorPathGeometry *dup() {
+  CQIllustratorPathGeometry *dup() override {
     return new CQIllustratorPathGeometry(*this);
   }
 

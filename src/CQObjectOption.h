@@ -13,7 +13,7 @@ class CQObjectOptionTool : public CQOptionTool {
  public:
   CQObjectOptionTool(CQIllustrator *illustrator);
 
-  CQOptionToolDialog *getDialog();
+  CQOptionToolDialog *getDialog() override;
 
   void selectShape(const std::string &name);
 

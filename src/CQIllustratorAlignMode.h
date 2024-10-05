@@ -41,11 +41,11 @@ class CQIllustratorAlignToolbar : public CQIllustratorToolbar {
  public:
   CQIllustratorAlignToolbar(CQIllustratorAlignMode *mode);
 
-  const char *getTitle() const { return "Align"; }
+  const char *getTitle() const override { return "Align"; }
 
-  QIcon getIcon();
+  QIcon getIcon() override;
 
-  void addWidgets();
+  void addWidgets() override;
 
   double getOffset() const;
 
@@ -101,20 +101,20 @@ class CQIllustratorAlignMode : public CQIllustratorMode {
  public:
   CQIllustratorAlignMode(CQIllustrator *illustrator);
 
-  const char *getTitle() const { return "Align"; }
+  const char *getTitle() const override { return "Align"; }
 
-  CQIllustratorAlignToolbar *createToolbar();
+  CQIllustratorAlignToolbar *createToolbar() override;
 
-  CQMenuItem *createMenuItem(CQMenu *menu);
+  CQMenuItem *createMenuItem(CQMenu *menu) override;
 
-  CQIllustratorAlignToolbar *getToolbar() const { return toolbar_; }
+  CQIllustratorAlignToolbar *getToolbar() const override { return toolbar_; }
 
-  void handleMouseRelease(const MouseEvent &e);
-  void handleMouseDrag   (const MouseEvent &e);
+  void handleMouseRelease(const MouseEvent &e) override;
+  void handleMouseDrag   (const MouseEvent &e) override;
 
-  void drawOverlay(CQIllustratorShapeDrawer *drawer);
+  void drawOverlay(CQIllustratorShapeDrawer *drawer) override;
 
-  QCursor getCursor() const;
+  QCursor getCursor() const override;
 
   void align(CQIllustrator::AlignSide side, bool commit);
 
@@ -190,7 +190,7 @@ class CQAlignAnchor : public QWidget {
   typedef CQIllustratorAlignToolbar::ObjectEdgeType ObjectEdgeType;
 
  public:
-  CQAlignAnchor(QWidget *parent = 0);
+  CQAlignAnchor(QWidget *parent = nullptr);
 
   AnchorMode getMode() const;
 
@@ -235,7 +235,7 @@ class CQAlignAnchorObject : public QWidget {
   typedef CQIllustratorAlignToolbar::ObjectEdgeType ObjectEdgeType;
 
  public:
-  CQAlignAnchorObject(QWidget *parent=0);
+  CQAlignAnchorObject(QWidget *parent=nullptr);
 
   QString getName() const;
 
@@ -266,7 +266,7 @@ class CQAlignAnchorPoint : public QWidget {
   Q_OBJECT
 
  public:
-  CQAlignAnchorPoint(QWidget *parent=0);
+  CQAlignAnchorPoint(QWidget *parent=nullptr);
 
   QPointF getValue() const;
 
@@ -295,7 +295,7 @@ class CQToolButton : public QToolButton {
   CQToolButton(const QIcon &icon);
 
  private:
-  bool event(QEvent*);
+  bool event(QEvent*) override;
 
  signals:
   void previewStart();

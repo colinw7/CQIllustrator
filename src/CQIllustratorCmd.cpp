@@ -6,9 +6,9 @@ class CQIllustratorHelpCmd : public CQIllustratorCmd {
  public:
   CQIllustratorHelpCmd();
 
-  const char *getName() const { return "help"; }
+  const char *getName() const override { return "help"; }
 
-  bool exec(const std::vector<std::string> &words);
+  bool exec(const std::vector<std::string> &words) override;
 };
 
 CQIllustratorCmdMgr::
@@ -66,7 +66,7 @@ displayCmds() const
 
 CQIllustratorCmd::
 CQIllustratorCmd(const char *args) :
- illustrator_(0), args_(args)
+ illustrator_(nullptr), args_(args)
 {
 }
 

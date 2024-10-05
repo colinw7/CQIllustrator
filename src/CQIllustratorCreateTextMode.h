@@ -18,11 +18,11 @@ class CQIllustratorCreateTextSizer : public CQIllustratorModeSizer {
  public:
   CQIllustratorCreateTextSizer(CQIllustratorCreateTextMode *mode);
 
-  void drawHandles(QPainter *painter, const CQIllustratorShape *shape);
+  void drawHandles(QPainter *painter, const CQIllustratorShape *shape) override;
 
  private:
-  CQIllustratorControlPointHandle *ll_handle_ { 0 };
-  CQIllustratorControlPointHandle *ur_handle_ { 0 };
+  CQIllustratorControlPointHandle *ll_handle_ { nullptr };
+  CQIllustratorControlPointHandle *ur_handle_ { nullptr };
 };
 
 //------
@@ -33,26 +33,26 @@ class CQIllustratorCreateTextMode : public CQIllustratorMode {
  public:
   CQIllustratorCreateTextMode(CQIllustrator *illustrator);
 
-  const char *getTitle() const { return "Create Text"; }
+  const char *getTitle() const override { return "Create Text"; }
 
   CQIllustratorCreateTextToolbar *getToolbar() { return toolbar_; }
 
-  CQIllustratorCreateTextToolbar *createToolbar();
+  CQIllustratorCreateTextToolbar *createToolbar() override;
 
-  CQIllustratorCreateTextSizer *createSizer();
+  CQIllustratorCreateTextSizer *createSizer() override;
 
-  CQMenuItem *createMenuItem(CQMenu *menu);
+  CQMenuItem *createMenuItem(CQMenu *menu) override;
 
-  bool isCreateMode() const { return true; }
+  bool isCreateMode() const override { return true; }
 
-  CQIllustratorCreateTextToolbar *getToolbar() const { return toolbar_; }
+  CQIllustratorCreateTextToolbar *getToolbar() const override { return toolbar_; }
 
-  void handleMouseRelease(const MouseEvent &e);
-  void handleMouseDrag   (const MouseEvent &e);
+  void handleMouseRelease(const MouseEvent &e) override;
+  void handleMouseDrag   (const MouseEvent &e) override;
 
-  bool handleKeyPress(const KeyEvent &e);
+  bool handleKeyPress(const KeyEvent &e) override;
 
-  void drawOverlay(CQIllustratorShapeDrawer *drawer);
+  void drawOverlay(CQIllustratorShapeDrawer *drawer) override;
 
   const QString &getText() const { return text_; }
 

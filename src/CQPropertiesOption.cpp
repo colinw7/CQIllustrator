@@ -18,7 +18,7 @@
 
 CQPropertiesOptionTool::
 CQPropertiesOptionTool(CQIllustrator *illustrator) :
- CQOptionTool(), illustrator_(illustrator), dialog_(0)
+ CQOptionTool(), illustrator_(illustrator), dialog_(nullptr)
 {
   dialog_ = new CQPropertiesOptionDialog(this);
 
@@ -54,7 +54,7 @@ void
 CQPropertiesOptionTool::
 selectionChangedSlot()
 {
-  const CQIllustratorShape *shape = 0;
+  const CQIllustratorShape *shape = nullptr;
 
   const CQIllustratorSelectedShapes *selection = illustrator_->getSelection();
 
@@ -415,7 +415,7 @@ updatePointsSlot()
 CQControlPointItem::
 CQControlPointItem(CQControlPointsTable *t, const CQIllustratorShape *shape,
                    CQIllustratorShapeControlPoint *point) :
- CQTableWidgetItem(t), table_(t), shape_(shape), point_(0), edit_(0)
+ CQTableWidgetItem(t), table_(t), shape_(shape), point_(nullptr), edit_(nullptr)
 {
   point_ = point->dup();
 }

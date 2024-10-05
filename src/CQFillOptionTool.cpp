@@ -31,7 +31,7 @@ class CQFillOptionSwab : public QWidget {
   CQFillOptionSwab(CQFillOptionDialog *dialog);
 
  private:
-  void paintEvent(QPaintEvent *e);
+  void paintEvent(QPaintEvent *e) override;
 
  private:
   CQFillOptionDialog *dialog_;
@@ -78,7 +78,7 @@ void
 CQFillOptionTool::
 selectionChangedSlot()
 {
-  const CQIllustratorShape *shape = 0;
+  const CQIllustratorShape *shape = nullptr;
 
   const CQIllustratorSelectedShapes *selection = illustrator_->getSelection();
 
@@ -128,15 +128,15 @@ paintEvent(QPaintEvent *)
   if (fill.hasGradient()) {
     const CGenGradient *g = fill.getGradient();
 
-    const CLinearGradient *lg = 0;
-    const CRadialGradient *rg = 0;
+    const CLinearGradient *lg = nullptr;
+    const CRadialGradient *rg = nullptr;
 
-    if      ((lg = dynamic_cast<const CLinearGradient *>(g)) != 0) {
+    if      ((lg = dynamic_cast<const CLinearGradient *>(g)) != nullptr) {
       QBrush brush(CQUtil::toQGradient(lg));
 
       painter.setBrush(brush);
     }
-    else if ((rg = dynamic_cast<const CRadialGradient *>(g)) != 0) {
+    else if ((rg = dynamic_cast<const CRadialGradient *>(g)) != nullptr) {
       QBrush brush(CQUtil::toQGradient(rg));
 
       painter.setBrush(brush);

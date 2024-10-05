@@ -31,7 +31,7 @@ class CQIllustratorSandbox {
     if (! edit_shapes_.empty())
       return edit_shapes_.front();
     else
-      return 0;
+      return nullptr;
   }
 
   shape_iterator beginShape() { return edit_shapes_.begin(); }
@@ -53,7 +53,7 @@ class CQIllustratorSandbox {
   void draw(CQIllustratorShapeDrawer *drawer);
 
  private:
-  CQIllustrator *illustrator_;
+  CQIllustrator *illustrator_ { nullptr };
   EditShapes     edit_shapes_;
 };
 

@@ -51,7 +51,7 @@ removeShape(CQIllustratorShape *shape)
 
   quadTree_->remove(shape);
 
-  shape->setData(0);
+  shape->setData(nullptr);
 
   emit objectDeleted(shape);
 }
@@ -129,7 +129,7 @@ getObjectAt(const CPoint2D &p) const
 
   getObjectsAt(p, shapes);
 
-  CQIllustratorShape *select_shape = 0;
+  CQIllustratorShape *select_shape = nullptr;
   double              select_area  = 0.0;
 
   ShapeList::const_iterator ps1, ps2;
@@ -139,7 +139,7 @@ getObjectAt(const CPoint2D &p) const
 
     double area = shape->getFlatBBox().area();
 
-    if (select_shape == 0 || area < select_area) {
+    if (select_shape == nullptr || area < select_area) {
       select_shape = shape;
       select_area  = area;
     }

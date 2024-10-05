@@ -14,7 +14,7 @@
 
 CQLayerOptionTool::
 CQLayerOptionTool(CQIllustrator *illustrator) :
- CQOptionTool(), illustrator_(illustrator), dialog_(0)
+ CQOptionTool(), illustrator_(illustrator), dialog_(nullptr)
 {
   dialog_ = new CQLayerOptionDialog(this);
 

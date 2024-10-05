@@ -233,7 +233,7 @@ getDesc() const
 
 CQIllustratorUndoCreateShape::
 CQIllustratorUndoCreateShape(CQIllustratorUndo *undo, CQIllustratorShape *shape, bool create) :
- undo_(undo), create_(create), shape_(0), id_(0)
+ undo_(undo), create_(create), shape_(nullptr), id_(0)
 {
   if (create)
     id_ = shape->getId();
@@ -257,7 +257,7 @@ exec()
     illustrator->setSelectShape(shape_);
 
     id_    = shape_->getId();
-    shape_ = 0;
+    shape_ = nullptr;
   }
   // if was created then delete
   else {

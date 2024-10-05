@@ -116,7 +116,7 @@ handleMouseRelease(const MouseEvent &e)
     uint num_nshapes = nshapes.size();
 
     if (num_nshapes > 0) {
-      illustrator_->setSelectShape(0);
+      illustrator_->setSelectShape(nullptr);
 
       for (uint i = 0; i < num_nshapes; ++i)
         illustrator_->addSelectShape(nshapes[i]);

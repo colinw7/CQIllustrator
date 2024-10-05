@@ -7,20 +7,20 @@ class CQIllustratorSetAnchorPositionMode : public CQIllustratorMode {
  public:
   CQIllustratorSetAnchorPositionMode(CQIllustrator *illustrator);
 
-  const char *getTitle() const { return "Set Anchor Position"; }
+  const char *getTitle() const override { return "Set Anchor Position"; }
 
-  CQIllustratorToolbar *createToolbar() { return 0; }
+  CQIllustratorToolbar *createToolbar() override { return nullptr; }
 
-  CQMenuItem *createMenuItem(CQMenu *menu);
+  CQMenuItem *createMenuItem(CQMenu *menu) override;
 
-  CQIllustratorToolbar *getToolbar() const { return 0; }
+  CQIllustratorToolbar *getToolbar() const override { return nullptr; }
 
-  void handleMousePress  (const MouseEvent &e);
-  void handleMouseRelease(const MouseEvent &e);
-  void handleMouseDrag   (const MouseEvent &e);
-  void handleMouseMove   (const MouseEvent &e);
+  void handleMousePress  (const MouseEvent &e) override;
+  void handleMouseRelease(const MouseEvent &e) override;
+  void handleMouseDrag   (const MouseEvent &e) override;
+  void handleMouseMove   (const MouseEvent &e) override;
 
-  QCursor getCursor() const;
+  QCursor getCursor() const override;
 
  private:
 };

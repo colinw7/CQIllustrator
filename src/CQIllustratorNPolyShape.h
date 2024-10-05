@@ -19,17 +19,18 @@ class CQIllustratorNPolyShape : public CQIllustratorShape {
   CQIllustratorNPolyShape(const CPoint2D &c, int n, double r, double a);
   CQIllustratorNPolyShape(const CQIllustratorNPolyShape &poly);
 
-  CQIllustratorNPolyShape *dup() const;
+  CQIllustratorNPolyShape *dup() const override;
 
-  const char *getClassName() const { return "npoly"; }
+  const char *getClassName() const override { return "npoly"; }
 
-  void getControlPoints(ControlPointList &points, ControlType type=ControlType::GEOMETRY) const;
+  void getControlPoints(ControlPointList &points,
+                        ControlType type=ControlType::GEOMETRY) const override;
 
-  void setControlPoint(const CQIllustratorShapeControlPoint *point);
+  void setControlPoint(const CQIllustratorShapeControlPoint *point) override;
 
-  CPoint2D getCenter() const { return c_; }
+  CPoint2D getCenter() const override { return c_; }
 
-  CPoint2D getRotateCenter() const;
+  CPoint2D getRotateCenter() const override;
 
   int getNum() const { return n_; }
   void setNum(int n);
@@ -46,25 +47,25 @@ class CQIllustratorNPolyShape : public CQIllustratorShape {
   CPoint2D getPoint() const;
   void setPoint(const CPoint2D &p);
 
-  bool getPolygon(CPolygon2D &polygon) const;
+  bool getPolygon(CPolygon2D &polygon) const override;
 
-  bool getPath(CPathShapePartList &path) const;
+  bool getPath(CPathShapePartList &path) const override;
 
-  void moveBy(const CPoint2D &d);
+  void moveBy(const CPoint2D &d) override;
 
-  bool flip(bool x_axis);
+  bool flip(bool x_axis) override;
 
-  void drawShape(CQIllustratorShapeDrawer *drawer) const;
+  void drawShape(CQIllustratorShapeDrawer *drawer) const override;
 
-  CQIllustratorShapeGeometry *getGeometry();
+  CQIllustratorShapeGeometry *getGeometry() override;
 
-  void doSetGeometry(const CQIllustratorShapeGeometry *geom);
+  void doSetGeometry(const CQIllustratorShapeGeometry *geom) override;
 
-  void saveSVG(const CQIllustratorSaveData &saveData);
-  void saveCmd(const CQIllustratorSaveData &saveData);
+  void saveSVG(const CQIllustratorSaveData &saveData) override;
+  void saveCmd(const CQIllustratorSaveData &saveData) override;
 
  protected:
-  void updateBBox() const;
+  void updateBBox() const override;
 
   void getPoints(std::vector<CPoint2D> &p) const;
 
@@ -82,13 +83,13 @@ class CQIllustratorNPolyShapeControlPoint : public CQIllustratorShapeControlPoin
   CQIllustratorNPolyShapeControlPoint(CQIllustratorNPolyShape::ControlPointType type,
                                       const CPoint2D &p);
 
-  CQIllustratorNPolyShapeControlPoint *dup() const;
+  CQIllustratorNPolyShapeControlPoint *dup() const override;
 
   CQIllustratorNPolyShape::ControlPointType getType() const { return type_; }
 
-  CPoint2D getPoint(const CQIllustratorShape *shape) const;
+  CPoint2D getPoint(const CQIllustratorShape *shape) const override;
 
-  void setPoint(CQIllustratorShape *shape, const CPoint2D &point);
+  void setPoint(CQIllustratorShape *shape, const CPoint2D &point) override;
 
  protected:
   CQIllustratorNPolyShape::ControlPointType type_;

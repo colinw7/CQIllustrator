@@ -39,14 +39,14 @@ class CQIllustratorShapeFill {
   double getFillRule() const { return rule_; }
   void setFillRule(CFillType rule) { rule_ = rule; }
 
-  bool hasGradient() const { return (gradient_ != 0); }
+  bool hasGradient() const { return (gradient_ != nullptr); }
 
   void setGradient(const CGenGradient *g);
 
   const CGenGradient *getGradient() const { return gradient_; }
   CGenGradient *getGradient() { return gradient_; }
 
-  bool hasImage() const { return (image_ != 0); }
+  bool hasImage() const { return (image_ != nullptr); }
 
   CImagePtr getImage() const;
 
@@ -73,8 +73,8 @@ class CQIllustratorShapeFill {
   CRGBA                   color_ { 1, 1, 1 };
   double                  opacity_ { 1 };
   CFillType               rule_ { FILL_TYPE_EVEN_ODD };
-  CGenGradient           *gradient_ { 0 };
-  CQIllustratorImageFill *image_ { 0 };
+  CGenGradient           *gradient_ { nullptr };
+  CQIllustratorImageFill *image_ { nullptr };
 };
 
 #endif

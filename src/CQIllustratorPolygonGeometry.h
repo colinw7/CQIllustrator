@@ -17,7 +17,7 @@ class CQIllustratorPolygonGeometry : public CQIllustratorShapeGeometry {
    CQIllustratorShapeGeometry(geometry), points_(geometry.points_) {
   }
 
-  virtual CQIllustratorPolygonGeometry *dup() {
+  CQIllustratorPolygonGeometry *dup() override {
     return new CQIllustratorPolygonGeometry(*this);
   }
 

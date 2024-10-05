@@ -15,7 +15,7 @@ class CQIllustratorImageSizer : public CQIllustratorModeSizer {
  public:
   CQIllustratorImageSizer(CQIllustratorSetImageMode *mode);
 
-  void drawHandles(QPainter *painter, const CQIllustratorShape *shape);
+  void drawHandles(QPainter *painter, const CQIllustratorShape *shape) override;
 };
 
 class CQIllustratorSetImageToolbar : public CQIllustratorToolbar {
@@ -24,13 +24,13 @@ class CQIllustratorSetImageToolbar : public CQIllustratorToolbar {
  public:
   CQIllustratorSetImageToolbar(CQIllustratorSetImageMode *mode);
 
-  const char *getTitle() const { return "Set Image"; }
+  const char *getTitle() const override { return "Set Image"; }
 
-  QIcon getIcon();
+  QIcon getIcon() override;
 
-  void addWidgets();
+  void addWidgets() override;
 
-  void setSelectedShape(const CQIllustratorShape *shape);
+  void setSelectedShape(const CQIllustratorShape *shape) override;
 
   void updateShape();
 
@@ -51,18 +51,18 @@ class CQIllustratorSetImageToolbar : public CQIllustratorToolbar {
   void balignSlot();
 
  private:
-  CQIllustratorSetImageMode          *mode_;
+  CQIllustratorSetImageMode          *mode_ { nullptr };
   CQIllustratorShapeFill::ImageScale  scale_;
   CHAlignType                         halign_;
   CVAlignType                         valign_;
-  QComboBox                          *scaleCombo_;
-  CQImageButton                      *imageButton_;
-  CQImageButton                      *lalignButton_;
-  CQImageButton                      *hcalignButton_;
-  CQImageButton                      *ralignButton_;
-  CQImageButton                      *talignButton_;
-  CQImageButton                      *vcalignButton_;
-  CQImageButton                      *balignButton_;
+  QComboBox                          *scaleCombo_ { nullptr };
+  CQImageButton                      *imageButton_ { nullptr };
+  CQImageButton                      *lalignButton_ { nullptr };
+  CQImageButton                      *hcalignButton_ { nullptr };
+  CQImageButton                      *ralignButton_ { nullptr };
+  CQImageButton                      *talignButton_ { nullptr };
+  CQImageButton                      *vcalignButton_ { nullptr };
+  CQImageButton                      *balignButton_ { nullptr };
 };
 
 //---
@@ -73,25 +73,25 @@ class CQIllustratorSetImageMode : public CQIllustratorMode {
  public:
   CQIllustratorSetImageMode(CQIllustrator *illustrator);
 
-  const char *getTitle() const { return "Set Image"; }
+  const char *getTitle() const override { return "Set Image"; }
 
-  CQIllustratorSetImageToolbar *createToolbar();
+  CQIllustratorSetImageToolbar *createToolbar() override;
 
-  CQIllustratorImageSizer *createSizer();
+  CQIllustratorImageSizer *createSizer() override;
 
-  CQMenuItem *createMenuItem(CQMenu *menu);
+  CQMenuItem *createMenuItem(CQMenu *menu) override;
 
-  CQIllustratorSetImageToolbar *getToolbar() const { return toolbar_; }
+  CQIllustratorSetImageToolbar *getToolbar() const override { return toolbar_; }
 
-  void handleMouseRelease(const MouseEvent &e);
-  void handleMouseDrag   (const MouseEvent &e);
+  void handleMouseRelease(const MouseEvent &e) override;
+  void handleMouseDrag   (const MouseEvent &e) override;
 
-  void drawOverlay(CQIllustratorShapeDrawer *drawer);
+  void drawOverlay(CQIllustratorShapeDrawer *drawer) override;
 
-  QCursor getCursor() const;
+  QCursor getCursor() const override;
 
  private:
-  CQIllustratorSetImageToolbar*     toolbar_;
+  CQIllustratorSetImageToolbar*     toolbar_ { nullptr };
   CAutoPtr<CQIllustratorImageSizer> sizer_;
 };
 

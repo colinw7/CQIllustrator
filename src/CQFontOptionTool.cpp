@@ -14,7 +14,7 @@ class CQFontOptionSwab : public QWidget {
   CQFontOptionSwab(CQFontOptionDialog *dialog);
 
  private:
-  void paintEvent(QPaintEvent *e);
+  void paintEvent(QPaintEvent *e) override;
 
  private:
   CQFontOptionDialog *dialog_;
@@ -23,7 +23,7 @@ class CQFontOptionSwab : public QWidget {
 
 CQFontOptionTool::
 CQFontOptionTool(QWidget *) :
- CQOptionTool(), dialog_(0)
+ CQOptionTool(), dialog_(nullptr)
 {
   dialog_ = new CQFontOptionDialog(this);
 

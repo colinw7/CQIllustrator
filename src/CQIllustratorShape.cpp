@@ -13,6 +13,7 @@
 #include <CQImageGaussianBlur.h>
 #include <CLinearGradient.h>
 #include <CRadialGradient.h>
+#include <CStrUtil.h>
 #include <CMathGeom2D.h>
 #include <QPainter>
 
@@ -72,7 +73,7 @@ getFlatMatrix() const
   if (parent_) {
     CQIllustratorShape *parent = parent_;
 
-    while (parent != 0) {
+    while (parent != nullptr) {
       m = parent->m_*m;
 
       parent = parent->parent_;
@@ -224,7 +225,7 @@ void
 CQIllustratorShape::
 removeChild(CQIllustratorShape *child)
 {
-  child->parent_ = 0;
+  child->parent_ = nullptr;
 
   shapes_.remove(child);
 
@@ -241,7 +242,7 @@ setParent(CQIllustratorShape *newParent)
   if (newParent)
     newParent->addChild(this);
   else
-    parent_ = 0;
+    parent_ = nullptr;
 }
 
 void
@@ -384,7 +385,7 @@ getFilter() const
   if (filter_id_)
     return CQIllustratorShapeFilterMgrInst->getFilter(filter_id_);
   else
-    return 0;
+    return nullptr;
 }
 
 void
@@ -730,7 +731,7 @@ void
 CQIllustratorShape::
 draw(CQIllustratorShapeDrawer *drawer) const
 {
-  if (getFilter() != 0)
+  if (getFilter() != nullptr)
     drawGaussian(drawer);
   else
     drawShape(drawer);

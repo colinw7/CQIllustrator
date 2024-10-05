@@ -31,7 +31,7 @@ getFilter(int id)
   FilterMap::const_iterator p = filterMap_.find(id);
 
   if (p == filterMap_.end())
-    return 0;
+    return nullptr;
 
   return (*p).second;
 }

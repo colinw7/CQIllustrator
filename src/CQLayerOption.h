@@ -15,7 +15,7 @@ class CQLayerOptionTool : public CQOptionTool {
 
   CQIllustrator *getIllustrator() const { return illustrator_; }
 
-  CQOptionToolDialog *getDialog();
+  CQOptionToolDialog *getDialog() override;
 
   void updateLayer();
 

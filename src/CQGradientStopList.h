@@ -94,7 +94,7 @@ class CQGradientStopOffsetItem : public CQTableWidgetItem {
   QString toString() const;
 
  private:
-  CQGradientStopTable          *table_ { 0 };
+  CQGradientStopTable          *table_ { nullptr };
   uint                          ind_ { 0 };
   double                        offset_ { 0 };
   mutable QPointer<CQRealEdit>  edit_;
@@ -123,7 +123,7 @@ class CQGradientStopList : public QWidget {
   Q_OBJECT
 
  public:
-  CQGradientStopList(QWidget *parent=0);
+  CQGradientStopList(QWidget *parent=nullptr);
 
   void init(const CGenGradient &g);
 
@@ -137,7 +137,7 @@ class CQGradientStopList : public QWidget {
   void stopsChanged();
 
  private:
-  CQGradientStopTable    *table_ { 0 };
+  CQGradientStopTable    *table_ { nullptr };
   CGenGradient::StopList  stops_;
 };
 

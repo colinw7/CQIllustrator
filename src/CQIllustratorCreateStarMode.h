@@ -28,15 +28,15 @@ class CQIllustratorCreateStarToolbar : public CQIllustratorToolbar {
  public:
   CQIllustratorCreateStarToolbar(CQIllustratorCreateStarMode *mode);
 
-  const char *getTitle() const { return "Create Star"; }
+  const char *getTitle() const override { return "Create Star"; }
 
-  QIcon getIcon();
+  QIcon getIcon() override;
 
-  void addWidgets();
+  void addWidgets() override;
 
   CreateMode getCreateMode() const { return createMode_; }
 
-  void setSelectedShape(const CQIllustratorShape *shape);
+  void setSelectedShape(const CQIllustratorShape *shape) override;
 
   void setSize(const CBBox2D &bbox);
 
@@ -47,16 +47,16 @@ class CQIllustratorCreateStarToolbar : public CQIllustratorToolbar {
   void updateShape();
 
  private:
-  CQIllustratorCreateStarMode *mode_ { 0 };
-  CreateMode                   createMode_ { CreateMode::STAR };
-  CQImageButton               *starButton_ { 0 };
-  CQImageButton               *polyButton_ { 0 };
-  CQPointEdit                 *centerEdit_ { 0 };
-  QSpinBox                    *numEdit_ { 0 };
-  CQRealEdit                  *radius1Edit_ { 0 };
-  CQRealEdit                  *radius2Edit_ { 0 };
-  CQAngleSpinBox              *angle1Edit_ { 0 };
-  CQAngleSpinBox              *angle2Edit_ { 0 };
+  CQIllustratorCreateStarMode *mode_        { nullptr };
+  CreateMode                   createMode_  { CreateMode::STAR };
+  CQImageButton               *starButton_  { nullptr };
+  CQImageButton               *polyButton_  { nullptr };
+  CQPointEdit                 *centerEdit_  { nullptr };
+  QSpinBox                    *numEdit_     { nullptr };
+  CQRealEdit                  *radius1Edit_ { nullptr };
+  CQRealEdit                  *radius2Edit_ { nullptr };
+  CQAngleSpinBox              *angle1Edit_  { nullptr };
+  CQAngleSpinBox              *angle2Edit_  { nullptr };
 };
 
 //------
@@ -65,7 +65,7 @@ class CQIllustratorCreateStarSizer : public CQIllustratorModeSizer {
  public:
   CQIllustratorCreateStarSizer(CQIllustratorCreateStarMode *mode);
 
-  void drawHandles(QPainter *painter, const CQIllustratorShape *shape);
+  void drawHandles(QPainter *painter, const CQIllustratorShape *shape) override;
 
  private:
   CQIllustratorControlPointHandle *c_handle_ { 0 };
@@ -81,24 +81,24 @@ class CQIllustratorCreateStarMode : public CQIllustratorMode {
  public:
   CQIllustratorCreateStarMode(CQIllustrator *illustrator);
 
-  const char *getTitle() const { return "Create Star"; }
+  const char *getTitle() const override { return "Create Star"; }
 
   CQIllustratorCreateStarToolbar *getToolbar() { return toolbar_; }
 
-  CQIllustratorCreateStarToolbar *createToolbar();
+  CQIllustratorCreateStarToolbar *createToolbar() override;
 
-  CQIllustratorCreateStarSizer *createSizer();
+  CQIllustratorCreateStarSizer *createSizer() override;
 
-  CQMenuItem *createMenuItem(CQMenu *menu);
+  CQMenuItem *createMenuItem(CQMenu *menu) override;
 
-  bool isCreateMode() const { return true; }
+  bool isCreateMode() const override { return true; }
 
-  CQIllustratorCreateStarToolbar *getToolbar() const { return toolbar_; }
+  CQIllustratorCreateStarToolbar *getToolbar() const override { return toolbar_; }
 
-  void handleMouseRelease(const MouseEvent &e);
-  void handleMouseDrag   (const MouseEvent &e);
+  void handleMouseRelease(const MouseEvent &e) override;
+  void handleMouseDrag   (const MouseEvent &e) override;
 
-  void drawOverlay(CQIllustratorShapeDrawer *drawer);
+  void drawOverlay(CQIllustratorShapeDrawer *drawer) override;
 
  private:
   CQIllustratorCreateStarToolbar *toolbar_ { 0 };
