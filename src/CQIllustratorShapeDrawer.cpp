@@ -27,15 +27,15 @@ CQIllustratorShapeDrawer(CQIllustrator *illustrator, QPainter *painter) :
   //control_point_active_image_ =
   //  CImageMgrInst->createImage(CQPixmapCacheInst->getIcon("CONTROL_POINT_ACTIVE"));
 
-  // curve_point_image_ =
-  //   CImageMgrInst->createImage(CQPixmapCacheInst->getIcon("CURVE_POINT"));
-  // curve_point_active_image_ =
-  //   CImageMgrInst->createImage(CQPixmapCacheInst->getIcon("CURVE_POINT_ACTIVE"));
+  //curve_point_image_ =
+  //  CImageMgrInst->createImage(CQPixmapCacheInst->getIcon("CURVE_POINT"));
+  //curve_point_active_image_ =
+  //  CImageMgrInst->createImage(CQPixmapCacheInst->getIcon("CURVE_POINT_ACTIVE"));
 
-  //qi1_control_ = control_point_image_       .cast<CQImage>()->getQImage();
-  //qi2_control_ = control_point_active_image_.cast<CQImage>()->getQImage();
-  //qi1_curve_   = curve_point_image_         .cast<CQImage>()->getQImage();
-  //qi2_curve_   = curve_point_active_image_  .cast<CQImage>()->getQImage();
+  //qi1_control_ = dynamic_cast<CQImage *>(control_point_image_       .get())->getQImage();
+  //qi2_control_ = dynamic_cast<CQImage *>(control_point_active_image_.get())->getQImage();
+  //qi1_curve_   = dynamic_cast<CQImage *>(curve_point_image_         .get())->getQImage();
+  //qi2_curve_   = dynamic_cast<CQImage *>(curve_point_active_image_  .get())->getQImage();
 }
 
 CQIllustratorShapeDrawer::

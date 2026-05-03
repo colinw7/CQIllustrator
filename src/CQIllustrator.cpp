@@ -232,7 +232,7 @@ CQIllustrator::
 CQIllustrator() :
  CQMainWindow("Illustrator")
 {
-  drawer_ = new CQIllustratorShapeDrawer(this);
+  drawer_ = std::make_unique<CQIllustratorShapeDrawer>(this);
 
   selection_ = new CQIllustratorSelectedShapes(this);
 
@@ -247,11 +247,11 @@ CQIllustrator() :
 
   connect(layerStack_, SIGNAL(layersModified()), this, SLOT(layersModifiedSlot()));
 
-  undo_ = new CQIllustratorUndo(this);
+  undo_ = UndoP(new CQIllustratorUndo(this));
 
-  connect(undo_, SIGNAL(undoChanged()), this, SLOT(undoChangedSlot()));
+  connect(undo_.get(), SIGNAL(undoChanged()), this, SLOT(undoChangedSlot()));
 
-  sandbox_ = new CQIllustratorSandbox(this);
+  sandbox_ = std::make_unique<CQIllustratorSandbox>(this);
 
   cmdMgr_ = new CQIllustratorCmdMgr(this);
 
@@ -1316,9 +1316,9 @@ selectPointsIn(const CBBox2D &bbox, CQIllustratorShape::ControlType type,
       auto &sshape = selection_->get(shape);
 
       if (! remove)
-        selection_->addShapePoint(sshape, controlPoints[i]);
+        selection_->addShapePoint(sshape, controlPoints[i].get());
       else
-        selection_->removeShapePoint(sshape, controlPoints[i]);
+        selection_->removeShapePoint(sshape, controlPoints[i].get());
     }
   }
 
@@ -1358,9 +1358,9 @@ selectLinesIn(const CBBox2D &bbox, bool add, bool remove)
       auto &sshape = selection_->get(shape);
 
       if (! remove)
-        selection_->addShapeLine(sshape, controlLines[i]);
+        selection_->addShapeLine(sshape, controlLines[i].get());
       else
-        selection_->removeShapeLine(sshape, controlLines[i]);
+        selection_->removeShapeLine(sshape, controlLines[i].get());
     }
   }
 
@@ -1535,7 +1535,7 @@ drawContents(QPainter *painter)
 
   //------
 
-  grid_.draw(drawer_, bbox);
+  grid_.draw(drawer_.get(), bbox);
 
   //------
 
@@ -1563,7 +1563,7 @@ drawContents(QPainter *painter)
 
       drawer_->setBBox(bbox);
 
-      shape->draw(drawer_);
+      shape->draw(drawer_.get());
     }
   }
 
@@ -1578,11 +1578,11 @@ drawOverlay(QPainter *painter)
 
   drawer_->pushMatrix(canvas_->getMatrix());
 
-  currentMode_->drawSelection(drawer_);
+  currentMode_->drawSelection(drawer_.get());
 
-  sandbox_->draw(drawer_);
+  sandbox_->draw(drawer_.get());
 
-  currentMode_->drawOverlay(drawer_);
+  currentMode_->drawOverlay(drawer_.get());
 
   drawer_->popMatrix();
 }
@@ -2936,7 +2936,7 @@ addSVGObject(CSVGObject *, CSVGObject *object, bool force)
 
         auto img = image->getImageBuffer()->getImage()->image();
 
-        if (img.isValid()) {
+        if (img) {
           auto &fill = shape->getFill();
 
           fill.setImage(img);
@@ -4358,8 +4358,8 @@ setShapeSVGStrokeAndFill(CQIllustratorShape *shape, CSVGObject *object)
 
   auto sc = object->getFlatStrokeColor();
 
-  if (sc.isValid()) {
-    auto sc1 = sc.getValue();
+  if (sc) {
+    auto sc1 = sc.value();
 
     stroke.setStroked(sc1.getValue().type() != CSVGColor::Type::NONE);
     stroke.setColor  (object->colorToRGBA(sc1));
@@ -4373,26 +4373,26 @@ setShapeSVGStrokeAndFill(CQIllustratorShape *shape, CSVGObject *object)
   auto sw  = object->getFlatStrokeWidth();
   auto sda = object->getFlatStrokeDashArray();
 
-  if (so.isValid())
-    stroke.setOpacity(opacity*so.getValue().getValue(1));
+  if (so)
+    stroke.setOpacity(opacity*so.value().getValue(1));
   else
     stroke.setOpacity(opacity);
 
-  if (sw.isValid())
-    stroke.setWidth(sw.getValue().getValue(0));
+  if (sw)
+    stroke.setWidth(sw.value().getValue(0));
   else
     stroke.setWidth(0);
 
-  if (sda.isValid())
-    stroke.setLineDash(CSVGStrokeDash(sda.getValue().getValue().dashes()).getLineDash());
+  if (sda)
+    stroke.setLineDash(CSVGStrokeDash(sda.value().getValue().dashes()).getLineDash());
 
   stroke.setLineCap (objStroke.getLineCap().getValue());
   stroke.setLineJoin(objStroke.getLineJoin().getValue());
 
   auto fc = object->getFlatFillColor();
 
-  if (fc.isValid()) {
-    auto fc1 = fc.getValue();
+  if (fc) {
+    auto fc1 = fc.value();
 
     fill.setFilled(fc1.getValue().type() != CSVGColor::Type::NONE);
     fill.setColor (object->colorToRGBA(fc1));
@@ -4404,8 +4404,8 @@ setShapeSVGStrokeAndFill(CQIllustratorShape *shape, CSVGObject *object)
 
   auto fo = object->getFlatFillOpacity();
 
-  if (fo.isValid())
-    fill.setOpacity(opacity*fo.getValue().getValue(1));
+  if (fo)
+    fill.setOpacity(opacity*fo.value().getValue(1));
   else
     fill.setOpacity(opacity);
 
@@ -5011,8 +5011,8 @@ setFill(QPainter *painter, const CQIllustratorShape *,
 
     QBrush brush;
 
-    if (image.isValid()) {
-      auto qimage = image.cast<CQImage>()->getQImage();
+    if (image) {
+      auto qimage = dynamic_cast<CQImage *>(image.get())->getQImage();
 
       brush.setTextureImage(qimage);
 

@@ -31,12 +31,9 @@ getControlPoints(ControlPointList &points, ControlType type) const
     CPoint2D p1 = getInnerPoint();
     CPoint2D p2 = getOuterPoint();
 
-    CQIllustratorStarShapeControlPoint *c  =
-      new CQIllustratorStarShapeControlPoint(ControlPointType::CENTER, pc);
-    CQIllustratorStarShapeControlPoint *ri =
-      new CQIllustratorStarShapeControlPoint(ControlPointType::IR    , p1);
-    CQIllustratorStarShapeControlPoint *ro =
-      new CQIllustratorStarShapeControlPoint(ControlPointType::OR    , p2);
+    auto c  = std::make_shared<CQIllustratorStarShapeControlPoint>(ControlPointType::CENTER, pc);
+    auto ri = std::make_shared<CQIllustratorStarShapeControlPoint>(ControlPointType::IR    , p1);
+    auto ro = std::make_shared<CQIllustratorStarShapeControlPoint>(ControlPointType::OR    , p2);
 
     points.push_back(c);
     points.push_back(ri);

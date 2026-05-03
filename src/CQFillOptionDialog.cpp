@@ -445,7 +445,7 @@ updateWidgets()
   else if (fill_.hasImage()) {
     stack_->setCurrentIndex(3);
 
-    imagePreview_->setImage(fill_.getImage());
+    imagePreview_->addImage(fill_.getImage());
 
     is_image = true;
   }
@@ -653,7 +653,7 @@ setImageSlot()
 
     auto image = CImageMgrInst->lookupImage(src);
 
-    if (image.isValid()) {
+    if (image) {
       fill_.setImage(image);
 
       updateWidgets();

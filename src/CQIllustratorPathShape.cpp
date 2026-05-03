@@ -293,7 +293,7 @@ getControlLines(ControlLineList &clines) const
   uint num_lines = lines.size();
 
   for (uint i = 0; i < num_lines; ++i)
-    clines.push_back(new CQIllustratorPathShapeControlLine(i, lines[i]));
+    clines.push_back(std::make_shared<CQIllustratorPathShapeControlLine>(i, lines[i]));
 }
 
 void
@@ -572,14 +572,14 @@ getControlPoints(ControlPointList &points, ControlType type) const
 
         CPoint2D p1 = m*moveToPart->getPoint();
 
-        points.push_back(new CQIllustratorPathShapeControlPoint(i, p1));
+        points.push_back(std::make_shared<CQIllustratorPathShapeControlPoint>(i, p1));
       }
       else if (type == CPATH_PART_TYPE_LINE_TO) {
         const auto *lineToPart = dynamic_cast<const CPathShapeLineTo *>(part);
 
         CPoint2D p1 = m*lineToPart->getPoint();
 
-        points.push_back(new CQIllustratorPathShapeControlPoint(i, p1));
+        points.push_back(std::make_shared<CQIllustratorPathShapeControlPoint>(i, p1));
       }
       else if (type == CPATH_PART_TYPE_CURVE2_TO) {
         const auto *curveToPart = dynamic_cast<const CPathShapeCurve2To *>(part);
@@ -587,8 +587,8 @@ getControlPoints(ControlPointList &points, ControlType type) const
         CPoint2D pp1 = m*curveToPart->getPoint1();
         CPoint2D pp2 = m*curveToPart->getPoint2();
 
-        points.push_back(new CQIllustratorPathShapeControlPoint(i, 1, pp1));
-        points.push_back(new CQIllustratorPathShapeControlPoint(i, pp2));
+        points.push_back(std::make_shared<CQIllustratorPathShapeControlPoint>(i, 1, pp1));
+        points.push_back(std::make_shared<CQIllustratorPathShapeControlPoint>(i, pp2));
       }
       else if (type == CPATH_PART_TYPE_CURVE3_TO) {
         const auto *curveToPart = dynamic_cast<const CPathShapeCurve3To *>(part);
@@ -597,9 +597,9 @@ getControlPoints(ControlPointList &points, ControlType type) const
         CPoint2D pp2 = m*curveToPart->getPoint2();
         CPoint2D pp3 = m*curveToPart->getPoint3();
 
-        points.push_back(new CQIllustratorPathShapeControlPoint(i, 1, pp1));
-        points.push_back(new CQIllustratorPathShapeControlPoint(i, 2, pp2));
-        points.push_back(new CQIllustratorPathShapeControlPoint(i, pp3));
+        points.push_back(std::make_shared<CQIllustratorPathShapeControlPoint>(i, 1, pp1));
+        points.push_back(std::make_shared<CQIllustratorPathShapeControlPoint>(i, 2, pp2));
+        points.push_back(std::make_shared<CQIllustratorPathShapeControlPoint>(i, pp3));
       }
       else if (type == CPATH_PART_TYPE_ARC) {
         const auto *arcToPart = dynamic_cast<const CPathShapeArc *>(part);
@@ -614,9 +614,9 @@ getControlPoints(ControlPointList &points, ControlType type) const
         CPoint2D pp1 = m*p1;
         CPoint2D pp2 = m*p2;
 
-        points.push_back(new CQIllustratorPathShapeControlPoint(i, c1 ));
-        points.push_back(new CQIllustratorPathShapeControlPoint(i, 1, pp1));
-        points.push_back(new CQIllustratorPathShapeControlPoint(i, 2, pp2));
+        points.push_back(std::make_shared<CQIllustratorPathShapeControlPoint>(i, c1 ));
+        points.push_back(std::make_shared<CQIllustratorPathShapeControlPoint>(i, 1, pp1));
+        points.push_back(std::make_shared<CQIllustratorPathShapeControlPoint>(i, 2, pp2));
       }
       else if (type == CPATH_PART_TYPE_CLOSE) {
       }

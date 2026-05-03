@@ -281,7 +281,7 @@ drawHandles(QPainter *painter, const CQIllustratorShape *shape)
 
     text->getControlPoints(controlPoints);
 
-    ll_handle_->draw(text, controlPoints[0], painter);
-    ur_handle_->draw(text, controlPoints[1], painter);
+    ll_handle_->draw(text, controlPoints[0].get(), painter);
+    ur_handle_->draw(text, controlPoints[1].get(), painter);
   }
 }

@@ -161,12 +161,10 @@ getControlPoints(ControlPointList &points, ControlType type) const
     CPoint2D p1(lg->getX1(), lg->getY1());
     CPoint2D p2(lg->getX2(), lg->getY2());
 
-    CQIllustratorShapeLGradientControlPoint *start =
-      new CQIllustratorShapeLGradientControlPoint(
-            CQIllustratorShapeLGradientControlPoint::Position::START, p1);
-    CQIllustratorShapeLGradientControlPoint *end   =
-      new CQIllustratorShapeLGradientControlPoint(
-            CQIllustratorShapeLGradientControlPoint::Position::END  , p2);
+    auto start = std::make_shared<CQIllustratorShapeLGradientControlPoint>(
+                   CQIllustratorShapeLGradientControlPoint::Position::START, p1);
+    auto end   = std::make_shared<CQIllustratorShapeLGradientControlPoint>(
+                   CQIllustratorShapeLGradientControlPoint::Position::END  , p2);
 
     points.push_back(start);
     points.push_back(end);
@@ -194,15 +192,12 @@ getControlPoints(ControlPointList &points, ControlType type) const
 
     CPoint2D rp(c.x + r1, c.y + r1);
 
-    CQIllustratorShapeRGradientControlPoint *center =
-      new CQIllustratorShapeRGradientControlPoint(
-            CQIllustratorShapeRGradientControlPoint::Position::CENTER, c);
-    CQIllustratorShapeRGradientControlPoint *focus  =
-      new CQIllustratorShapeRGradientControlPoint(
-            CQIllustratorShapeRGradientControlPoint::Position::FOCUS , f);
-    CQIllustratorShapeRGradientControlPoint *radius =
-      new CQIllustratorShapeRGradientControlPoint(
-            CQIllustratorShapeRGradientControlPoint::Position::RADIUS, rp);
+    auto center = std::make_shared< CQIllustratorShapeRGradientControlPoint>(
+                    CQIllustratorShapeRGradientControlPoint::Position::CENTER, c);
+    auto focus  = std::make_shared<CQIllustratorShapeRGradientControlPoint>(
+                    CQIllustratorShapeRGradientControlPoint::Position::FOCUS , f);
+    auto radius = std::make_shared<CQIllustratorShapeRGradientControlPoint>(
+                    CQIllustratorShapeRGradientControlPoint::Position::RADIUS, rp);
 
     points.push_back(center);
     points.push_back(focus);
@@ -529,7 +524,7 @@ nearestPoint(const CPoint2D &p, ControlType type) const
   for (uint i = 0; i < num_points; ++i) {
     double dist = points[i]->distance(this, p);
 
-    nearest.updatePoint(points[i], dist);
+    nearest.updatePoint(points[i].get(), dist);
   }
 
   return nearest;

@@ -14,7 +14,6 @@
 #include <CFont.h>
 #include <CImageLib.h>
 #include <CGenGradient.h>
-#include <CAutoPtrVector.h>
 #include <QRectF>
 
 class CQIllustratorShape;
@@ -52,12 +51,15 @@ class CQIllustratorShape : public QObject {
     RGRADIENT
   };
 
-  typedef std::vector<CPoint2D> PointList;
+  using PointList = std::vector<CPoint2D>;
 
-  typedef CAutoPtrVector<CQIllustratorShapeControlLine>  ControlLineList;
-  typedef CAutoPtrVector<CQIllustratorShapeControlPoint> ControlPointList;
+  using ShapeControlLineP  = std::shared_ptr<CQIllustratorShapeControlLine>;
+  using ShapeControlPointP = std::shared_ptr<CQIllustratorShapeControlPoint>;
 
-  typedef std::list<CQIllustratorShape *> ShapeList;
+  using ControlLineList  = std::vector<ShapeControlLineP>;
+  using ControlPointList = std::vector<ShapeControlPointP>;
+
+  using ShapeList = std::list<CQIllustratorShape *>;
 
  public:
   CQIllustratorShape(CQIllustratorShape *parent=nullptr);

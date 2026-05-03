@@ -27,7 +27,7 @@ CQIllustratorSelectMode(CQIllustrator *illustrator) :
 {
   setCursor(select_bits, selectmask_bits, 2, 2);
 
-  sizer_ = new CQIllustratorSizer(illustrator_);
+  sizer_ = std::make_unique<CQIllustratorSizer>(illustrator_);
 }
 
 CQIllustratorSelectToolbar *

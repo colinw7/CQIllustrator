@@ -94,7 +94,7 @@ getControlPoints(ControlPointList &points, ControlType type) const
     for (uint i = 0; i < num_points; ++i) {
       CPoint2D p1 = m*points_[i];
 
-      points.push_back(new CQIllustratorPolygonShapeControlPoint(i, p1));
+      points.push_back(std::make_shared<CQIllustratorPolygonShapeControlPoint>(i, p1));
     }
   }
   else

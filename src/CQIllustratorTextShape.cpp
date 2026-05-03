@@ -51,10 +51,8 @@ getControlPoints(ControlPointList &points, ControlType type) const
     CPoint2D p1 = m*p1_;
     CPoint2D p2 = m*p2_;
 
-    CQIllustratorTextShapeControlPoint *ll =
-      new CQIllustratorTextShapeControlPoint(ControlPointType::LL, p1);
-    CQIllustratorTextShapeControlPoint *ur =
-      new CQIllustratorTextShapeControlPoint(ControlPointType::UR, p2);
+    auto ll = std::make_shared<CQIllustratorTextShapeControlPoint>(ControlPointType::LL, p1);
+    auto ur = std::make_shared<CQIllustratorTextShapeControlPoint>(ControlPointType::UR, p2);
 
     points.push_back(ll);
     points.push_back(ur);

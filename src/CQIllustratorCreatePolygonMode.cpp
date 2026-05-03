@@ -943,8 +943,8 @@ drawHandles(QPainter *painter, const CQIllustratorShape *shape)
     updateHandles(numControlPoints);
 
     for (uint i = 0; i < numControlPoints; ++i) {
-      CQIllustratorPolygonShapeControlPoint *controlPoint =
-        dynamic_cast<CQIllustratorPolygonShapeControlPoint *>(controlPoints[i]);
+      auto *controlPoint =
+        dynamic_cast<CQIllustratorPolygonShapeControlPoint *>(controlPoints[i].get());
 
       controlPointHandles_[i]->draw(polygon, controlPoint, painter);
     }

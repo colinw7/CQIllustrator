@@ -45,14 +45,10 @@ getControlPoints(ControlPointList &points, ControlType type) const
     CPoint2D pa1(c1, s1);
     CPoint2D pa2(c2, s2);
 
-    CQIllustratorEllipseShapeControlPoint *cxr =
-      new CQIllustratorEllipseShapeControlPoint(ControlPointType::RX, pxr);
-    CQIllustratorEllipseShapeControlPoint *cyr =
-      new CQIllustratorEllipseShapeControlPoint(ControlPointType::RY, pyr);
-    CQIllustratorEllipseShapeControlPoint *ca1 =
-      new CQIllustratorEllipseShapeControlPoint(ControlPointType::A1, pa1);
-    CQIllustratorEllipseShapeControlPoint *ca2 =
-      new CQIllustratorEllipseShapeControlPoint(ControlPointType::A2, pa2);
+    auto cxr = std::make_shared<CQIllustratorEllipseShapeControlPoint>(ControlPointType::RX, pxr);
+    auto cyr = std::make_shared<CQIllustratorEllipseShapeControlPoint>(ControlPointType::RY, pyr);
+    auto ca1 = std::make_shared<CQIllustratorEllipseShapeControlPoint>(ControlPointType::A1, pa1);
+    auto ca2 = std::make_shared<CQIllustratorEllipseShapeControlPoint>(ControlPointType::A2, pa2);
 
     points.push_back(cxr);
     points.push_back(cyr);

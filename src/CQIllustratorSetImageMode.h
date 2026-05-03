@@ -4,7 +4,6 @@
 #include <CQIllustratorMode.h>
 #include <CQIllustratorToolbar.h>
 #include <CQIllustrator.h>
-#include <CAutoPtr.h>
 
 class QComboBox;
 class CQImageButton;
@@ -91,8 +90,8 @@ class CQIllustratorSetImageMode : public CQIllustratorMode {
   QCursor getCursor() const override;
 
  private:
-  CQIllustratorSetImageToolbar*     toolbar_ { nullptr };
-  CAutoPtr<CQIllustratorImageSizer> sizer_;
+  CQIllustratorSetImageToolbar*            toolbar_ { nullptr };
+  std::unique_ptr<CQIllustratorImageSizer> sizer_;
 };
 
 #endif

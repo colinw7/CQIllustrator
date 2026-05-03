@@ -223,7 +223,7 @@ drawHandles(QPainter *painter, const CQIllustratorShape *shape)
     updateHandles(numControlPoints);
 
     for (uint i = 0; i < numControlPoints; ++i)
-      controlPointHandles_[i]->draw(shape, controlPoints[i], painter);
+      controlPointHandles_[i]->draw(shape, controlPoints[i].get(), painter);
   }
 }
 

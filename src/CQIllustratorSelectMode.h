@@ -4,7 +4,6 @@
 #include <CQIllustratorMode.h>
 #include <CQIllustratorToolbar.h>
 #include <CQIllustratorSizer.h>
-#include <CAutoPtr.h>
 
 class CQImageButton;
 class CQIllustratorSelectMode;
@@ -62,13 +61,15 @@ class CQIllustratorSelectMode : public CQIllustratorMode {
   void drawOverlay(CQIllustratorShapeDrawer *drawer) override;
 
  private:
-  CQIllustratorSelectToolbar   *toolbar_ { nullptr };
-  CAutoPtr<CQIllustratorSizer>  sizer_;
-  bool                          sizing_ { false };
-  CBBox2D                       drag_bbox_;
-  CPoint2D                      drag_center_;
-  CMatrix2D                     drag_matrix_;
-  bool                          inside_ { false };
+  using SizerP = std::unique_ptr<CQIllustratorSizer>;
+
+  CQIllustratorSelectToolbar* toolbar_ { nullptr };
+  SizerP                      sizer_;
+  bool                        sizing_ { false };
+  CBBox2D                     drag_bbox_;
+  CPoint2D                    drag_center_;
+  CMatrix2D                   drag_matrix_;
+  bool                        inside_ { false };
 };
 
 #endif

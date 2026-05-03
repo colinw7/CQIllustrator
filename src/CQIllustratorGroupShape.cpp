@@ -39,8 +39,8 @@ getControlPoints(ControlPointList &points, ControlType type) const
       CPoint2D p1 = bbox.getLL();
       CPoint2D p2 = bbox.getUR();
 
-      points.push_back(new CQIllustratorGroupShapeControlPoint(0, p1));
-      points.push_back(new CQIllustratorGroupShapeControlPoint(1, p2));
+      points.push_back(std::make_shared<CQIllustratorGroupShapeControlPoint>(0, p1));
+      points.push_back(std::make_shared<CQIllustratorGroupShapeControlPoint>(1, p2));
     }
   }
   else

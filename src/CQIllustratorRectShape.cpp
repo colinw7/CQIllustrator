@@ -35,14 +35,10 @@ getControlPoints(ControlPointList &points, ControlType type) const
     CPoint2D rx1(rx_, 0);
     CPoint2D ry1(0, ry_);
 
-    CQIllustratorRectShapeControlPoint *ll =
-      new CQIllustratorRectShapeControlPoint(ControlPointType::LL, p1);
-    CQIllustratorRectShapeControlPoint *ur =
-      new CQIllustratorRectShapeControlPoint(ControlPointType::UR, p2);
-    CQIllustratorRectShapeControlPoint *rx =
-      new CQIllustratorRectShapeControlPoint(ControlPointType::RX, rx1);
-    CQIllustratorRectShapeControlPoint *ry =
-      new CQIllustratorRectShapeControlPoint(ControlPointType::RY, ry1);
+    auto ll = std::make_shared<CQIllustratorRectShapeControlPoint>(ControlPointType::LL, p1);
+    auto ur = std::make_shared<CQIllustratorRectShapeControlPoint>(ControlPointType::UR, p2);
+    auto rx = std::make_shared<CQIllustratorRectShapeControlPoint>(ControlPointType::RX, rx1);
+    auto ry = std::make_shared<CQIllustratorRectShapeControlPoint>(ControlPointType::RY, ry1);
 
     points.push_back(ll);
     points.push_back(ur);

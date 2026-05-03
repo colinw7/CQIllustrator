@@ -4,7 +4,6 @@
 #include <CQIllustratorMode.h>
 #include <CQIllustratorToolbar.h>
 #include <CQIllustrator.h>
-#include <CAutoPtr.h>
 
 class QRadioButton;
 class CQRealEdit;
@@ -82,8 +81,8 @@ class CQIllustratorSetLGradientMode : public CQIllustratorMode {
   QCursor getCursor() const override;
 
  private:
-  CQIllustratorSetLGradientToolbar  *toolbar_ { nullptr };
-  CAutoPtr<CQIllustratorLGradSizer>  sizer_;
+  CQIllustratorSetLGradientToolbar*        toolbar_ { nullptr };
+  std::unique_ptr<CQIllustratorLGradSizer> sizer_;
 };
 
 #endif

@@ -402,10 +402,10 @@ drawHandles(QPainter *painter, const CQIllustratorShape *shape)
 
     ellipse->getControlPoints(controlPoints);
 
-    rx_handle_->draw(ellipse, controlPoints[0], painter);
-    ry_handle_->draw(ellipse, controlPoints[1], painter);
-    a1_handle_->draw(ellipse, controlPoints[2], painter);
-    a2_handle_->draw(ellipse, controlPoints[3], painter);
+    rx_handle_->draw(ellipse, controlPoints[0].get(), painter);
+    ry_handle_->draw(ellipse, controlPoints[1].get(), painter);
+    a1_handle_->draw(ellipse, controlPoints[2].get(), painter);
+    a2_handle_->draw(ellipse, controlPoints[3].get(), painter);
   }
 }
 

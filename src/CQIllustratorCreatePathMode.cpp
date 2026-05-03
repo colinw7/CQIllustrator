@@ -1285,8 +1285,8 @@ drawHandles(QPainter *painter, const CQIllustratorShape *shape)
     updateHandles(numControlPoints);
 
     for (uint i = 0; i < numControlPoints; ++i) {
-      CQIllustratorPathShapeControlPoint *controlPoint =
-        dynamic_cast<CQIllustratorPathShapeControlPoint *>(controlPoints[i]);
+      auto *controlPoint =
+        dynamic_cast<CQIllustratorPathShapeControlPoint *>(controlPoints[i].get());
 
       if (controlPoint->isMaster())
         controlPointHandles_[i]->setStyle(CQIllustratorHandle::CIRCLE_STYLE);
@@ -1305,7 +1305,7 @@ updateHandles(uint numHandles)
   CQIllustrator *illustrator = mode_->getIllustrator();
 
   while (controlPointHandles_.size() < numHandles) {
-    CQIllustratorControlPointHandle *handle = new CQIllustratorControlPointHandle(illustrator);
+    auto *handle = new CQIllustratorControlPointHandle(illustrator);
 
     addHandle(handle);
   }

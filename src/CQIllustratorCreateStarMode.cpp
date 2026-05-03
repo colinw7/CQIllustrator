@@ -440,16 +440,16 @@ drawHandles(QPainter *painter, const CQIllustratorShape *shape)
 
     star->getControlPoints(controlPoints);
 
-    c_handle_ ->draw(star, controlPoints[0], painter);
-    ir_handle_->draw(star, controlPoints[1], painter);
-    or_handle_->draw(star, controlPoints[2], painter);
+    c_handle_ ->draw(star, controlPoints[0].get(), painter);
+    ir_handle_->draw(star, controlPoints[1].get(), painter);
+    or_handle_->draw(star, controlPoints[2].get(), painter);
   }
   else if (poly) {
     CQIllustratorShape::ControlPointList controlPoints;
 
     poly->getControlPoints(controlPoints);
 
-    c_handle_ ->draw(poly, controlPoints[0], painter);
-    ir_handle_->draw(poly, controlPoints[1], painter);
+    c_handle_ ->draw(poly, controlPoints[0].get(), painter);
+    ir_handle_->draw(poly, controlPoints[1].get(), painter);
   }
 }

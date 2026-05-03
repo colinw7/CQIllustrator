@@ -45,9 +45,9 @@ CQIllustratorImageSizer *
 CQIllustratorSetImageMode::
 createSizer()
 {
-  sizer_ = new CQIllustratorImageSizer(this);
+  sizer_ = std::make_unique<CQIllustratorImageSizer>(this);
 
-  return sizer_;
+  return sizer_.get();
 }
 
 CQMenuItem *
@@ -97,8 +97,7 @@ handleMouseDrag(const MouseEvent &)
 
     if (fill.hasImage()) {
       CImagePtr image = fill.getImage();
-
-      assert(image.isValid());
+      assert(image);
     }
   }
 
@@ -346,7 +345,7 @@ setImageSlot()
 
     CImagePtr image = CImageMgrInst->lookupImage(src);
 
-    if (image.isValid()) {
+    if (image) {
       setShapeImage(shape, image);
       return;
     }

@@ -29,10 +29,8 @@ getControlPoints(ControlPointList &points, ControlType type) const
     CPoint2D pc = getCenterPoint();
     CPoint2D p  = getPoint();
 
-    CQIllustratorNPolyShapeControlPoint *c =
-      new CQIllustratorNPolyShapeControlPoint(TYPE_CENTER, pc);
-    CQIllustratorNPolyShapeControlPoint *r =
-      new CQIllustratorNPolyShapeControlPoint(TYPE_RADIUS, p);
+    auto c = std::make_shared<CQIllustratorNPolyShapeControlPoint>(TYPE_CENTER, pc);
+    auto r = std::make_shared<CQIllustratorNPolyShapeControlPoint>(TYPE_RADIUS, p);
 
     points.push_back(c);
     points.push_back(r);

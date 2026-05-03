@@ -398,10 +398,10 @@ drawHandles(QPainter *painter, const CQIllustratorShape *shape)
 
     rect->getControlPoints(controlPoints);
 
-    ll_handle_->draw(rect, controlPoints[0], painter);
-    ur_handle_->draw(rect, controlPoints[1], painter);
-    rx_handle_->draw(rect, controlPoints[2], painter);
-    ry_handle_->draw(rect, controlPoints[3], painter);
+    ll_handle_->draw(rect, controlPoints[0].get(), painter);
+    ur_handle_->draw(rect, controlPoints[1].get(), painter);
+    rx_handle_->draw(rect, controlPoints[2].get(), painter);
+    ry_handle_->draw(rect, controlPoints[3].get(), painter);
   }
 }
 

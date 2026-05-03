@@ -230,7 +230,7 @@ update(const CQIllustratorShape *shape)
     table_->setRowCount(num_points);
 
     for (uint i = 0; i < num_points; ++i) {
-      CQIllustratorShapeControlPoint *point = points[i];
+      CQIllustratorShapeControlPoint *point = points[i].get();
 
       table_->addPoint(shape, i, point);
     }

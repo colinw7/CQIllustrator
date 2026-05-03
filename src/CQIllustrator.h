@@ -7,7 +7,6 @@
 #include <CEvent.h>
 #include <CBooleanOp.h>
 #include <CStack.h>
-#include <CAutoPtr.h>
 
 class CQIllustrator;
 class CQIllustratorEllipseShape;
@@ -154,7 +153,7 @@ class CQIllustrator : public CQMainWindow {
 
   QWidget *createCentralWidget() override;
 
-  CQIllustratorShapeDrawer *getDrawer() const { return drawer_; }
+  CQIllustratorShapeDrawer *getDrawer() const { return drawer_.get(); }
 
   void initTerm() override;
   void createWorkspace() override;
@@ -308,9 +307,9 @@ class CQIllustrator : public CQMainWindow {
 
   CQIllustratorData *getData() const;
 
-  CQIllustratorUndo *getUndo() const { return undo_; }
+  CQIllustratorUndo *getUndo() const { return undo_.get(); }
 
-  CQIllustratorSandbox *getSandbox() const { return sandbox_; }
+  CQIllustratorSandbox *getSandbox() const { return sandbox_.get(); }
 
   const CRGBA &getBackground() const { return bg_; }
   void setBackground(const CRGBA &bg);
@@ -522,72 +521,75 @@ class CQIllustrator : public CQMainWindow {
   QSize sizeHint() const override;
 
  private:
-  typedef std::map<Mode,CQIllustratorMode *> ModeMap;
+  using ModeMap      = std::map<Mode,CQIllustratorMode *>;
+  using ShapeDrawerP = std::unique_ptr<CQIllustratorShapeDrawer>;
+  using SandboxP     = std::unique_ptr<CQIllustratorSandbox>;
+  using UndoP        = std::unique_ptr<CQIllustratorUndo>;
 
   // Canvas
-  CQIllustratorCanvas*               canvas_ { 0 };
+  CQIllustratorCanvas*               canvas_ { nullptr };
 
   // Menu and Toolbar
-  CQMenu*                            fileMenu_ { 0 };
-  CQMenu*                            createMenu_ { 0 };
-  CQMenu*                            modeMenu_ { 0 };
-  CQMenu*                            pathMenu_ { 0 };
-  CQMenu*                            selectMenu_ { 0 };
-  CQMenu*                            editMenu_ { 0 };
-  CQMenuItem*                        undoItem_ { 0 };
-  CQMenuItem*                        redoItem_ { 0 };
-  CQMenu*                            layerMenu_ { 0 };
-  CQMenuItem*                        addLayerItem_ { 0 };
-  CQMenu*                            viewMenu_ { 0 };
-  CQMenu*                            helpMenu_ { 0 };
-  CQToolBar*                         modeToolBar_ { 0 };
-  CQToolBar*                         pathModeToolBar_ { 0 };
-  CQToolBar*                         selectToolBar_ { 0 };
-  CQToolBar*                         editToolBar_ { 0 };
-  CQToolBar*                         layerToolBar_ { 0 };
-  CQToolBar*                         mouseToolToolBar_ { 0 };
-  QStackedWidget*                    mouseToolStack_ { 0 };
-  CQToolBar*                         toolsToolBar_ { 0 };
-  CQToolBar*                         consoleToolBar_ { 0 };
-  CQMenuItem*                        alignItem_ { 0 };
-  CQMenuItem*                        groupItem_ { 0 };
-  CQMenuItem*                        ungroupItem_ { 0 };
-  CQMenuItem*                        copyItem_ { 0 };
-  CQMenuItem*                        deleteItem_ { 0 };
-  CQMenuItem*                        raiseItem_ { 0 };
-  CQMenuItem*                        lowerItem_ { 0 };
-  CQMenuItem*                        flipXItem_ { 0 };
-  CQMenuItem*                        flipYItem_ { 0 };
-  CQMenuItem*                        lockItem_ { 0 };
-  CQMenuItem*                        unlockItem_ { 0 };
-  CQMenuItem*                        copyStroke_ { 0 };
-  CQMenuItem*                        pasteStroke_ { 0 };
-  CQMenuItem*                        selectAllItem_ { 0 };
-  CQMenuItem*                        selectNoneItem_ { 0 };
-  CQMenuItem*                        flipViewItem_ { 0 };
+  CQMenu*                            fileMenu_ { nullptr };
+  CQMenu*                            createMenu_ { nullptr };
+  CQMenu*                            modeMenu_ { nullptr };
+  CQMenu*                            pathMenu_ { nullptr };
+  CQMenu*                            selectMenu_ { nullptr };
+  CQMenu*                            editMenu_ { nullptr };
+  CQMenuItem*                        undoItem_ { nullptr };
+  CQMenuItem*                        redoItem_ { nullptr };
+  CQMenu*                            layerMenu_ { nullptr };
+  CQMenuItem*                        addLayerItem_ { nullptr };
+  CQMenu*                            viewMenu_ { nullptr };
+  CQMenu*                            helpMenu_ { nullptr };
+  CQToolBar*                         modeToolBar_ { nullptr };
+  CQToolBar*                         pathModeToolBar_ { nullptr };
+  CQToolBar*                         selectToolBar_ { nullptr };
+  CQToolBar*                         editToolBar_ { nullptr };
+  CQToolBar*                         layerToolBar_ { nullptr };
+  CQToolBar*                         mouseToolToolBar_ { nullptr };
+  QStackedWidget*                    mouseToolStack_ { nullptr };
+  CQToolBar*                         toolsToolBar_ { nullptr };
+  CQToolBar*                         consoleToolBar_ { nullptr };
+  CQMenuItem*                        alignItem_ { nullptr };
+  CQMenuItem*                        groupItem_ { nullptr };
+  CQMenuItem*                        ungroupItem_ { nullptr };
+  CQMenuItem*                        copyItem_ { nullptr };
+  CQMenuItem*                        deleteItem_ { nullptr };
+  CQMenuItem*                        raiseItem_ { nullptr };
+  CQMenuItem*                        lowerItem_ { nullptr };
+  CQMenuItem*                        flipXItem_ { nullptr };
+  CQMenuItem*                        flipYItem_ { nullptr };
+  CQMenuItem*                        lockItem_ { nullptr };
+  CQMenuItem*                        unlockItem_ { nullptr };
+  CQMenuItem*                        copyStroke_ { nullptr };
+  CQMenuItem*                        pasteStroke_ { nullptr };
+  CQMenuItem*                        selectAllItem_ { nullptr };
+  CQMenuItem*                        selectNoneItem_ { nullptr };
+  CQMenuItem*                        flipViewItem_ { nullptr };
 
   // Tools
-  CQStrokeOptionTool*                strokeTool_ { 0 };
-  CQFillOptionTool*                  fillTool_ { 0 };
-//CQFontOptionTool*                  fontTool_ { 0 };
-  CQObjectOptionTool*                objectTool_ { 0 };
-  CQLayerOptionTool*                 layerTool_ { 0 };
-  CQPropertiesOptionTool*            propTool_ { 0 };
+  CQStrokeOptionTool*                strokeTool_ { nullptr };
+  CQFillOptionTool*                  fillTool_ { nullptr };
+//CQFontOptionTool*                  fontTool_ { nullptr };
+  CQObjectOptionTool*                objectTool_ { nullptr };
+  CQLayerOptionTool*                 layerTool_ { nullptr };
+  CQPropertiesOptionTool*            propTool_ { nullptr };
 
   // Dock Widgets
-  CQIllustratorUndoDock*             undoDock_ { 0 };
-  CQIllustratorPreferenceDock*       preferenceDock_ { 0 };
-  CQIllustratorSnapDock*             snapDock_ { 0 };
+  CQIllustratorUndoDock*             undoDock_ { nullptr };
+  CQIllustratorPreferenceDock*       preferenceDock_ { nullptr };
+  CQIllustratorSnapDock*             snapDock_ { nullptr };
 
   // Console
-  QLineEdit*                         consoleEdit_ { 0 };
-  QAction*                           consoleAction_ { 0 };
+  QLineEdit*                         consoleEdit_ { nullptr };
+  QAction*                           consoleAction_ { nullptr };
 
   // Status Labels
-  QLabel*                            modeLabel_ { 0 };
-  QLabel*                            selLabel_ { 0 };
-  QLabel*                            posLabel_ { 0 };
-  QLabel*                            deltaLabel_ { 0 };
+  QLabel*                            modeLabel_ { nullptr };
+  QLabel*                            selLabel_ { nullptr };
+  QLabel*                            posLabel_ { nullptr };
+  QLabel*                            deltaLabel_ { nullptr };
 
   // Current File
   QString                            fileName_;
@@ -601,28 +603,28 @@ class CQIllustrator : public CQMainWindow {
   bool                               dimmed_ { false };
   bool                               dim_valid_ { false };
   bool                               quad_tree_ { false };
-  CAutoPtr<CQIllustratorShapeDrawer> drawer_;
+  ShapeDrawerP                       drawer_;
   Mode                               mode_ { Mode::SELECT };
   ModeMap                            modeMap_;
-  CQIllustratorMode*                 currentMode_ { 0 };
-  CQIllustratorLayerStack*           layerStack_ { 0 };
+  CQIllustratorMode*                 currentMode_ { nullptr };
+  CQIllustratorLayerStack*           layerStack_ { nullptr };
   CBBox2D                            fullBBox_;
   CBBox2D                            bbox_;
-  CAutoPtr<CQIllustratorUndo>        undo_;
-  CAutoPtr<CQIllustratorSandbox>     sandbox_;
+  UndoP                              undo_;
+  SandboxP                           sandbox_;
   CRGBA                              bg_ { 1, 1, 1 };
-  CQIllustratorSelectedShapes*       selection_ { 0 };
+  CQIllustratorSelectedShapes*       selection_ { nullptr };
   PreviewObjectList                  previewObjects_;
   QPointF                            press_wpos_;
   QPoint                             current_ppos_;
   CQIllustratorGrid                  grid_;
   CQIllustratorSnap                  snap_;
-  CQIllustratorCmdMgr*               cmdMgr_ { 0 };
+  CQIllustratorCmdMgr*               cmdMgr_ { nullptr };
   CQIllustratorShapeStroke           def_stroke_;
   CQIllustratorShapeFill             def_fill_;
   CQIllustratorShapeStroke           save_stroke_;
   CQIllustratorShapeFill             save_fill_;
-  CQIllustratorPropertiesDlg*        propertiesDlg_ { 0 };
+  CQIllustratorPropertiesDlg*        propertiesDlg_ { nullptr };
 };
 
 #endif

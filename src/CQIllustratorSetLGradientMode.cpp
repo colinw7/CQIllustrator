@@ -39,9 +39,9 @@ CQIllustratorLGradSizer *
 CQIllustratorSetLGradientMode::
 createSizer()
 {
-  sizer_ = new CQIllustratorLGradSizer(this);
+  sizer_ = std::make_unique<CQIllustratorLGradSizer>(this);
 
-  return sizer_;
+  return sizer_.get();
 }
 
 CQMenuItem *
@@ -350,8 +350,8 @@ drawHandles(QPainter *painter, const CQIllustratorShape *shape)
   shape->getControlPoints(controlPoints, CQIllustratorShape::ControlType::LGRADIENT);
 
   if (controlPoints.size() == 2) {
-    start_handle_->draw(shape, controlPoints[0], painter);
-    end_handle_  ->draw(shape, controlPoints[1], painter);
+    start_handle_->draw(shape, controlPoints[0].get(), painter);
+    end_handle_  ->draw(shape, controlPoints[1].get(), painter);
 
     CPoint2D p1 = controlPoints[0]->getPoint(shape);
     CPoint2D p2 = controlPoints[1]->getPoint(shape);
